@@ -5,9 +5,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:CodeBreaker.WPF.Views"
+        xmlns:conv="clr-namespace:CodeBreaker.WPF.Converters"
         xmlns:local="clr-namespace:CodeBreaker.WPF"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <conv:SelectionAndKeyPegToBrushConverter x:Key="SelectionAndKeyPegConverter" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -26,7 +30,24 @@
         <views:PegSelectionView Grid.Row="1" Grid.ColumnSpan="3" 
                                 ViewModel="{Binding ViewModel, ElementName=Self, Mode=OneWay}" />
 
-        <ListView ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
-        
+        <ListView ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Width="100" Height="100" 
+                                     Fill="{Binding Converter={StaticResource SelectionAndKeyPegConverter}, ConverterParameter=0}" />
+                            <Ellipse Width="100" Height="100" 
+                                     Fill="{Binding Converter={StaticResource SelectionAndKeyPegConverter}, ConverterParameter=1}" />
+                            <Ellipse Width="100" Height="100" 
+                                     Fill="{Binding Converter={StaticResource SelectionAndKeyPegConverter}, ConverterParameter=2}" />
+                            <Ellipse Width="100" Height="100" 
+                                     Fill="{Binding Converter={StaticResource SelectionAndKeyPegConverter}, ConverterParameter=3}" />
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
     </Grid>
 </Window>
