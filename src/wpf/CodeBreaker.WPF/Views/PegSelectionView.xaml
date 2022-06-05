@@ -12,10 +12,22 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
+            <ComboBox ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" SelectedItem="{Binding ViewModel.SelectedColor1, Mode=TwoWay}"></ComboBox>
+            <ComboBox ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" SelectedItem="{Binding ViewModel.SelectedColor2, Mode=TwoWay}"></ComboBox>
+            <ComboBox ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" SelectedItem="{Binding ViewModel.SelectedColor3, Mode=TwoWay}"></ComboBox>
+            <ComboBox ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" SelectedItem="{Binding ViewModel.SelectedColor4, Mode=TwoWay}"></ComboBox>
+        </StackPanel>
+        <Button Content="Set Move" Command="{Binding ViewModel.SetMoveCommand, Mode=OneWay}" Grid.Column="1" Margin="4"></Button>
+
+        <!--<Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>-->
+        <!--<StackPanel Orientation="Horizontal">
             <RadioButton Style="{DynamicResource RadioKeyPegSelectionTemplate}" />
             <Button Template="{DynamicResource PegSelectionTemplate}" Width="100" Height="100" Margin="4"
                 Background="{Binding ColorSelection1, Converter={StaticResource PegColorToBrushConverter}, Mode=OneWay}" />
@@ -33,7 +45,7 @@
             <Button Background="Green" Height="50" Margin="4" />
             <Button Background="Blue" Height="50" Margin="4" />
             <Button Background="Yellow" Height="50" Margin="4" />
-        </StackPanel>
+        </StackPanel>-->
 
     </Grid>
 </UserControl>

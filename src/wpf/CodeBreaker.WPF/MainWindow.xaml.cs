@@ -6,16 +6,28 @@ using System.Windows;
 
 namespace CodeBreaker.WPF;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindow : Window
 {
     public MainWindow()
     {
+        ViewModel = (Application.Current as App)?.Services
+            .GetRequiredService<CodeBreaker6x4ViewModel>() ??
+                throw new InvalidOperationException();
+
+        DataContext = this;
+
         InitializeComponent();
-        ViewModel = (Application.Current as App)?.Services.GetRequiredService<CodeBreaker6x4ViewModel>() ?? throw new InvalidOperationException();
+
     }
 
-    public CodeBreaker6x4ViewModel ViewModel { get; }
+
+    public CodeBreaker6x4ViewModel ViewModel
+    {
+        get => (CodeBreaker6x4ViewModel)GetValue(ViewModelProperty);
+        set => SetValue(ViewModelProperty, value);
+    }
+
+    public static readonly DependencyProperty ViewModelProperty =
+        DependencyProperty.Register("ViewModel", typeof(CodeBreaker6x4ViewModel), typeof(MainWindow), new PropertyMetadata(null));
+
 }

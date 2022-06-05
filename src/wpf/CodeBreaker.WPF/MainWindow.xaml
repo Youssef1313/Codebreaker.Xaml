@@ -1,4 +1,5 @@
 ﻿<Window x:Class="CodeBreaker.WPF.MainWindow"
+        x:Name="Self"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -21,10 +22,10 @@
 
         <TextBlock Text="Name:" />
         <TextBox Text="{Binding Name, Mode=TwoWay}" Grid.Column="1" />
-        <Button Content="Start" Grid.Column="2" Margin="8" />
-        <Grid Grid.Row="1" Grid.ColumnSpan="3">
-            <views:PegSelectionView />
-        </Grid>
+        <Button Content="Start" Command="{Binding ViewModel.StartGameCommand, Mode=OneTime}" Grid.Column="2" Margin="8" />
+        <views:PegSelectionView Grid.Row="1" Grid.ColumnSpan="3" 
+                                ViewModel="{Binding ViewModel, ElementName=Self, Mode=OneWay}" />
+
         <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
         
     </Grid>

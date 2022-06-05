@@ -1,28 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CodeBreaker.ViewModels;
+
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace CodeBreaker.WPF.Views
+namespace CodeBreaker.WPF.Views;
+
+public partial class PegSelectionView : UserControl
 {
-    /// <summary>
-    /// Interaction logic for PegSelectionView.xaml
-    /// </summary>
-    public partial class PegSelectionView : UserControl
+    public PegSelectionView()
     {
-        public PegSelectionView()
-        {
-            InitializeComponent();
-        }
+        DataContext = this;
+        InitializeComponent();
     }
+
+    public CodeBreaker6x4ViewModel ViewModel
+    {
+        get => (CodeBreaker6x4ViewModel)GetValue(ViewModelProperty);
+        set => SetValue(ViewModelProperty, value);
+    }
+
+    public static readonly DependencyProperty ViewModelProperty =
+        DependencyProperty.Register("ViewModel", typeof(CodeBreaker6x4ViewModel), typeof(PegSelectionView), new PropertyMetadata(null));
 }

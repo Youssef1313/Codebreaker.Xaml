@@ -7,28 +7,24 @@ namespace CodeBreaker.ViewModels.Services;
 public class GameClient
 {
     private readonly HttpClient _httpClient;
-    private int _moveNumber = 0;
-    private string? _gameId;
+
     public GameClient(HttpClient httpClient)
     {
         _httpClient = httpClient;
     }
 
-    public async Task StartGameAsync(string name)
+    public async Task<CreateGameResponse> StartGameAsync(string name)
     {
         CreateGameRequest request = new(name);
-        var responseMessage = await _httpClient.PostAsJsonAsync("start", request);
+        var responseMessage = await _httpClient.PostAsJsonAsync("v1/start", request);
         responseMessage.EnsureSuccessStatusCode();
         var response = await responseMessage.Content.ReadFromJsonAsync<CreateGameResponse>();
-        _moveNumber = 1;
-        _gameId = response.Id;
+        return response;
     }
 
-    public async Task<string[]> SetMove(string[] colorNames)
+    public async Task<string[]> SetMove(string gameId, int moveNumber, params string[] colorNames)
     {
-        if (_gameId is null) throw new InvalidOperationException($"call {nameof(StartGameAsync)} before");
-
-        MoveRequest moveRequest = new(_gameId, _moveNumber++, colorNames);
+        MoveRequest moveRequest = new(gameId, moveNumber, colorNames);
 
         var responseMessage = await _httpClient.PostAsJsonAsync("move", moveRequest);
         responseMessage.EnsureSuccessStatusCode();
