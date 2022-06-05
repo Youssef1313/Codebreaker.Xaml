@@ -26,7 +26,7 @@
         <views:PegSelectionView Grid.Row="1" Grid.ColumnSpan="3" 
                                 ViewModel="{Binding ViewModel, ElementName=Self, Mode=OneWay}" />
 
-        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
+        <ListView ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
         
     </Grid>
 </Window>

@@ -13,6 +13,7 @@ public partial class CodeBreaker6x4ViewModel
     private readonly GameClient _client;
 
     private int _moveNumber = 0;
+    private string _gameId = string.Empty;
     public CodeBreaker6x4ViewModel(GameClient client)
     {
         _client = client;
@@ -24,12 +25,16 @@ public partial class CodeBreaker6x4ViewModel
 
     public ObservableCollection<string> ColorList { get; } = new();
 
+    public ObservableCollection<SelectionAndKeyPegs> GameMoves { get; } = new();
+
     [ICommand]
     public async Task StartGameAsync()
     {
         try
         {
             var response = await _client.StartGameAsync(_name);
+
+            _gameId = response.Id;
             (_, int maxMoves, string[] colors) = response.GameOptions;
             _moveNumber++;
 
@@ -45,9 +50,12 @@ public partial class CodeBreaker6x4ViewModel
     }
 
     [ICommand]
-    public Task SetMoveAsync()
+    public async Task SetMoveAsync()
     {
-        return Task.CompletedTask;
+        string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
+        var keyPegColors = await _client.SetMoveAsync(_gameId, _moveNumber++, selection);
+
+        GameMoves.Add(new SelectionAndKeyPegs(selection, keyPegColors));
     }
 
     [ObservableProperty]
@@ -63,3 +71,5 @@ public partial class CodeBreaker6x4ViewModel
     private string _selectedColor4 = string.Empty;
 
 }
+
+public record SelectionAndKeyPegs(string[] Selection, string[] KeyPegs);
