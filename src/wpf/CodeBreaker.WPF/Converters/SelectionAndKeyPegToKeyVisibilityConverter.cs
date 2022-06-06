@@ -13,7 +13,9 @@ public class SelectionAndKeyPegToKeyVisibilityConverter : IValueConverter
         ArgumentNullException.ThrowIfNull(parameter);
         if (value is SelectionAndKeyPegs selection && int.TryParse(parameter.ToString(), out int ix))
         {
-            return (ix <= selection.KeyPegs.Length) ? Visibility.Visible : Visibility.Hidden;
+            return (ix < selection.KeyPegs.Length) 
+                ? Visibility.Visible 
+                : Visibility.Hidden;
         }
         else
         {
