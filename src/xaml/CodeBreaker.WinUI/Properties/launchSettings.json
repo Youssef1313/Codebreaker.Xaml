@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CodeBreaker.WinUI (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "CodeBreaker.WinUI (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
