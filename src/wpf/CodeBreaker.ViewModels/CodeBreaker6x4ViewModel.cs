@@ -11,13 +11,14 @@ namespace CodeBreaker.ViewModels;
 public partial class CodeBreaker6x4ViewModel
 {
     private readonly GameClient _client;
+    private readonly IDialogService _dialogService;
 
     private int _moveNumber = 0;
     private string _gameId = string.Empty;
-    public CodeBreaker6x4ViewModel(GameClient client)
+    public CodeBreaker6x4ViewModel(GameClient client, IDialogService dialogService)
     {
         _client = client;
-        ColorList.Add("first");
+        _dialogService = dialogService;
     }
 
     [ObservableProperty]
@@ -53,9 +54,17 @@ public partial class CodeBreaker6x4ViewModel
     public async Task SetMoveAsync()
     {
         string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
-        var keyPegColors = await _client.SetMoveAsync(_gameId, _moveNumber++, selection);
+        (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber++, selection);
 
         GameMoves.Add(new SelectionAndKeyPegs(selection, keyPegColors));
+        if (won)
+        {
+            await _dialogService.ShowMessageAsync("Congratulations - you won!");
+        }
+        else if (completed)
+        {
+            await _dialogService.ShowMessageAsync("Sorry, you didn't find the match!");
+        }
     }
 
     [ObservableProperty]

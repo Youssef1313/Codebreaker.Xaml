@@ -19,6 +19,7 @@ public sealed partial class App : Application, IDisposable
         _host = Host.CreateDefaultBuilder()
             .ConfigureServices(services =>
             {
+                services.AddTransient<IDialogService, Services.WPFDialogService>();
                 services.AddScoped<CodeBreaker6x4ViewModel>();
                 services.AddHttpClient<GameClient>(client =>
                 {

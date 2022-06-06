@@ -22,13 +22,13 @@ public class GameClient
         return response;
     }
 
-    public async Task<string[]> SetMoveAsync(string gameId, int moveNumber, params string[] colorNames)
+    public async Task<(bool Completed, bool Won, string[] KeyPegs)> SetMoveAsync(string gameId, int moveNumber, params string[] colorNames)
     {
         MoveRequest moveRequest = new(gameId, moveNumber, colorNames);
 
         var responseMessage = await _httpClient.PostAsJsonAsync("v1/move", moveRequest);
         responseMessage.EnsureSuccessStatusCode();
         var response = await responseMessage.Content.ReadFromJsonAsync<MoveResponse>();
-        return response.KeyPegs?.ToArray() ?? new string[0];
+        return (response.Completed, response.Won, response.KeyPegs?.ToArray() ?? new string[0]);
     }
 }
