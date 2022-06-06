@@ -6,7 +6,7 @@ using System.Windows.Media;
 
 namespace CodeBreaker.WPF.Converters;
 
-public class SelectionAndKeyPegToBrushConverter : IValueConverter
+public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
 {
     private static Brush BlackBrush = new SolidColorBrush(Colors.Black);
     private static Brush WhiteBrush = new SolidColorBrush(Colors.White);
