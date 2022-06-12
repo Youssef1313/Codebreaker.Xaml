@@ -2,7 +2,8 @@
 
 namespace CodeBreaker.WinUI.ViewModels;
 
-public class MainViewModel : ObservableRecipient
+[ObservableObject]
+public partial class MainViewModel
 {
     public MainViewModel()
     {

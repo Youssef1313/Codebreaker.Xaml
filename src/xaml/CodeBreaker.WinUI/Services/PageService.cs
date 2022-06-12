@@ -1,8 +1,6 @@
 ﻿using CodeBreaker.WinUI.Contracts.Services;
-
-using CommunityToolkit.Mvvm.ComponentModel;
-
-using Microsoft.UI.Xaml.Controls;
+using CodeBreaker.WinUI.ViewModels;
+using CodeBreaker.WinUI.Views;
 
 
 namespace CodeBreaker.WinUI.Services;
@@ -13,8 +11,7 @@ public class PageService : IPageService
 
     public PageService()
     {
-        //Configure<MainViewModel, MainPage>();
-        //Configure<ListDetailsViewModel, ListDetailsPage>();
+        Configure<MainViewModel, MainPage>();
     }
 
     public Type GetPageType(string key)
@@ -32,7 +29,7 @@ public class PageService : IPageService
     }
 
     private void Configure<VM, V>()
-        where VM : ObservableObject
+        where VM : class
         where V : Page
     {
         lock (_pages)

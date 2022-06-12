@@ -8,6 +8,8 @@ global using Microsoft.Xaml.Interactivity;
 using CodeBreaker.WinUI.Activation;
 using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Services;
+using CodeBreaker.WinUI.ViewModels;
+using CodeBreaker.WinUI.Views;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -39,6 +41,12 @@ public partial class App : Application
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
+
+            services.AddTransient<ShellPage>();
+            services.AddTransient<ShellViewModel>();
+
+            services.AddTransient<MainPage>();
+            services.AddTransient<MainViewModel>();
         })
         .Build();
 
