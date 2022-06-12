@@ -11,10 +11,10 @@ namespace CodeBreaker.WinUI.Services;
 public class NavigationService : INavigationService
 {
     private readonly IPageService _pageService;
-    private object _lastParameterUsed;
-    private Frame _frame;
+    private object? _lastParameterUsed;
+    private Frame? _frame;
 
-    public event NavigatedEventHandler Navigated;
+    public event NavigatedEventHandler? Navigated;
 
     public Frame Frame
     {
@@ -22,7 +22,7 @@ public class NavigationService : INavigationService
         {
             if (_frame == null)
             {
-                _frame = App.MainWindow.Content as Frame;
+                _frame = App.MainWindow.Content as Frame ?? throw new InvalidOperationException("MainWindow content is not a frame");
                 RegisterFrameEvents();
             }
 
@@ -46,7 +46,7 @@ public class NavigationService : INavigationService
 
     private void RegisterFrameEvents()
     {
-        if (_frame != null)
+        if (_frame is not null)
         {
             _frame.Navigated += OnNavigated;
         }
@@ -54,7 +54,7 @@ public class NavigationService : INavigationService
 
     private void UnregisterFrameEvents()
     {
-        if (_frame != null)
+        if (_frame is not null)
         {
             _frame.Navigated -= OnNavigated;
         }
@@ -64,8 +64,8 @@ public class NavigationService : INavigationService
     {
         if (CanGoBack)
         {
-            var vmBeforeNavigation = _frame.GetPageViewModel();
-            _frame.GoBack();
+            var vmBeforeNavigation = _frame?.GetPageViewModel();
+            _frame?.GoBack();
             if (vmBeforeNavigation is INavigationAware navigationAware)
             {
                 navigationAware.OnNavigatedFrom();
@@ -77,12 +77,14 @@ public class NavigationService : INavigationService
         return false;
     }
 
-    public bool NavigateTo(string pageKey, object parameter = null, bool clearNavigation = false)
+    public bool NavigateTo(string pageKey, object? parameter = default, bool clearNavigation = false)
     {
         var pageType = _pageService.GetPageType(pageKey);
 
-        if (_frame.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParameterUsed)))
+        if (_frame?.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParameterUsed)))
         {
+            if (_frame is null) throw new InvalidOperationException();
+
             _frame.Tag = clearNavigation;
             var vmBeforeNavigation = _frame.GetPageViewModel();
             var navigated = _frame.Navigate(pageType, parameter);

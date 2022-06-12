@@ -1,8 +1,6 @@
 ﻿using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.ViewModels;
 
-using Microsoft.UI.Xaml;
-
 namespace CodeBreaker.WinUI.Activation;
 
 public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventArgs>
@@ -14,15 +12,17 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
         _navigationService = navigationService;
     }
 
-    protected override bool CanHandleInternal(LaunchActivatedEventArgs args)
+    protected override bool CanHandleInternal(LaunchActivatedEventArgs? args)
     {
         // None of the ActivationHandlers has handled the activation.
         return _navigationService.Frame.Content == null;
     }
 
-    protected async override Task HandleInternalAsync(LaunchActivatedEventArgs args)
+    protected async override Task HandleInternalAsync(LaunchActivatedEventArgs? args)
     {
-        _navigationService.NavigateTo(typeof(MainViewModel).FullName, args.Arguments);
+        string? fullName = typeof(MainViewModel).FullName;
+        if (fullName is null) throw new InvalidOperationException();
+        _navigationService.NavigateTo(fullName, args?.Arguments);
 
         await Task.CompletedTask;
     }

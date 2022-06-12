@@ -1,4 +1,5 @@
 ﻿global using CodeBreaker.WinUI.Helpers;
+
 global using Microsoft.UI.Xaml;
 global using Microsoft.UI.Xaml.Controls;
 global using Microsoft.UI.Xaml.Navigation;
@@ -10,8 +11,6 @@ using CodeBreaker.WinUI.Services;
 
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-using Windows.ApplicationModel.Activation;
 
 using Xaml = Microsoft.UI.Xaml;
 
@@ -76,5 +75,4 @@ public partial class App : Application
         var activationService = App.GetService<IActivationService>();
         await activationService.ActivateAsync(args);
     }
-
 }

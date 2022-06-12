@@ -6,12 +6,11 @@ using Microsoft.UI.Xaml.Navigation;
 
 namespace CodeBreaker.WinUI.ViewModels;
 
-[ObservableRecipient]
 [ObservableObject]
 public partial class ShellViewModel
 {
     private bool _isBackEnabled;
-    private object _selected;
+    private object? _selected;
 
     public INavigationService NavigationService { get; }
 
@@ -23,7 +22,7 @@ public partial class ShellViewModel
         set => SetProperty(ref _isBackEnabled, value);
     }
 
-    public object Selected
+    public object? Selected
     {
         get => _selected;
         set => SetProperty(ref _selected, value);

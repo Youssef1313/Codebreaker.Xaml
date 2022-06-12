@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using CodeBreaker.WinUI.Contracts.Services;
-
-using Microsoft.UI.Xaml.Controls;
+﻿using CodeBreaker.WinUI.Contracts.Services;
 
 namespace CodeBreaker.WinUI.Services;
 
@@ -14,11 +8,11 @@ public class NavigationViewService : INavigationViewService
 
     private readonly IPageService _pageService;
 
-    private NavigationView _navigationView;
+    private NavigationView? _navigationView;
 
-    public IList<object> MenuItems => _navigationView.MenuItems;
+    public IList<object>? MenuItems => _navigationView?.MenuItems;
 
-    public object SettingsItem => _navigationView.SettingsItem;
+    public object? SettingsItem => _navigationView?.SettingsItem;
 
     public NavigationViewService(INavigationService navigationService, IPageService pageService)
     {
@@ -35,11 +29,14 @@ public class NavigationViewService : INavigationViewService
 
     public void UnregisterEvents()
     {
-        _navigationView.BackRequested -= OnBackRequested;
-        _navigationView.ItemInvoked -= OnItemInvoked;
+        if (_navigationView is not null)
+        {
+            _navigationView.BackRequested -= OnBackRequested;
+            _navigationView.ItemInvoked -= OnItemInvoked;
+        }
     }
 
-    public NavigationViewItem GetSelectedItem(Type pageType) => GetSelectedItem(_navigationView.MenuItems, pageType);
+    public NavigationViewItem? GetSelectedItem(Type pageType) => GetSelectedItem(_navigationView?.MenuItems, pageType);
 
     private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args) => _navigationService.GoBack();
 
@@ -51,17 +48,21 @@ public class NavigationViewService : INavigationViewService
         }
         else
         {
-            var selectedItem = args.InvokedItemContainer as NavigationViewItem;
-
-            if (selectedItem.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
+            if (args.InvokedItemContainer is NavigationViewItem selectedItem && 
+                selectedItem.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
             {
                 _navigationService.NavigateTo(pageKey);
             }
         }
     }
 
-    private NavigationViewItem GetSelectedItem(IEnumerable<object> menuItems, Type pageType)
+    private NavigationViewItem? GetSelectedItem(IEnumerable<object>? menuItems, Type pageType)
     {
+        if (menuItems is null)
+        {
+            return null;
+        }
+
         foreach (var item in menuItems.OfType<NavigationViewItem>())
         {
             if (IsMenuItemForPageType(item, pageType))
