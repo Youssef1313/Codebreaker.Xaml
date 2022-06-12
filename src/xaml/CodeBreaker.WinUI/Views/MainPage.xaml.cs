@@ -1,15 +1,17 @@
-﻿using CodeBreaker.WinUI.ViewModels;
+﻿using CodeBreaker.ViewModels;
+using CodeBreaker.WinUI.ViewModels;
 
 
 namespace CodeBreaker.WinUI.Views;
 
 public sealed partial class MainPage : Page
 {
-    public MainViewModel ViewModel { get; }
+    public CodeBreaker6x4ViewModel ViewModel { get; }
 
     public MainPage()
     {
-        ViewModel = App.GetService<MainViewModel>();
+        ViewModel = App.GetService<CodeBreaker6x4ViewModel>();
         InitializeComponent();
     }
+
 }

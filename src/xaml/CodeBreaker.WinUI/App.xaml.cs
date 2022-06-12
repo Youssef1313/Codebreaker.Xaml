@@ -5,6 +5,8 @@ global using Microsoft.UI.Xaml.Controls;
 global using Microsoft.UI.Xaml.Navigation;
 global using Microsoft.Xaml.Interactivity;
 
+using CodeBreaker.ViewModels;
+using CodeBreaker.ViewModels.Services;
 using CodeBreaker.WinUI.Activation;
 using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Services;
@@ -41,12 +43,18 @@ public partial class App : Application
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddScoped<IDialogService, WinUIDialogService>();
 
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 
             services.AddTransient<MainPage>();
-            services.AddTransient<MainViewModel>();
+            services.AddTransient<CodeBreaker6x4ViewModel>();
+            services.AddHttpClient<GameClient>(options =>
+            {
+                options.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
+            });
+
         })
         .Build();
 

@@ -12,6 +12,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Views\KeyPegsView.xaml" />
+    <None Remove="Views\PegSelectionView.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
@@ -36,8 +40,9 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.3" />
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.194" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.0" />
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.8" />
   </ItemGroup>
 
@@ -45,6 +50,20 @@
   <ItemGroup>
     <ProjectReference Include="..\..\shared\CodeBreaker.Shared\CodeBreaker.Shared.csproj" />
     <ProjectReference Include="..\CodeBreaker.ViewModels\CodeBreaker.ViewModels.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Page Update="Views\KeyPegsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Page Update="Views\PegSelectionView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
 
