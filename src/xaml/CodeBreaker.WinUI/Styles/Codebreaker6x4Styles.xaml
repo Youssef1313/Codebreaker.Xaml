@@ -1,53 +1,67 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:conv="using:CodeBreaker.WinUI.Converters"
-    xmlns:local="using:CodeBreaker.WinUI.Styles">
+    xmlns:conv="using:CodeBreaker.WinUI.Converters">
     
     <conv:SelectionAndKeyPegToSelectionBrushConverter x:Key="SelectionConverter" />
     <conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />
     <conv:SelectionAndKeyPegToKeyBrushConverter x:Key="KeyPegConverter" />
     
     <DataTemplate x:Key="Codebreaker6x4CodePegs">
-        <Grid>
+        <Grid Background="LightBlue">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding MoveNumber}" Grid.Column="0" />
-            <StackPanel Orientation="Horizontal" Background="LightBlue" Grid.Column="1">
-                <Ellipse Width="100" Height="100" 
-                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=0}" />
-                <Ellipse Width="100" Height="100" 
-                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=1}" />
-                <Ellipse Width="100" Height="100" 
-                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=2}" />
-                <Ellipse Width="100" Height="100" 
-                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=3}" />
-            </StackPanel>
-            <Grid Grid.Column="2" Background="LightBlue">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Ellipse Width="25" Height="25" Grid.Row="0" Grid.Column="0"
-                                     Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=0}"
-                                     Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=0}" />
-                <Ellipse Width="25" Height="25" Grid.Row="0" Grid.Column="1"
-                                     Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=1}"
-                                     Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=1}" />
-                <Ellipse Width="25" Height="25" Grid.Row="1" Grid.Column="0"
-                                     Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=2}"                                     
-                                     Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=2}" />
-                <Ellipse Width="25" Height="25" Grid.Row="1" Grid.Column="1"
-                                     Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=3}"                                     
-                                     Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=3}" />
-            </Grid>
+            <TextBlock Text="{Binding MoveNumber}" Width="48" FontSize="32" Margin="8,8,8,8" HorizontalAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" />
+            <Border Grid.Column="1" BorderThickness="2,2,0,2" BorderBrush="DarkBlue">
+                <StackPanel Orientation="Horizontal" Margin="16,0,0,0" >
+                    <Ellipse 
+                        Width="68" Height="68" Margin="12, 4"
+                        Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=0}" />
+                    <Ellipse 
+                        Width="68" Height="68" Margin="40, 4"
+                        Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=1}" />
+                    <Ellipse 
+                        Width="68" Height="68" Margin="14, 4"
+                        Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=2}" />
+                    <Ellipse 
+                        Width="68" Height="68" Margin="36, 4"
+                        Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=3}" />
+
+                </StackPanel>
+            </Border>
+
+            <Border BorderThickness="0,2,2,2" BorderBrush="DarkBlue" Grid.Column="2">
+                <Grid Margin="12,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Ellipse 
+                        Width="16" Height="16" Margin="8" Grid.Row="0" Grid.Column="0"
+                        Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=0}"
+                        Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=0}" />
+                    <Ellipse 
+                        Width="16" Height="16" Margin="8" Grid.Row="0" Grid.Column="1"
+                        Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=1}"
+                        Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=1}" />
+                    <Ellipse 
+                        Width="16" Height="16" Margin="8" Grid.Row="1" Grid.Column="0"
+                        Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=2}"                                     
+                        Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=2}" />
+                    <Ellipse 
+                        Width="16" Height="16" Margin="8" Grid.Row="1" Grid.Column="1"
+                        Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=3}"                                     
+                        Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=3}" />
+                </Grid>
+            </Border>
+
 
         </Grid>
     </DataTemplate>

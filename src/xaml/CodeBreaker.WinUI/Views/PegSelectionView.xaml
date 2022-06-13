@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <DataTemplate x:Key="SelectColorTemplate">
             <Grid>
-                <Ellipse Fill="{Binding}" Width="100" Height="100" />
+                <Ellipse Fill="{Binding}" Width="60" Height="60" />
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
@@ -19,24 +19,29 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <ComboBox Margin="4"
+        <StackPanel Orientation="Horizontal" Background="LightBlue" Height="92" Margin="16,0,0,0">
+            <TextBlock Width="80" />
+            <ComboBox 
+                Margin="4" Width="112"                     
                 ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
                 SelectedItem="{x:Bind ViewModel.SelectedColor1, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SelectColorTemplate}"/>
-            <ComboBox Margin="4"
+            <ComboBox 
+                Margin="4" Width="112"
                 ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
                 SelectedItem="{x:Bind ViewModel.SelectedColor2, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SelectColorTemplate}"/>
-            <ComboBox Margin="4"
+            <ComboBox 
+                Margin="4" Width="112"
                 ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
                 SelectedItem="{x:Bind ViewModel.SelectedColor3, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SelectColorTemplate}"/>                
-            <ComboBox Margin="4"
+            <ComboBox 
+                Margin="4" Width="112"
                 ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
                 SelectedItem="{x:Bind ViewModel.SelectedColor4, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SelectColorTemplate}"/>
         </StackPanel>
-        <Button Content="Set Move" Command="{x:Bind ViewModel.SetMoveCommand, Mode=OneWay}" Grid.Column="1" Margin="4" />
+        <AppBarButton Label="Move" Command="{x:Bind ViewModel.SetMoveCommand, Mode=OneWay}" Grid.Column="1" Margin="4" Icon="Send" />
     </Grid>
 </UserControl>

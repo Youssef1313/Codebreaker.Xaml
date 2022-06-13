@@ -39,6 +39,7 @@
             Grid.Row="1" 
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Start}">
             <TextBox 
+                Width="180"
                 IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}"
                 x:Name="TextName" 
                 Header="Name:" 

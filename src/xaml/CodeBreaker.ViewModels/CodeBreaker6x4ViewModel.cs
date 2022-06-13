@@ -97,6 +97,11 @@ public partial class CodeBreaker6x4ViewModel
         GameMoves.Clear();
         ColorList.Clear();
         GameStatus = GameMode.NotRunning;
+        ErrorMessage.IsVisible = false;
+        ErrorMessage.Message = string.Empty;
+        InfoMessage.IsVisible = false;
+        InfoMessage.Message = string.Empty;
+        _moveNumber = 0;
     }
 
     public AsyncRelayCommand SetMoveCommand { get; }
@@ -104,24 +109,36 @@ public partial class CodeBreaker6x4ViewModel
     // [ICommand]
     private async Task SetMoveAsync()
     {
-        InProgress = true;
-        string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
-        (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber, selection);
-
-        GameMoves.Add(new SelectionAndKeyPegs(selection, keyPegColors, _moveNumber++));
-        GameStatus = GameMode.MoveSet;
-
-        if (won)
+        try
         {
-            GameStatus = GameMode.Won;
-            InfoMessage.Message = "Congratulations - you won!";
-            InfoMessage.IsVisible = true;
+            InProgress = true;
+            string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
+            (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber, selection);
+
+            GameMoves.Add(new SelectionAndKeyPegs(selection, keyPegColors, _moveNumber++));
+            GameStatus = GameMode.MoveSet;
+
+            if (won)
+            {
+                GameStatus = GameMode.Won;
+                InfoMessage.Message = "Congratulations - you won!";
+                InfoMessage.IsVisible = true;
+            }
+            else if (completed)
+            {
+                GameStatus = GameMode.Lost;
+                InfoMessage.Message = "Sorry, you didn't find the matching colors!";
+                InfoMessage.IsVisible = true;
+            }
         }
-        else if (completed)
+        catch (Exception ex)
         {
-            GameStatus = GameMode.Lost;
-            InfoMessage.Message = "Sorry, you didn't find the matching colors!";
-            InfoMessage.IsVisible = true;
+            ErrorMessage.IsVisible = true;
+            ErrorMessage.Message = ex.Message;
+        }
+        finally
+        {
+            InProgress = false;
         }
     }
 
