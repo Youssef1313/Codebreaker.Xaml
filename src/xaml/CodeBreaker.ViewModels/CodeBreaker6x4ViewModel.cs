@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace CodeBreaker.ViewModels;
 
@@ -26,6 +27,15 @@ public partial class CodeBreaker6x4ViewModel
     public CodeBreaker6x4ViewModel(GameClient client)
     {
         _client = client;
+        SetMoveCommand = new AsyncRelayCommand(SetMoveAsync, CanSetMove);
+
+        PropertyChanged += (sender, e) =>
+        {
+            if (_selectedColorPropertyNames.Contains(e.PropertyName))
+            {
+                SetMoveCommand.NotifyCanExecuteChanged();
+            }
+        };
     }
 
     [ObservableProperty]
@@ -45,10 +55,12 @@ public partial class CodeBreaker6x4ViewModel
     public bool IsEnabled => !InProgress;
 
     [ICommand]
-    public async Task StartGameAsync()
+    private async Task StartGameAsync()
     {
         try
         {
+            InitializeValues();
+
             InProgress = true;
             var response = await _client.StartGameAsync(_name);
 
@@ -76,8 +88,21 @@ public partial class CodeBreaker6x4ViewModel
         }
     }
 
-    [ICommand]
-    public async Task SetMoveAsync()
+    private void InitializeValues()
+    {
+        SelectedColor1 = string.Empty;
+        SelectedColor2 = string.Empty;
+        SelectedColor3 = string.Empty;
+        SelectedColor4 = string.Empty;
+        GameMoves.Clear();
+        ColorList.Clear();
+        GameStatus = GameMode.NotRunning;
+    }
+
+    public AsyncRelayCommand SetMoveCommand { get; }
+
+    // [ICommand]
+    private async Task SetMoveAsync()
     {
         InProgress = true;
         string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
@@ -91,15 +116,19 @@ public partial class CodeBreaker6x4ViewModel
             GameStatus = GameMode.Won;
             InfoMessage.Message = "Congratulations - you won!";
             InfoMessage.IsVisible = true;
-            // await _dialogService.ShowMessageAsync("Congratulations - you won!");
         }
         else if (completed)
         {
             GameStatus = GameMode.Lost;
             InfoMessage.Message = "Sorry, you didn't find the matching colors!";
             InfoMessage.IsVisible = true;
-            // await _dialogService.ShowMessageAsync("Sorry, you didn't find the match!");
         }
+    }
+
+    private bool CanSetMove()
+    {
+        string[] selections = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
+        return selections.All(s => s != string.Empty);
     }
 
     [ObservableProperty]
@@ -113,6 +142,8 @@ public partial class CodeBreaker6x4ViewModel
 
     [ObservableProperty]
     private string _selectedColor4 = string.Empty;
+
+    private string[] _selectedColorPropertyNames = { nameof(SelectedColor1), nameof(SelectedColor2), nameof(SelectedColor3), nameof(SelectedColor4) };
 
     public InfoMessageViewModel ErrorMessage { get; } = new InfoMessageViewModel { IsError = true, Title = "Error" };
 
