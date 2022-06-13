@@ -14,6 +14,9 @@ public class GameStatusToVisibilityConverter : IValueConverter
         static Visibility GetRunningVisibility(GameMode gameMode) => 
             (gameMode == GameMode.NotRunning) ? Visibility.Collapsed : Visibility.Visible;
 
+        static Visibility GetCancelVisibility(GameMode gameMode) =>
+            (gameMode == GameMode.Started || gameMode == GameMode.MoveSet) ? Visibility.Visible : Visibility.Collapsed;
+
         string uiCategory = parameter?.ToString() ?? throw new InvalidOperationException("Pass a parameter to this converter");
 
 
@@ -23,6 +26,7 @@ public class GameStatusToVisibilityConverter : IValueConverter
             {
                 "Start" => GetStartVisibility(gameMode),
                 "Running" => GetRunningVisibility(gameMode),
+                "Cancelable" => GetCancelVisibility(gameMode),
                 _ => throw new InvalidOperationException("Invalid parameter value")
             };
         }

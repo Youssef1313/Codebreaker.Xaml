@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace CodeBreaker.ViewModels;
 
@@ -20,14 +21,21 @@ public enum GameMode
 public partial class CodeBreaker6x4ViewModel
 {
     private readonly GameClient _client;
-    private readonly IDialogService _dialogService;
 
     private int _moveNumber = 0;
     private string _gameId = string.Empty;
-    public CodeBreaker6x4ViewModel(GameClient client, IDialogService dialogService)
+    public CodeBreaker6x4ViewModel(GameClient client)
     {
         _client = client;
-        _dialogService = dialogService;
+        SetMoveCommand = new AsyncRelayCommand(SetMoveAsync, CanSetMove);
+
+        PropertyChanged += (sender, e) =>
+        {
+            if (_selectedColorPropertyNames.Contains(e.PropertyName))
+            {
+                SetMoveCommand.NotifyCanExecuteChanged();
+            }
+        };
     }
 
     [ObservableProperty]
@@ -40,11 +48,20 @@ public partial class CodeBreaker6x4ViewModel
     [ObservableProperty]
     private GameMode _gameStatus = GameMode.NotRunning;
 
+    [AlsoNotifyChangeFor(nameof(IsEnabled))]
+    [ObservableProperty]
+    private bool _inProgress = false;
+
+    public bool IsEnabled => !InProgress;
+
     [ICommand]
-    public async Task StartGameAsync()
+    private async Task StartGameAsync()
     {
         try
         {
+            InitializeValues();
+
+            InProgress = true;
             var response = await _client.StartGameAsync(_name);
 
             GameStatus = GameMode.Started;
@@ -62,29 +79,73 @@ public partial class CodeBreaker6x4ViewModel
         }
         catch (Exception ex)
         {
-
+            ErrorMessage.IsVisible = true;
+            ErrorMessage.Message = ex.Message;
+        }
+        finally
+        {
+            InProgress = false;
         }
     }
 
-    [ICommand]
-    public async Task SetMoveAsync()
+    private void InitializeValues()
     {
-        string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
-        (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber, selection);
+        SelectedColor1 = string.Empty;
+        SelectedColor2 = string.Empty;
+        SelectedColor3 = string.Empty;
+        SelectedColor4 = string.Empty;
+        GameMoves.Clear();
+        ColorList.Clear();
+        GameStatus = GameMode.NotRunning;
+        ErrorMessage.IsVisible = false;
+        ErrorMessage.Message = string.Empty;
+        InfoMessage.IsVisible = false;
+        InfoMessage.Message = string.Empty;
+        _moveNumber = 0;
+    }
 
-        GameMoves.Add(new SelectionAndKeyPegs(selection, keyPegColors, _moveNumber++));
-        GameStatus = GameMode.MoveSet;
+    public AsyncRelayCommand SetMoveCommand { get; }
 
-        if (won)
+    // [ICommand]
+    private async Task SetMoveAsync()
+    {
+        try
         {
-            GameStatus = GameMode.Won;
-            await _dialogService.ShowMessageAsync("Congratulations - you won!");
+            InProgress = true;
+            string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
+            (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber, selection);
+
+            GameMoves.Add(new SelectionAndKeyPegs(selection, keyPegColors, _moveNumber++));
+            GameStatus = GameMode.MoveSet;
+
+            if (won)
+            {
+                GameStatus = GameMode.Won;
+                InfoMessage.Message = "Congratulations - you won!";
+                InfoMessage.IsVisible = true;
+            }
+            else if (completed)
+            {
+                GameStatus = GameMode.Lost;
+                InfoMessage.Message = "Sorry, you didn't find the matching colors!";
+                InfoMessage.IsVisible = true;
+            }
         }
-        else if (completed)
+        catch (Exception ex)
         {
-            GameStatus = GameMode.Lost;
-            await _dialogService.ShowMessageAsync("Sorry, you didn't find the match!");
+            ErrorMessage.IsVisible = true;
+            ErrorMessage.Message = ex.Message;
         }
+        finally
+        {
+            InProgress = false;
+        }
+    }
+
+    private bool CanSetMove()
+    {
+        string[] selections = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
+        return selections.All(s => s != string.Empty);
     }
 
     [ObservableProperty]
@@ -99,6 +160,11 @@ public partial class CodeBreaker6x4ViewModel
     [ObservableProperty]
     private string _selectedColor4 = string.Empty;
 
+    private string[] _selectedColorPropertyNames = { nameof(SelectedColor1), nameof(SelectedColor2), nameof(SelectedColor3), nameof(SelectedColor4) };
+
+    public InfoMessageViewModel ErrorMessage { get; } = new InfoMessageViewModel { IsError = true, Title = "Error" };
+
+    public InfoMessageViewModel InfoMessage { get; } = new InfoMessageViewModel { IsError = false, Title = "Information" };
 }
 
 public record SelectionAndKeyPegs(string[] Selection, string[] KeyPegs, int MoveNumber);
