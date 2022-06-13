@@ -14,28 +14,50 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <RelativePanel 
+        <InfoBar 
             Grid.Row="0" 
+            Severity="Informational"
+            IsOpen="{x:Bind ViewModel.InfoMessage.IsVisible, Mode=OneWay}"
+            Message="{x:Bind ViewModel.InfoMessage.Message, Mode=OneWay}"
+            IsIconVisible="True" 
+            IsClosable="True" />
+        <InfoBar
+            Grid.Row="0"
+            IsOpen="{x:Bind ViewModel.ErrorMessage.IsVisible, Mode=OneWay}"
+            Severity="Error"
+            Message="{x:Bind ViewModel.ErrorMessage.Message, Mode=OneWay}"
+            IsIconVisible="True"
+            IsClosable="True" />
+        <ProgressRing
+            Grid.Row="0"
+            IsActive="{x:Bind ViewModel.InProgress, Mode=OneWay}" />
+
+        <RelativePanel 
+            Grid.Row="1" 
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Start}">
             <TextBox 
+                IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}"
                 x:Name="TextName" 
                 Header="Name:" 
                 Text="{x:Bind ViewModel.Name, Mode=TwoWay}" />
-            <Button 
-                Content="Start the game" 
-                Command="{x:Bind ViewModel.StartGameCommand, Mode=OneTime}" 
-                Margin="8"
-                RelativePanel.RightOf="TextName" />
+            <AppBarButton Label="Start" Icon="Play" Command="{x:Bind ViewModel.StartGameCommand, Mode=OneTime}" RelativePanel.RightOf="TextName" />
+
+        </RelativePanel>
+        <RelativePanel
+            Grid.Row="1"
+            Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Cancelable}">
+            <AppBarButton Label="Cancel" Icon="Cancel" />
         </RelativePanel>
 
         <views:PegSelectionView 
-            Grid.Row="1" Grid.ColumnSpan="3" 
+            Grid.Row="2"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
             ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
 
-        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+        <ListView Grid.Row="3" 
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
             ItemsSource="{x:Bind ViewModel.GameMoves, Mode=OneWay}"
             ItemTemplate="{StaticResource Codebreaker6x4CodePegs}" />

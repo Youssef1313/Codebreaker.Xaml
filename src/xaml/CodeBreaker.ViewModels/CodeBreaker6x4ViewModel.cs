@@ -20,14 +20,12 @@ public enum GameMode
 public partial class CodeBreaker6x4ViewModel
 {
     private readonly GameClient _client;
-    private readonly IDialogService _dialogService;
 
     private int _moveNumber = 0;
     private string _gameId = string.Empty;
-    public CodeBreaker6x4ViewModel(GameClient client, IDialogService dialogService)
+    public CodeBreaker6x4ViewModel(GameClient client)
     {
         _client = client;
-        _dialogService = dialogService;
     }
 
     [ObservableProperty]
@@ -40,11 +38,18 @@ public partial class CodeBreaker6x4ViewModel
     [ObservableProperty]
     private GameMode _gameStatus = GameMode.NotRunning;
 
+    [AlsoNotifyChangeFor(nameof(IsEnabled))]
+    [ObservableProperty]
+    private bool _inProgress = false;
+
+    public bool IsEnabled => !InProgress;
+
     [ICommand]
     public async Task StartGameAsync()
     {
         try
         {
+            InProgress = true;
             var response = await _client.StartGameAsync(_name);
 
             GameStatus = GameMode.Started;
@@ -62,13 +67,19 @@ public partial class CodeBreaker6x4ViewModel
         }
         catch (Exception ex)
         {
-
+            ErrorMessage.IsVisible = true;
+            ErrorMessage.Message = ex.Message;
+        }
+        finally
+        {
+            InProgress = false;
         }
     }
 
     [ICommand]
     public async Task SetMoveAsync()
     {
+        InProgress = true;
         string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
         (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber, selection);
 
@@ -78,12 +89,16 @@ public partial class CodeBreaker6x4ViewModel
         if (won)
         {
             GameStatus = GameMode.Won;
-            await _dialogService.ShowMessageAsync("Congratulations - you won!");
+            InfoMessage.Message = "Congratulations - you won!";
+            InfoMessage.IsVisible = true;
+            // await _dialogService.ShowMessageAsync("Congratulations - you won!");
         }
         else if (completed)
         {
             GameStatus = GameMode.Lost;
-            await _dialogService.ShowMessageAsync("Sorry, you didn't find the match!");
+            InfoMessage.Message = "Sorry, you didn't find the matching colors!";
+            InfoMessage.IsVisible = true;
+            // await _dialogService.ShowMessageAsync("Sorry, you didn't find the match!");
         }
     }
 
@@ -99,6 +114,9 @@ public partial class CodeBreaker6x4ViewModel
     [ObservableProperty]
     private string _selectedColor4 = string.Empty;
 
+    public InfoMessageViewModel ErrorMessage { get; } = new InfoMessageViewModel { IsError = true, Title = "Error" };
+
+    public InfoMessageViewModel InfoMessage { get; } = new InfoMessageViewModel { IsError = false, Title = "Information" };
 }
 
 public record SelectionAndKeyPegs(string[] Selection, string[] KeyPegs, int MoveNumber);
