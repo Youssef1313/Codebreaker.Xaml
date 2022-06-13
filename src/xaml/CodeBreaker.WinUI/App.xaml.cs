@@ -1,4 +1,5 @@
 ﻿global using CodeBreaker.WinUI.Helpers;
+global using CodeBreaker.Shared;
 
 global using Microsoft.UI.Xaml;
 global using Microsoft.UI.Xaml.Controls;

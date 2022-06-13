@@ -1,4 +1,5 @@
-﻿using CodeBreaker.WinUI.Contracts.Services;
+﻿using CodeBreaker.ViewModels;
+using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.ViewModels;
 
 namespace CodeBreaker.WinUI.Activation;
@@ -20,7 +21,7 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
 
     protected async override Task HandleInternalAsync(LaunchActivatedEventArgs? args)
     {
-        string? fullName = typeof(MainViewModel).FullName;
+        string? fullName = typeof(CodeBreaker6x4ViewModel).FullName;
         if (fullName is null) throw new InvalidOperationException();
         _navigationService.NavigateTo(fullName, args?.Arguments);
 

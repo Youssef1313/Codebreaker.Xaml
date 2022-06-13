@@ -9,7 +9,7 @@ public sealed partial class PegSelectionView : UserControl
 {
     public PegSelectionView()
     {
-        this.InitializeComponent();
+        InitializeComponent();
     }
 
 
@@ -19,10 +19,6 @@ public sealed partial class PegSelectionView : UserControl
         set => SetValue(ViewModelProperty, value);
     }
 
-
-    // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
     public static readonly DependencyProperty ViewModelProperty =
         DependencyProperty.Register("ViewModel", typeof(CodeBreaker6x4ViewModel), typeof(PegSelectionView), new PropertyMetadata(null));
-
-
 }

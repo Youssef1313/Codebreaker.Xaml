@@ -1,4 +1,5 @@
-﻿using CodeBreaker.WinUI.Contracts.Services;
+﻿using CodeBreaker.ViewModels;
+using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.ViewModels;
 using CodeBreaker.WinUI.Views;
 
@@ -11,7 +12,7 @@ public class PageService : IPageService
 
     public PageService()
     {
-        Configure<MainViewModel, MainPage>();
+        Configure<CodeBreaker6x4ViewModel, MainPage>();
     }
 
     public Type GetPageType(string key)

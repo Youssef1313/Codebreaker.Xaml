@@ -6,6 +6,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <DataTemplate x:Key="SelectColorTemplate">
+            <Grid>
+                <Ellipse Fill="{Binding}" Width="100" Height="100" />
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -13,13 +20,23 @@
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <StackPanel Orientation="Horizontal">
-            <ComboBox ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" SelectedItem="{x:Bind ViewModel.SelectedColor1, Mode=TwoWay}"></ComboBox>
-            <ComboBox ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" SelectedItem="{x:Bind ViewModel.SelectedColor2, Mode=TwoWay}"></ComboBox>
-            <ComboBox ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" SelectedItem="{x:Bind ViewModel.SelectedColor3, Mode=TwoWay}"></ComboBox>
-            <ComboBox ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" SelectedItem="{x:Bind ViewModel.SelectedColor4, Mode=TwoWay}"></ComboBox>
+            <ComboBox Margin="4"
+                ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
+                SelectedItem="{x:Bind ViewModel.SelectedColor1, Mode=TwoWay}"
+                ItemTemplate="{StaticResource SelectColorTemplate}"/>
+            <ComboBox Margin="4"
+                ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
+                SelectedItem="{x:Bind ViewModel.SelectedColor2, Mode=TwoWay}"
+                ItemTemplate="{StaticResource SelectColorTemplate}"/>
+            <ComboBox Margin="4"
+                ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
+                SelectedItem="{x:Bind ViewModel.SelectedColor3, Mode=TwoWay}"
+                ItemTemplate="{StaticResource SelectColorTemplate}"/>                
+            <ComboBox Margin="4"
+                ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
+                SelectedItem="{x:Bind ViewModel.SelectedColor4, Mode=TwoWay}"
+                ItemTemplate="{StaticResource SelectColorTemplate}"/>
         </StackPanel>
-        <Button Content="Set Move" Command="{x:Bind ViewModel.SetMoveCommand, Mode=OneWay}" Grid.Column="1" Margin="4"></Button>
-
-
+        <Button Content="Set Move" Command="{x:Bind ViewModel.SetMoveCommand, Mode=OneWay}" Grid.Column="1" Margin="4" />
     </Grid>
 </UserControl>

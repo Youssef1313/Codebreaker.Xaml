@@ -8,74 +8,37 @@
     xmlns:conv="using:CodeBreaker.WinUI.Converters"
     mc:Ignorable="d">
     <Page.Resources>
-        <conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />
-        <conv:SelectionAndKeyPegToSelectionBrushConverter x:Key="SelectionConverter" />
-        <conv:SelectionAndKeyPegToKeyBrushConverter x:Key="KeyPegConverter" />
+        <conv:GameStatusToVisibilityConverter x:Key="GameStatusVisibilityConverter" />
     </Page.Resources>
-
     <Grid x:Name="ContentArea">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
+        <RelativePanel 
+            Grid.Row="0" 
+            Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Start}">
+            <TextBox 
+                x:Name="TextName" 
+                Header="Name:" 
+                Text="{x:Bind ViewModel.Name, Mode=TwoWay}" />
+            <Button 
+                Content="Start the game" 
+                Command="{x:Bind ViewModel.StartGameCommand, Mode=OneTime}" 
+                Margin="8"
+                RelativePanel.RightOf="TextName" />
+        </RelativePanel>
 
-        <TextBlock Text="Name:" />
-        <TextBox Text="{x:Bind ViewModel.Name, Mode=TwoWay}" Grid.Column="1" />
-        <Button Content="Start" Command="{x:Bind ViewModel.StartGameCommand, Mode=OneTime}" Grid.Column="2" Margin="8" />
-        <views:PegSelectionView Grid.Row="1" Grid.ColumnSpan="3" 
-                                ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
+        <views:PegSelectionView 
+            Grid.Row="1" Grid.ColumnSpan="3" 
+            Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
+            ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
 
-        <ListView ItemsSource="{x:Bind ViewModel.GameMoves, Mode=OneWay}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Horizontal" Background="LightBlue">
-                            <Ellipse Width="100" Height="100" 
-                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=0}" />
-                            <Ellipse Width="100" Height="100" 
-                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=1}" />
-                            <Ellipse Width="100" Height="100" 
-                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=2}" />
-                            <Ellipse Width="100" Height="100" 
-                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=3}" />
-                        </StackPanel>
-                        <Grid Grid.Column="1" Background="LightBlue">
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Ellipse Width="25" Height="25" Grid.Row="0" Grid.Column="0"
-                                     Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=0}"
-                                     Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=0}" />
-                            <Ellipse Width="25" Height="25" Grid.Row="0" Grid.Column="1"
-                                     Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=1}"
-                                     Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=1}" />
-                            <Ellipse Width="25" Height="25" Grid.Row="1" Grid.Column="0"
-                                     Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=2}"                                     
-                                     Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=2}" />
-                            <Ellipse Width="25" Height="25" Grid.Row="1" Grid.Column="1"
-                                     Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=3}"                                     
-                                     Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=3}" />
-                        </Grid>
-
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
+        <ListView Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+            Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
+            ItemsSource="{x:Bind ViewModel.GameMoves, Mode=OneWay}"
+            ItemTemplate="{StaticResource Codebreaker6x4CodePegs}" />
     </Grid>
+
 </Page>
