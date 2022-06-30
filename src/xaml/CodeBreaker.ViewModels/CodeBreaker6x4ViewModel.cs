@@ -67,7 +67,7 @@ public partial class CodeBreaker6x4ViewModel
             GameStatus = GameMode.Started;
 
             _gameId = response.Id;
-            (_, int maxMoves, string[] colors) = response.GameOptions;
+            (_, _, int maxMoves, string[] colors) = response.GameOptions;
             _moveNumber++;
 
             ColorList.Clear();

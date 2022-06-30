@@ -1,9 +1,11 @@
 ﻿using CodeBreaker.ViewModels;
 using CodeBreaker.ViewModels.Services;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using System.Configuration;
 using System.Windows;
 
 namespace CodeBreaker.WPF;
@@ -17,13 +19,14 @@ public sealed partial class App : Application, IDisposable
     public App()
     {
         _host = Host.CreateDefaultBuilder()
-            .ConfigureServices(services =>
+            .ConfigureServices((context, services) =>
             {
                 services.AddTransient<IDialogService, Services.WPFDialogService>();
                 services.AddScoped<CodeBreaker6x4ViewModel>();
                 services.AddHttpClient<GameClient>(client =>
                 {
-                    client.BaseAddress = new Uri("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
+                    string uriString = context.Configuration["CodeBreakerAPIURI"] ?? throw new ConfigurationErrorsException("CodeBreakerAPIURI not configured");
+                    client.BaseAddress = new Uri(uriString);
                 });
             })
             .Build();
