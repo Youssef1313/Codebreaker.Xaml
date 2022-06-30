@@ -3,6 +3,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
+using Microsoft.Extensions.Options;
+
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -17,6 +19,11 @@ public enum GameMode
     Won
 }
 
+public class CodeBreaker6x4ViewModelOptions
+{
+    public bool EnableDialogs { get; set; } = false;
+}
+
 [ObservableObject]
 public partial class CodeBreaker6x4ViewModel
 {
@@ -24,9 +31,18 @@ public partial class CodeBreaker6x4ViewModel
 
     private int _moveNumber = 0;
     private string _gameId = string.Empty;
-    public CodeBreaker6x4ViewModel(GameClient client)
+    private readonly bool _enableDialogs = false;
+    private readonly IDialogService _dialogService;
+    
+    public CodeBreaker6x4ViewModel(
+        GameClient client, 
+        IOptions<CodeBreaker6x4ViewModelOptions> options,
+        IDialogService dialogService)
     {
         _client = client;
+        _dialogService = dialogService;
+        _enableDialogs = options.Value.EnableDialogs;
+        
         SetMoveCommand = new AsyncRelayCommand(SetMoveAsync, CanSetMove);
 
         PropertyChanged += (sender, e) =>
@@ -123,12 +139,20 @@ public partial class CodeBreaker6x4ViewModel
                 GameStatus = GameMode.Won;
                 InfoMessage.Message = "Congratulations - you won!";
                 InfoMessage.IsVisible = true;
+                if (_enableDialogs)
+                {
+                    await _dialogService.ShowMessageAsync(InfoMessage.Message);
+                }
             }
             else if (completed)
             {
                 GameStatus = GameMode.Lost;
                 InfoMessage.Message = "Sorry, you didn't find the matching colors!";
                 InfoMessage.IsVisible = true;
+                if (_enableDialogs)
+                {
+                    await _dialogService.ShowMessageAsync(InfoMessage.Message);
+                }
             }
         }
         catch (Exception ex)

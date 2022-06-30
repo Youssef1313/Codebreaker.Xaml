@@ -21,6 +21,7 @@ public sealed partial class App : Application, IDisposable
         _host = Host.CreateDefaultBuilder()
             .ConfigureServices((context, services) =>
             {
+                services.Configure<CodeBreaker6x4ViewModelOptions>(options => options.EnableDialogs = true);
                 services.AddTransient<IDialogService, Services.WPFDialogService>();
                 services.AddScoped<CodeBreaker6x4ViewModel>();
                 services.AddHttpClient<GameClient>(client =>
