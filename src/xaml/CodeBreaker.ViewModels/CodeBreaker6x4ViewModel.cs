@@ -106,7 +106,7 @@ public partial class CodeBreaker6x4ViewModel
 
     public AsyncRelayCommand SetMoveCommand { get; }
 
-    // [ICommand]
+    // [ICommand] - TODO: what about CanExecute with code generated ICommand?
     private async Task SetMoveAsync()
     {
         try

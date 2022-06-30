@@ -4,6 +4,8 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
+using static CodeBreaker.Shared.CodeBreakerColors;
+
 namespace CodeBreaker.WPF.Converters;
 
 public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
@@ -25,12 +27,12 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
 
             return selection.Selection[ix] switch
             {
-                "black" => BlackBrush,
-                "white" => WhiteBrush,
-                "red" => RedBrush,
-                "green" => GreenBrush,
-                "blue" => BlueBrush,
-                "yellow" => YellowBrush,
+                Black => BlackBrush,
+                White => WhiteBrush,
+                Red => RedBrush,
+                Green => GreenBrush,
+                Blue => BlueBrush,
+                Yellow => YellowBrush,
                 _ => EmptyBrush
             };
         }
