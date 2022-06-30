@@ -36,9 +36,11 @@ public partial class App : Application
             // Default Activation Handler
             services.AddTransient<ActivationHandler<Xaml.LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
-// Other Activation Handlers
+            // Other Activation Handlers
 
-// Services
+            // Services
+            services.Configure<CodeBreaker6x4ViewModelOptions>(options => options.EnableDialogs = false);
+
             services.AddTransient<INavigationViewService, NavigationViewService>();
 
             services.AddSingleton<IActivationService, ActivationService>();
