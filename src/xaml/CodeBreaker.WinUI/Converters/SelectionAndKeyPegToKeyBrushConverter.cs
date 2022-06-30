@@ -4,6 +4,8 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 
+using static CodeBreaker.Shared.CodeBreakerColors;
+
 namespace CodeBreaker.WinUI.Converters;
 
 public class SelectionAndKeyPegToKeyBrushConverter : IValueConverter
@@ -23,8 +25,8 @@ public class SelectionAndKeyPegToKeyBrushConverter : IValueConverter
 
                 return selection.KeyPegs[ix] switch
                 {
-                    "black" => BlackBrush,
-                    "white" => WhiteBrush,
+                    Black => BlackBrush,
+                    White => WhiteBrush,
                     _ => EmptyBrush
                 };
             }
