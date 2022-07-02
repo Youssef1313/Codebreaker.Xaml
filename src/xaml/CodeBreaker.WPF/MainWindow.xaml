@@ -13,7 +13,14 @@
         <conv:GameStatueToVisibilityConverter x:Key="GameStatusVisibilityConverter" />
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />
-        <conv:SelectionAndKeyPegToSelectionBrushConverter x:Key="SelectionConverter" />
+        <conv:SelectionAndKeyPegToSelectionBrushConverter 
+            x:Key="SelectionConverter" 
+            BlackBrush="{StaticResource BlackBrush}"
+            WhiteBrush="{StaticResource WhiteBrush}"
+            RedBrush="{StaticResource RedBrush}"
+            GreenBrush="{StaticResource GreenBrush}"
+            BlueBrush="{StaticResource BlueBrush}"
+            YellowBrush="{StaticResource YellowBrush}" />
         <conv:SelectionAndKeyPegToKeyBrushConverter x:Key="KeyPegConverter" />
     </Window.Resources>
 

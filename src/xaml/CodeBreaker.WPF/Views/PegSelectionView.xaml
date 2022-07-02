@@ -8,10 +8,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <conv:PegColorToBrushConverter x:Key="PegColorToBrushConverter" />
         <DataTemplate x:Key="SelectColorTemplate">
             <Grid>
-                <Ellipse Fill="{Binding Mode=OneWay}" Width="60" Height="60" />
+                <Ellipse Fill="{Binding Mode=OneWay, Converter={StaticResource PegColorToBrushConverter}}" Width="60" Height="60" />
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
