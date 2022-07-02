@@ -55,7 +55,7 @@ public partial class CodeBreaker6x4ViewModel
     }
 
     [ObservableProperty]
-    private string _name = "default user";
+    private string _name = "enter your game-username";
 
     public ObservableCollection<string> ColorList { get; } = new();
 
@@ -106,10 +106,7 @@ public partial class CodeBreaker6x4ViewModel
 
     private void InitializeValues()
     {
-        SelectedColor1 = string.Empty;
-        SelectedColor2 = string.Empty;
-        SelectedColor3 = string.Empty;
-        SelectedColor4 = string.Empty;
+        ClearSelectedColor();
         GameMoves.Clear();
         ColorList.Clear();
         GameStatus = GameMode.NotRunning;
@@ -128,7 +125,13 @@ public partial class CodeBreaker6x4ViewModel
         try
         {
             InProgress = true;
+            //if (_selectedColor1 is null || _selectedColor2 is null || _selectedColor3 is null || _selectedColor4 is null)
+            //{
+            //    throw new InvalidOperationException("all colors need to be selected before this method may be invoked");
+            //}
+
             string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
+
             (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber, selection);
 
             GameMoves.Add(new SelectionAndKeyPegs(selection, keyPegColors, _moveNumber++));
@@ -162,14 +165,24 @@ public partial class CodeBreaker6x4ViewModel
         }
         finally
         {
+            // ClearSelectedColor();
             InProgress = false;
         }
     }
 
     private bool CanSetMove()
     {
-        string[] selections = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
-        return selections.All(s => s != string.Empty);
+        string?[] selections = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
+        return selections.All(s => s is not null);
+    }
+
+    // TODO: create a color for no-selection, or use null?
+    private void ClearSelectedColor()
+    {
+        SelectedColor1 = string.Empty;
+        SelectedColor2 = string.Empty;
+        SelectedColor3 = string.Empty;
+        SelectedColor4 = string.Empty;
     }
 
     [ObservableProperty]

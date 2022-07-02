@@ -10,12 +10,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
+        <conv:GameStatueToVisibilityConverter x:Key="GameStatusVisibilityConverter" />
+        <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />
         <conv:SelectionAndKeyPegToSelectionBrushConverter x:Key="SelectionConverter" />
         <conv:SelectionAndKeyPegToKeyBrushConverter x:Key="KeyPegConverter" />
     </Window.Resources>
-    <Grid>
+
+    <Grid Grid.IsSharedSizeScope="True">
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
@@ -25,14 +29,40 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
+        <Menu>
 
-        <TextBlock Text="Name:" />
-        <TextBox Text="{Binding ViewModel.Name, Mode=TwoWay}" Grid.Column="1" />
-        <Button Content="Start" Command="{Binding ViewModel.StartGameCommand, Mode=OneTime}" Grid.Column="2" Margin="8" />
-        <views:PegSelectionView Grid.Row="1" Grid.ColumnSpan="3" 
-                                ViewModel="{Binding ViewModel, ElementName=Self, Mode=OneWay}" />
+        </Menu>
+        <ProgressBar 
+            Height="50" Margin="8"
+            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Minimum="0" Maximum="100" IsIndeterminate="True" 
+            Visibility="{Binding ViewModel.InProgress, Converter={StaticResource BoolToVisibilityConverter}}" />
 
-        <ListView ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+        <TextBlock 
+            Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Start}"
+            Margin="8"
+            Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"
+            Text="Name:" />
+        <TextBox 
+            Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Start}"
+            Margin="8" 
+            Grid.Row="1" Grid.Column="1"
+            Text="{Binding ViewModel.Name, Mode=TwoWay}" />
+        <Button
+            Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Start}"            
+            Margin="8"
+            Grid.Row="1" Grid.Column="2"
+            Content="Start" 
+            Command="{Binding ViewModel.StartGameCommand, Mode=OneTime}"  />
+        
+        <views:PegSelectionView 
+            Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Cancelable}"
+            Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" 
+            ViewModel="{Binding ViewModel, ElementName=Self, Mode=OneWay}" />
+
+        <ListView 
+            Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
+            Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
+            ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -40,16 +70,22 @@
                             <ColumnDefinition Width="3*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel Orientation="Horizontal" Background="LightBlue">
-                            <Ellipse Width="100" Height="100" 
+                        <Grid Background="LightBlue">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition SharedSizeGroup="pegsizegroup1"  Width="auto" />
+                                <ColumnDefinition SharedSizeGroup="pegsizegroup2"  Width="auto" />
+                                <ColumnDefinition SharedSizeGroup="pegsizegroup3"  Width="auto" />
+                                <ColumnDefinition SharedSizeGroup="pegsizegroup4"  Width="auto" />
+                            </Grid.ColumnDefinitions>
+                            <Ellipse Width="80" Height="80" Grid.Column="0" Margin="8"
                                      Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=0}" />
-                            <Ellipse Width="100" Height="100" 
+                            <Ellipse Width="80" Height="80" Grid.Column="1" Margin="8"
                                      Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=1}" />
-                            <Ellipse Width="100" Height="100" 
+                            <Ellipse Width="80" Height="80" Grid.Column="2" Margin="8"
                                      Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=2}" />
-                            <Ellipse Width="100" Height="100" 
+                            <Ellipse Width="80" Height="80" Grid.Column="3" Margin="8"
                                      Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=3}" />
-                        </StackPanel>
+                        </Grid>
                         <Grid Grid.Column="1" Background="LightBlue">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
@@ -59,16 +95,16 @@
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
-                            <Ellipse Width="25" Height="25" Grid.Row="0" Grid.Column="0"
+                            <Ellipse Width="25" Height="25" Grid.Row="0" Grid.Column="0" Margin="4"
                                      Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=0}"
                                      Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=0}" />
-                            <Ellipse Width="25" Height="25" Grid.Row="0" Grid.Column="1"
+                            <Ellipse Width="25" Height="25" Grid.Row="0" Grid.Column="1" Margin="4"
                                      Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=1}"
                                      Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=1}" />
-                            <Ellipse Width="25" Height="25" Grid.Row="1" Grid.Column="0"
+                            <Ellipse Width="25" Height="25" Grid.Row="1" Grid.Column="0" Margin="4"
                                      Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=2}"                                     
                                      Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=2}" />
-                            <Ellipse Width="25" Height="25" Grid.Row="1" Grid.Column="1"
+                            <Ellipse Width="25" Height="25" Grid.Row="1" Grid.Column="1" Margin="4"
                                      Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=3}"                                     
                                      Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=3}" />
                         </Grid>
