@@ -79,10 +79,10 @@
                         </Grid.ColumnDefinitions>
                         <Grid Background="LightBlue">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition SharedSizeGroup="pegsizegroup1"  Width="auto" />
-                                <ColumnDefinition SharedSizeGroup="pegsizegroup2"  Width="auto" />
-                                <ColumnDefinition SharedSizeGroup="pegsizegroup3"  Width="auto" />
-                                <ColumnDefinition SharedSizeGroup="pegsizegroup4"  Width="auto" />
+                                <ColumnDefinition SharedSizeGroup="pegsizegroup"  Width="auto" />
+                                <ColumnDefinition SharedSizeGroup="pegsizegroup"  Width="auto" />
+                                <ColumnDefinition SharedSizeGroup="pegsizegroup"  Width="auto" />
+                                <ColumnDefinition SharedSizeGroup="pegsizegroup"  Width="auto" />
                             </Grid.ColumnDefinitions>
                             <Ellipse Width="80" Height="80" Grid.Column="0" Margin="8"
                                      Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=0}" />
