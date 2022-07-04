@@ -16,6 +16,7 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
             <ColumnDefinition SharedSizeGroup="pegsizegroup" Width="auto" />
             <ColumnDefinition SharedSizeGroup="pegsizegroup" Width="auto" />
             <ColumnDefinition SharedSizeGroup="pegsizegroup" Width="auto" />
@@ -24,31 +25,31 @@
         </Grid.ColumnDefinitions>
         <ComboBox 
             Margin="8"
-            Grid.Column="0"
+            Grid.Column="1"
             ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" 
             ItemTemplate="{StaticResource SelectColorTemplate}"
             SelectedItem="{Binding ViewModel.SelectedColor1, Mode=TwoWay}" />
         <ComboBox 
             Margin="8"
-            Grid.Column="1"
+            Grid.Column="2"
             ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" 
             ItemTemplate="{StaticResource SelectColorTemplate}"
             SelectedItem="{Binding ViewModel.SelectedColor2, Mode=TwoWay}" />
         <ComboBox 
             Margin="8"
-            Grid.Column="2"
+            Grid.Column="3"
             ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" 
             ItemTemplate="{StaticResource SelectColorTemplate}"                
             SelectedItem="{Binding ViewModel.SelectedColor3, Mode=TwoWay}" />
         <ComboBox 
             Margin="8"
-            Grid.Column="3"
+            Grid.Column="4"
             ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
             ItemTemplate="{StaticResource SelectColorTemplate}"                
             SelectedItem="{Binding ViewModel.SelectedColor4, Mode=TwoWay}" />
         <Button 
             Margin="8"
-            Grid.Column="4" 
+            Grid.Column="5" 
             Content="Set Move" 
             Command="{Binding ViewModel.SetMoveCommand, Mode=OneWay}" />
 

@@ -116,18 +116,21 @@
             </Grid.ColumnDefinitions>
             <Grid Background="LightBlue">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
                     <ColumnDefinition SharedSizeGroup="pegsizegroup"  Width="auto" />
                     <ColumnDefinition SharedSizeGroup="pegsizegroup"  Width="auto" />
                     <ColumnDefinition SharedSizeGroup="pegsizegroup"  Width="auto" />
                     <ColumnDefinition SharedSizeGroup="pegsizegroup"  Width="auto" />
                 </Grid.ColumnDefinitions>
-                <Ellipse Width="80" Height="80" Grid.Column="0" Margin="8"
-                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=0}" />
+                <TextBlock Grid.Column="0" Width="48" FontSize="32" Margin="8,8,8,8" HorizontalAlignment="Center" 
+                          Text="{Binding MoveNumber}" />
                 <Ellipse Width="80" Height="80" Grid.Column="1" Margin="8"
-                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=1}" />
+                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=0}" />
                 <Ellipse Width="80" Height="80" Grid.Column="2" Margin="8"
-                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=2}" />
+                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=1}" />
                 <Ellipse Width="80" Height="80" Grid.Column="3" Margin="8"
+                                     Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=2}" />
+                <Ellipse Width="80" Height="80" Grid.Column="4" Margin="8"
                                      Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=3}" />
             </Grid>
             <Grid Grid.Column="1" Background="LightBlue">
