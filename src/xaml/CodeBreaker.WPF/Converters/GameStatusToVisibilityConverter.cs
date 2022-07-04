@@ -6,7 +6,7 @@ using System.Windows.Data;
 
 namespace CodeBreaker.WPF.Converters;
 
-internal class GameStatueToVisibilityConverter : IValueConverter
+internal class GameStatusToVisibilityConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
