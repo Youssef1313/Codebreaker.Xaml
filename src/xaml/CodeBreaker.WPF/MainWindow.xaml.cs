@@ -17,9 +17,7 @@ public partial class MainWindow : Window
         DataContext = this;
 
         InitializeComponent();
-
     }
-
 
     public CodeBreaker6x4ViewModel ViewModel
     {
@@ -29,5 +27,4 @@ public partial class MainWindow : Window
 
     public static readonly DependencyProperty ViewModelProperty =
         DependencyProperty.Register("ViewModel", typeof(CodeBreaker6x4ViewModel), typeof(MainWindow), new PropertyMetadata(null));
-
 }

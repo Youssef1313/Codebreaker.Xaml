@@ -1,7 +1,6 @@
 ﻿using CodeBreaker.ViewModels;
 using CodeBreaker.ViewModels.Services;
 
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -43,6 +42,5 @@ public sealed partial class App : Application, IDisposable
     protected override void OnActivated(EventArgs e)
     {
         base.OnActivated(e);
-
     }
 }
