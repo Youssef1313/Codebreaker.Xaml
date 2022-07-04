@@ -2,6 +2,8 @@
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 
 using Microsoft.Extensions.Options;
 
@@ -51,7 +53,14 @@ public partial class CodeBreaker6x4ViewModel
             {
                 SetMoveCommand.NotifyCanExecuteChanged();
             }
+
+            if (e.PropertyName == nameof(GameStatus))
+            {
+                WeakReferenceMessenger.Default.Send(new GameStateChangedMessage(GameStatus));
+            };
         };
+
+        
     }
 
     [ObservableProperty]
@@ -149,7 +158,7 @@ public partial class CodeBreaker6x4ViewModel
             }
             else if (completed)
             {
-                GameStatus = GameMode.Lost;
+                GameStatus = GameMode.Lost;        
                 InfoMessage.Message = "Sorry, you didn't find the matching colors!";
                 InfoMessage.IsVisible = true;
                 if (_enableDialogs)
@@ -205,3 +214,11 @@ public partial class CodeBreaker6x4ViewModel
 }
 
 public record SelectionAndKeyPegs(string[] Selection, string[] KeyPegs, int MoveNumber);
+
+public class GameStateChangedMessage : ValueChangedMessage<GameMode>
+{
+    public GameStateChangedMessage(GameMode gameMode)
+        : base(gameMode)
+    {
+    }
+}
