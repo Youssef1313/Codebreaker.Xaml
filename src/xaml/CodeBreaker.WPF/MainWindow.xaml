@@ -24,7 +24,28 @@
         <conv:SelectionAndKeyPegToKeyBrushConverter x:Key="KeyPegConverter" />
     </Window.Resources>
 
-    <Grid Grid.IsSharedSizeScope="True">
+    <Grid x:Name="MainGrid" Grid.IsSharedSizeScope="True">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="GameModes">
+                <VisualState x:Name="NotRunning"/>
+                <VisualState x:Name="Started">
+                    <Storyboard>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textName" Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textEditName" Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="buttonStart" Storyboard.TargetProperty="(UIElement.Visibility)">
+                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
+                        </ObjectAnimationUsingKeyFrames>
+                    </Storyboard>
+                </VisualState>
+                <VisualState x:Name="MoveSet"/>
+                <VisualState x:Name="Lost"/>
+                <VisualState x:Name="Won"/>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -45,17 +66,17 @@
             Visibility="{Binding ViewModel.InProgress, Converter={StaticResource BoolToVisibilityConverter}}" />
 
         <TextBlock 
-            Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Start}"
+            x:Name="textName"
             Margin="8"
             Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right"
             Text="Name:" />
         <TextBox 
-            Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Start}"
+            x:Name="textEditName"            
             Margin="8" 
             Grid.Row="1" Grid.Column="1"
             Text="{Binding ViewModel.Name, Mode=TwoWay}" />
         <Button
-            Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Start}"            
+            x:Name="buttonStart"            
             Margin="8"
             Grid.Row="1" Grid.Column="2"
             Content="Start" 
