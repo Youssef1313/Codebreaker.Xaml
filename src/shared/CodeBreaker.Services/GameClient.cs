@@ -2,7 +2,7 @@
 
 using System.Net.Http.Json;
 
-namespace CodeBreaker.ViewModels.Services;
+namespace CodeBreaker.Services;
 
 public class GameClient
 {

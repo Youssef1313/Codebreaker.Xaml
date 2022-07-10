@@ -1,4 +1,5 @@
-﻿using CodeBreaker.ViewModels.Services;
+﻿using CodeBreaker.Services;
+using CodeBreaker.ViewModels.Services;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
