@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels", "x
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.WPF", "xaml\CodeBreaker.WPF\CodeBreaker.WPF.csproj", "{E913722C-D2D0-475E-94A2-0C2C808C8012}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Services", "shared\CodeBreaker.Services\CodeBreaker.Services.csproj", "{522F9BBA-0377-4D97-B621-FFD952513B41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{E913722C-D2D0-475E-94A2-0C2C808C8012}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E913722C-D2D0-475E-94A2-0C2C808C8012}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E913722C-D2D0-475E-94A2-0C2C808C8012}.Release|Any CPU.Build.0 = Release|Any CPU
+		{522F9BBA-0377-4D97-B621-FFD952513B41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{522F9BBA-0377-4D97-B621-FFD952513B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{522F9BBA-0377-4D97-B621-FFD952513B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{522F9BBA-0377-4D97-B621-FFD952513B41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

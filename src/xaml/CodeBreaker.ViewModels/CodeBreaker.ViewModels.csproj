@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\shared\CodeBreaker.Services\CodeBreaker.Services.csproj" />
     <ProjectReference Include="..\..\shared\CodeBreaker.Shared\CodeBreaker.Shared.csproj" />
   </ItemGroup>
 
