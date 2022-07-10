@@ -1,4 +1,5 @@
-﻿using CodeBreaker.ViewModels;
+﻿using CodeBreaker.Services;
+using CodeBreaker.ViewModels;
 using CodeBreaker.ViewModels.Services;
 
 using Microsoft.Extensions.DependencyInjection;
