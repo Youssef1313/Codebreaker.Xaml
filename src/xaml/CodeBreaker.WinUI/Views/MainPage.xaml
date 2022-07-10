@@ -62,7 +62,9 @@
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
             ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
 
-        <ListView Grid.Row="3" 
+        <ListBox 
+            x:Name="listGameMoves"
+            Grid.Row="3" 
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
             ItemsSource="{x:Bind ViewModel.GameMoves, Mode=OneWay}"
             ItemTemplate="{StaticResource Codebreaker6x4CodePegs}" />

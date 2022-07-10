@@ -22,6 +22,12 @@ public enum GameMode
     Won
 }
 
+public enum GameMoveValue
+{
+    Started,
+    Completed
+}
+
 public class CodeBreaker6x4ViewModelOptions
 {
     public bool EnableDialogs { get; set; } = false;
@@ -59,13 +65,11 @@ public partial class CodeBreaker6x4ViewModel
             {
                 WeakReferenceMessenger.Default.Send(new GameStateChangedMessage(GameStatus));
             };
-        };
-
-        
+        };        
     }
 
     [ObservableProperty]
-    private string _name = "enter your game-username";
+    private string _name = "game-username";
 
     public ObservableCollection<string> ColorList { get; } = new();
 
@@ -129,23 +133,27 @@ public partial class CodeBreaker6x4ViewModel
 
     public AsyncRelayCommand SetMoveCommand { get; }
 
-    // [ICommand] - TODO: what about CanExecute with code generated ICommand?
     private async Task SetMoveAsync()
     {
         try
         {
             InProgress = true;
-            //if (_selectedColor1 is null || _selectedColor2 is null || _selectedColor3 is null || _selectedColor4 is null)
-            //{
-            //    throw new InvalidOperationException("all colors need to be selected before this method may be invoked");
-            //}
+            WeakReferenceMessenger.Default.Send(new GameMoveMessage(GameMoveValue.Started));
+
+            if (_selectedColor1 is null || _selectedColor2 is null || _selectedColor3 is null || _selectedColor4 is null)
+            {
+                throw new InvalidOperationException("all colors need to be selected before invoking this method");
+            }
 
             string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
 
             (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber, selection);
 
-            GameMoves.Add(new SelectionAndKeyPegs(selection, keyPegColors, _moveNumber++));
+            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, keyPegColors, _moveNumber++);
+            GameMoves.Add(selectionAndKeyPegs);
             GameStatus = GameMode.MoveSet;
+
+            WeakReferenceMessenger.Default.Send(new GameMoveMessage(GameMoveValue.Completed, selectionAndKeyPegs));
 
             if (won)
             {
@@ -175,7 +183,7 @@ public partial class CodeBreaker6x4ViewModel
         }
         finally
         {
-            // ClearSelectedColor();
+            ClearSelectedColor();
             InProgress = false;
         }
     }
@@ -186,26 +194,67 @@ public partial class CodeBreaker6x4ViewModel
         return selections.All(s => s is not null);
     }
 
-    // TODO: create a color for no-selection, or use null?
     private void ClearSelectedColor()
     {
-        SelectedColor1 = string.Empty;
-        SelectedColor2 = string.Empty;
-        SelectedColor3 = string.Empty;
-        SelectedColor4 = string.Empty;
+        SelectedColor1 = null;
+        SelectedColor2 = null;
+        SelectedColor3 = null;
+        SelectedColor4 = null;
+
+        SetMoveCommand.NotifyCanExecuteChanged();
     }
 
-    [ObservableProperty]
-    private string _selectedColor1 = string.Empty;
+    private string? _selectedColor1 = null;
+    public string? SelectedColor1
+    {
+        get => _selectedColor1;
+        set
+        {
+            if (SetProperty(ref _selectedColor1, value))
+            {
+                SetMoveCommand.NotifyCanExecuteChanged();
+            }
+        }
+    }
 
-    [ObservableProperty]
-    private string _selectedColor2 = string.Empty;
+    private string? _selectedColor2 = null;
+    public string? SelectedColor2
+    {
+        get => _selectedColor2;
+        set
+        {
+            if (SetProperty(ref _selectedColor2, value))
+            {
+                SetMoveCommand.NotifyCanExecuteChanged();
+            }
+        }
+    }
 
-    [ObservableProperty]
-    private string _selectedColor3 = string.Empty;
+    private string? _selectedColor3 = null;
+    public string? SelectedColor3
+    {
+        get => _selectedColor3;
+        set
+        {
+            if (SetProperty(ref _selectedColor3, value))
+            {
+                SetMoveCommand.NotifyCanExecuteChanged();
+            }
+        }
+    }
 
-    [ObservableProperty]
-    private string _selectedColor4 = string.Empty;
+    private string? _selectedColor4 = null;
+    public string? SelectedColor4
+    {
+        get => _selectedColor4;
+        set
+        {
+            if (SetProperty(ref _selectedColor4, value))
+            {
+                SetMoveCommand.NotifyCanExecuteChanged();
+            }
+        }
+    }
 
     private string[] _selectedColorPropertyNames = { nameof(SelectedColor1), nameof(SelectedColor2), nameof(SelectedColor3), nameof(SelectedColor4) };
 
@@ -222,4 +271,15 @@ public class GameStateChangedMessage : ValueChangedMessage<GameMode>
         : base(gameMode)
     {
     }
+}
+
+public class GameMoveMessage : ValueChangedMessage<GameMoveValue>
+{
+    public GameMoveMessage(GameMoveValue gameMoveValue, SelectionAndKeyPegs? selectionAndKeyPegs = null)
+        : base(gameMoveValue)
+    {
+        SelectionAndKeyPegs = selectionAndKeyPegs;
+    }
+
+    public SelectionAndKeyPegs? SelectionAndKeyPegs { get; }
 }
