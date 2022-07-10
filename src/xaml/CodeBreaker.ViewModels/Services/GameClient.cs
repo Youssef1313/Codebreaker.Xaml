@@ -16,7 +16,7 @@ public class GameClient
     public async Task<CreateGameResponse> StartGameAsync(string name)
     {
         CreateGameRequest request = new(name);
-        var responseMessage = await _httpClient.PostAsJsonAsync("v1/start", request);
+        var responseMessage = await _httpClient.PostAsJsonAsync("start/6x4", request);
         responseMessage.EnsureSuccessStatusCode();
         var response = await responseMessage.Content.ReadFromJsonAsync<CreateGameResponse>();
         return response;
@@ -26,7 +26,7 @@ public class GameClient
     {
         MoveRequest moveRequest = new(gameId, moveNumber, colorNames);
 
-        var responseMessage = await _httpClient.PostAsJsonAsync("v1/move", moveRequest);
+        var responseMessage = await _httpClient.PostAsJsonAsync("move/6x4", moveRequest);
         responseMessage.EnsureSuccessStatusCode();
         var response = await responseMessage.Content.ReadFromJsonAsync<MoveResponse>();
         return (response.Completed, response.Won, response.KeyPegs?.ToArray() ?? new string[0]);

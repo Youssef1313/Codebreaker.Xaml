@@ -4,17 +4,28 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
+using static CodeBreaker.Shared.CodeBreakerColors;
+
 namespace CodeBreaker.WPF.Converters;
 
 public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
 {
-    private static Brush BlackBrush = new SolidColorBrush(Colors.Black);
-    private static Brush WhiteBrush = new SolidColorBrush(Colors.White);
-    private static Brush RedBrush = new SolidColorBrush(Colors.Red);
-    private static Brush GreenBrush = new SolidColorBrush(Colors.Green);
-    private static Brush BlueBrush = new SolidColorBrush(Colors.Blue);
-    private static Brush YellowBrush = new SolidColorBrush(Colors.Yellow);
-    private static Brush EmptyBrush = new SolidColorBrush(Colors.LightGray);
+    private static Brush s_blackBrush = new SolidColorBrush(Colors.Black);
+    private static Brush s_whiteBrush = new SolidColorBrush(Colors.White);
+    private static Brush s_redBrush = new SolidColorBrush(Colors.Red);
+    private static Brush s_greenBrush = new SolidColorBrush(Colors.Green);
+    private static Brush s_blueBrush = new SolidColorBrush(Colors.Blue);
+    private static Brush s_yellowBrush = new SolidColorBrush(Colors.Yellow);
+    private static Brush s_emptyBrush = new SolidColorBrush(Colors.LightGray);
+
+    public Brush BlackBrush { get; set; } = s_blackBrush;
+    public Brush WhiteBrush { get; set; } = s_whiteBrush;
+    public Brush RedBrush { get; set; } = s_redBrush;
+    public Brush GreenBrush { get; set; } = s_greenBrush;
+    public Brush BlueBrush { get; set; } = s_blueBrush;
+    public Brush YellowBrush { get; set; } = s_yellowBrush;
+
+    private Brush EmptyBrush { get; set; } = s_emptyBrush;
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
@@ -25,12 +36,12 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
 
             return selection.Selection[ix] switch
             {
-                "black" => BlackBrush,
-                "white" => WhiteBrush,
-                "red" => RedBrush,
-                "green" => GreenBrush,
-                "blue" => BlueBrush,
-                "yellow" => YellowBrush,
+                Black => BlackBrush,
+                White => WhiteBrush,
+                Red => RedBrush,
+                Green => GreenBrush,
+                Blue => BlueBrush,
+                Yellow => YellowBrush,
                 _ => EmptyBrush
             };
         }

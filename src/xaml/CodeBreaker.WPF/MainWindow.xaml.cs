@@ -1,5 +1,7 @@
 ﻿using CodeBreaker.ViewModels;
 
+using CommunityToolkit.Mvvm.Messaging;
+
 using Microsoft.Extensions.DependencyInjection;
 
 using System.Windows;
@@ -18,8 +20,11 @@ public partial class MainWindow : Window
 
         InitializeComponent();
 
+        WeakReferenceMessenger.Default.Register<GameStateChangedMessage>(this, (r, m) =>
+        {
+            VisualStateManager.GoToElementState(MainGrid, m.Value.ToString(), true);
+        });
     }
-
 
     public CodeBreaker6x4ViewModel ViewModel
     {
@@ -29,5 +34,4 @@ public partial class MainWindow : Window
 
     public static readonly DependencyProperty ViewModelProperty =
         DependencyProperty.Register("ViewModel", typeof(CodeBreaker6x4ViewModel), typeof(MainWindow), new PropertyMetadata(null));
-
 }

@@ -44,7 +44,11 @@
                 x:Name="TextName" 
                 Header="Name:" 
                 Text="{x:Bind ViewModel.Name, Mode=TwoWay}" />
-            <AppBarButton Label="Start" Icon="Play" Command="{x:Bind ViewModel.StartGameCommand, Mode=OneTime}" RelativePanel.RightOf="TextName" />
+            <AppBarButton 
+                Label="Start" 
+                Icon="Play" 
+                Command="{x:Bind ViewModel.StartGameCommand, Mode=OneTime}" 
+                RelativePanel.RightOf="TextName" />
 
         </RelativePanel>
         <RelativePanel
