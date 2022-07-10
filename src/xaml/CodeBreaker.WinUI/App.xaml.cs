@@ -1,11 +1,11 @@
 ﻿global using CodeBreaker.WinUI.Helpers;
-global using CodeBreaker.Shared;
 
 global using Microsoft.UI.Xaml;
 global using Microsoft.UI.Xaml.Controls;
 global using Microsoft.UI.Xaml.Navigation;
 global using Microsoft.Xaml.Interactivity;
 
+using CodeBreaker.Services;
 using CodeBreaker.ViewModels;
 using CodeBreaker.ViewModels.Services;
 using CodeBreaker.WinUI.Activation;
