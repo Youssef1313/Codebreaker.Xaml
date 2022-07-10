@@ -22,21 +22,25 @@
         <StackPanel Orientation="Horizontal" Background="LightBlue" Height="92" Margin="16,0,0,0">
             <TextBlock Width="80" />
             <ComboBox 
+                x:Name="guess1"
                 Margin="4" Width="112"                     
                 ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
                 SelectedItem="{x:Bind ViewModel.SelectedColor1, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SelectColorTemplate}"/>
             <ComboBox 
+                x:Name="guess2"
                 Margin="4" Width="112"
                 ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
                 SelectedItem="{x:Bind ViewModel.SelectedColor2, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SelectColorTemplate}"/>
             <ComboBox 
+                x:Name="guess3"
                 Margin="4" Width="112"
                 ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
                 SelectedItem="{x:Bind ViewModel.SelectedColor3, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SelectColorTemplate}"/>                
             <ComboBox 
+                x:Name="guess4"
                 Margin="4" Width="112"
                 ItemsSource="{x:Bind ViewModel.ColorList, Mode=OneWay}" 
                 SelectedItem="{x:Bind ViewModel.SelectedColor4, Mode=TwoWay}"

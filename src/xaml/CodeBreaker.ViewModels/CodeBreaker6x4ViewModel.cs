@@ -22,6 +22,12 @@ public enum GameMode
     Won
 }
 
+public enum GameMoveValue
+{
+    Started,
+    Completed
+}
+
 public class CodeBreaker6x4ViewModelOptions
 {
     public bool EnableDialogs { get; set; } = false;
@@ -59,9 +65,7 @@ public partial class CodeBreaker6x4ViewModel
             {
                 WeakReferenceMessenger.Default.Send(new GameStateChangedMessage(GameStatus));
             };
-        };
-
-        
+        };        
     }
 
     [ObservableProperty]
@@ -135,6 +139,8 @@ public partial class CodeBreaker6x4ViewModel
         try
         {
             InProgress = true;
+            WeakReferenceMessenger.Default.Send(new GameMoveMessage(GameMoveValue.Started));
+            
             //if (_selectedColor1 is null || _selectedColor2 is null || _selectedColor3 is null || _selectedColor4 is null)
             //{
             //    throw new InvalidOperationException("all colors need to be selected before this method may be invoked");
@@ -144,8 +150,11 @@ public partial class CodeBreaker6x4ViewModel
 
             (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber, selection);
 
-            GameMoves.Add(new SelectionAndKeyPegs(selection, keyPegColors, _moveNumber++));
+            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, keyPegColors, _moveNumber++);
+            GameMoves.Add(selectionAndKeyPegs);
             GameStatus = GameMode.MoveSet;
+
+            WeakReferenceMessenger.Default.Send(new GameMoveMessage(GameMoveValue.Completed, selectionAndKeyPegs));
 
             if (won)
             {
@@ -222,4 +231,15 @@ public class GameStateChangedMessage : ValueChangedMessage<GameMode>
         : base(gameMode)
     {
     }
+}
+
+public class GameMoveMessage : ValueChangedMessage<GameMoveValue>
+{
+    public GameMoveMessage(GameMoveValue gameMoveValue, SelectionAndKeyPegs? selectionAndKeyPegs = null)
+        : base(gameMoveValue)
+    {
+        SelectionAndKeyPegs = selectionAndKeyPegs;
+    }
+
+    public SelectionAndKeyPegs? SelectionAndKeyPegs { get; }
 }

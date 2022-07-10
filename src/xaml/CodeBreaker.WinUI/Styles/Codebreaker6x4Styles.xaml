@@ -6,8 +6,8 @@
     <conv:SelectionAndKeyPegToSelectionBrushConverter x:Key="SelectionConverter" />
     <conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />
     <conv:SelectionAndKeyPegToKeyBrushConverter x:Key="KeyPegConverter" />
-    
-    <DataTemplate x:Key="Codebreaker6x4CodePegs">
+
+    <DataTemplate x:Key="Codebreaker6x4CodePegs" x:Name="Codebreaker6x4CodePegs">
         <Grid Background="LightBlue">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
@@ -18,15 +18,19 @@
             <Border Grid.Column="1" BorderThickness="2,2,0,2" BorderBrush="DarkBlue">
                 <StackPanel Orientation="Horizontal" Margin="16,0,0,0" >
                     <Ellipse 
+                        x:Name="guessDisplay1"
                         Width="68" Height="68" Margin="12, 4"
                         Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=0}" />
                     <Ellipse 
+                        x:Name="guessDisplay2"
                         Width="68" Height="68" Margin="40, 4"
                         Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=1}" />
                     <Ellipse 
+                        x:Name="guessDisplay3"
                         Width="68" Height="68" Margin="14, 4"
                         Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=2}" />
                     <Ellipse 
+                        x:Name="guessDisplay4"
                         Width="68" Height="68" Margin="36, 4"
                         Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=3}" />
 
