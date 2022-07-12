@@ -39,7 +39,7 @@ public partial class CodeBreaker6x4ViewModel
     private readonly GameClient _client;
 
     private int _moveNumber = 0;
-    private string _gameId = string.Empty;
+    private Guid _gameId = Guid.Empty;
     private readonly bool _enableDialogs = false;
     private readonly IDialogService _dialogService;
     
@@ -57,14 +57,10 @@ public partial class CodeBreaker6x4ViewModel
         PropertyChanged += (sender, e) =>
         {
             if (_selectedColorPropertyNames.Contains(e.PropertyName))
-            {
                 SetMoveCommand.NotifyCanExecuteChanged();
-            }
 
             if (e.PropertyName == nameof(GameStatus))
-            {
                 WeakReferenceMessenger.Default.Send(new GameStateChangedMessage(GameStatus));
-            };
         };        
     }
 
@@ -103,9 +99,7 @@ public partial class CodeBreaker6x4ViewModel
             ColorList.Clear();
 
             foreach (var color in colors)
-            {               
                 ColorList.Add(color);
-            }
         }
         catch (Exception ex)
         {
@@ -141,9 +135,7 @@ public partial class CodeBreaker6x4ViewModel
             WeakReferenceMessenger.Default.Send(new GameMoveMessage(GameMoveValue.Started));
 
             if (_selectedColor1 is null || _selectedColor2 is null || _selectedColor3 is null || _selectedColor4 is null)
-            {
                 throw new InvalidOperationException("all colors need to be selected before invoking this method");
-            }
 
             string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
 
@@ -211,9 +203,7 @@ public partial class CodeBreaker6x4ViewModel
         set
         {
             if (SetProperty(ref _selectedColor1, value))
-            {
                 SetMoveCommand.NotifyCanExecuteChanged();
-            }
         }
     }
 
@@ -224,9 +214,7 @@ public partial class CodeBreaker6x4ViewModel
         set
         {
             if (SetProperty(ref _selectedColor2, value))
-            {
                 SetMoveCommand.NotifyCanExecuteChanged();
-            }
         }
     }
 
@@ -237,9 +225,7 @@ public partial class CodeBreaker6x4ViewModel
         set
         {
             if (SetProperty(ref _selectedColor3, value))
-            {
                 SetMoveCommand.NotifyCanExecuteChanged();
-            }
         }
     }
 
@@ -250,9 +236,7 @@ public partial class CodeBreaker6x4ViewModel
         set
         {
             if (SetProperty(ref _selectedColor4, value))
-            {
                 SetMoveCommand.NotifyCanExecuteChanged();
-            }
         }
     }
 
