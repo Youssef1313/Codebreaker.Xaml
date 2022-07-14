@@ -1,5 +1,4 @@
 ﻿using CodeBreaker.ViewModels;
-using CodeBreaker.WinUI.ViewModels;
 
 using CommunityToolkit.Mvvm.Messaging;
 
@@ -20,48 +19,51 @@ public sealed partial class MainPage : Page
 
         WeakReferenceMessenger.Default.Register<GameMoveMessage>(this, (r, m) =>
         {
+            static void Animate(ConnectedAnimationService animationService, string key, UIElement target)
+            {     
+                var animation = animationService?.GetAnimation(key);
+                // the default animation configuration is a GravityConnectedAnimationConfiguration, which is good for this scenario
+                
+                if (animation is null) return;
+                
+                animation.TryStart(target);
+            }
+            
             if (m.Value is GameMoveValue.Completed)
             {
                 var selectionAndKeyPegs = m.SelectionAndKeyPegs;
                 if (selectionAndKeyPegs is null) throw new InvalidOperationException();
                 
-                var connectedAnimation = ConnectedAnimationService.GetForCurrentView();
-                var animation1 = connectedAnimation?.GetAnimation("guess1");
-                var animation2 = connectedAnimation?.GetAnimation("guess2");
-                var animation3 = connectedAnimation?.GetAnimation("guess3");
-                var animation4 = connectedAnimation?.GetAnimation("guess4");
-
+                var animationService = ConnectedAnimationService.GetForCurrentView();
                 var container = listGameMoves.ItemContainerGenerator.ContainerFromItem(selectionAndKeyPegs);
-
-                var items = FindItems<Ellipse>(container);
-
-                ConnectedAnimation?[] animations = new[] { animation1, animation2, animation3, animation4 };
-                Ellipse[] targets = items.ToArray();
-                
+       
+                var items = FindItemsOfType<Ellipse>(container).Take(4).ToArray(); // the first 4 ellipses are the guesses, the next 4 the key pegs
                 for (int i = 0; i < 4; i++)
                 {
-                    animations[i]?.TryStart(targets[i]);
+                    Animate(animationService, $"guess{i + 1}", items[i]);
                 }
             }
         });
     }
 
-    private IEnumerable<T> FindItems<T>(DependencyObject obj)
+    private IEnumerable<T> FindItemsOfType<T>(DependencyObject obj)
         where T : DependencyObject
     {
         for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
         {
             DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+            if (child is null)
+            {
+                yield break;
+            }
             if (child is T item)
             {
                 yield return item;
             }
-            else
+
+            foreach (T childOfChild in FindItemsOfType<T>(child))
             {
-                foreach (var childOfChild in FindItems<T>(child))
-                {
-                    yield return childOfChild;
-                }
+                yield return childOfChild;
             }
         }
     }
