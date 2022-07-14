@@ -50,6 +50,12 @@
             BlueBrush="{StaticResource BlueBrush}"
             YellowBrush="{StaticResource YellowBrush}" />
 
+    <conv:SelectionAndKeyPegToKeyVisibleConverter
+        x:Key="KeyVisibleConverter" />
+
+    <conv:SelectionAndKeyPegToKeyBrushConverter
+        x:Key="KeyBrushConverter" />
+
     <DataTemplate x:Key="CodeBreaker6x4CodePegs">
         <ViewCell>
             <Grid>
@@ -58,7 +64,10 @@
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="auto" />
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="1" StrokeThickness="2" Background="DarkBlue">
+                <Border 
+                    Grid.Column="1" 
+                    StrokeThickness="2" 
+                    Stroke="DarkBlue">
                     <HorizontalStackLayout Margin="16,0,0,0" >
                         <Ellipse 
                             x:Name="guessDisplay1"
@@ -78,6 +87,46 @@
                             Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=3}" />
 
                     </HorizontalStackLayout>
+                </Border>
+
+                <Border
+                    Grid.Column="2"
+                    StrokeThickness="2"
+                    Stroke="DarkBlue">
+                    <Grid Margin="12,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Ellipse 
+                            Stroke="White"
+                            StrokeThickness="2"
+                            WidthRequest="16" HeightRequest="16" Margin="8" Grid.Row="0" Grid.Column="0"
+                            IsVisible="{Binding Converter={StaticResource KeyVisibleConverter}, ConverterParameter=0}"
+                            Fill="{Binding Converter={StaticResource KeyBrushConverter}, ConverterParameter=0}" />
+                        <Ellipse 
+                            Stroke="White"
+                            StrokeThickness="2"
+                            WidthRequest="16" HeightRequest="16" Margin="8" Grid.Row="0" Grid.Column="1"
+                            IsVisible="{Binding Converter={StaticResource KeyVisibleConverter}, ConverterParameter=1}"
+                            Fill="{Binding Converter={StaticResource KeyBrushConverter}, ConverterParameter=1}" />
+                        <Ellipse 
+                            Stroke="White"
+                            StrokeThickness="2"
+                            WidthRequest="16" HeightRequest="16" Margin="8" Grid.Row="1" Grid.Column="0"
+                            IsVisible="{Binding Converter={StaticResource KeyVisibleConverter}, ConverterParameter=2}"                                     
+                            Fill="{Binding Converter={StaticResource KeyBrushConverter}, ConverterParameter=2}" />
+                        <Ellipse 
+                            Stroke="White"
+                            StrokeThickness="2"
+                            WidthRequest="16" HeightRequest="16" Margin="8" Grid.Row="1" Grid.Column="1"
+                            IsVisible="{Binding Converter={StaticResource KeyVisibleConverter}, ConverterParameter=3}"                                     
+                            Fill="{Binding Converter={StaticResource KeyBrushConverter}, ConverterParameter=3}" />
+                    </Grid>
                 </Border>
             </Grid>
         </ViewCell>

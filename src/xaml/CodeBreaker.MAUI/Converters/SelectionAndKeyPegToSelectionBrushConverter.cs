@@ -26,13 +26,13 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
     private Brush EmptyBrush { get; set; } = s_emptyBrush;
 
 
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         // with .NET MAUI (contrary to other XAML technologies,
         // the converter is invoked many times,
         // often with null values, but also with the MainPage passed as value
         
-        if (value is null) return null!;
+        if (value is null) return null;
         
         ArgumentNullException.ThrowIfNull(parameter);
         if (value is SelectionAndKeyPegs selection)
@@ -50,7 +50,7 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
                 _ => EmptyBrush
             };
         }
-        return null!;
+        return null;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
