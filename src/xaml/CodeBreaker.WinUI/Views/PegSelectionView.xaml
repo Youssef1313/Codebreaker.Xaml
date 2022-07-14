@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <DataTemplate x:Key="SelectColorTemplate">
             <Grid>
-                <Ellipse Fill="{Binding}" Width="60" Height="60" />
+                <Ellipse Fill="{Binding Mode=OneWay, Converter={StaticResource PegColorToBrushConverter}}" Width="60" Height="60" />
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
@@ -19,7 +19,7 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal" Background="LightBlue" Height="92" Margin="16,0,0,0">
+        <StackPanel Orientation="Horizontal" Height="92" Margin="16,0,0,0">
             <TextBlock Width="80" />
             <ComboBox 
                 x:Name="guess1"
