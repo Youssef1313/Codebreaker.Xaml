@@ -27,6 +27,8 @@ public static class MauiProgram
 		{
 			options.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
 		});
+		builder.Services.AddTransient<MainPage>();
 		return builder.Build();
 	}
+
 }

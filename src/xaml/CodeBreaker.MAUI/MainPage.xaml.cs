@@ -1,24 +1,18 @@
-﻿namespace CodeBreaker.MAUI;
+﻿using CodeBreaker.ViewModels;
+
+namespace CodeBreaker.MAUI;
 
 public partial class MainPage : ContentPage
 {
-	int count = 0;
 
-	public MainPage()
+	public MainPage(CodeBreaker6x4ViewModel viewModel)
 	{
+		ViewModel = viewModel;
+
+		BindingContext = this;
 		InitializeComponent();
 	}
 
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		count++;
-
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
-
-		SemanticScreenReader.Announce(CounterBtn.Text);
-	}
+	public CodeBreaker6x4ViewModel ViewModel { get; }
 }
 

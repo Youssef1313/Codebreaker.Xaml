@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CodeBreaker.MAUI.Views.PegSelectionView">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <HorizontalStackLayout>
+            <Picker x:Name="guess1"
+                Margin="4" WidthRequest="112"
+                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" />
+            <Picker x:Name="guess2"
+                Margin="4" WidthRequest="112"
+                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" />
+            <Picker x:Name="guess3"
+                Margin="4" WidthRequest="112"
+                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" />
+            <Picker x:Name="guess4"
+                Margin="4" WidthRequest="112"
+                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" />
+        </HorizontalStackLayout>
+        <Button 
+            Grid.Column="1"
+            Text="Move" 
+            Command="{Binding ViewModel.SetMoveCommand, Mode=OneTime}" />
+
+    </Grid>
+
+</ContentView>
