@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:conv="clr-namespace:CodeBreaker.MAUI.Converters"
+             x:Class="CodeBreaker.MAUI.Resources.Styles.CodebreakerStyles">
+
+    <RadialGradientBrush x:Key="BlackBrush" Center="0.7,0.2">
+        <RadialGradientBrush.GradientStops>
+            <GradientStop Color="Black" Offset="1" />
+            <GradientStop Color="White" Offset="0" />
+        </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="WhiteBrush" Center="0.7,0.2">
+        <RadialGradientBrush.GradientStops>
+            <GradientStop Color="White" Offset="1" />
+            <GradientStop Color="LightGray" Offset="0" />
+        </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="RedBrush" Center="0.7,0.2">
+        <RadialGradientBrush.GradientStops>
+            <GradientStop Color="Red" Offset="1" />
+            <GradientStop Color="Orange" Offset="0" />
+        </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="GreenBrush" Center="0.7,0.2">
+        <RadialGradientBrush.GradientStops>
+            <GradientStop Color="Green" Offset="1" />
+            <GradientStop Color="LightGreen" Offset="0" />
+        </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="BlueBrush" Center="0.7,0.2">
+        <RadialGradientBrush.GradientStops>
+            <GradientStop Color="Blue" Offset="1" />
+            <GradientStop Color="LightBlue" Offset="0" />
+        </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="YellowBrush" Center="0.7,0.2">
+        <RadialGradientBrush.GradientStops>
+            <GradientStop Color="Yellow" Offset="1" />
+            <GradientStop Color="White" Offset="0" />
+        </RadialGradientBrush.GradientStops>
+    </RadialGradientBrush>
+
+    <conv:SelectionAndKeyPegToSelectionBrushConverter 
+            x:Key="SelectionConverter" 
+            BlackBrush="{StaticResource BlackBrush}"
+            WhiteBrush="{StaticResource WhiteBrush}"
+            RedBrush="{StaticResource RedBrush}"
+            GreenBrush="{StaticResource GreenBrush}"
+            BlueBrush="{StaticResource BlueBrush}"
+            YellowBrush="{StaticResource YellowBrush}" />
+
+    <DataTemplate x:Key="CodeBreaker6x4CodePegs">
+        <ViewCell>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="1" StrokeThickness="2" Background="DarkBlue">
+                    <HorizontalStackLayout Margin="16,0,0,0" >
+                        <Ellipse 
+                            x:Name="guessDisplay1"
+                            WidthRequest="68" HeightRequest="68" Margin="12, 4"
+                            Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=0}" />
+                        <Ellipse 
+                            x:Name="guessDisplay2"
+                            WidthRequest="68" HeightRequest="68" Margin="40, 4"
+                            Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=1}" />
+                        <Ellipse 
+                            x:Name="guessDisplay3"
+                            WidthRequest="68" HeightRequest="68" Margin="14, 4"
+                            Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=2}" />
+                        <Ellipse 
+                            x:Name="guessDisplay4"
+                            WidthRequest="68" HeightRequest="68" Margin="36, 4"
+                            Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=3}" />
+
+                    </HorizontalStackLayout>
+                </Border>
+            </Grid>
+        </ViewCell>
+    </DataTemplate>
+</ResourceDictionary>

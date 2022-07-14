@@ -7,19 +7,23 @@
             <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
-        <HorizontalStackLayout>
+        <HorizontalStackLayout BackgroundColor="Yellow">
             <Picker x:Name="guess1"
                 Margin="4" WidthRequest="112"
-                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" />
+                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
+                SelectedItem="{Binding ViewModel.SelectedColor1, Mode=TwoWay}" />
             <Picker x:Name="guess2"
                 Margin="4" WidthRequest="112"
-                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" />
+                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
+                SelectedItem="{Binding ViewModel.SelectedColor2, Mode=TwoWay}" />
             <Picker x:Name="guess3"
                 Margin="4" WidthRequest="112"
-                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" />
+                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
+                SelectedItem="{Binding ViewModel.SelectedColor3, Mode=TwoWay}" />
             <Picker x:Name="guess4"
                 Margin="4" WidthRequest="112"
-                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" />
+                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
+                SelectedItem="{Binding ViewModel.SelectedColor4, Mode=TwoWay}" />
         </HorizontalStackLayout>
         <Button 
             Grid.Column="1"

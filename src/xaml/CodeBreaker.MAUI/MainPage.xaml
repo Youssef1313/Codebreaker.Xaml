@@ -34,8 +34,12 @@
 
 
             <views:PegSelectionView
-                IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter,GameStatusVisibleConverter}, ConverterParameter=Running}"/>
+                IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"/>
 
+            <ListView
+                IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"
+                ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}"
+                ItemTemplate="{StaticResource CodeBreaker6x4CodePegs}"/>
         </VerticalStackLayout>
     </ScrollView>
  
