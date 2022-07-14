@@ -53,9 +53,9 @@ public partial class App : Application
 
             services.AddTransient<MainPage>();
             services.AddTransient<CodeBreaker6x4ViewModel>();
-            services.AddHttpClient<GameClient>(options =>
+            services.AddHttpClient<GameClient>(client =>
             {
-                options.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
+                client.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
             });
 
         })
