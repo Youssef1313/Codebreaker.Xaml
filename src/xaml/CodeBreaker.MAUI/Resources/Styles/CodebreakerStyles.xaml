@@ -90,21 +90,23 @@
                     StrokeThickness="2" 
                     Stroke="DarkBlue">
                     <HorizontalStackLayout Margin="16,0,0,0" >
+                        <HorizontalStackLayout.Resources>
+                            <Style TargetType="Ellipse">
+                                <Setter Property="WidthRequest" Value="68" />
+                                <Setter Property="Margin" Value="12, 4" />
+                            </Style>
+                        </HorizontalStackLayout.Resources>
                         <Ellipse 
                             x:Name="guessDisplay1"
-                            WidthRequest="68" HeightRequest="68" Margin="12, 4"
                             Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=0}" />
                         <Ellipse 
                             x:Name="guessDisplay2"
-                            WidthRequest="68" HeightRequest="68" Margin="40, 4"
                             Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=1}" />
                         <Ellipse 
                             x:Name="guessDisplay3"
-                            WidthRequest="68" HeightRequest="68" Margin="14, 4"
                             Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=2}" />
                         <Ellipse 
                             x:Name="guessDisplay4"
-                            WidthRequest="68" HeightRequest="68" Margin="36, 4"
                             Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=3}" />
 
                     </HorizontalStackLayout>
@@ -115,6 +117,15 @@
                     StrokeThickness="2"
                     Stroke="DarkBlue">
                     <Grid Margin="12,0,0,0">
+                        <Grid.Resources>
+                            <Style TargetType="Ellipse">
+                                <Setter Property="Stroke" Value="White" />
+                                <Setter Property="StrokeThickness" Value="2" />
+                                <Setter Property="WidthRequest" Value="16" />
+                                <Setter Property="HeightRequest" Value="16" />
+                                <Setter Property="Margin" Value="8" />
+                            </Style>
+                        </Grid.Resources>
                         <Grid.RowDefinitions>
                             <RowDefinition />
                             <RowDefinition />
@@ -124,27 +135,19 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <Ellipse 
-                            Stroke="White"
-                            StrokeThickness="2"
-                            WidthRequest="16" HeightRequest="16" Margin="8" Grid.Row="0" Grid.Column="0"
+                            Grid.Row="0" Grid.Column="0"
                             IsVisible="{Binding Converter={StaticResource KeyVisibleConverter}, ConverterParameter=0}"
                             Fill="{Binding Converter={StaticResource KeyBrushConverter}, ConverterParameter=0}" />
                         <Ellipse 
-                            Stroke="White"
-                            StrokeThickness="2"
-                            WidthRequest="16" HeightRequest="16" Margin="8" Grid.Row="0" Grid.Column="1"
+                            Grid.Row="0" Grid.Column="1"
                             IsVisible="{Binding Converter={StaticResource KeyVisibleConverter}, ConverterParameter=1}"
                             Fill="{Binding Converter={StaticResource KeyBrushConverter}, ConverterParameter=1}" />
                         <Ellipse 
-                            Stroke="White"
-                            StrokeThickness="2"
-                            WidthRequest="16" HeightRequest="16" Margin="8" Grid.Row="1" Grid.Column="0"
+                            Grid.Row="1" Grid.Column="0"
                             IsVisible="{Binding Converter={StaticResource KeyVisibleConverter}, ConverterParameter=2}"                                     
                             Fill="{Binding Converter={StaticResource KeyBrushConverter}, ConverterParameter=2}" />
                         <Ellipse 
-                            Stroke="White"
-                            StrokeThickness="2"
-                            WidthRequest="16" HeightRequest="16" Margin="8" Grid.Row="1" Grid.Column="1"
+                            Grid.Row="1" Grid.Column="1"
                             IsVisible="{Binding Converter={StaticResource KeyVisibleConverter}, ConverterParameter=3}"                                     
                             Fill="{Binding Converter={StaticResource KeyBrushConverter}, ConverterParameter=3}" />
                     </Grid>
