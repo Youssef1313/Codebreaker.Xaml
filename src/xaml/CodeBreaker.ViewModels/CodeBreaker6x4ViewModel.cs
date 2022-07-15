@@ -105,6 +105,10 @@ public partial class CodeBreaker6x4ViewModel
         {
             ErrorMessage.IsVisible = true;
             ErrorMessage.Message = ex.Message;
+            if (_enableDialogs)
+            {
+                await _dialogService.ShowMessageAsync(ErrorMessage.Message);
+            }
         }
         finally
         {
@@ -172,6 +176,10 @@ public partial class CodeBreaker6x4ViewModel
         {
             ErrorMessage.IsVisible = true;
             ErrorMessage.Message = ex.Message;
+            if (_enableDialogs)
+            {
+                await _dialogService.ShowMessageAsync(ErrorMessage.Message);
+            }
         }
         finally
         {

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:views="clr-namespace:CodeBreaker.MAUI.Views"
+             xmlns:conv="clr-namespace:CodeBreaker.MAUI.Converters"
+             Title="Codebreaker"
+             x:Class="CodeBreaker.MAUI.MainPage">
+    
+    <ContentPage.Resources>
+        <conv:GameStatusToIsVisibleConverter x:Key="GameStatusVisibleConverter" />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout 
+            Spacing="25" 
+            Padding="30,0" 
+            VerticalOptions="Start">
+            <ActivityIndicator 
+                IsRunning="{Binding ViewModel.InProgress, Mode=OneWay}" 
+                HorizontalOptions="Center" 
+                VerticalOptions="Center" />
+            <HorizontalStackLayout
+                IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Start}">
+                <Label 
+                    Text="Name" 
+                    FontSize="30" />
+                <Entry
+                    WidthRequest="180"
+                    IsEnabled="{Binding ViewModel.IsEnabled, Mode=OneWay}"
+                    Text="{Binding ViewModel.Name, Mode=TwoWay}" />
+                <Button
+                    Text="Start"
+                    Command="{Binding ViewModel.StartGameCommand, Mode=OneTime}" />
+            </HorizontalStackLayout>
+
+            <views:PegSelectionView
+                IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"/>
+
+            <ListView
+                IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"
+                ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}"
+                ItemTemplate="{StaticResource CodeBreaker6x4CodePegs}"/>
+            
+        </VerticalStackLayout>
+    </ScrollView>
+ 
+</ContentPage>
