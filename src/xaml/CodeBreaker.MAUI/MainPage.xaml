@@ -15,7 +15,7 @@
         <VerticalStackLayout 
             Spacing="25" 
             Padding="30,0" 
-            VerticalOptions="Center">
+            VerticalOptions="Start">
             <ActivityIndicator 
                 IsRunning="{Binding ViewModel.InProgress, Mode=OneWay}" 
                 HorizontalOptions="Center" 
