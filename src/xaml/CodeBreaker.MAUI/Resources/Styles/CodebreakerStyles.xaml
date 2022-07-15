@@ -93,6 +93,7 @@
                         <HorizontalStackLayout.Resources>
                             <Style TargetType="Ellipse">
                                 <Setter Property="WidthRequest" Value="68" />
+                                <Setter Property="HeightRequest" Value="68" />
                                 <Setter Property="Margin" Value="12, 4" />
                             </Style>
                         </HorizontalStackLayout.Resources>
