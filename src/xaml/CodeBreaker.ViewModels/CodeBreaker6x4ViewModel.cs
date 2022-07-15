@@ -65,7 +65,7 @@ public partial class CodeBreaker6x4ViewModel
     }
 
     [ObservableProperty]
-    private string _name = "game-username";
+    private string _name = string.Empty;
 
     public ObservableCollection<string> ColorList { get; } = new();
 

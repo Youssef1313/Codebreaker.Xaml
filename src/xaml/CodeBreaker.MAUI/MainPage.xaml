@@ -10,39 +10,63 @@
     <ContentPage.Resources>
         <conv:GameStatusToIsVisibleConverter x:Key="GameStatusVisibleConverter" />
     </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
 
-    <ScrollView>
-        <VerticalStackLayout 
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout 
             Spacing="25" 
             Padding="30,0" 
-            VerticalOptions="Start">
-            <ActivityIndicator 
+            VerticalOptions="FillAndExpand">
+                <ActivityIndicator 
                 IsRunning="{Binding ViewModel.InProgress, Mode=OneWay}" 
                 HorizontalOptions="Center" 
                 VerticalOptions="Center" />
-            <HorizontalStackLayout
-                IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Start}">
-                <Label 
-                    Text="Name" 
-                    FontSize="30" />
-                <Entry
-                    WidthRequest="180"
-                    IsEnabled="{Binding ViewModel.IsEnabled, Mode=OneWay}"
-                    Text="{Binding ViewModel.Name, Mode=TwoWay}" />
-                <Button
-                    Text="Start"
-                    Command="{Binding ViewModel.StartGameCommand, Mode=OneTime}" />
-            </HorizontalStackLayout>
 
-            <views:PegSelectionView
-                IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"/>
+                <HorizontalStackLayout
+                    IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Start}">
+                    <Label 
+                        VerticalTextAlignment="Center"
+                        Text="Name:" 
+                        FontSize="20" />
+                    <Entry
+                        Margin="12,0"
+                        WidthRequest="180"
+                        IsEnabled="{Binding ViewModel.IsEnabled, Mode=OneWay}"
+                        Text="{Binding ViewModel.Name, Mode=TwoWay, TargetNullValue='Enter your name' }" />
 
-            <ListView
+                </HorizontalStackLayout>
+
+                <views:PegSelectionView
+                    IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"/>
+
+                <ListView
+                    IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"
+                    ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}"
+                    ItemTemplate="{StaticResource CodeBreaker6x4CodePegs}"/>
+
+            </VerticalStackLayout>
+
+        </ScrollView>
+        <VerticalStackLayout Grid.Row="1">
+            <Button
+                Margin="20"
+                HorizontalOptions="Fill"
+                VerticalOptions="EndAndExpand"
+                Text="Start"
+                IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Start}"
+                Command="{Binding ViewModel.StartGameCommand, Mode=OneTime}" />
+
+            <Button 
+                Margin="20"
+                HorizontalOptions="Fill"
+                VerticalOptions="End"
+                Text="Move" 
                 IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"
-                ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}"
-                ItemTemplate="{StaticResource CodeBreaker6x4CodePegs}"/>
-            
+                Command="{Binding ViewModel.SetMoveCommand, Mode=OneTime}" />
         </VerticalStackLayout>
-    </ScrollView>
- 
+    </Grid>
 </ContentPage>
