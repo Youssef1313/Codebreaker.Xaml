@@ -50,11 +50,32 @@
             BlueBrush="{StaticResource BlueBrush}"
             YellowBrush="{StaticResource YellowBrush}" />
 
+    <conv:PegColorToBrushConverter
+        x:Key="PegColorToBrushConverter"
+        BlackBrush="{StaticResource BlackBrush}"
+        WhiteBrush="{StaticResource WhiteBrush}"
+        RedBrush="{StaticResource RedBrush}"
+        GreenBrush="{StaticResource GreenBrush}"
+        BlueBrush="{StaticResource BlueBrush}"
+        YellowBrush="{StaticResource YellowBrush}" />
+
     <conv:SelectionAndKeyPegToKeyVisibleConverter
         x:Key="KeyVisibleConverter" />
 
     <conv:SelectionAndKeyPegToKeyBrushConverter
         x:Key="KeyBrushConverter" />
+
+    <DataTemplate x:Key="SelectColorTemplate">
+        <StackLayout>
+            <Frame HasShadow="True" BorderColor="DarkGray" CornerRadius="4" HorizontalOptions="Center"
+                   VerticalOptions="Center" HeightRequest="80" WidthRequest="80">
+                <Ellipse 
+                    Fill="{Binding Mode=OneWay, Converter={StaticResource PegColorToBrushConverter}}" 
+                    WidthRequest="60" 
+                    HeightRequest="60" />
+            </Frame>
+        </StackLayout>
+    </DataTemplate>
 
     <DataTemplate x:Key="CodeBreaker6x4CodePegs">
         <ViewCell>
