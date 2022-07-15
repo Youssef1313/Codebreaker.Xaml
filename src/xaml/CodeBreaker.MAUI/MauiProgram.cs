@@ -20,7 +20,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 		builder.Services.Configure<CodeBreaker6x4ViewModelOptions>(
-			options => options.EnableDialogs = false);
+			options => options.EnableDialogs = true);
 		builder.Services.AddTransient<CodeBreaker6x4ViewModel>();
 		builder.Services.AddScoped<IDialogService, MauiDialogService>();
 		builder.Services.AddHttpClient<GameClient>(options =>
