@@ -2,40 +2,29 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CodeBreaker.MAUI.Views.PegSelectionView">
-    <Grid>
-        <Grid.Resources>
+
+    <HorizontalStackLayout Margin="10,0">
+        <HorizontalStackLayout.Resources>
             <Style TargetType="Picker">
                 <Setter Property="Background" Value="DarkGray" />
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="Margin" Value="4" />
-                <Setter Property="WidthRequest" Value="112" />
+                <Setter Property="WidthRequest" Value="44" />
             </Style>
-        </Grid.Resources>
-            
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
-        <HorizontalStackLayout>
-            <Picker x:Name="guess1"      
+        </HorizontalStackLayout.Resources>
+        <Picker x:Name="guess1"    
                 ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
                 SelectedItem="{Binding ViewModel.SelectedColor1, Mode=TwoWay}" />
-            <Picker x:Name="guess2"
+        <Picker x:Name="guess2"
                 ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
                 SelectedItem="{Binding ViewModel.SelectedColor2, Mode=TwoWay}" />
-            <Picker x:Name="guess3"
+        <Picker x:Name="guess3"
                 ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
                 SelectedItem="{Binding ViewModel.SelectedColor3, Mode=TwoWay}" />
-            <Picker x:Name="guess4"
+        <Picker x:Name="guess4"
                 ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
                 SelectedItem="{Binding ViewModel.SelectedColor4, Mode=TwoWay}" />
-        </HorizontalStackLayout>
-        
-        <Button 
-            Grid.Column="1"
-            Text="Move" 
-            Command="{Binding ViewModel.SetMoveCommand, Mode=OneTime}" />
 
-    </Grid>
+    </HorizontalStackLayout>
 
 </ContentView>

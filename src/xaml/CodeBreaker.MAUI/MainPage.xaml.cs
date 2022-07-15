@@ -15,9 +15,9 @@ public partial class MainPage : ContentPage
 		BindingContext = this;
 		InitializeComponent();
 
-		WeakReferenceMessenger.Default.Register<InfoMessage>(this, (r, m) =>
+		WeakReferenceMessenger.Default.Register<InfoMessage>(this, async (r, m) =>
 		{
-			DisplayAlert("Info", m.Text, "Close");
+			await DisplayAlert("Info", m.Text, "Close");
 		});
 	}
 
