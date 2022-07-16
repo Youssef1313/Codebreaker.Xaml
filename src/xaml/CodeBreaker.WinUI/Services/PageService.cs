@@ -1,6 +1,5 @@
 ﻿using CodeBreaker.ViewModels;
 using CodeBreaker.WinUI.Contracts.Services;
-using CodeBreaker.WinUI.ViewModels;
 using CodeBreaker.WinUI.Views;
 
 

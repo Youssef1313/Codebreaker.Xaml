@@ -19,10 +19,11 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
         return _navigationService.Frame.Content == null;
     }
 
-    protected async override Task HandleInternalAsync(LaunchActivatedEventArgs? args)
+    protected override async Task HandleInternalAsync(LaunchActivatedEventArgs? args)
     {
         string? fullName = typeof(CodeBreaker6x4ViewModel).FullName;
         if (fullName is null) throw new InvalidOperationException();
+        
         _navigationService.NavigateTo(fullName, args?.Arguments);
 
         await Task.CompletedTask;

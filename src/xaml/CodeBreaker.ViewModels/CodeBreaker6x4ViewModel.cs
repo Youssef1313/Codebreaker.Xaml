@@ -98,7 +98,7 @@ public partial class CodeBreaker6x4ViewModel
 
             ColorList.Clear();
 
-            foreach (var color in colors)
+            foreach (string color in colors)
                 ColorList.Add(color);
         }
         catch (Exception ex)
@@ -248,7 +248,7 @@ public partial class CodeBreaker6x4ViewModel
         }
     }
 
-    private string[] _selectedColorPropertyNames = { nameof(SelectedColor1), nameof(SelectedColor2), nameof(SelectedColor3), nameof(SelectedColor4) };
+    private readonly string[] _selectedColorPropertyNames = { nameof(SelectedColor1), nameof(SelectedColor2), nameof(SelectedColor3), nameof(SelectedColor4) };
 
     public InfoMessageViewModel ErrorMessage { get; } = new InfoMessageViewModel { IsError = true, Title = "Error" };
 

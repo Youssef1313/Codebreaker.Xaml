@@ -9,13 +9,13 @@ public class GameStatusToVisibilityConverter : IValueConverter
     public object Convert(object value, Type targetType, object? parameter, string? language)
     {
         static Visibility GetStartVisibility(GameMode gameMode) => 
-            (gameMode == GameMode.Started || gameMode == GameMode.MoveSet) ? Visibility.Collapsed : Visibility.Visible;
+            (gameMode is GameMode.Started or GameMode.MoveSet) ? Visibility.Collapsed : Visibility.Visible;
 
         static Visibility GetRunningVisibility(GameMode gameMode) => 
             (gameMode == GameMode.NotRunning) ? Visibility.Collapsed : Visibility.Visible;
 
         static Visibility GetCancelVisibility(GameMode gameMode) =>
-            (gameMode == GameMode.Started || gameMode == GameMode.MoveSet) ? Visibility.Visible : Visibility.Collapsed;
+            (gameMode is GameMode.Started or GameMode.MoveSet) ? Visibility.Visible : Visibility.Collapsed;
 
         string uiCategory = parameter?.ToString() ?? throw new InvalidOperationException("Pass a parameter to this converter");
 

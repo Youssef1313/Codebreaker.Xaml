@@ -9,6 +9,7 @@ public class SelectionAndKeyPegToKeyVisibilityConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, string language)
     {
         ArgumentNullException.ThrowIfNull(parameter);
+        
         if (value is SelectionAndKeyPegs selection && int.TryParse(parameter.ToString(), out int ix))
         {
             return (ix < selection.KeyPegs.Length) 
