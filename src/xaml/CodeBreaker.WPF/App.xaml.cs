@@ -15,7 +15,7 @@ namespace CodeBreaker.WPF;
 /// </summary>
 public sealed partial class App : Application, IDisposable
 {
-    private IHost _host;
+    private readonly IHost _host;
     public App()
     {
         _host = Host.CreateDefaultBuilder()
