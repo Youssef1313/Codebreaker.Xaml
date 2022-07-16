@@ -9,13 +9,13 @@ public class GameStatusToIsVisibleConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         static bool GetStartVisibility(GameMode gameMode) =>
-             !(gameMode == GameMode.Started || gameMode == GameMode.MoveSet);
+            gameMode is not (GameMode.Started or GameMode.MoveSet);
 
         static bool GetRunningVisibility(GameMode gameMode) =>
             !(gameMode == GameMode.NotRunning);
 
         static bool GetCancelVisibility(GameMode gameMode) =>
-            (gameMode == GameMode.Started || gameMode == GameMode.MoveSet);
+            (gameMode is GameMode.Started or GameMode.MoveSet);
 
         string uiCategory = parameter?.ToString() ?? throw new InvalidOperationException("Pass a parameter to this converter");
 
@@ -36,8 +36,6 @@ public class GameStatusToIsVisibleConverter : IValueConverter
         }
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
         throw new NotImplementedException();
-    }
 }

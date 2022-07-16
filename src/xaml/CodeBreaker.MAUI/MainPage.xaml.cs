@@ -23,4 +23,3 @@ public partial class MainPage : ContentPage
 
 	public CodeBreaker6x4ViewModel ViewModel { get; }
 }
-

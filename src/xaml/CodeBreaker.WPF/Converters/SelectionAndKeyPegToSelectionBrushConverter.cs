@@ -10,13 +10,13 @@ namespace CodeBreaker.WPF.Converters;
 
 public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
 {
-    private static Brush s_blackBrush = new SolidColorBrush(Colors.Black);
-    private static Brush s_whiteBrush = new SolidColorBrush(Colors.White);
-    private static Brush s_redBrush = new SolidColorBrush(Colors.Red);
-    private static Brush s_greenBrush = new SolidColorBrush(Colors.Green);
-    private static Brush s_blueBrush = new SolidColorBrush(Colors.Blue);
-    private static Brush s_yellowBrush = new SolidColorBrush(Colors.Yellow);
-    private static Brush s_emptyBrush = new SolidColorBrush(Colors.LightGray);
+    private static readonly Brush s_blackBrush = new SolidColorBrush(Colors.Black);
+    private static readonly Brush s_whiteBrush = new SolidColorBrush(Colors.White);
+    private static readonly Brush s_redBrush = new SolidColorBrush(Colors.Red);
+    private static readonly Brush s_greenBrush = new SolidColorBrush(Colors.Green);
+    private static readonly Brush s_blueBrush = new SolidColorBrush(Colors.Blue);
+    private static readonly Brush s_yellowBrush = new SolidColorBrush(Colors.Yellow);
+    private static readonly Brush s_emptyBrush = new SolidColorBrush(Colors.LightGray);
 
     public Brush BlackBrush { get; set; } = s_blackBrush;
     public Brush WhiteBrush { get; set; } = s_whiteBrush;
