@@ -1,4 +1,7 @@
 ﻿using CodeBreaker.Services;
+using CodeBreaker.Shared.Models.Api;
+using CodeBreaker.Shared.Models.Data;
+using static CodeBreaker.Shared.Models.Data.Colors;
 using CodeBreaker.ViewModels.Services;
 
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -65,7 +68,7 @@ public partial class CodeBreaker6x4ViewModel
     }
 
     [ObservableProperty]
-    private string _name = "game-username";
+    private string _username = "game-username";
 
     public ObservableCollection<string> ColorList { get; } = new();
 
@@ -88,17 +91,17 @@ public partial class CodeBreaker6x4ViewModel
             InitializeValues();
 
             InProgress = true;
-            var response = await _client.StartGameAsync(_name);
+            CreateGameResponse response = await _client.StartGameAsync(_username, "6x4Game");
 
             GameStatus = GameMode.Started;
 
-            _gameId = response.Id;
-            (_, _, int maxMoves, string[] colors) = response.GameOptions;
+            _gameId = response.Game.GameId;
+            GameType<string> gameType = response.Game.Type;
             _moveNumber++;
 
             ColorList.Clear();
 
-            foreach (var color in colors)
+            foreach (string color in gameType.Fields)
                 ColorList.Add(color);
         }
         catch (Exception ex)
@@ -139,33 +142,38 @@ public partial class CodeBreaker6x4ViewModel
 
             string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
 
-            (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber, selection);
+            CreateMoveResponse response = await _client.SetMoveAsync(_gameId, selection);
+            string[] keyPegStrings = new string[response.KeyPegs.Black + response.KeyPegs.White];
+            
+            for (int i = 0; i < response.KeyPegs.Black; i++)
+                keyPegStrings[i] = Black;
 
-            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, keyPegColors, _moveNumber++);
+            for (int i = 0; i < response.KeyPegs.White; i++)
+                keyPegStrings[i + response.KeyPegs.Black] = White;
+
+            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, keyPegStrings, _moveNumber++);
             GameMoves.Add(selectionAndKeyPegs);
             GameStatus = GameMode.MoveSet;
 
             WeakReferenceMessenger.Default.Send(new GameMoveMessage(GameMoveValue.Completed, selectionAndKeyPegs));
 
-            if (won)
+            if (response.Won)
             {
                 GameStatus = GameMode.Won;
                 InfoMessage.Message = "Congratulations - you won!";
                 InfoMessage.IsVisible = true;
+
                 if (_enableDialogs)
-                {
                     await _dialogService.ShowMessageAsync(InfoMessage.Message);
-                }
             }
-            else if (completed)
+            else if (response.Ended)
             {
                 GameStatus = GameMode.Lost;        
                 InfoMessage.Message = "Sorry, you didn't find the matching colors!";
                 InfoMessage.IsVisible = true;
+                
                 if (_enableDialogs)
-                {
                     await _dialogService.ShowMessageAsync(InfoMessage.Message);
-                }
             }
         }
         catch (Exception ex)

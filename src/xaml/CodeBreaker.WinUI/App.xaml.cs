@@ -34,7 +34,7 @@ public partial class App : Application
         .ConfigureServices((context, services) =>
         {
             // Default Activation Handler
-            services.AddTransient<ActivationHandler<Xaml.LaunchActivatedEventArgs>, DefaultActivationHandler>();
+            services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
             // Other Activation Handlers
 

@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-using static CodeBreaker.Shared.CodeBreakerColors;
+using static CodeBreaker.Shared.Models.Data.Colors;
 
 namespace CodeBreaker.WPF.Converters;
 
