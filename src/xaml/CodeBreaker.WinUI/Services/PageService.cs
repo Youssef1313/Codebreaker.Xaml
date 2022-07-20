@@ -12,6 +12,7 @@ public class PageService : IPageService
     public PageService()
     {
         Configure<CodeBreaker6x4ViewModel, MainPage>();
+        Configure<LivePageViewModel, LivePage>();
     }
 
     public Type GetPageType(string key)
