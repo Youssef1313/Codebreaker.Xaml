@@ -17,7 +17,7 @@ public sealed partial class PegSelectionView : UserControl
 
         WeakReferenceMessenger.Default.Register<GameMoveMessage>(this, (r, m) =>
         {
-            if (m.Value is GameMoveValue.Started)
+            if (m.GameMoveValue is GameMoveValue.Started)
             {
                 var connectedAnimation = ConnectedAnimationService.GetForCurrentView();
                 connectedAnimation?.PrepareToAnimate("guess1", guess1);
