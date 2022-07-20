@@ -256,6 +256,6 @@ public partial class CodeBreaker6x4ViewModel
 
 public record SelectionAndKeyPegs(string[] Selection, string[] KeyPegs, int MoveNumber);
 
-public record class GameStateChangedMessage(GameMode gameMode);
+public record class GameStateChangedMessage(GameMode GameMode);
 
-public record class GameMoveMessage(GameMoveValue gameMoveValue, SelectionAndKeyPegs? selectionAndKeyPegs = null);
+public record class GameMoveMessage(GameMoveValue GameMoveValue, SelectionAndKeyPegs? SelectionAndKeyPegs = null);
