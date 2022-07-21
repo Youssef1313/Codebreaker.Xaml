@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Services", "sha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Shared", "shared\CodeBreaker.Shared\CodeBreaker.Shared.csproj", "{B7181E9E-A4AA-452F-83C4-92182DFDB579}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels.Tests", "xaml\CodeBreaker.ViewModels.Tests\CodeBreaker.ViewModels.Tests.csproj", "{9C7EE2F5-DD4E-4853-A9CE-5D8E7F0A8554}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{B7181E9E-A4AA-452F-83C4-92182DFDB579}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7181E9E-A4AA-452F-83C4-92182DFDB579}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7181E9E-A4AA-452F-83C4-92182DFDB579}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C7EE2F5-DD4E-4853-A9CE-5D8E7F0A8554}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C7EE2F5-DD4E-4853-A9CE-5D8E7F0A8554}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C7EE2F5-DD4E-4853-A9CE-5D8E7F0A8554}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C7EE2F5-DD4E-4853-A9CE-5D8E7F0A8554}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
