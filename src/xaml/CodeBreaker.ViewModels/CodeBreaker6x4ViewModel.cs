@@ -35,7 +35,7 @@ public class CodeBreaker6x4ViewModelOptions
 [ObservableObject]
 public partial class CodeBreaker6x4ViewModel
 {
-    private readonly GameClient _client;
+    private readonly IGameClient _client;
 
     private int _moveNumber = 0;
     private Guid _gameId = Guid.Empty;
@@ -43,7 +43,7 @@ public partial class CodeBreaker6x4ViewModel
     private readonly IDialogService _dialogService;
     
     public CodeBreaker6x4ViewModel(
-        GameClient client, 
+        IGameClient client, 
         IOptions<CodeBreaker6x4ViewModelOptions> options,
         IDialogService dialogService)
     {
