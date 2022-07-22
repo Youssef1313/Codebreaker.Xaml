@@ -16,6 +16,7 @@ using CodeBreaker.WinUI.Views;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 using Xaml = Microsoft.UI.Xaml;
 
@@ -48,7 +49,11 @@ public partial class App : Application
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddScoped<IDialogService, WinUIDialogService>();
 
-            services.AddSingleton(x => new HubConnectionBuilder().WithUrl("https://codebreaker.service.signalr.net").WithAutomaticReconnect().Build());
+            services.AddSingleton(x => new HubConnectionBuilder()
+                .WithUrl("https://codebreakerlive.purplebush-9a246700.westeurope.azurecontainerapps.io/live")
+                //.WithUrl("http://localhost:5131/live")
+                .WithAutomaticReconnect()
+                .Build());
             services.AddSingleton<LiveClient>();
 
             services.AddTransient<ShellPage>();
@@ -63,6 +68,7 @@ public partial class App : Application
             services.AddHttpClient<IGameClient, GameClient>(client =>
             {
                 client.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
+                //client.BaseAddress = new("http://localhost:9400");
             });
 
         })
