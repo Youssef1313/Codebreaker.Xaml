@@ -46,7 +46,12 @@
                 -->
                 <NavigationViewItem x:Uid="Shell_Main" helpers:NavigationHelper.NavigateTo="CodeBreaker.ViewModels.CodeBreaker6x4ViewModel">
                     <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;"/>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;" />
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem x:Uid="Shell_Live" helpers:NavigationHelper.NavigateTo="CodeBreaker.ViewModels.LivePageViewModel">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xf785;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <!--<NavigationViewItem x:Uid="Shell_ListDetails" helpers:NavigationHelper.NavigateTo="CodeBreaker.WinUI.ViewModels.ListDetailsViewModel">

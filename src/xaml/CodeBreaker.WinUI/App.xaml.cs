@@ -34,7 +34,7 @@ public partial class App : Application
         .ConfigureServices((context, services) =>
         {
             // Default Activation Handler
-            services.AddTransient<ActivationHandler<Xaml.LaunchActivatedEventArgs>, DefaultActivationHandler>();
+            services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
 
             // Other Activation Handlers
 
@@ -53,6 +53,10 @@ public partial class App : Application
 
             services.AddTransient<MainPage>();
             services.AddTransient<CodeBreaker6x4ViewModel>();
+
+            services.AddTransient<LivePage>();
+            services.AddTransient<LivePageViewModel>();
+
             services.AddHttpClient<IGameClient, GameClient>(client =>
             {
                 client.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
@@ -88,10 +92,10 @@ public partial class App : Application
     /// will be used such as when the application is launched to open a specific file.
     /// </summary>
     /// <param name="args">Details about the launch request and process.</param>
-    protected override async void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+    protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         base.OnLaunched(args);
-        var activationService = App.GetService<IActivationService>();
+        var activationService = GetService<IActivationService>();
         await activationService.ActivateAsync(args);
     }
 }
