@@ -23,7 +23,7 @@ public static class MauiProgram
 			options => options.EnableDialogs = true);
 		builder.Services.AddTransient<CodeBreaker6x4ViewModel>();
 		builder.Services.AddScoped<IDialogService, MauiDialogService>();
-		builder.Services.AddHttpClient<GameClient>(client =>
+		builder.Services.AddHttpClient<IGameClient, GameClient>(client =>
 		{
 			client.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
 		});

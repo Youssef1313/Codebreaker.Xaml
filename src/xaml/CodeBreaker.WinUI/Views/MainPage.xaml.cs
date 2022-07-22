@@ -29,7 +29,7 @@ public sealed partial class MainPage : Page
                 animation.TryStart(target);
             }
             
-            if (m.Value is GameMoveValue.Completed)
+            if (m.GameMoveValue is GameMoveValue.Completed)
             {
                 var selectionAndKeyPegs = m.SelectionAndKeyPegs;
                 if (selectionAndKeyPegs is null) throw new InvalidOperationException();

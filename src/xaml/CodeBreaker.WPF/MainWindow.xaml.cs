@@ -22,7 +22,7 @@ public partial class MainWindow : Window
 
         WeakReferenceMessenger.Default.Register<GameStateChangedMessage>(this, (r, m) =>
         {
-            VisualStateManager.GoToElementState(MainGrid, m.Value.ToString(), true);
+            VisualStateManager.GoToElementState(MainGrid, m.GameMode.ToString(), true);
         });
     }
 
