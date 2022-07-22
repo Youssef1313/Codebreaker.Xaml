@@ -4,7 +4,6 @@ using CodeBreaker.ViewModels.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
-using CommunityToolkit.Mvvm.Messaging.Messages;
 
 using Microsoft.Extensions.Options;
 
@@ -36,7 +35,7 @@ public class CodeBreaker6x4ViewModelOptions
 [ObservableObject]
 public partial class CodeBreaker6x4ViewModel
 {
-    private readonly GameClient _client;
+    private readonly IGameClient _client;
 
     private int _moveNumber = 0;
     private Guid _gameId = Guid.Empty;
@@ -44,7 +43,7 @@ public partial class CodeBreaker6x4ViewModel
     private readonly IDialogService _dialogService;
     
     public CodeBreaker6x4ViewModel(
-        GameClient client, 
+        IGameClient client, 
         IOptions<CodeBreaker6x4ViewModelOptions> options,
         IDialogService dialogService)
     {
@@ -257,21 +256,6 @@ public partial class CodeBreaker6x4ViewModel
 
 public record SelectionAndKeyPegs(string[] Selection, string[] KeyPegs, int MoveNumber);
 
-public class GameStateChangedMessage : ValueChangedMessage<GameMode>
-{
-    public GameStateChangedMessage(GameMode gameMode)
-        : base(gameMode)
-    {
-    }
-}
+public record class GameStateChangedMessage(GameMode GameMode);
 
-public class GameMoveMessage : ValueChangedMessage<GameMoveValue>
-{
-    public GameMoveMessage(GameMoveValue gameMoveValue, SelectionAndKeyPegs? selectionAndKeyPegs = null)
-        : base(gameMoveValue)
-    {
-        SelectionAndKeyPegs = selectionAndKeyPegs;
-    }
-
-    public SelectionAndKeyPegs? SelectionAndKeyPegs { get; }
-}
+public record class GameMoveMessage(GameMoveValue GameMoveValue, SelectionAndKeyPegs? SelectionAndKeyPegs = null);
