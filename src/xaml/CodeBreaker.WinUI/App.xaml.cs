@@ -13,7 +13,7 @@ using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Services;
 using CodeBreaker.WinUI.ViewModels;
 using CodeBreaker.WinUI.Views;
-
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
@@ -47,6 +47,9 @@ public partial class App : Application
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddScoped<IDialogService, WinUIDialogService>();
+
+            services.AddSingleton(x => new HubConnectionBuilder().WithUrl("https://codebreaker.service.signalr.net").WithAutomaticReconnect().Build());
+            services.AddSingleton<LiveClient>();
 
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();

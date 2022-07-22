@@ -52,19 +52,15 @@ public sealed partial class MainPage : Page
         for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
         {
             DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+
             if (child is null)
-            {
                 yield break;
-            }
+
             if (child is T item)
-            {
                 yield return item;
-            }
 
             foreach (T childOfChild in FindItemsOfType<T>(child))
-            {
                 yield return childOfChild;
-            }
         }
     }
 }
