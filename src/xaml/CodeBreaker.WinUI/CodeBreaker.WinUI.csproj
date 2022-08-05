@@ -11,6 +11,7 @@
     <UseWinUI>true</UseWinUI>
     <ImplicitUsings>enable</ImplicitUsings>
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
+    <Company>CN innovation</Company>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Styles\Codebreaker6x4Styles.xaml" />
