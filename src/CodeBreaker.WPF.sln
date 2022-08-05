@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.WPF", "xaml\Cod
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Services", "shared\CodeBreaker.Services\CodeBreaker.Services.csproj", "{522F9BBA-0377-4D97-B621-FFD952513B41}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels.Tests", "xaml\CodeBreaker.ViewModels.Tests\CodeBreaker.ViewModels.Tests.csproj", "{448E073D-AA11-4060-83FD-E49C3F00D6C7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{522F9BBA-0377-4D97-B621-FFD952513B41}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{522F9BBA-0377-4D97-B621-FFD952513B41}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{522F9BBA-0377-4D97-B621-FFD952513B41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{448E073D-AA11-4060-83FD-E49C3F00D6C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{448E073D-AA11-4060-83FD-E49C3F00D6C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{448E073D-AA11-4060-83FD-E49C3F00D6C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{448E073D-AA11-4060-83FD-E49C3F00D6C7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
