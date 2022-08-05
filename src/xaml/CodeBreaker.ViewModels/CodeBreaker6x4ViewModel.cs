@@ -73,13 +73,13 @@ public partial class CodeBreaker6x4ViewModel
     [ObservableProperty]
     private GameMode _gameStatus = GameMode.NotRunning;
 
-    [AlsoNotifyChangeFor(nameof(IsEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsEnabled))]
     [ObservableProperty]
     private bool _inProgress = false;
 
     public bool IsEnabled => !InProgress;
 
-    [ICommand]
+    [RelayCommand]
     private async Task StartGameAsync()
     {
         try
