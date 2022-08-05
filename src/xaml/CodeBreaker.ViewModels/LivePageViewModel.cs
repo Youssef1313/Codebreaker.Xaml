@@ -18,7 +18,7 @@ public partial class LivePageViewModel
 
     public ObservableCollection<LiveHubArgsViewModel> LiveEvents { get; private init; } = new ObservableCollection<LiveHubArgsViewModel>();
 
-    [ICommand]
+    [RelayCommand(IncludeCancelCommand = true)]
     public async Task StartStreamingAsync(CancellationToken token = default)
     {
         await _liveClient.StartAsync(token);
