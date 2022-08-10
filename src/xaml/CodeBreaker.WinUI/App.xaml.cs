@@ -53,6 +53,12 @@ public partial class App : Application
                 .WithUrl("https://codebreakerlive.purplebush-9a246700.westeurope.azurecontainerapps.io/live")
                 //.WithUrl("http://localhost:5131/live")
                 .WithAutomaticReconnect()
+                .ConfigureLogging(x =>
+                {
+                    x.SetMinimumLevel(LogLevel.Information);
+                    x.AddDebug();
+                    x.AddConsole();
+                })
                 .Build());
             services.AddSingleton<LiveClient>();
 
