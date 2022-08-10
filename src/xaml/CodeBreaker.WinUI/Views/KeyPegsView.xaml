@@ -7,18 +7,16 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Ellipse Grid.Row="0" Grid.Column="0" Width="150" Height="150" Fill="Black" Visibility="Visible" />
-        <Ellipse Grid.Row="0" Grid.Column="1" Width="150" Height="150" Fill="Black" Visibility="Visible" />
-        <Ellipse Grid.Row="1" Grid.Column="0" Width="150" Height="150" Fill="Black" Visibility="Visible" />
-        <Ellipse Grid.Row="1" Grid.Column="1" Width="150" Height="150" Fill="Black" Visibility="Visible" />
-    </Grid>
+    <ItemsControl ItemsSource="{x:Bind Path=Pegs, Mode=TwoWay}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" Spacing="20" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="x:String">
+                <Ellipse Fill="{x:Bind}" Width="40" Height="40" />
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
 </UserControl>

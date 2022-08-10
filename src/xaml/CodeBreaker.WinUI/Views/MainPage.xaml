@@ -43,7 +43,7 @@
                 IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}"
                 x:Name="TextName" 
                 Header="Name:" 
-                Text="{x:Bind ViewModel.Name, Mode=TwoWay}" />
+                Text="{x:Bind ViewModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <AppBarButton 
                 Label="Start" 
                 Icon="Play" 
