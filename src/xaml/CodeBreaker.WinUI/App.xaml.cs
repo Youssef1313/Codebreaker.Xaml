@@ -60,23 +60,21 @@ public partial class App : Application
                     x.AddConsole();
                 })
                 .Build());
-            services.AddSingleton<LiveClient>();
 
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
-
-            services.AddTransient<MainPage>();
-            services.AddTransient<CodeBreaker6x4ViewModel>();
-
-            services.AddTransient<LivePage>();
-            services.AddTransient<LivePageViewModel>();
 
             services.AddHttpClient<IGameClient, GameClient>(client =>
             {
                 client.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
                 //client.BaseAddress = new("http://localhost:9400");
             });
+            services.AddScoped<CodeBreaker6x4ViewModel>();
+            services.AddTransient<MainPage>();
 
+            services.AddSingleton<LiveClient>();
+            services.AddScoped<LivePageViewModel>();
+            services.AddTransient<LivePage>();
         })
         .Build();
 

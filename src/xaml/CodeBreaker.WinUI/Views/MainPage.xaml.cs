@@ -1,4 +1,5 @@
 ﻿using CodeBreaker.ViewModels;
+using CodeBreaker.WinUI.Helpers;
 
 using CommunityToolkit.Mvvm.Messaging;
 
@@ -44,6 +45,8 @@ public sealed partial class MainPage : Page
                 }
             }
         });
+
+        WeakReferenceMessenger.Default.UnregisterAllOnUnloaded(this);
     }
 
     private IEnumerable<T> FindItemsOfType<T>(DependencyObject obj)
