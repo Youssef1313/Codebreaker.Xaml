@@ -15,7 +15,5 @@ internal static class MessengerExtensions
         }
 
         element.Unloaded += UnloadedCallback;
-
-        element.Unloaded += (_, _) => Console.WriteLine("no");
     }
 }
