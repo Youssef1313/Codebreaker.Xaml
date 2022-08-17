@@ -23,15 +23,15 @@ public partial class LivePageViewModel
         {
             if (args.Data is null) return;
             GameMove move = args.Data;
-            GameViewModel game = Games.Where(x => x.GameId == move.GameId).Single();
-            game.Moves.Add(new MoveViewModel(move));
+            GameViewModel? game = Games.Where(x => x.GameId == move.GameId).SingleOrDefault();
+            game?.Moves.Add(new MoveViewModel(move));
         };
     }
 
     public ObservableCollection<GameViewModel> Games { get; private init; } = new();
 
 
-    [RelayCommand(IncludeCancelCommand = true)]
+    [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true, IncludeCancelCommand = true)]
     public async Task StartStreamingAsync(CancellationToken token = default)
     {
         await _liveClient.StartAsync(token);

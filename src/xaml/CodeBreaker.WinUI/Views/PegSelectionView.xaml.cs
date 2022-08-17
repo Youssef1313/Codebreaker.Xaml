@@ -1,11 +1,7 @@
 ﻿using CodeBreaker.ViewModels;
 
 using CommunityToolkit.Mvvm.Messaging;
-
 using Microsoft.UI.Xaml.Media.Animation;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
 
 namespace CodeBreaker.WinUI.Views;
 
@@ -26,6 +22,8 @@ public sealed partial class PegSelectionView : UserControl
                 connectedAnimation?.PrepareToAnimate("guess4", guess4);
             }
         });
+
+        WeakReferenceMessenger.Default.UnregisterAllOnUnloaded(this);
     }
 
     public CodeBreaker6x4ViewModel ViewModel
