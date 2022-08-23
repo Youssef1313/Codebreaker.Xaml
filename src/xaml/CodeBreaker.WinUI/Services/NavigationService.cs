@@ -1,4 +1,5 @@
-﻿using CodeBreaker.WinUI.Contracts.Services;
+﻿using CodeBreaker.Services;
+using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Contracts.ViewModels;
 
 using Microsoft.UI.Xaml.Controls;

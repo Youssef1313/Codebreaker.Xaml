@@ -11,6 +11,7 @@ public class PageService : IPageService
 
     public PageService()
     {
+        Configure<AuthPageViewModel, AuthPage>();
         Configure<CodeBreaker6x4ViewModel, MainPage>();
         Configure<LivePageViewModel, LivePage>();
     }

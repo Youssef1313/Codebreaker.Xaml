@@ -21,7 +21,7 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
 
     protected override async Task HandleInternalAsync(LaunchActivatedEventArgs? args)
     {
-        string? fullName = typeof(CodeBreaker6x4ViewModel).FullName;
+        string? fullName = typeof(AuthPageViewModel).FullName;
         if (fullName is null) throw new InvalidOperationException();
         
         _navigationService.NavigateTo(fullName, args?.Arguments);

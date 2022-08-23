@@ -47,6 +47,7 @@ public partial class App : Application
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
+            services.AddSingleton<INavigationServiceCore>(x => x.GetRequiredService<INavigationService>());
             services.AddScoped<IDialogService, WinUIDialogService>();
 
             services.AddSingleton(x => new HubConnectionBuilder()
@@ -64,8 +65,13 @@ public partial class App : Application
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 
-            services.AddHttpClient<IGameClient, GameClient>(client =>
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<AuthPageViewModel>();
+            services.AddTransient<AuthPage>();
+
+            services.AddHttpClient<IGameClient, GameClient>((serviceProvider, client) =>
             {
+                client.DefaultRequestHeaders.Authorization = new("Bearer", "abc");
                 client.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
                 //client.BaseAddress = new("http://localhost:9400");
             });

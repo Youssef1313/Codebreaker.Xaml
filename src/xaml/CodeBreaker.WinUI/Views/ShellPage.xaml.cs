@@ -1,6 +1,7 @@
 ﻿using CodeBreaker.WinUI.Contracts.Services;
+using CodeBreaker.WinUI.Messages;
 using CodeBreaker.WinUI.ViewModels;
-
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 
@@ -28,6 +29,9 @@ public sealed partial class ShellPage : Page
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();
+        NavigationViewControl.IsPaneVisible = false;
+        WeakReferenceMessenger.Default.UnregisterAllOnUnloaded(this);
+        WeakReferenceMessenger.Default.Register<ChangeNavigationPaneVisibility>(this, (s, args) => NavigationViewControl.IsPaneVisible = args.IsVisible);
     }
 
     private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)

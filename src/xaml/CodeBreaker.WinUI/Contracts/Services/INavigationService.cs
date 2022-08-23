@@ -1,14 +1,12 @@
-﻿namespace CodeBreaker.WinUI.Contracts.Services;
+﻿using CodeBreaker.Services;
 
-public interface INavigationService
+namespace CodeBreaker.WinUI.Contracts.Services;
+
+public interface INavigationService : INavigationServiceCore
 {
     event NavigatedEventHandler Navigated;
 
     bool CanGoBack { get; }
 
     Frame Frame { get; set; }
-
-    bool NavigateTo(string pageKey, object? parameter = null, bool clearNavigation = false);
-
-    bool GoBack();
 }
