@@ -24,7 +24,7 @@
                        VerticalAlignment="Center"
                        TextWrapping="NoWrap"
                        Style="{StaticResource CaptionTextBlockStyle}"
-                       Margin="28,0,0,0"/>
+                       Margin="5,0,0,0"/>
         </Grid>
         <NavigationView
             x:Name="NavigationViewControl"
@@ -33,7 +33,6 @@
             IsBackEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
             SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
             IsSettingsVisible="False"
-            IsPaneVisible="{x:Bind ViewModel.IsAuthenticated, Mode=OneWay}"
             ExpandedModeThresholdWidth="1280"
             DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
             Header="{x:Bind ((ContentControl)ViewModel.Selected).Content, Mode=OneWay}">
@@ -45,7 +44,7 @@
                 TODO: Update item icons by updating FontIcon.Glyph properties.
                 https://docs.microsoft.com/windows/apps/design/style/segoe-fluent-icons-font#icon-list
                 -->
-                <NavigationViewItem x:Uid="Shell_Main" helpers:NavigationHelper.NavigateTo="CodeBreaker.ViewModels.CodeBreaker6x4ViewModel">
+                <NavigationViewItem x:Uid="Shell_Game" helpers:NavigationHelper.NavigateTo="CodeBreaker.ViewModels.CodeBreaker6x4ViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;" />
                     </NavigationViewItem.Icon>
@@ -55,16 +54,12 @@
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xf785;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <!--<NavigationViewItem x:Uid="Shell_ListDetails" helpers:NavigationHelper.NavigateTo="CodeBreaker.WinUI.ViewModels.ListDetailsViewModel">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xea37;"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>-->
             </NavigationView.MenuItems>
             <NavigationView.HeaderTemplate>
                 <DataTemplate>
                     <Grid>
                         <TextBlock
+                            Margin="-25,0,0,0"
                             Text="{Binding}"
                             Style="{ThemeResource TitleTextBlockStyle}" />
                     </Grid>
@@ -77,6 +72,7 @@
                         <DataTemplate>
                             <Grid>
                                 <TextBlock
+                                    Margin="-25,0,0,0"
                                     Text="{Binding}"
                                     Style="{ThemeResource TitleTextBlockStyle}" />
                             </Grid>

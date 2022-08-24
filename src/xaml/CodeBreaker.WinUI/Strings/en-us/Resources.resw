@@ -123,8 +123,8 @@
   <data name="AppDescription" xml:space="preserve">
     <value>CodeBreaker.WinUI</value>
   </data>
-  <data name="Shell_Main.Content" xml:space="preserve">
-    <value>Main</value>
+  <data name="Shell_Game.Content" xml:space="preserve">
+    <value>Game</value>
   </data>
   <data name="Shell_Blank.Content" xml:space="preserve">
     <value>Blank</value>

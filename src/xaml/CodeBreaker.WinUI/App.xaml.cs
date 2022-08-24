@@ -76,7 +76,7 @@ public partial class App : Application
                 //client.BaseAddress = new("http://localhost:9400");
             });
             services.AddScoped<CodeBreaker6x4ViewModel>();
-            services.AddTransient<MainPage>();
+            services.AddTransient<GamePage>();
 
             services.AddSingleton<LiveClient>();
             services.AddScoped<LivePageViewModel>();

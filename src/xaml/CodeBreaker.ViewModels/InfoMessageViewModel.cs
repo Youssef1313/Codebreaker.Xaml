@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System.Windows.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CodeBreaker.ViewModels;
 
@@ -16,4 +17,10 @@ public partial class InfoMessageViewModel
 
     [ObservableProperty]
     private string _title = string.Empty;
+
+    [ObservableProperty]
+    private ICommand? _actionCommand;
+
+    [ObservableProperty]
+    private string _actionTitle = "OK";
 }

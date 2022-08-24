@@ -22,7 +22,6 @@ public class PegColorToBrushConverter : IValueConverter
     public Brush GreenBrush { get; set; } = s_greenBrush;
     public Brush BlueBrush { get; set; } = s_blueBrush;
     public Brush YellowBrush { get; set; } = s_yellowBrush;
-
     private Brush EmptyBrush { get; set; } = s_emptyBrush;
 
     public object Convert(object value, Type targetType, object parameter, string language)

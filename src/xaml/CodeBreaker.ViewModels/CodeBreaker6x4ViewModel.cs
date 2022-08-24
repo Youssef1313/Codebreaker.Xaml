@@ -52,6 +52,17 @@ public partial class CodeBreaker6x4ViewModel
         _enableDialogs = options.Value.EnableDialogs;
         
         SetMoveCommand = new AsyncRelayCommand(SetMoveAsync, CanSetMove);
+        InfoMessage = new InfoMessageViewModel
+        {
+            IsError = false,
+            Title = "Information",
+            ActionTitle = "Weiter",
+            ActionCommand = new RelayCommand(() =>
+            {
+                GameStatus = GameMode.NotRunning;
+                InfoMessage!.IsVisible = false;
+            })
+         };
 
         PropertyChanged += (sender, e) =>
         {
@@ -251,7 +262,7 @@ public partial class CodeBreaker6x4ViewModel
 
     public InfoMessageViewModel ErrorMessage { get; } = new InfoMessageViewModel { IsError = true, Title = "Error" };
 
-    public InfoMessageViewModel InfoMessage { get; } = new InfoMessageViewModel { IsError = false, Title = "Information" };
+    public InfoMessageViewModel InfoMessage { get; }
 }
 
 public record SelectionAndKeyPegs(string[] Selection, string[] KeyPegs, int MoveNumber);

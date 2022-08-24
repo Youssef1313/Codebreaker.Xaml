@@ -9,11 +9,11 @@ using Microsoft.UI.Xaml.Shapes;
 
 namespace CodeBreaker.WinUI.Views;
 
-public sealed partial class MainPage : Page
+public sealed partial class GamePage : Page
 {
     public CodeBreaker6x4ViewModel ViewModel { get; }
 
-    public MainPage()
+    public GamePage()
     {
         ViewModel = App.GetService<CodeBreaker6x4ViewModel>();
         InitializeComponent();

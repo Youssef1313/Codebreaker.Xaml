@@ -14,10 +14,24 @@
             <Run FontStyle="Italic">CodeBreaker</Run>
             </TextBlock>
             <StackPanel Orientation="Horizontal" Spacing="15">
-                <Button Command="{x:Bind Path=ViewModel.LoginCommand, Mode=OneTime}" Content="Login" />
+                <Button Command="{x:Bind Path=ViewModel.LoginCommand, Mode=OneTime}">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <SymbolIcon Symbol="Contact" />
+                        <TextBlock>
+                            Sign in
+                            <Run FontStyle="Italic">or</Run>
+                            sign up
+                        </TextBlock>
+                    </StackPanel>
+                </Button>
                 <Grid>
                     <TextBlock /> <!-- Necessary to show the tooltip, because the button is not enabled -->
-                    <Button IsEnabled="False" Content="Continue as Guest" x:Name="continueAsGuestButton" />
+                    <Button IsEnabled="False" x:Name="continueAsGuestButton">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <SymbolIcon Symbol="OtherUser" />
+                            <TextBlock Text="Continue as Guest" />
+                        </StackPanel>
+                    </Button>
                     <ToolTipService.ToolTip>
                         <ToolTip Content="Not available yet" IsEnabled="True" Visibility="Visible" Placement="Bottom" />
                     </ToolTipService.ToolTip>
