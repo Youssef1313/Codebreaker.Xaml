@@ -6,7 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
 using Microsoft.Extensions.Options;
-
+using Microsoft.Identity.Client;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -41,14 +41,16 @@ public partial class CodeBreaker6x4ViewModel
     private Guid _gameId = Guid.Empty;
     private readonly bool _enableDialogs = false;
     private readonly IDialogService _dialogService;
-    
+    private readonly IAuthService _authService;
     public CodeBreaker6x4ViewModel(
-        IGameClient client, 
+        IGameClient client,
         IOptions<CodeBreaker6x4ViewModelOptions> options,
-        IDialogService dialogService)
+        IDialogService dialogService,
+        IAuthService authService)
     {
         _client = client;
         _dialogService = dialogService;
+        _authService = authService;
         _enableDialogs = options.Value.EnableDialogs;
 
         InfoMessage = new InfoMessageViewModel
@@ -61,7 +63,7 @@ public partial class CodeBreaker6x4ViewModel
                 GameStatus = GameMode.NotRunning;
                 InfoMessage!.IsVisible = false;
             })
-         };
+        };
 
         PropertyChanged += (sender, e) =>
         {
@@ -70,11 +72,17 @@ public partial class CodeBreaker6x4ViewModel
 
             if (e.PropertyName == nameof(GameStatus))
                 WeakReferenceMessenger.Default.Send(new GameStateChangedMessage(GameStatus));
-        };        
+        };
+
+        SetGamerNameIfAvailable();
     }
 
     [ObservableProperty]
     private string _name = string.Empty;
+
+    [NotifyPropertyChangedFor(nameof(IsNameEnterable))]
+    [ObservableProperty]
+    private bool _isNamePredefined = false;
 
     public ObservableCollection<string> ColorList { get; } = new();
 
@@ -83,11 +91,11 @@ public partial class CodeBreaker6x4ViewModel
     [ObservableProperty]
     private GameMode _gameStatus = GameMode.NotRunning;
 
-    [NotifyPropertyChangedFor(nameof(IsEnabled))]
+    [NotifyPropertyChangedFor(nameof(IsNameEnterable))]
     [ObservableProperty]
     private bool _inProgress = false;
 
-    public bool IsEnabled => !InProgress;
+    public bool IsNameEnterable => !InProgress && !_isNamePredefined;
 
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
     private async Task StartGameAsync()
@@ -207,6 +215,17 @@ public partial class CodeBreaker6x4ViewModel
         SelectedColor4 = null;
 
         SetMoveCommand.NotifyCanExecuteChanged();
+    }
+
+    private void SetGamerNameIfAvailable()
+    {
+        string? gamerName = _authService.LastUserInformation?.GamerName;
+
+        if (string.IsNullOrWhiteSpace(gamerName))
+            return;
+
+        Name = gamerName;
+        IsNamePredefined = true;
     }
 
     [ObservableProperty]

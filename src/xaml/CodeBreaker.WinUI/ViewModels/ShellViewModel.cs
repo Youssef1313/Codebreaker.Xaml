@@ -10,8 +10,6 @@ namespace CodeBreaker.WinUI.ViewModels;
 [ObservableObject]
 public partial class ShellViewModel
 {
-    private readonly IAuthService _authService;
-
     [ObservableProperty]
     private bool _isBackEnabled;
 
@@ -22,28 +20,13 @@ public partial class ShellViewModel
 
     public INavigationViewService NavigationViewService { get; }
 
-    //public bool IsBackEnabled
-    //{
-    //    get => _isBackEnabled;
-    //    set => SetProperty(ref _isBackEnabled, value);
-    //}
-
-    //public object? Selected
-    //{
-    //    get => _selected;
-    //    set => SetProperty(ref _selected, value);
-    //}
-
-    public bool IsAuthenticated => _authService.IsAuthenticatedAsync().Result;
-
     public bool IsNavigationPaneVisible { get; set; } = true;
 
-    public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService, IAuthService authService)
+    public ShellViewModel(INavigationService navigationService, INavigationViewService navigationViewService)
     {
         NavigationService = navigationService;
         NavigationService.Navigated += OnNavigated;
         NavigationViewService = navigationViewService;
-        _authService = authService;
     }
 
     private void OnNavigated(object sender, NavigationEventArgs e)

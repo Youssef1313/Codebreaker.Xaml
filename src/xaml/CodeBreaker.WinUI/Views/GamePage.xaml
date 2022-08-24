@@ -57,13 +57,23 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <TextBox
-                Grid.Column="0"
-                IsEnabled="{x:Bind ViewModel.IsEnabled, Mode=OneWay}"
-                x:Name="TextName"
-                Header="Gamername"
-                PlaceholderText="Enter your Gamername"
-                Text="{x:Bind ViewModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Grid Grid.Column="0">
+                <!-- The extra grid and the empy (enabled) TextBlock are necessary for showing the tooltip over the (disabled) TextBox. -->
+                <TextBlock />
+                <TextBox
+                    IsEnabled="{x:Bind ViewModel.IsNameEnterable, Mode=OneWay}"
+                    x:Name="TextName"
+                    Header="Gamername"
+                    VerticalAlignment="Center"
+                    PlaceholderText="Enter your Gamername"
+                    Text="{x:Bind ViewModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                <ToolTipService.ToolTip>
+                    <ToolTip
+                        IsEnabled="{x:Bind Path=ViewModel.IsNamePredefined, Mode=OneWay}"
+                        Content="The gamername was already defined during sign-up"
+                        Placement="Bottom" />
+                </ToolTipService.ToolTip>
+            </Grid>
             <Button
                 Grid.Column="1"
                 VerticalAlignment="Bottom"

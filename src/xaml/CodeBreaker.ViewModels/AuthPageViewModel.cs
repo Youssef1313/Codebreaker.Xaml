@@ -26,7 +26,7 @@ public partial class AuthPageViewModel
     }
 
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
-    public async Task LoginAsync(CancellationToken cancellation = default)
+    private async Task LoginAsync(CancellationToken cancellation = default)
     {
         try
         {
@@ -40,4 +40,8 @@ public partial class AuthPageViewModel
 
         _navigationService.NavigateTo(typeof(CodeBreaker6x4ViewModel).FullName!, clearNavigation: true);
     }
+
+    [RelayCommand]
+    private void ContinueAsGuest() =>
+        _navigationService.NavigateTo(typeof(CodeBreaker6x4ViewModel).FullName!, clearNavigation: true);
 }
