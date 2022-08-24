@@ -24,18 +24,15 @@
                         </TextBlock>
                     </StackPanel>
                 </Button>
-                <Grid>
-                    <TextBlock /> <!-- Necessary to show the tooltip, because the button is not enabled -->
-                    <Button IsEnabled="False" x:Name="continueAsGuestButton">
-                        <StackPanel Orientation="Horizontal" Spacing="10">
-                            <SymbolIcon Symbol="OtherUser" />
-                            <TextBlock Text="Continue as Guest" />
-                        </StackPanel>
-                    </Button>
+                <Button Command="{x:Bind Path=ViewModel.ContinueAsGuestCommand, Mode=OneTime}">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <SymbolIcon Symbol="OtherUser" />
+                        <TextBlock Text="Continue as Guest" />
+                    </StackPanel>
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="Not available yet" IsEnabled="True" Visibility="Visible" Placement="Bottom" />
+                        <ToolTip Content="You can play games, but you won't get listed in the scoreboard." Placement="Bottom" />
                     </ToolTipService.ToolTip>
-                </Grid>
+                </Button>
                 <ProgressRing IsActive="{x:Bind Path=ViewModel.LoginCommand.IsRunning, Mode=OneWay}" />
             </StackPanel>
         </StackPanel>

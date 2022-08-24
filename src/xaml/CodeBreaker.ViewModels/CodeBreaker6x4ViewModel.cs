@@ -57,7 +57,7 @@ public partial class CodeBreaker6x4ViewModel
         {
             IsError = false,
             Title = "Information",
-            ActionTitle = "Weiter",
+            ActionTitle = "Continue",
             ActionCommand = new RelayCommand(() =>
             {
                 GameStatus = GameMode.NotRunning;
