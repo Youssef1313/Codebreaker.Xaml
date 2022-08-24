@@ -48,6 +48,7 @@
                     Content="{x:Bind Path=ViewModel.ErrorMessage.ActionTitle, Mode=OneTime}" />
             </InfoBar.ActionButton>
         </InfoBar>
+        <!--Startgame section-->
         <Grid
             Grid.Row="1"
             ColumnSpacing="25"
@@ -70,23 +71,23 @@
                 Padding="35,8"
                 Command="{x:Bind Path=ViewModel.StartGameCommand, Mode=OneTime}">
                 <StackPanel Orientation="Vertical" Spacing="5">
-                    <SymbolIcon Symbol="Play" Visibility="{x:Bind Path=ViewModel.StartGameCommand.IsRunning, Converter={StaticResource BoolToVisibility}, ConverterParameter=True}" />
-                    <ProgressRing Visibility="{x:Bind Path=ViewModel.StartGameCommand.IsRunning, Mode=OneWay}" />
+                    <SymbolIcon Symbol="Play" Visibility="{x:Bind Path=ViewModel.StartGameCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolToVisibility}, ConverterParameter=True}" />
+                    <ProgressRing Visibility="{x:Bind Path=ViewModel.StartGameCommand.IsRunning, Mode=OneWay}" Width="20" Height="20" />
                     <TextBlock Text="Start the game" />
                 </StackPanel>
             </Button>
         </Grid>
-        <RelativePanel
+        <!--Gamebar section-->
+        <StackPanel
+            Orientation="Horizontal"
             Grid.Row="1"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Cancelable}">
-            <AppBarButton Label="Cancel" Icon="Cancel" />
-        </RelativePanel>
-
-        <views:PegSelectionView 
-            Grid.Row="2"
-            Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Running}"
-            ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
-
+            <AppBarButton Label="Cancel" Icon="Cancel" IsEnabled="False" />
+            <views:PegSelectionView 
+                Grid.Row="2"
+                ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
+        </StackPanel>
+        <!--Move section-->
         <ListBox 
             x:Name="listGameMoves"
             Grid.Row="3" 

@@ -50,8 +50,7 @@ public partial class CodeBreaker6x4ViewModel
         _client = client;
         _dialogService = dialogService;
         _enableDialogs = options.Value.EnableDialogs;
-        
-        SetMoveCommand = new AsyncRelayCommand(SetMoveAsync, CanSetMove);
+
         InfoMessage = new InfoMessageViewModel
         {
             IsError = false,
@@ -90,7 +89,7 @@ public partial class CodeBreaker6x4ViewModel
 
     public bool IsEnabled => !InProgress;
 
-    [RelayCommand]
+    [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
     private async Task StartGameAsync()
     {
         try
@@ -139,8 +138,7 @@ public partial class CodeBreaker6x4ViewModel
         _moveNumber = 0;
     }
 
-    public AsyncRelayCommand SetMoveCommand { get; }
-
+    [RelayCommand(CanExecute = nameof(CanSetMove), AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
     private async Task SetMoveAsync()
     {
         try
@@ -198,11 +196,8 @@ public partial class CodeBreaker6x4ViewModel
         }
     }
 
-    private bool CanSetMove()
-    {
-        string?[] selections = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
-        return selections.All(s => s is not null);
-    }
+    private bool CanSetMove =>
+        new []{ _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 }.All(s => s is not null);
 
     private void ClearSelectedColor()
     {
@@ -214,50 +209,18 @@ public partial class CodeBreaker6x4ViewModel
         SetMoveCommand.NotifyCanExecuteChanged();
     }
 
-    private string? _selectedColor1 = null;
-    public string? SelectedColor1
-    {
-        get => _selectedColor1;
-        set
-        {
-            if (SetProperty(ref _selectedColor1, value))
-                SetMoveCommand.NotifyCanExecuteChanged();
-        }
-    }
+    [ObservableProperty]
+    private string? _selectedColor1;
 
-    private string? _selectedColor2 = null;
-    public string? SelectedColor2
-    {
-        get => _selectedColor2;
-        set
-        {
-            if (SetProperty(ref _selectedColor2, value))
-                SetMoveCommand.NotifyCanExecuteChanged();
-        }
-    }
+    [ObservableProperty]
+    private string? _selectedColor2;
 
-    private string? _selectedColor3 = null;
-    public string? SelectedColor3
-    {
-        get => _selectedColor3;
-        set
-        {
-            if (SetProperty(ref _selectedColor3, value))
-                SetMoveCommand.NotifyCanExecuteChanged();
-        }
-    }
+    [ObservableProperty]
+    private string? _selectedColor3;
 
-    private string? _selectedColor4 = null;
-    public string? SelectedColor4
-    {
-        get => _selectedColor4;
-        set
-        {
-            if (SetProperty(ref _selectedColor4, value))
-                SetMoveCommand.NotifyCanExecuteChanged();
-        }
-    }
-
+    [ObservableProperty]
+    private string? _selectedColor4;
+    
     private readonly string[] _selectedColorPropertyNames = { nameof(SelectedColor1), nameof(SelectedColor2), nameof(SelectedColor3), nameof(SelectedColor4) };
 
     public InfoMessageViewModel ErrorMessage { get; } = new InfoMessageViewModel { IsError = true, Title = "Error" };
