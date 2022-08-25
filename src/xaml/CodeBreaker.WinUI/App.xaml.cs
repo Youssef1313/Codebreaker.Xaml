@@ -6,6 +6,7 @@ global using Microsoft.UI.Xaml.Navigation;
 global using Microsoft.Xaml.Interactivity;
 
 using CodeBreaker.Services;
+using CodeBreaker.Services.Authentication;
 using CodeBreaker.ViewModels;
 using CodeBreaker.ViewModels.Services;
 using CodeBreaker.WinUI.Activation;

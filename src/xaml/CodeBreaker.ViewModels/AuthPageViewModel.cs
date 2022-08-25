@@ -3,6 +3,7 @@ using CodeBreaker.Services;
 using CommunityToolkit.Mvvm.Input;
 using CodeBreaker.ViewModels.Services;
 using Microsoft.Extensions.Logging;
+using CodeBreaker.Services.Authentication;
 
 namespace CodeBreaker.ViewModels;
 
