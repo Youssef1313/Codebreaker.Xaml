@@ -11,6 +11,7 @@ namespace CodeBreaker.ViewModels.Tests;
 public class CodeBreaker6x4ViewModelTests
 {
     private readonly CodeBreaker6x4ViewModel _viewModel;
+
     public CodeBreaker6x4ViewModelTests()
     {
         Mock<IGameClient> gameClient = new();
@@ -21,11 +22,15 @@ public class CodeBreaker6x4ViewModelTests
                 Id = Guid.NewGuid(),
                 GameOptions = new CreateGameOptions() { Colors = new string[] { "Red", "Green", "Blue" } }
             });
+
         Mock<IOptions<CodeBreaker6x4ViewModelOptions>> options = new();
         options.Setup(o => o.Value).Returns(new CodeBreaker6x4ViewModelOptions() { EnableDialogs = false });
+
         Mock<IDialogService> dialogService = new();
 
-        _viewModel = new CodeBreaker6x4ViewModel(gameClient.Object, options.Object, dialogService.Object);
+        Mock<IAuthService> authService = new();
+
+        _viewModel = new CodeBreaker6x4ViewModel(gameClient.Object, options.Object, dialogService.Object, authService.Object);
     }
     
     [Fact]
