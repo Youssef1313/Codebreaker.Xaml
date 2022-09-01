@@ -31,7 +31,7 @@ public partial class AuthPageViewModel
     {
         try
         {
-            await _authService.LoginAsync(cancellation);
+            await _authService.AquireTokenAsync(cancellation);
         }
         catch (Exception)
         {
