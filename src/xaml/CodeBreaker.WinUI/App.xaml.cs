@@ -72,7 +72,6 @@ public partial class App : Application
 
             services.AddHttpClient<IGameClient, GameClient>((serviceProvider, client) =>
             {
-                client.DefaultRequestHeaders.Authorization = new("Bearer", "abc");
                 client.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
                 //client.BaseAddress = new("http://localhost:9400");
             });
