@@ -1,13 +1,16 @@
 ﻿using CodeBreaker.Services;
-using CodeBreaker.Services.Authentication;
+using CodeBreaker.Shared.Models.Api;
+using CodeBreaker.Shared.Models.Data;
+using static CodeBreaker.Shared.Models.Data.Colors;
 using CodeBreaker.ViewModels.Services;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using CommunityToolkit.Mvvm.Messaging.Messages;
 
 using Microsoft.Extensions.Options;
-using Microsoft.Identity.Client;
+
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -36,35 +39,23 @@ public class CodeBreaker6x4ViewModelOptions
 [ObservableObject]
 public partial class CodeBreaker6x4ViewModel
 {
-    private readonly IGameClient _client;
+    private readonly GameClient _client;
 
     private int _moveNumber = 0;
     private Guid _gameId = Guid.Empty;
     private readonly bool _enableDialogs = false;
     private readonly IDialogService _dialogService;
-    private readonly IAuthService _authService;
+    
     public CodeBreaker6x4ViewModel(
-        IGameClient client,
+        GameClient client, 
         IOptions<CodeBreaker6x4ViewModelOptions> options,
-        IDialogService dialogService,
-        IAuthService authService)
+        IDialogService dialogService)
     {
         _client = client;
         _dialogService = dialogService;
-        _authService = authService;
         _enableDialogs = options.Value.EnableDialogs;
-
-        InfoMessage = new InfoMessageViewModel
-        {
-            IsError = false,
-            Title = "Information",
-            ActionTitle = "Continue",
-            ActionCommand = new RelayCommand(() =>
-            {
-                GameStatus = GameMode.NotRunning;
-                InfoMessage!.IsVisible = false;
-            })
-        };
+        
+        SetMoveCommand = new AsyncRelayCommand(SetMoveAsync, CanSetMove);
 
         PropertyChanged += (sender, e) =>
         {
@@ -73,17 +64,11 @@ public partial class CodeBreaker6x4ViewModel
 
             if (e.PropertyName == nameof(GameStatus))
                 WeakReferenceMessenger.Default.Send(new GameStateChangedMessage(GameStatus));
-        };
-
-        SetGamerNameIfAvailable();
+        };        
     }
 
     [ObservableProperty]
-    private string _name = string.Empty;
-
-    [NotifyPropertyChangedFor(nameof(IsNameEnterable))]
-    [ObservableProperty]
-    private bool _isNamePredefined = false;
+    private string _username = "game-username";
 
     public ObservableCollection<string> ColorList { get; } = new();
 
@@ -92,13 +77,13 @@ public partial class CodeBreaker6x4ViewModel
     [ObservableProperty]
     private GameMode _gameStatus = GameMode.NotRunning;
 
-    [NotifyPropertyChangedFor(nameof(IsNameEnterable))]
+    [AlsoNotifyChangeFor(nameof(IsEnabled))]
     [ObservableProperty]
     private bool _inProgress = false;
 
-    public bool IsNameEnterable => !InProgress && !_isNamePredefined;
+    public bool IsEnabled => !InProgress;
 
-    [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
+    [ICommand]
     private async Task StartGameAsync()
     {
         try
@@ -106,27 +91,23 @@ public partial class CodeBreaker6x4ViewModel
             InitializeValues();
 
             InProgress = true;
-            var response = await _client.StartGameAsync(_name);
+            CreateGameResponse response = await _client.StartGameAsync(_username, "6x4Game");
 
             GameStatus = GameMode.Started;
 
-            _gameId = response.Id;
-            (_, _, int maxMoves, string[] colors) = response.GameOptions;
+            _gameId = response.Game.GameId;
+            GameType<string> gameType = response.Game.Type;
             _moveNumber++;
 
             ColorList.Clear();
 
-            foreach (string color in colors)
+            foreach (string color in gameType.Fields)
                 ColorList.Add(color);
         }
         catch (Exception ex)
         {
             ErrorMessage.IsVisible = true;
             ErrorMessage.Message = ex.Message;
-            if (_enableDialogs)
-            {
-                await _dialogService.ShowMessageAsync(ErrorMessage.Message);
-            }
         }
         finally
         {
@@ -147,7 +128,8 @@ public partial class CodeBreaker6x4ViewModel
         _moveNumber = 0;
     }
 
-    [RelayCommand(CanExecute = nameof(CanSetMove), AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
+    public AsyncRelayCommand SetMoveCommand { get; }
+
     private async Task SetMoveAsync()
     {
         try
@@ -160,43 +142,44 @@ public partial class CodeBreaker6x4ViewModel
 
             string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
 
-            (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber, selection);
+            CreateMoveResponse response = await _client.SetMoveAsync(_gameId, selection);
+            string[] keyPegStrings = new string[response.KeyPegs.Black + response.KeyPegs.White];
+            
+            for (int i = 0; i < response.KeyPegs.Black; i++)
+                keyPegStrings[i] = Black;
 
-            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, keyPegColors, _moveNumber++);
+            for (int i = 0; i < response.KeyPegs.White; i++)
+                keyPegStrings[i + response.KeyPegs.Black] = White;
+
+            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, keyPegStrings, _moveNumber++);
             GameMoves.Add(selectionAndKeyPegs);
             GameStatus = GameMode.MoveSet;
 
             WeakReferenceMessenger.Default.Send(new GameMoveMessage(GameMoveValue.Completed, selectionAndKeyPegs));
 
-            if (won)
+            if (response.Won)
             {
                 GameStatus = GameMode.Won;
                 InfoMessage.Message = "Congratulations - you won!";
                 InfoMessage.IsVisible = true;
+
                 if (_enableDialogs)
-                {
                     await _dialogService.ShowMessageAsync(InfoMessage.Message);
-                }
             }
-            else if (completed)
+            else if (response.Ended)
             {
                 GameStatus = GameMode.Lost;        
                 InfoMessage.Message = "Sorry, you didn't find the matching colors!";
                 InfoMessage.IsVisible = true;
+                
                 if (_enableDialogs)
-                {
                     await _dialogService.ShowMessageAsync(InfoMessage.Message);
-                }
             }
         }
         catch (Exception ex)
         {
             ErrorMessage.IsVisible = true;
             ErrorMessage.Message = ex.Message;
-            if (_enableDialogs)
-            {
-                await _dialogService.ShowMessageAsync(ErrorMessage.Message);
-            }
         }
         finally
         {
@@ -205,8 +188,11 @@ public partial class CodeBreaker6x4ViewModel
         }
     }
 
-    private bool CanSetMove =>
-        new []{ _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 }.All(s => s is not null);
+    private bool CanSetMove()
+    {
+        string?[] selections = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
+        return selections.All(s => s is not null);
+    }
 
     private void ClearSelectedColor()
     {
@@ -218,38 +204,74 @@ public partial class CodeBreaker6x4ViewModel
         SetMoveCommand.NotifyCanExecuteChanged();
     }
 
-    private void SetGamerNameIfAvailable()
+    private string? _selectedColor1 = null;
+    public string? SelectedColor1
     {
-        string? gamerName = _authService.LastUserInformation?.GamerName;
-
-        if (string.IsNullOrWhiteSpace(gamerName))
-            return;
-
-        Name = gamerName;
-        IsNamePredefined = true;
+        get => _selectedColor1;
+        set
+        {
+            if (SetProperty(ref _selectedColor1, value))
+                SetMoveCommand.NotifyCanExecuteChanged();
+        }
     }
 
-    [ObservableProperty]
-    private string? _selectedColor1;
+    private string? _selectedColor2 = null;
+    public string? SelectedColor2
+    {
+        get => _selectedColor2;
+        set
+        {
+            if (SetProperty(ref _selectedColor2, value))
+                SetMoveCommand.NotifyCanExecuteChanged();
+        }
+    }
 
-    [ObservableProperty]
-    private string? _selectedColor2;
+    private string? _selectedColor3 = null;
+    public string? SelectedColor3
+    {
+        get => _selectedColor3;
+        set
+        {
+            if (SetProperty(ref _selectedColor3, value))
+                SetMoveCommand.NotifyCanExecuteChanged();
+        }
+    }
 
-    [ObservableProperty]
-    private string? _selectedColor3;
+    private string? _selectedColor4 = null;
+    public string? SelectedColor4
+    {
+        get => _selectedColor4;
+        set
+        {
+            if (SetProperty(ref _selectedColor4, value))
+                SetMoveCommand.NotifyCanExecuteChanged();
+        }
+    }
 
-    [ObservableProperty]
-    private string? _selectedColor4;
-    
-    private readonly string[] _selectedColorPropertyNames = { nameof(SelectedColor1), nameof(SelectedColor2), nameof(SelectedColor3), nameof(SelectedColor4) };
+    private string[] _selectedColorPropertyNames = { nameof(SelectedColor1), nameof(SelectedColor2), nameof(SelectedColor3), nameof(SelectedColor4) };
 
     public InfoMessageViewModel ErrorMessage { get; } = new InfoMessageViewModel { IsError = true, Title = "Error" };
 
-    public InfoMessageViewModel InfoMessage { get; }
+    public InfoMessageViewModel InfoMessage { get; } = new InfoMessageViewModel { IsError = false, Title = "Information" };
 }
 
 public record SelectionAndKeyPegs(string[] Selection, string[] KeyPegs, int MoveNumber);
 
-public record class GameStateChangedMessage(GameMode GameMode);
+public class GameStateChangedMessage : ValueChangedMessage<GameMode>
+{
+    public GameStateChangedMessage(GameMode gameMode)
+        : base(gameMode)
+    {
+    }
+}
 
-public record class GameMoveMessage(GameMoveValue GameMoveValue, SelectionAndKeyPegs? SelectionAndKeyPegs = null);
+public class GameMoveMessage : ValueChangedMessage<GameMoveValue>
+{
+    public GameMoveMessage(GameMoveValue gameMoveValue, SelectionAndKeyPegs? selectionAndKeyPegs = null)
+        : base(gameMoveValue)
+    {
+        SelectionAndKeyPegs = selectionAndKeyPegs;
+    }
+
+    public SelectionAndKeyPegs? SelectionAndKeyPegs { get; }
+}
