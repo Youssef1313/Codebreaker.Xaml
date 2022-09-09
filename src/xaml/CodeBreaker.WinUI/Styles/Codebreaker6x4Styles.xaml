@@ -94,7 +94,7 @@
                     <ItemsControl Grid.Row="0" ItemsSource="{Binding Path=KeyPegs.White, Converter={StaticResource IntToEnumerableConverter}}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" Spacing="10" />
+                                <StackPanel Orientation="Horizontal" Spacing="20" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
@@ -106,7 +106,7 @@
                     <ItemsControl Grid.Row="1" ItemsSource="{Binding Path=KeyPegs.Black, Converter={StaticResource IntToEnumerableConverter}}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" Spacing="10" />
+                                <StackPanel Orientation="Horizontal" Spacing="20" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
