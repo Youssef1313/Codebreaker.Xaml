@@ -60,6 +60,7 @@
 
     <conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />
     <conv:SelectionAndKeyPegToKeyBrushConverter x:Key="KeyPegConverter" />
+    <conv:IntToEnumerableConverter x:Key="IntToEnumerableConverter" />
 
     <DataTemplate x:Key="Codebreaker6x4CodePegs" x:Name="Codebreaker6x4CodePegs">
         <Grid>
@@ -68,60 +69,54 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding MoveNumber}" Width="48" FontSize="32" Margin="8,8,8,8" HorizontalAlignment="Center" HorizontalTextAlignment="Center" Grid.Column="0" />
-            <Border Grid.Column="1" BorderThickness="2,2,0,2" BorderBrush="DarkBlue">
-                <StackPanel Orientation="Horizontal" Margin="16,0,0,0" >
-                    <Ellipse 
-                        x:Name="guessDisplay1"
-                        Width="68" Height="68" Margin="12, 4"
-                        Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=0}" />
-                    <Ellipse 
-                        x:Name="guessDisplay2"
-                        Width="68" Height="68" Margin="40, 4"
-                        Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=1}" />
-                    <Ellipse 
-                        x:Name="guessDisplay3"
-                        Width="68" Height="68" Margin="14, 4"
-                        Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=2}" />
-                    <Ellipse 
-                        x:Name="guessDisplay4"
-                        Width="68" Height="68" Margin="36, 4"
-                        Fill="{Binding Converter={StaticResource SelectionConverter}, ConverterParameter=3}" />
-
-                </StackPanel>
+            <TextBlock Grid.Column="0" Text="{Binding Path=MoveNumber}" FontSize="{ThemeResource LargeFontSize}" Margin="20,0" VerticalAlignment="Center" />
+            <Border Grid.Column="1" BorderThickness="2,2,0,2" BorderBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="7" CornerRadius="2">
+                <ItemsControl ItemsSource="{Binding Path=GuessPegs}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" Margin="16,0,0,0" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Ellipse Width="68" Height="68" Margin="12,4" Fill="{Binding}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </Border>
 
-            <Border BorderThickness="0,2,2,2" BorderBrush="DarkBlue" Grid.Column="2">
-                <Grid Margin="12,0,0,0">
+            <Border Grid.Column="2" BorderThickness="0,2,2,2" BorderBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="30,7" CornerRadius="2">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition />
                     </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Ellipse 
-                        Width="16" Height="16" Margin="8" Grid.Row="0" Grid.Column="0"
-                        Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=0}"
-                        Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=0}" />
-                    <Ellipse 
-                        Width="16" Height="16" Margin="8" Grid.Row="0" Grid.Column="1"
-                        Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=1}"
-                        Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=1}" />
-                    <Ellipse 
-                        Width="16" Height="16" Margin="8" Grid.Row="1" Grid.Column="0"
-                        Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=2}"                                     
-                        Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=2}" />
-                    <Ellipse 
-                        Width="16" Height="16" Margin="8" Grid.Row="1" Grid.Column="1"
-                        Visibility="{Binding Converter={StaticResource KeyPegVisibilityConverter}, ConverterParameter=3}"                                     
-                        Fill="{Binding Converter={StaticResource KeyPegConverter}, ConverterParameter=3}" />
+                    <ItemsControl Grid.Row="0" ItemsSource="{Binding Path=KeyPegs.White, Converter={StaticResource IntToEnumerableConverter}}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="10" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Ellipse Width="16" Height="16" Fill="White" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Path=KeyPegs.Black, Converter={StaticResource IntToEnumerableConverter}}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="10" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Ellipse Width="16" Height="16" Fill="Black" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
             </Border>
-
-
         </Grid>
     </DataTemplate>
-
 </ResourceDictionary>

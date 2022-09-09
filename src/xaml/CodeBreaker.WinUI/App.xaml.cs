@@ -52,8 +52,8 @@ public partial class App : Application
             services.AddScoped<IDialogService, WinUIDialogService>();
 
             services.AddSingleton(x => new HubConnectionBuilder()
-                .WithUrl("https://codebreakerlive.purplebush-9a246700.westeurope.azurecontainerapps.io/live")
-                //.WithUrl("http://localhost:5131/live")
+                //.WithUrl("https://codebreakerlive.purplebush-9a246700.westeurope.azurecontainerapps.io/live")
+                .WithUrl("http://localhost:5131/live")
                 .WithAutomaticReconnect()
                 .ConfigureLogging(x =>
                 {
@@ -70,10 +70,10 @@ public partial class App : Application
             services.AddScoped<AuthPageViewModel>();
             services.AddTransient<AuthPage>();
 
-            services.AddHttpClient<IGameClient, GameClient>((serviceProvider, client) =>
+            services.AddHttpClient<IGameClient, GameClient>((HttpClient client) =>
             {
-                client.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
-                //client.BaseAddress = new("http://localhost:9400");
+                //client.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
+                client.BaseAddress = new("http://localhost:9400");
             });
             services.AddScoped<CodeBreaker6x4ViewModel>();
             services.AddTransient<GamePage>();

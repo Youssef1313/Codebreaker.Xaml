@@ -1,15 +1,17 @@
-﻿using CodeBreaker.Shared;
+﻿using CodeBreaker.Shared.Models.Data;
 
 namespace CodeBreaker.ViewModels;
 
 public class MoveViewModel
 {
-    private readonly GameMove _move;
+    private readonly Move _move;
 
-    public MoveViewModel(GameMove move) =>
+    public MoveViewModel(Move move) =>
         _move = move;
 
     public int MoveNumber => _move.MoveNumber;
 
-    public IList<string> GuessPegs => _move.GuessPegs;
+    public IReadOnlyList<string> GuessPegs => _move.GuessPegs;
+
+    public KeyPegs? KeyPegs => _move.KeyPegs;
 }

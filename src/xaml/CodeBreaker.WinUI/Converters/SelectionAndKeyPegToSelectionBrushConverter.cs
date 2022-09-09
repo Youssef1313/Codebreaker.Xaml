@@ -35,7 +35,7 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
         {
             int ix = int.Parse(parameter.ToString()!);
 
-            return selection.Selection[ix] switch
+            return selection.GuessPegs[ix] switch
             {
                 Black => BlackBrush,
                 White => WhiteBrush,

@@ -92,7 +92,7 @@
             Orientation="Horizontal"
             Grid.Row="1"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Cancelable}">
-            <AppBarButton Label="Cancel" Icon="Cancel" IsEnabled="False" />
+            <!--<AppBarButton Label="Cancel" Icon="Cancel" IsEnabled="False" />-->
             <views:PegSelectionView 
                 Grid.Row="2"
                 ViewModel="{x:Bind ViewModel, Mode=OneWay}" />

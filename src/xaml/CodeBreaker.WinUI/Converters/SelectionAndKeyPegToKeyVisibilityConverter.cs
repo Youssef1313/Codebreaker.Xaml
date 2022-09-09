@@ -12,7 +12,7 @@ public class SelectionAndKeyPegToKeyVisibilityConverter : IValueConverter
         
         if (value is SelectionAndKeyPegs selection && int.TryParse(parameter.ToString(), out int ix))
         {
-            return (ix < selection.KeyPegs.Length) 
+            return (ix < selection.KeyPegs.White + selection.KeyPegs.Black) 
                 ? Visibility.Visible 
                 : Visibility.Collapsed;
         }
