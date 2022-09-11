@@ -91,6 +91,6 @@
             Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
             Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" 
             ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}"
-            ItemTemplate="{StaticResource Codebreaker6x4DisplayPegs}" />
+            ItemTemplate="{StaticResource Codebreaker6x4CodePegs}" />
     </Grid>
 </Window>

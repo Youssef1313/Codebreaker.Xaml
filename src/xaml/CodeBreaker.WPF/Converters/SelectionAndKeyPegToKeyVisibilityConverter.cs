@@ -11,11 +11,12 @@ public class SelectionAndKeyPegToKeyVisibilityConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         ArgumentNullException.ThrowIfNull(parameter);
+
         if (value is SelectionAndKeyPegs selection && int.TryParse(parameter.ToString(), out int ix))
         {
-            return (ix < selection.KeyPegs.Length) 
-                ? Visibility.Visible 
-                : Visibility.Hidden;
+            return (ix < selection.KeyPegs.Total)
+                ? Visibility.Visible
+                : Visibility.Collapsed;
         }
         else
         {

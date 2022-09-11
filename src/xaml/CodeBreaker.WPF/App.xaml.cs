@@ -1,4 +1,5 @@
 ﻿using CodeBreaker.Services;
+using CodeBreaker.Services.Authentication;
 using CodeBreaker.ViewModels;
 using CodeBreaker.ViewModels.Services;
 
@@ -24,6 +25,7 @@ public sealed partial class App : Application, IDisposable
                 services.Configure<CodeBreaker6x4ViewModelOptions>(options => options.EnableDialogs = true);
                 services.AddTransient<IDialogService, Services.WPFDialogService>();
                 services.AddScoped<CodeBreaker6x4ViewModel>();
+                services.AddScoped<IAuthService, AuthService>();
                 services.AddHttpClient<IGameClient, GameClient>(client =>
                 {
                     string uriString = context.Configuration["CodeBreakerAPIURI"] ?? throw new ConfigurationErrorsException("CodeBreakerAPIURI not configured");
