@@ -17,9 +17,21 @@ namespace CodeBreaker.WPF;
 public sealed partial class App : Application, IDisposable
 {
     private readonly IHost _host;
+
     public App()
     {
-        _host = Host.CreateDefaultBuilder()
+#if DEBUG
+        Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", "Development");
+#else
+        Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", "Production");
+#endif
+
+        _host = Host
+            .CreateDefaultBuilder()
+            .ConfigureAppConfiguration(options =>
+            {
+                string? test = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+            })
             .ConfigureServices((context, services) =>
             {
                 services.Configure<CodeBreaker6x4ViewModelOptions>(options => options.EnableDialogs = true);
@@ -28,19 +40,28 @@ public sealed partial class App : Application, IDisposable
                 services.AddScoped<IAuthService, AuthService>();
                 services.AddHttpClient<IGameClient, GameClient>(client =>
                 {
-                    string uriString = context.Configuration["CodeBreakerAPIURI"] ?? throw new ConfigurationErrorsException("CodeBreakerAPIURI not configured");
+                    string uriString = context.Configuration["ApiBase"] ?? throw new ConfigurationErrorsException("ApiBase not configured");
                     client.BaseAddress = new Uri(uriString);
                 });
             })
             .Build();
+
+        DefaultScope = _host.Services.CreateScope();
     }
 
     public void Dispose()
     {
+        DefaultScope.Dispose();
         _host.Dispose();
     }
 
+    public IServiceScope DefaultScope { get; private init; }
+
     public IServiceProvider Services => _host.Services;
+
+    public T GetService<T>()
+        where T : class =>
+        DefaultScope.ServiceProvider.GetRequiredService<T>();
 
     protected override void OnActivated(EventArgs e)
     {

@@ -12,8 +12,7 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        ViewModel = (Application.Current as App)?.Services
-            .GetRequiredService<CodeBreaker6x4ViewModel>() ??
+        ViewModel = (Application.Current as App)?.GetService<CodeBreaker6x4ViewModel>() ??
                 throw new InvalidOperationException();
 
         DataContext = this;
