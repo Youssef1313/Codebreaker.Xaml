@@ -60,7 +60,7 @@ public partial class App : Application
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 
-            services.AddScoped<IAuthService, AuthService>();
+            services.AddSingleton<IAuthService, AuthService>();
             services.AddScoped<AuthPageViewModel>();
             services.AddTransient<AuthPage>();
 
