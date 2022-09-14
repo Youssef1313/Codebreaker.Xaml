@@ -163,7 +163,7 @@ public partial class CodeBreaker6x4ViewModel
 
             CreateMoveResponse response = await _client.SetMoveAsync(_gameId, selection);
 
-            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, response.KeyPegs, _moveNumber++);
+            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, response.KeyPegs.ToModel(), _moveNumber++);
             GameMoves.Add(selectionAndKeyPegs);
             GameStatus = GameMode.MoveSet;
 

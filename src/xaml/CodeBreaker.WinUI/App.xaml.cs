@@ -4,7 +4,7 @@ global using Microsoft.UI.Xaml;
 global using Microsoft.UI.Xaml.Controls;
 global using Microsoft.UI.Xaml.Navigation;
 global using Microsoft.Xaml.Interactivity;
-
+using System.Diagnostics;
 using CodeBreaker.Services;
 using CodeBreaker.Services.Authentication;
 using CodeBreaker.ViewModels;
@@ -15,10 +15,11 @@ using CodeBreaker.WinUI.Services;
 using CodeBreaker.WinUI.ViewModels;
 using CodeBreaker.WinUI.Views;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
+using Windows.ApplicationModel;
 using Xaml = Microsoft.UI.Xaml;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -33,6 +34,10 @@ public partial class App : Application
 {
     private static readonly IHost s_host = Host
         .CreateDefaultBuilder()
+        .ConfigureAppConfiguration(options =>
+        {
+            options.SetBasePath(Package.Current.InstalledLocation.Path);
+        })
         .ConfigureServices((context, services) =>
         {
             // Default Activation Handler
@@ -52,8 +57,7 @@ public partial class App : Application
             services.AddScoped<IDialogService, WinUIDialogService>();
 
             services.AddSingleton(x => new HubConnectionBuilder()
-                //.WithUrl("https://codebreakerlive.purplebush-9a246700.westeurope.azurecontainerapps.io/live")
-                .WithUrl("http://localhost:5131/live")
+                .WithUrl(context.Configuration["LiveBase"]) // TODO: Add Auth-Token
                 .WithAutomaticReconnect()
                 .ConfigureLogging(x =>
                 {
@@ -70,11 +74,7 @@ public partial class App : Application
             services.AddScoped<AuthPageViewModel>();
             services.AddTransient<AuthPage>();
 
-            services.AddHttpClient<IGameClient, GameClient>((HttpClient client) =>
-            {
-                //client.BaseAddress = new("https://codebreakerapi.purplebush-9a246700.westeurope.azurecontainerapps.io");
-                client.BaseAddress = new("http://localhost:9400");
-            });
+            services.AddHttpClient<IGameClient, GameClient>((HttpClient client) => client.BaseAddress = new(context.Configuration["ApiBase"]));
             services.AddScoped<CodeBreaker6x4ViewModel>();
             services.AddTransient<GamePage>();
 
@@ -84,9 +84,11 @@ public partial class App : Application
         })
         .Build();
 
+    public static IServiceScope DefaultScope { get; } = s_host.Services.CreateScope();
+
     public static T GetService<T>()
         where T : class => 
-        s_host.Services.GetRequiredService<T>();
+        DefaultScope.ServiceProvider.GetRequiredService<T>();
 
     public static Window MainWindow { get; set; } = new Window() { Title = "AppDisplayName".GetLocalized() };
 
@@ -96,6 +98,13 @@ public partial class App : Application
     /// </summary>
     public App()
     {
+#if DEBUG
+        // Settings the environment variable here, because environment variables in launchsettings.json get ignored
+        Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", "Development");
+#else
+        Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", "Production");
+#endif
+
         InitializeComponent();
         UnhandledException += App_UnhandledException;
     }
