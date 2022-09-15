@@ -1,6 +1,6 @@
 using CodeBreaker.Services;
 using CodeBreaker.Services.Authentication;
-using CodeBreaker.Shared;
+using CodeBreaker.Shared.Models.Api;
 using CodeBreaker.ViewModels.Services;
 
 using Microsoft.Extensions.Options;
@@ -17,11 +17,21 @@ public class CodeBreaker6x4ViewModelTests
     {
         Mock<IGameClient> gameClient = new();
         gameClient.Setup(
-            client => client.StartGameAsync("Test"))
+            client => client.StartGameAsync("Test", "6x4Game"))
             .ReturnsAsync(new CreateGameResponse()
             {
-                Id = Guid.NewGuid(),
-                GameOptions = new CreateGameOptions() { Colors = new string[] { "Red", "Green", "Blue" } }
+                Game = new ()
+                {
+                    GameId = Guid.NewGuid(),
+                    Start = DateTime.Now,
+                    Type = new (
+                        "6x4Game",
+                        new List<string>() { "Black", "White", "Red", "Green", "Blue", "Yellow" }.AsReadOnly(),
+                        4,
+                        12),
+                    Username = "Test",
+                    Code = new List<string>() { "Black", "White", "Black", "Red" }.AsReadOnly()
+                }
             });
 
         Mock<IOptions<CodeBreaker6x4ViewModelOptions>> options = new();

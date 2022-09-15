@@ -1,5 +1,7 @@
 ﻿using CodeBreaker.Services;
 using CodeBreaker.Services.Authentication;
+using CodeBreaker.Shared.Models.Api;
+using CodeBreaker.Shared.Models.Data;
 using CodeBreaker.ViewModels.Services;
 
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -106,17 +108,16 @@ public partial class CodeBreaker6x4ViewModel
             InitializeValues();
 
             InProgress = true;
-            var response = await _client.StartGameAsync(_name);
+            CreateGameResponse response = await _client.StartGameAsync(_name, "6x4Game");
 
             GameStatus = GameMode.Started;
 
-            _gameId = response.Id;
-            (_, _, int maxMoves, string[] colors) = response.GameOptions;
+            _gameId = response.Game.GameId;
             _moveNumber++;
 
             ColorList.Clear();
 
-            foreach (string color in colors)
+            foreach (string color in response.Game.Type.Fields)
                 ColorList.Add(color);
         }
         catch (Exception ex)
@@ -160,15 +161,15 @@ public partial class CodeBreaker6x4ViewModel
 
             string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
 
-            (bool completed, bool won, string[] keyPegColors) = await _client.SetMoveAsync(_gameId, _moveNumber, selection);
+            CreateMoveResponse response = await _client.SetMoveAsync(_gameId, selection);
 
-            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, keyPegColors, _moveNumber++);
+            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, response.KeyPegs.ToModel(), _moveNumber++);
             GameMoves.Add(selectionAndKeyPegs);
             GameStatus = GameMode.MoveSet;
 
             WeakReferenceMessenger.Default.Send(new GameMoveMessage(GameMoveValue.Completed, selectionAndKeyPegs));
 
-            if (won)
+            if (response.Won)
             {
                 GameStatus = GameMode.Won;
                 InfoMessage.Message = "Congratulations - you won!";
@@ -178,9 +179,9 @@ public partial class CodeBreaker6x4ViewModel
                     await _dialogService.ShowMessageAsync(InfoMessage.Message);
                 }
             }
-            else if (completed)
+            else if (response.Ended)
             {
-                GameStatus = GameMode.Lost;        
+                GameStatus = GameMode.Lost;
                 InfoMessage.Message = "Sorry, you didn't find the matching colors!";
                 InfoMessage.IsVisible = true;
                 if (_enableDialogs)
@@ -193,10 +194,9 @@ public partial class CodeBreaker6x4ViewModel
         {
             ErrorMessage.IsVisible = true;
             ErrorMessage.Message = ex.Message;
+
             if (_enableDialogs)
-            {
                 await _dialogService.ShowMessageAsync(ErrorMessage.Message);
-            }
         }
         finally
         {
@@ -206,7 +206,7 @@ public partial class CodeBreaker6x4ViewModel
     }
 
     private bool CanSetMove =>
-        new []{ _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 }.All(s => s is not null);
+        new[] { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 }.All(s => s is not null);
 
     private void ClearSelectedColor()
     {
@@ -240,7 +240,7 @@ public partial class CodeBreaker6x4ViewModel
 
     [ObservableProperty]
     private string? _selectedColor4;
-    
+
     private readonly string[] _selectedColorPropertyNames = { nameof(SelectedColor1), nameof(SelectedColor2), nameof(SelectedColor3), nameof(SelectedColor4) };
 
     public InfoMessageViewModel ErrorMessage { get; } = new InfoMessageViewModel { IsError = true, Title = "Error" };
@@ -248,7 +248,7 @@ public partial class CodeBreaker6x4ViewModel
     public InfoMessageViewModel InfoMessage { get; }
 }
 
-public record SelectionAndKeyPegs(string[] Selection, string[] KeyPegs, int MoveNumber);
+public record SelectionAndKeyPegs(string[] GuessPegs, KeyPegs KeyPegs, int MoveNumber);
 
 public record class GameStateChangedMessage(GameMode GameMode);
 

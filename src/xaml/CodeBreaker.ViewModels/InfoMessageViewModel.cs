@@ -1,11 +1,17 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace CodeBreaker.ViewModels;
 
 [ObservableObject]
 public partial class InfoMessageViewModel
 {
+    public InfoMessageViewModel()
+    {
+        ActionCommand = new RelayCommand(() => IsVisible = false);
+    }
+
     [ObservableProperty]
     private bool _isVisible = false;
 
@@ -22,5 +28,8 @@ public partial class InfoMessageViewModel
     private ICommand? _actionCommand;
 
     [ObservableProperty]
-    private string _actionTitle = "OK";
+    private string? _actionTitle = "OK";
+
+    public bool HasAction =>
+        ActionCommand is not null && ActionTitle is not null;
 }

@@ -31,6 +31,7 @@
             IsClosable="True">
             <InfoBar.ActionButton>
                 <Button
+                    Visibility="{x:Bind Path=ViewModel.InfoMessage.HasAction, Converter={StaticResource BoolToVisibility}, ConverterParameter=False}"
                     Command="{x:Bind Path=ViewModel.InfoMessage.ActionCommand, Mode=OneTime}"
                     Content="{x:Bind Path=ViewModel.InfoMessage.ActionTitle, Mode=OneTime}" />
             </InfoBar.ActionButton>
@@ -44,6 +45,7 @@
             IsClosable="True">
             <InfoBar.ActionButton>
                 <Button
+                    Visibility="{x:Bind Path=ViewModel.ErrorMessage.HasAction, Converter={StaticResource BoolToVisibility}, ConverterParameter=False}"
                     Command="{x:Bind Path=ViewModel.ErrorMessage.ActionCommand, Mode=OneTime}"
                     Content="{x:Bind Path=ViewModel.ErrorMessage.ActionTitle, Mode=OneTime}" />
             </InfoBar.ActionButton>
@@ -92,7 +94,7 @@
             Orientation="Horizontal"
             Grid.Row="1"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Cancelable}">
-            <AppBarButton Label="Cancel" Icon="Cancel" IsEnabled="False" />
+            <!--<AppBarButton Label="Cancel" Icon="Cancel" IsEnabled="False" />-->
             <views:PegSelectionView 
                 Grid.Row="2"
                 ViewModel="{x:Bind ViewModel, Mode=OneWay}" />

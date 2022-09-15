@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Windows.Data;
 using System.Windows.Media;
 
-using static CodeBreaker.Shared.CodeBreakerColors;
+using static CodeBreaker.Shared.Models.Data.Colors;
 
 namespace CodeBreaker.WPF.Converters;
 
@@ -34,7 +34,7 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
         {
             int ix = int.Parse(parameter.ToString()!);
 
-            return selection.Selection[ix] switch
+            return selection.GuessPegs[ix] switch
             {
                 Black => BlackBrush,
                 White => WhiteBrush,

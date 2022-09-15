@@ -4,7 +4,7 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 
-using static CodeBreaker.Shared.CodeBreakerColors;
+using static CodeBreaker.Shared.Models.Data.Colors;
 
 
 namespace CodeBreaker.WinUI.Converters;
@@ -35,7 +35,7 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
         {
             int ix = int.Parse(parameter.ToString()!);
 
-            return selection.Selection[ix] switch
+            return selection.GuessPegs[ix] switch
             {
                 Black => BlackBrush,
                 White => WhiteBrush,

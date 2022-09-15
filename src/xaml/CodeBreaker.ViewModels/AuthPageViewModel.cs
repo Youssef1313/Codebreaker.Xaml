@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using CodeBreaker.ViewModels.Services;
 using Microsoft.Extensions.Logging;
 using CodeBreaker.Services.Authentication;
+using CodeBreaker.Services.Authentication.Definitions;
 
 namespace CodeBreaker.ViewModels;
 
@@ -18,6 +19,8 @@ public partial class AuthPageViewModel
 
     private readonly INavigationServiceCore _navigationService;
 
+    private readonly IAuthDefinition _authDefinition = new ApiServiceAuthDefinition();
+
     public AuthPageViewModel(IAuthService authService, IDialogService dialogService, ILogger<AuthPageViewModel> logger, INavigationServiceCore navigationService)
     {
         _authService = authService;
@@ -31,7 +34,7 @@ public partial class AuthPageViewModel
     {
         try
         {
-            await _authService.AquireTokenAsync(cancellation);
+            await _authService.AquireTokenAsync(_authDefinition, cancellation);
         }
         catch (Exception)
         {
