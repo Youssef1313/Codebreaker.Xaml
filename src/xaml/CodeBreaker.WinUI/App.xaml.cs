@@ -47,6 +47,7 @@ public partial class App : Application
 
             // Services
             services.Configure<CodeBreaker6x4ViewModelOptions>(options => options.EnableDialogs = false);
+            services.Configure<LiveClientOptions>(context.Configuration);
 
             services.AddTransient<INavigationViewService, NavigationViewService>();
 
@@ -56,21 +57,10 @@ public partial class App : Application
             services.AddSingleton<INavigationServiceCore>(x => x.GetRequiredService<INavigationService>());
             services.AddScoped<IDialogService, WinUIDialogService>();
 
-            services.AddSingleton(x => new HubConnectionBuilder()
-                .WithUrl(context.Configuration["LiveBase"]) // TODO: Add Auth-Token
-                .WithAutomaticReconnect()
-                .ConfigureLogging(x =>
-                {
-                    x.SetMinimumLevel(LogLevel.Information);
-                    x.AddDebug();
-                    x.AddConsole();
-                })
-                .Build());
-
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
 
-            services.AddScoped<IAuthService, AuthService>();
+            services.AddSingleton<IAuthService, AuthService>();
             services.AddScoped<AuthPageViewModel>();
             services.AddTransient<AuthPage>();
 
