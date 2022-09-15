@@ -5,13 +5,13 @@ VisualStudioVersion = 17.3.32519.111
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Shared", "shared\CodeBreaker.Shared\CodeBreaker.Shared.csproj", "{941EA5AA-7731-4082-A9C8-E3D5CA53859C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels", "xaml\CodeBreaker.ViewModels\CodeBreaker.ViewModels.csproj", "{DF9B73ED-CB18-4B36-85E8-43E25853D12E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels", "clients\xaml\CodeBreaker.ViewModels\CodeBreaker.ViewModels.csproj", "{DF9B73ED-CB18-4B36-85E8-43E25853D12E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.WPF", "xaml\CodeBreaker.WPF\CodeBreaker.WPF.csproj", "{E913722C-D2D0-475E-94A2-0C2C808C8012}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.WPF", "clients\xaml\CodeBreaker.WPF\CodeBreaker.WPF.csproj", "{E913722C-D2D0-475E-94A2-0C2C808C8012}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Services", "shared\CodeBreaker.Services\CodeBreaker.Services.csproj", "{522F9BBA-0377-4D97-B621-FFD952513B41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Services", "clients}shared\CodeBreaker.Services\CodeBreaker.Services.csproj", "{522F9BBA-0377-4D97-B621-FFD952513B41}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels.Tests", "xaml\CodeBreaker.ViewModels.Tests\CodeBreaker.ViewModels.Tests.csproj", "{448E073D-AA11-4060-83FD-E49C3F00D6C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels.Tests", "clients}xaml\CodeBreaker.ViewModels.Tests\CodeBreaker.ViewModels.Tests.csproj", "{448E073D-AA11-4060-83FD-E49C3F00D6C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

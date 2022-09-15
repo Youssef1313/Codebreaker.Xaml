@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-using static CodeBreaker.Shared.CodeBreakerColors;
+using static CodeBreaker.Shared.Models.Data.Colors;
 
 namespace CodeBreaker.MAUI.Converters;
 public class PegColorToBrushConverter : IValueConverter
