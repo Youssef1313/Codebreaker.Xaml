@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels", "c
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.WPF", "clients\xaml\CodeBreaker.WPF\CodeBreaker.WPF.csproj", "{E913722C-D2D0-475E-94A2-0C2C808C8012}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Services", "clients}shared\CodeBreaker.Services\CodeBreaker.Services.csproj", "{522F9BBA-0377-4D97-B621-FFD952513B41}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Services", "clients\shared\CodeBreaker.Services\CodeBreaker.Services.csproj", "{522F9BBA-0377-4D97-B621-FFD952513B41}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels.Tests", "clients}xaml\CodeBreaker.ViewModels.Tests\CodeBreaker.ViewModels.Tests.csproj", "{448E073D-AA11-4060-83FD-E49C3F00D6C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels.Tests", "clients\xaml\CodeBreaker.ViewModels.Tests\CodeBreaker.ViewModels.Tests.csproj", "{448E073D-AA11-4060-83FD-E49C3F00D6C7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
