@@ -25,7 +25,6 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
     public Brush GreenBrush { get; set; } = s_greenBrush;
     public Brush BlueBrush { get; set; } = s_blueBrush;
     public Brush YellowBrush { get; set; } = s_yellowBrush;
-
     private Brush EmptyBrush { get; set; } = s_emptyBrush;
 
     public object Convert(object value, Type targetType, object parameter, string language)
@@ -46,27 +45,6 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
             Yellow => YellowBrush,
             _ => EmptyBrush
         };
-
-        //ArgumentNullException.ThrowIfNull(parameter);
-        //if (value is SelectionAndKeyPegs selection)
-        //{
-        //    int ix = int.Parse(parameter.ToString()!);
-
-        //    return selection.GuessPegs[ix] switch
-        //    {
-        //        Black => BlackBrush,
-        //        White => WhiteBrush,
-        //        Red => RedBrush,
-        //        Green => GreenBrush,
-        //        Blue => BlueBrush,
-        //        Yellow => YellowBrush,
-        //        _ => EmptyBrush
-        //    };
-        //}
-        //else
-        //{
-        //    throw new ArgumentException("value is not of type SelectionAndKeyPegs");
-        //}
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)

@@ -59,7 +59,6 @@
             YellowBrush="{StaticResource YellowBrush}" />
 
     <conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />
-    <conv:SelectionAndKeyPegToKeyBrushConverter x:Key="KeyPegConverter" />
     <conv:IntToEnumerableConverter x:Key="IntToEnumerableConverter" />
 
     <DataTemplate x:Key="Codebreaker6x4CodePegs" x:Name="Codebreaker6x4CodePegs">
