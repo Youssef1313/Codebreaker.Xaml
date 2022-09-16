@@ -2,7 +2,7 @@
 
 using System.Globalization;
 
-using static CodeBreaker.Shared.CodeBreakerColors;
+using static CodeBreaker.Shared.Models.Data.Colors;
 
 namespace CodeBreaker.MAUI.Converters;
 
@@ -14,28 +14,30 @@ internal class SelectionAndKeyPegToKeyBrushConverter : IValueConverter
 
     public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value is null) return null;
-        ArgumentNullException.ThrowIfNull(parameter);
-        
-        if (value is SelectionAndKeyPegs selection)
-        {
-            if (int.TryParse(parameter.ToString(), out int ix))
-            {
-                if (selection.KeyPegs.Length <= (ix)) return EmptyBrush;
+        throw new NotImplementedException();
 
-                return selection.KeyPegs[ix] switch
-                {
-                    Black => BlackBrush,
-                    White => WhiteBrush,
-                    _ => EmptyBrush
-                };
-            }
-            else
-            {
-                return EmptyBrush;
-            }
-        }
-        return null;
+        //if (value is null) return null;
+        //ArgumentNullException.ThrowIfNull(parameter);
+        
+        //if (value is SelectionAndKeyPegs selection)
+        //{
+        //    if (int.TryParse(parameter.ToString(), out int ix))
+        //    {
+        //        if (selection.KeyPegs.Length <= (ix)) return EmptyBrush;
+
+        //        return selection.KeyPegs[ix] switch
+        //        {
+        //            Black => BlackBrush,
+        //            White => WhiteBrush,
+        //            _ => EmptyBrush
+        //        };
+        //    }
+        //    else
+        //    {
+        //        return EmptyBrush;
+        //    }
+        //}
+        //return null;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

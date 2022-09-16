@@ -2,7 +2,7 @@
 
 using System.Globalization;
 
-using static CodeBreaker.Shared.CodeBreakerColors;
+using static CodeBreaker.Shared.Models.Data.Colors;
 
 namespace CodeBreaker.MAUI.Converters;
 
@@ -22,7 +22,6 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
     public Brush GreenBrush { get; set; } = s_greenBrush;
     public Brush BlueBrush { get; set; } = s_blueBrush;
     public Brush YellowBrush { get; set; } = s_yellowBrush;
-
     private Brush EmptyBrush { get; set; } = s_emptyBrush;
 
 
@@ -31,26 +30,40 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
         // with .NET MAUI (contrary to other XAML technologies,
         // the converter is invoked many times,
         // often with null values, but also with the MainPage passed as value
-        
-        if (value is null) return null;
-        
-        ArgumentNullException.ThrowIfNull(parameter);
-        if (value is SelectionAndKeyPegs selection)
-        {
-            int ix = int.Parse(parameter.ToString()!);
+        if (value is null)
+            return null;
 
-            return selection.Selection[ix] switch
-            {
-                Black => BlackBrush,
-                White => WhiteBrush,
-                Red => RedBrush,
-                Green => GreenBrush,
-                Blue => BlueBrush,
-                Yellow => YellowBrush,
-                _ => EmptyBrush
-            };
-        }
-        return null;
+        if (value is not string guessPeg)
+            return null;
+
+        return guessPeg switch
+        {
+            Black => BlackBrush,
+            White => WhiteBrush,
+            Red => RedBrush,
+            Green => GreenBrush,
+            Blue => BlueBrush,
+            Yellow => YellowBrush,
+            _ => EmptyBrush
+        };
+        
+        //ArgumentNullException.ThrowIfNull(parameter);
+        //if (value is SelectionAndKeyPegs selection)
+        //{
+        //    int ix = int.Parse(parameter.ToString()!);
+
+        //    return selection.GuessPegs[ix] switch
+        //    {
+        //        Black => BlackBrush,
+        //        White => WhiteBrush,
+        //        Red => RedBrush,
+        //        Green => GreenBrush,
+        //        Blue => BlueBrush,
+        //        Yellow => YellowBrush,
+        //        _ => EmptyBrush
+        //    };
+        //}
+        //return null;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
