@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels", "xaml\CodeBreaker.ViewModels\CodeBreaker.ViewModels.csproj", "{E98CF0C8-4276-44AE-9260-FFB037E56BE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels", "clients\xaml\CodeBreaker.ViewModels\CodeBreaker.ViewModels.csproj", "{E98CF0C8-4276-44AE-9260-FFB037E56BE8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.MAUI", "xaml\CodeBreaker.MAUI\CodeBreaker.MAUI.csproj", "{D05F8B75-7B18-423C-928B-FBB26F9F13A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.MAUI", "clients\xaml\CodeBreaker.MAUI\CodeBreaker.MAUI.csproj", "{D05F8B75-7B18-423C-928B-FBB26F9F13A7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Services", "shared\CodeBreaker.Services\CodeBreaker.Services.csproj", "{857FAB8D-348F-4940-8004-36D501D1A661}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Services", "clients\shared\CodeBreaker.Services\CodeBreaker.Services.csproj", "{857FAB8D-348F-4940-8004-36D501D1A661}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.Shared", "shared\CodeBreaker.Shared\CodeBreaker.Shared.csproj", "{B7181E9E-A4AA-452F-83C4-92182DFDB579}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels.Tests", "xaml\CodeBreaker.ViewModels.Tests\CodeBreaker.ViewModels.Tests.csproj", "{9C7EE2F5-DD4E-4853-A9CE-5D8E7F0A8554}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeBreaker.ViewModels.Tests", "clients\xaml\CodeBreaker.ViewModels.Tests\CodeBreaker.ViewModels.Tests.csproj", "{9C7EE2F5-DD4E-4853-A9CE-5D8E7F0A8554}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
