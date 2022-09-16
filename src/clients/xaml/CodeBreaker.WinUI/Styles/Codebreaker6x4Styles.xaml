@@ -79,7 +79,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Ellipse Width="68" Height="68" Margin="12,4" Fill="{Binding}" />
+                            <Ellipse Width="68" Height="68" Margin="12,4" Fill="{Binding Converter={StaticResource SelectionConverter}}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

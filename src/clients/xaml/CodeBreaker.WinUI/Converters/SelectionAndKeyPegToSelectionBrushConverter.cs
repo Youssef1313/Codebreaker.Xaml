@@ -30,26 +30,43 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
 
     public object Convert(object value, Type targetType, object parameter, string language)
     {
-        ArgumentNullException.ThrowIfNull(parameter);
-        if (value is SelectionAndKeyPegs selection)
-        {
-            int ix = int.Parse(parameter.ToString()!);
+        if (value is null)
+            throw new ArgumentNullException(nameof(value));
 
-            return selection.GuessPegs[ix] switch
-            {
-                Black => BlackBrush,
-                White => WhiteBrush,
-                Red => RedBrush,
-                Green => GreenBrush,
-                Blue => BlueBrush,
-                Yellow => YellowBrush,
-                _ => EmptyBrush
-            };
-        }
-        else
+        if (value is not string guessPeg)
+            throw new ArgumentException("Value is no string");
+
+        return guessPeg switch
         {
-            throw new ArgumentException("value is not of type SelectionAndKeyPegs");
-        }
+            Black => BlackBrush,
+            White => WhiteBrush,
+            Red => RedBrush,
+            Green => GreenBrush,
+            Blue => BlueBrush,
+            Yellow => YellowBrush,
+            _ => EmptyBrush
+        };
+
+        //ArgumentNullException.ThrowIfNull(parameter);
+        //if (value is SelectionAndKeyPegs selection)
+        //{
+        //    int ix = int.Parse(parameter.ToString()!);
+
+        //    return selection.GuessPegs[ix] switch
+        //    {
+        //        Black => BlackBrush,
+        //        White => WhiteBrush,
+        //        Red => RedBrush,
+        //        Green => GreenBrush,
+        //        Blue => BlueBrush,
+        //        Yellow => YellowBrush,
+        //        _ => EmptyBrush
+        //    };
+        //}
+        //else
+        //{
+        //    throw new ArgumentException("value is not of type SelectionAndKeyPegs");
+        //}
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, string language)
