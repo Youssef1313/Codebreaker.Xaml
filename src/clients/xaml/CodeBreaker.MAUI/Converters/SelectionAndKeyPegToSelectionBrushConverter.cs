@@ -1,6 +1,4 @@
-﻿using CodeBreaker.ViewModels;
-
-using System.Globalization;
+﻿using System.Globalization;
 
 using static CodeBreaker.Shared.Models.Data.Colors;
 
@@ -46,28 +44,8 @@ public class SelectionAndKeyPegToSelectionBrushConverter : IValueConverter
             Yellow => YellowBrush,
             _ => EmptyBrush
         };
-        
-        //ArgumentNullException.ThrowIfNull(parameter);
-        //if (value is SelectionAndKeyPegs selection)
-        //{
-        //    int ix = int.Parse(parameter.ToString()!);
-
-        //    return selection.GuessPegs[ix] switch
-        //    {
-        //        Black => BlackBrush,
-        //        White => WhiteBrush,
-        //        Red => RedBrush,
-        //        Green => GreenBrush,
-        //        Blue => BlueBrush,
-        //        Yellow => YellowBrush,
-        //        _ => EmptyBrush
-        //    };
-        //}
-        //return null;
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
         throw new NotImplementedException();
-    }
 }
