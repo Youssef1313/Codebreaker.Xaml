@@ -1,12 +1,15 @@
-﻿using Microsoft.UI;
+﻿using CodeBreaker.ViewModels;
+
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 
 using static CodeBreaker.Shared.Models.Data.Colors;
 
+
 namespace CodeBreaker.WinUI.Converters;
 
-public class PegColorToBrushConverter : IValueConverter
+public class ColornameToBrushConverter : IValueConverter
 {
     private static readonly Brush s_blackBrush = new SolidColorBrush(Colors.Black);
     private static readonly Brush s_whiteBrush = new SolidColorBrush(Colors.White);
@@ -26,7 +29,13 @@ public class PegColorToBrushConverter : IValueConverter
 
     public object Convert(object value, Type targetType, object parameter, string language)
     {
-        return value switch
+        if (value is null)
+            throw new ArgumentNullException(nameof(value));
+
+        if (value is not string guessPeg)
+            throw new ArgumentException("Value is no string");
+
+        return guessPeg switch
         {
             Black => BlackBrush,
             White => WhiteBrush,

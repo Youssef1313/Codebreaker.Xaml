@@ -39,18 +39,9 @@
             <GradientStop Color="White" Offset="0" />
         </RadialGradientBrush.GradientStops>
     </RadialGradientBrush>
-    
-    <conv:PegColorToBrushConverter 
-        x:Key="PegColorToBrushConverter"
-        BlackBrush="{StaticResource BlackBrush}"
-        WhiteBrush="{StaticResource WhiteBrush}"
-        RedBrush="{StaticResource RedBrush}"
-        GreenBrush="{StaticResource GreenBrush}"
-        BlueBrush="{StaticResource BlueBrush}"
-        YellowBrush="{StaticResource YellowBrush}" />
 
-    <conv:SelectionAndKeyPegToSelectionBrushConverter 
-            x:Key="SelectionConverter" 
+    <conv:ColornameToBrushConverter 
+            x:Key="ColorConverter" 
             BlackBrush="{StaticResource BlackBrush}"
             WhiteBrush="{StaticResource WhiteBrush}"
             RedBrush="{StaticResource RedBrush}"
@@ -59,7 +50,6 @@
             YellowBrush="{StaticResource YellowBrush}" />
 
     <conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />
-    <conv:SelectionAndKeyPegToKeyBrushConverter x:Key="KeyPegConverter" />
     <conv:IntToEnumerableConverter x:Key="IntToEnumerableConverter" />
 
     <DataTemplate x:Key="Codebreaker6x4CodePegs" x:Name="Codebreaker6x4CodePegs">
@@ -79,7 +69,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Ellipse Width="68" Height="68" Margin="12,4" Fill="{Binding}" />
+                            <Ellipse Width="68" Height="68" Margin="12,4" Fill="{Binding Converter={StaticResource ColorConverter}}" />
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
