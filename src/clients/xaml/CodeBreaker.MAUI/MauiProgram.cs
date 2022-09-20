@@ -4,6 +4,7 @@ using CodeBreaker.ViewModels.Services;
 using CodeBreaker.MAUI.Services;
 using CodeBreaker.Services;
 using CodeBreaker.Services.Authentication;
+using Microsoft.Extensions.Configuration;
 
 namespace CodeBreaker.MAUI;
 
@@ -11,7 +12,13 @@ public static class MauiProgram
 {
 	public static MauiApp CreateMauiApp()
 	{
-		var builder = MauiApp.CreateBuilder();
+#if DEBUG
+        Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", "Development");
+#else
+        Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", "Production");
+#endif
+
+        var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
 			.UseMauiCommunityToolkit()
@@ -20,13 +27,16 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
-		builder.Services.Configure<CodeBreaker6x4ViewModelOptions>(options => options.EnableDialogs = true);
+
+        builder.Configuration.AddJsonStream(FileSystem.OpenAppPackageFileAsync("appsettings.json").Result);
+        builder.Configuration.AddJsonStream(FileSystem.OpenAppPackageFileAsync($"appsettings.{Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}.json").Result);
+        builder.Services.Configure<CodeBreaker6x4ViewModelOptions>(options => options.EnableDialogs = true);
         builder.Services.AddScoped<IDialogService, MauiDialogService>();
         builder.Services.AddSingleton<IAuthService, AuthService>();
         builder.Services.AddScoped<CodeBreaker6x4ViewModel>();
 		builder.Services.AddHttpClient<IGameClient, GameClient>(client =>
-		{
-			client.BaseAddress = new("http://localhost:9400");
+        {
+			client.BaseAddress = new(builder.Configuration["ApiBase"]);
 		});
 		builder.Services.AddTransient<MainPage>();
 		return builder.Build();
