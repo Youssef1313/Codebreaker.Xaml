@@ -4,52 +4,7 @@
              xmlns:conv="clr-namespace:CodeBreaker.MAUI.Converters"
              x:Class="CodeBreaker.MAUI.Resources.Styles.CodebreakerStyles">
 
-    <RadialGradientBrush x:Key="BlackBrush" Center="0.7,0.2">
-        <RadialGradientBrush.GradientStops>
-            <GradientStop Color="Black" Offset="1" />
-            <GradientStop Color="White" Offset="0" />
-        </RadialGradientBrush.GradientStops>
-    </RadialGradientBrush>
-    <RadialGradientBrush x:Key="WhiteBrush" Center="0.7,0.2">
-        <RadialGradientBrush.GradientStops>
-            <GradientStop Color="White" Offset="1" />
-            <GradientStop Color="LightGray" Offset="0" />
-        </RadialGradientBrush.GradientStops>
-    </RadialGradientBrush>
-    <RadialGradientBrush x:Key="RedBrush" Center="0.7,0.2">
-        <RadialGradientBrush.GradientStops>
-            <GradientStop Color="Red" Offset="1" />
-            <GradientStop Color="Orange" Offset="0" />
-        </RadialGradientBrush.GradientStops>
-    </RadialGradientBrush>
-    <RadialGradientBrush x:Key="GreenBrush" Center="0.7,0.2">
-        <RadialGradientBrush.GradientStops>
-            <GradientStop Color="Green" Offset="1" />
-            <GradientStop Color="LightGreen" Offset="0" />
-        </RadialGradientBrush.GradientStops>
-    </RadialGradientBrush>
-    <RadialGradientBrush x:Key="BlueBrush" Center="0.7,0.2">
-        <RadialGradientBrush.GradientStops>
-            <GradientStop Color="Blue" Offset="1" />
-            <GradientStop Color="LightBlue" Offset="0" />
-        </RadialGradientBrush.GradientStops>
-    </RadialGradientBrush>
-    <RadialGradientBrush x:Key="YellowBrush" Center="0.7,0.2">
-        <RadialGradientBrush.GradientStops>
-            <GradientStop Color="Yellow" Offset="1" />
-            <GradientStop Color="White" Offset="0" />
-        </RadialGradientBrush.GradientStops>
-    </RadialGradientBrush>
-
-    <conv:ColornameToBrushConverter 
-            x:Key="ColorConverter" 
-            BlackBrush="{StaticResource BlackBrush}"
-            WhiteBrush="{StaticResource WhiteBrush}"
-            RedBrush="{StaticResource RedBrush}"
-            GreenBrush="{StaticResource GreenBrush}"
-            BlueBrush="{StaticResource BlueBrush}"
-            YellowBrush="{StaticResource YellowBrush}" />
-
+    <conv:ColornameToBrushConverter x:Key="ColorConverter" />
     <conv:SelectionAndKeyPegToKeyVisibleConverter x:Key="KeyVisibleConverter" />
     <conv:IntToEnumerableConverter x:Key="IntToEnumerableConverter" />
 
