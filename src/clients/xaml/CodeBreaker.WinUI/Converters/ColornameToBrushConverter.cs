@@ -1,9 +1,7 @@
-﻿using CodeBreaker.ViewModels;
-
-using Microsoft.UI;
+﻿using Microsoft.UI;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
-
+using Windows.UI;
 using static CodeBreaker.Shared.Models.Data.Colors;
 
 
@@ -11,13 +9,13 @@ namespace CodeBreaker.WinUI.Converters;
 
 public class ColornameToBrushConverter : IValueConverter
 {
-    private static readonly Brush s_blackBrush = new SolidColorBrush(Colors.Black);
-    private static readonly Brush s_whiteBrush = new SolidColorBrush(Colors.White);
-    private static readonly Brush s_redBrush = new SolidColorBrush(Colors.Red);
-    private static readonly Brush s_greenBrush = new SolidColorBrush(Colors.Green);
-    private static readonly Brush s_blueBrush = new SolidColorBrush(Colors.Blue);
-    private static readonly Brush s_yellowBrush = new SolidColorBrush(Colors.Yellow);
-    private static readonly Brush s_emptyBrush = new SolidColorBrush(Colors.LightGray);
+    private static Brush s_blackBrush = new SolidColorBrush(Colors.Black);
+    private static Brush s_whiteBrush = new SolidColorBrush(Colors.White);
+    private static Brush s_redBrush = new SolidColorBrush(Color.FromArgb(255, 209, 52, 56));
+    private static Brush s_greenBrush = new SolidColorBrush(Color.FromArgb(255, 0, 173, 86));
+    private static Brush s_blueBrush = new SolidColorBrush(Color.FromArgb(255, 79, 107, 237));
+    private static Brush s_yellowBrush = new SolidColorBrush(Color.FromArgb(255, 252, 225, 0));
+    private static Brush s_emptyBrush = new SolidColorBrush(Color.FromArgb(255, 160, 174, 178));
 
     public Brush BlackBrush { get; set; } = s_blackBrush;
     public Brush WhiteBrush { get; set; } = s_whiteBrush;

@@ -15,7 +15,7 @@
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>
             <DataTemplate x:DataType="x:String">
-                <Ellipse Fill="{x:Bind}" Width="40" Height="40" />
+                <Ellipse Fill="{x:Bind, Converter={StaticResource ColorConverter}}" Width="40" Height="40" />
             </DataTemplate>
         </ItemsControl.ItemTemplate>
     </ItemsControl>

@@ -6,15 +6,15 @@ using static CodeBreaker.Shared.Models.Data.Colors;
 
 namespace CodeBreaker.WPF.Converters;
 
-public class PegColorToBrushConverter : IValueConverter
+public class ColorNameToBrushConverter : IValueConverter
 {
     private static readonly Brush s_blackBrush = new SolidColorBrush(Colors.Black);
     private static readonly Brush s_whiteBrush = new SolidColorBrush(Colors.White);
-    private static readonly Brush s_redBrush = new SolidColorBrush(Colors.Red);
-    private static readonly Brush s_greenBrush = new SolidColorBrush(Colors.Green);
-    private static readonly Brush s_blueBrush = new SolidColorBrush(Colors.Blue);
-    private static readonly Brush s_yellowBrush = new SolidColorBrush(Colors.Yellow);
-    private static readonly Brush s_emptyBrush = new SolidColorBrush(Colors.LightGray);
+    private static Brush s_redBrush = new SolidColorBrush(Color.FromRgb(209, 52, 56));
+    private static Brush s_greenBrush = new SolidColorBrush(Color.FromRgb(0, 173, 86));
+    private static Brush s_blueBrush = new SolidColorBrush(Color.FromRgb(79, 107, 237));
+    private static Brush s_yellowBrush = new SolidColorBrush(Color.FromRgb(252, 225, 0));
+    private static Brush s_emptyBrush = new SolidColorBrush(Color.FromRgb(160, 174, 178));
 
     public Brush BlackBrush { get; set; } = s_blackBrush;
     public Brush WhiteBrush { get; set; } = s_whiteBrush;
@@ -22,7 +22,6 @@ public class PegColorToBrushConverter : IValueConverter
     public Brush GreenBrush { get; set; } = s_greenBrush;
     public Brush BlueBrush { get; set; } = s_blueBrush;
     public Brush YellowBrush { get; set; } = s_yellowBrush;
-
     private Brush EmptyBrush { get; set; } = s_emptyBrush;
 
     public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)

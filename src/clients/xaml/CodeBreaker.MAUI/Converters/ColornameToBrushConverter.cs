@@ -8,11 +8,11 @@ public class ColornameToBrushConverter : IValueConverter
 {
     private static Brush s_blackBrush = new SolidColorBrush(Colors.Black);
     private static Brush s_whiteBrush = new SolidColorBrush(Colors.White);
-    private static Brush s_redBrush = new SolidColorBrush(Colors.Red);
-    private static Brush s_greenBrush = new SolidColorBrush(Colors.Green);
-    private static Brush s_blueBrush = new SolidColorBrush(Colors.Blue);
-    private static Brush s_yellowBrush = new SolidColorBrush(Colors.Yellow);
-    private static Brush s_emptyBrush = new SolidColorBrush(Colors.LightGray);
+    private static Brush s_redBrush = new SolidColorBrush(Color.FromArgb("#d13438"));
+    private static Brush s_greenBrush = new SolidColorBrush(Color.FromArgb("#00ad56"));
+    private static Brush s_blueBrush = new SolidColorBrush(Color.FromArgb("#4f6bed"));
+    private static Brush s_yellowBrush = new SolidColorBrush(Color.FromArgb("#fce100"));
+    private static Brush s_emptyBrush = new SolidColorBrush(Color.FromArgb("#a0aeb2"));
 
     public Brush BlackBrush { get; set; } = s_blackBrush;
     public Brush WhiteBrush { get; set; } = s_whiteBrush;
