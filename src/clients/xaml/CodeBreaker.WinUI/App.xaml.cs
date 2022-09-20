@@ -14,11 +14,9 @@ using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Services;
 using CodeBreaker.WinUI.ViewModels;
 using CodeBreaker.WinUI.Views;
-using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Windows.ApplicationModel;
 using Xaml = Microsoft.UI.Xaml;
 
