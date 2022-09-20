@@ -41,23 +41,14 @@
         </RadialGradientBrush.GradientStops>
     </RadialGradientBrush>
 
-    <conv:SelectionAndKeyPegToSelectionBrushConverter 
-            x:Key="SelectionConverter" 
+    <conv:ColornameToBrushConverter 
+            x:Key="ColorConverter" 
             BlackBrush="{StaticResource BlackBrush}"
             WhiteBrush="{StaticResource WhiteBrush}"
             RedBrush="{StaticResource RedBrush}"
             GreenBrush="{StaticResource GreenBrush}"
             BlueBrush="{StaticResource BlueBrush}"
             YellowBrush="{StaticResource YellowBrush}" />
-
-    <conv:PegColorToBrushConverter
-        x:Key="PegColorToBrushConverter"
-        BlackBrush="{StaticResource BlackBrush}"
-        WhiteBrush="{StaticResource WhiteBrush}"
-        RedBrush="{StaticResource RedBrush}"
-        GreenBrush="{StaticResource GreenBrush}"
-        BlueBrush="{StaticResource BlueBrush}"
-        YellowBrush="{StaticResource YellowBrush}" />
 
     <conv:SelectionAndKeyPegToKeyVisibleConverter x:Key="KeyVisibleConverter" />
     <conv:IntToEnumerableConverter x:Key="IntToEnumerableConverter" />
@@ -67,7 +58,7 @@
             <Frame HasShadow="True" BorderColor="DarkGray" CornerRadius="4" HorizontalOptions="Center"
                    VerticalOptions="Center" HeightRequest="80" WidthRequest="80">
                 <Ellipse 
-                    Fill="{Binding Mode=OneWay, Converter={StaticResource PegColorToBrushConverter}}" 
+                    Fill="{Binding Mode=OneWay, Converter={StaticResource ColorConverter}}" 
                     WidthRequest="60" 
                     HeightRequest="60" />
             </Frame>
@@ -88,7 +79,7 @@
                         </HorizontalStackLayout.Resources>
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
-                                <Ellipse Fill="{Binding Converter={StaticResource SelectionConverter}}" />
+                                <Ellipse Fill="{Binding Converter={StaticResource ColorConverter}}" />
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </HorizontalStackLayout>
