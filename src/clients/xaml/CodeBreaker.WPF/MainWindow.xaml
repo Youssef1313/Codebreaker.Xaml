@@ -13,15 +13,7 @@
         <conv:GameStatusToVisibilityConverter x:Key="GameStatusVisibilityConverter" />
         <conv:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />
-        <conv:SelectionAndKeyPegToSelectionBrushConverter 
-            x:Key="SelectionConverter" 
-            BlackBrush="{StaticResource BlackBrush}"
-            WhiteBrush="{StaticResource WhiteBrush}"
-            RedBrush="{StaticResource RedBrush}"
-            GreenBrush="{StaticResource GreenBrush}"
-            BlueBrush="{StaticResource BlueBrush}"
-            YellowBrush="{StaticResource YellowBrush}" />
-        <conv:SelectionAndKeyPegToKeyBrushConverter x:Key="KeyPegConverter" />
+        <conv:ColorNameToBrushConverter x:Key="ColorConverter" />
     </Window.Resources>
 
     <Grid x:Name="MainGrid" Grid.IsSharedSizeScope="True">
