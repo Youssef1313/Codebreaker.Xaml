@@ -3,7 +3,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace CodeBreaker.WPF.Views;
+namespace CodeBreaker.WPF.Views.Components;
 
 public partial class PegSelectionView : UserControl
 {

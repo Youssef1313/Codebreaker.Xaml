@@ -2,7 +2,7 @@
 using CommunityToolkit.Mvvm.Messaging;
 using System.Windows;
 
-namespace CodeBreaker.WPF;
+namespace CodeBreaker.WPF.Views.Pages;
 
 public partial class MainWindow : Window
 {

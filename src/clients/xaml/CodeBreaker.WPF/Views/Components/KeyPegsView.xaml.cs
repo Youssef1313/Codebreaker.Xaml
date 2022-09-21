@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace CodeBreaker.WPF.Views;
+namespace CodeBreaker.WPF.Views.Components;
 
 /// <summary>
 /// Interaction logic for KeyPegs.xaml
