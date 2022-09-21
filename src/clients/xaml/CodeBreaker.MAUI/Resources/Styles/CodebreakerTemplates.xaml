@@ -2,7 +2,7 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:conv="clr-namespace:CodeBreaker.MAUI.Converters"
-             x:Class="CodeBreaker.MAUI.Resources.Styles.CodebreakerStyles">
+             x:Class="CodeBreaker.MAUI.Resources.Styles.CodebreakerTemplates">
 
     <conv:ColornameToBrushConverter x:Key="ColorConverter" />
     <conv:SelectionAndKeyPegToKeyVisibleConverter x:Key="KeyVisibleConverter" />
@@ -20,7 +20,7 @@
         </StackLayout>
     </DataTemplate>
 
-    <DataTemplate x:Key="CodeBreaker6x4CodePegs">
+    <DataTemplate x:Key="PegsTemplate">
         <ViewCell>
             <Grid ColumnDefinitions="Auto, Auto, Auto">
                 <Border Grid.Column="1" StrokeThickness="2" Stroke="{StaticResource Black}">

@@ -1,20 +1,21 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:conv="clr-namespace:CodeBreaker.WPF.Converters"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:conv="using:CodeBreaker.WinUI.Converters">
 
-    <conv:ColorNameToBrushConverter x:Key="ColorConverter" />
+    <conv:ColornameToBrushConverter x:Key="ColorConverter" />
     <conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />
     <conv:IntToEnumerableConverter x:Key="IntToEnumerableConverter" />
 
-    <DataTemplate x:Key="Codebreaker6x4CodePegs">
-        <Grid Background="LightBlue">
+    <DataTemplate x:Key="PegsTemplate" x:Name="PegsTemplate">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Text="{Binding MoveNumber}" Width="48" FontSize="32" Margin="8,8,8,8" HorizontalAlignment="Center" Grid.Column="0" />
-            <Border Grid.Column="1" BorderThickness="2,2,0,2" BorderBrush="DarkBlue">
+            <TextBlock Grid.Column="0" Text="{Binding Path=MoveNumber}" FontSize="{ThemeResource LargeFontSize}" Margin="20,0" VerticalAlignment="Center" />
+            <Border Grid.Column="1" BorderThickness="2,2,0,2" BorderBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="7" CornerRadius="2">
                 <ItemsControl ItemsSource="{Binding Path=GuessPegs}">
                     <ItemsControl.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -29,7 +30,7 @@
                 </ItemsControl>
             </Border>
 
-            <Border BorderThickness="0,2,2,2" BorderBrush="DarkBlue" Grid.Column="2">
+            <Border Grid.Column="2" BorderThickness="0,2,2,2" BorderBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}" Padding="30,7" CornerRadius="2">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -38,24 +39,24 @@
                     <ItemsControl Grid.Row="0" ItemsSource="{Binding Path=KeyPegs.White, Converter={StaticResource IntToEnumerableConverter}}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
+                                <StackPanel Orientation="Horizontal" Spacing="20" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Ellipse Width="16" Height="16" Fill="White" Margin="10,0" />
+                                <Ellipse Width="16" Height="16" Fill="White" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                     <ItemsControl Grid.Row="1" ItemsSource="{Binding Path=KeyPegs.Black, Converter={StaticResource IntToEnumerableConverter}}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal" />
+                                <StackPanel Orientation="Horizontal" Spacing="20" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Ellipse Width="16" Height="16" Fill="Black" Margin="10,0" />
+                                <Ellipse Width="16" Height="16" Fill="Black" />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

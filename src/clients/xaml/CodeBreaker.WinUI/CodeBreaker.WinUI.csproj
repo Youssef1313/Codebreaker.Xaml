@@ -17,7 +17,7 @@
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
     <None Remove="appsettings.Production.json" />
-    <None Remove="Styles\Codebreaker6x4Styles.xaml" />
+    <None Remove="Styles\CodeBreakerTemplates.xaml" />
     <None Remove="Views\AuthPage.xaml" />
     <None Remove="Views\KeyPegsView.xaml" />
     <None Remove="Views\LivePage.xaml" />
@@ -72,7 +72,7 @@
 
 
   <ItemGroup>
-    <Page Update="Styles\Codebreaker6x4Styles.xaml">
+    <Page Update="Styles\CodeBreakerTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

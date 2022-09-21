@@ -105,7 +105,7 @@
             Grid.Row="3" 
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Running}"
             ItemsSource="{x:Bind ViewModel.GameMoves, Mode=OneWay}"
-            ItemTemplate="{StaticResource Codebreaker6x4CodePegs}" />
+            ItemTemplate="{StaticResource PegsTemplate}" />
     </Grid>
 
 </Page>
