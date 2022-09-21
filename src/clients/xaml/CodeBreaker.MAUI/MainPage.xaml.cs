@@ -8,7 +8,7 @@ namespace CodeBreaker.MAUI;
 public partial class MainPage : ContentPage
 {
 
-	public MainPage(CodeBreaker6x4ViewModel viewModel)
+	public MainPage(GamePageViewModel viewModel)
 	{
 		ViewModel = viewModel;
 
@@ -21,5 +21,5 @@ public partial class MainPage : ContentPage
 		});
 	}
 
-	public CodeBreaker6x4ViewModel ViewModel { get; }
+	public GamePageViewModel ViewModel { get; }
 }

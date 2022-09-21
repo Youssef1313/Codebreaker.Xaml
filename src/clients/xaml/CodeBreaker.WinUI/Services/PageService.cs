@@ -12,7 +12,7 @@ public class PageService : IPageService
     public PageService()
     {
         Configure<AuthPageViewModel, AuthPage>();
-        Configure<CodeBreaker6x4ViewModel, GamePage>();
+        Configure<GamePageViewModel, GamePage>();
         Configure<LivePageViewModel, LivePage>();
     }
 

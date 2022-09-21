@@ -26,12 +26,12 @@ public sealed partial class PegSelectionView : UserControl
         WeakReferenceMessenger.Default.UnregisterAllOnUnloaded(this);
     }
 
-    public CodeBreaker6x4ViewModel ViewModel
+    public GamePageViewModel ViewModel
     {
-        get => (CodeBreaker6x4ViewModel)GetValue(ViewModelProperty);
+        get => (GamePageViewModel)GetValue(ViewModelProperty);
         set => SetValue(ViewModelProperty, value);
     }
 
     public static readonly DependencyProperty ViewModelProperty =
-        DependencyProperty.Register("ViewModel", typeof(CodeBreaker6x4ViewModel), typeof(PegSelectionView), new PropertyMetadata(null));
+        DependencyProperty.Register("ViewModel", typeof(GamePageViewModel), typeof(PegSelectionView), new PropertyMetadata(null));
 }

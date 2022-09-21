@@ -30,13 +30,13 @@ public enum GameMoveValue
     Completed
 }
 
-public class CodeBreaker6x4ViewModelOptions
+public class GamePageViewModelOptions
 {
     public bool EnableDialogs { get; set; } = false;
 }
 
 [ObservableObject]
-public partial class CodeBreaker6x4ViewModel
+public partial class GamePageViewModel
 {
     private readonly IGameClient _client;
 
@@ -45,9 +45,9 @@ public partial class CodeBreaker6x4ViewModel
     private readonly bool _enableDialogs = false;
     private readonly IDialogService _dialogService;
     private readonly IAuthService _authService;
-    public CodeBreaker6x4ViewModel(
+    public GamePageViewModel(
         IGameClient client,
-        IOptions<CodeBreaker6x4ViewModelOptions> options,
+        IOptions<GamePageViewModelOptions> options,
         IDialogService dialogService,
         IAuthService authService)
     {

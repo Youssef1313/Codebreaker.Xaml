@@ -9,11 +9,11 @@ using Moq;
 
 namespace CodeBreaker.ViewModels.Tests;
 
-public class CodeBreaker6x4ViewModelTests
+public class GamePageViewModelTests
 {
-    private readonly CodeBreaker6x4ViewModel _viewModel;
+    private readonly GamePageViewModel _viewModel;
 
-    public CodeBreaker6x4ViewModelTests()
+    public GamePageViewModelTests()
     {
         Mock<IGameClient> gameClient = new();
         gameClient.Setup(
@@ -34,14 +34,14 @@ public class CodeBreaker6x4ViewModelTests
                 }
             });
 
-        Mock<IOptions<CodeBreaker6x4ViewModelOptions>> options = new();
-        options.Setup(o => o.Value).Returns(new CodeBreaker6x4ViewModelOptions() { EnableDialogs = false });
+        Mock<IOptions<GamePageViewModelOptions>> options = new();
+        options.Setup(o => o.Value).Returns(new GamePageViewModelOptions() { EnableDialogs = false });
 
         Mock<IDialogService> dialogService = new();
 
         Mock<IAuthService> authService = new();
 
-        _viewModel = new CodeBreaker6x4ViewModel(gameClient.Object, options.Object, dialogService.Object, authService.Object);
+        _viewModel = new GamePageViewModel(gameClient.Object, options.Object, dialogService.Object, authService.Object);
     }
     
     [Fact]

@@ -1,9 +1,5 @@
 ﻿using CodeBreaker.ViewModels;
-
 using CommunityToolkit.Mvvm.Messaging;
-
-using Microsoft.Extensions.DependencyInjection;
-
 using System.Windows;
 
 namespace CodeBreaker.WPF;
@@ -12,7 +8,7 @@ public partial class MainWindow : Window
 {
     public MainWindow()
     {
-        ViewModel = (Application.Current as App)?.GetService<CodeBreaker6x4ViewModel>() ??
+        ViewModel = (Application.Current as App)?.GetService<GamePageViewModel>() ??
                 throw new InvalidOperationException();
 
         DataContext = this;
@@ -25,12 +21,12 @@ public partial class MainWindow : Window
         });
     }
 
-    public CodeBreaker6x4ViewModel ViewModel
+    public GamePageViewModel ViewModel
     {
-        get => (CodeBreaker6x4ViewModel)GetValue(ViewModelProperty);
+        get => (GamePageViewModel)GetValue(ViewModelProperty);
         set => SetValue(ViewModelProperty, value);
     }
 
     public static readonly DependencyProperty ViewModelProperty =
-        DependencyProperty.Register("ViewModel", typeof(CodeBreaker6x4ViewModel), typeof(MainWindow), new PropertyMetadata(null));
+        DependencyProperty.Register("ViewModel", typeof(GamePageViewModel), typeof(MainWindow), new PropertyMetadata(null));
 }

@@ -11,11 +11,11 @@ namespace CodeBreaker.WinUI.Views;
 
 public sealed partial class GamePage : Page
 {
-    public CodeBreaker6x4ViewModel ViewModel { get; }
+    public GamePageViewModel ViewModel { get; }
 
     public GamePage()
     {
-        ViewModel = App.GetService<CodeBreaker6x4ViewModel>();
+        ViewModel = App.GetService<GamePageViewModel>();
         InitializeComponent();
 
         WeakReferenceMessenger.Default.Register<GameMoveMessage>(this, (r, m) =>
