@@ -1,4 +1,4 @@
-﻿namespace CodeBreaker.WinUI.Views;
+﻿namespace CodeBreaker.WinUI.Views.Components;
 
 public sealed partial class KeyPegsView : UserControl
 {

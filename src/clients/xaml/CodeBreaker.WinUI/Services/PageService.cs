@@ -1,7 +1,7 @@
 ﻿using CodeBreaker.ViewModels;
 using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Views;
-
+using CodeBreaker.WinUI.Views.Pages;
 
 namespace CodeBreaker.WinUI.Services;
 

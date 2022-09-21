@@ -3,7 +3,7 @@
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.UI.Xaml.Media.Animation;
 
-namespace CodeBreaker.WinUI.Views;
+namespace CodeBreaker.WinUI.Views.Components;
 
 public sealed partial class PegSelectionView : UserControl
 {

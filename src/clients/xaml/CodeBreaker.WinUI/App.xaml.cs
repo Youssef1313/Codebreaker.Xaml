@@ -14,6 +14,7 @@ using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Services;
 using CodeBreaker.WinUI.ViewModels;
 using CodeBreaker.WinUI.Views;
+using CodeBreaker.WinUI.Views.Pages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

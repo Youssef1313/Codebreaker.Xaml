@@ -7,7 +7,7 @@ using Microsoft.UI.Xaml.Media;
 
 using Windows.System;
 
-namespace CodeBreaker.WinUI.Views;
+namespace CodeBreaker.WinUI.Views.Pages;
 
 // TODO: Update NavigationViewItem titles and icons in ShellPage.xaml.
 public sealed partial class ShellPage : Page

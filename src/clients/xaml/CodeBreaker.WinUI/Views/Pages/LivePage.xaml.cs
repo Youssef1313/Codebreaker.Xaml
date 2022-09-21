@@ -6,7 +6,7 @@ using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Shapes;
 
-namespace CodeBreaker.WinUI.Views;
+namespace CodeBreaker.WinUI.Views.Pages;
 
 public sealed partial class LivePage : Page
 {
