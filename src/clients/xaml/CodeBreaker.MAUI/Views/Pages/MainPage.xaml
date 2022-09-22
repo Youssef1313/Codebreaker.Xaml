@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:views="clr-namespace:CodeBreaker.MAUI.Views"
+             xmlns:components="clr-namespace:CodeBreaker.MAUI.Views.Components"
              xmlns:conv="clr-namespace:CodeBreaker.MAUI.Converters"
              Title="Codebreaker"
-             x:Class="CodeBreaker.MAUI.MainPage">
+             x:Class="CodeBreaker.MAUI.Views.Pages.MainPage">
     
     <ContentPage.Resources>
         <conv:GameStatusToIsVisibleConverter x:Key="GameStatusVisibleConverter" />
@@ -40,7 +40,7 @@
 
                 </HorizontalStackLayout>
 
-                <views:PegSelectionView
+                <components:PegSelectionView
                     IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"/>
 
                 <ListView

@@ -1,4 +1,4 @@
-namespace CodeBreaker.MAUI.Views;
+namespace CodeBreaker.MAUI.Views.Components;
 
 public partial class PegSelectionView : ContentView
 {

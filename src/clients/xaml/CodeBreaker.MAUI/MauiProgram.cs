@@ -5,6 +5,7 @@ using CodeBreaker.MAUI.Services;
 using CodeBreaker.Services;
 using CodeBreaker.Services.Authentication;
 using Microsoft.Extensions.Configuration;
+using CodeBreaker.MAUI.Views.Pages;
 
 namespace CodeBreaker.MAUI;
 

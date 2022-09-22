@@ -3,7 +3,7 @@ using CodeBreaker.ViewModels;
 
 using CommunityToolkit.Mvvm.Messaging;
 
-namespace CodeBreaker.MAUI;
+namespace CodeBreaker.MAUI.Views.Pages;
 
 public partial class MainPage : ContentPage
 {
