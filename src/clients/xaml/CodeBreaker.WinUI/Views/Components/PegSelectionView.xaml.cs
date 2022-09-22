@@ -16,10 +16,10 @@ public sealed partial class PegSelectionView : UserControl
             if (m.GameMoveValue is GameMoveValue.Started)
             {
                 var connectedAnimation = ConnectedAnimationService.GetForCurrentView();
-                connectedAnimation?.PrepareToAnimate("guess1", guess1);
-                connectedAnimation?.PrepareToAnimate("guess2", guess2);
-                connectedAnimation?.PrepareToAnimate("guess3", guess3);
-                connectedAnimation?.PrepareToAnimate("guess4", guess4);
+                //connectedAnimation?.PrepareToAnimate("guess1", guess1);
+                //connectedAnimation?.PrepareToAnimate("guess2", guess2);
+                //connectedAnimation?.PrepareToAnimate("guess3", guess3);
+                //connectedAnimation?.PrepareToAnimate("guess4", guess4);
             }
         });
 
@@ -29,7 +29,11 @@ public sealed partial class PegSelectionView : UserControl
     public GamePageViewModel ViewModel
     {
         get => (GamePageViewModel)GetValue(ViewModelProperty);
-        set => SetValue(ViewModelProperty, value);
+        set
+        {
+            SetValue(ViewModelProperty, value);
+            PegSelectionViewControl.DataContext = ViewModel;
+        }
     }
 
     public static readonly DependencyProperty ViewModelProperty =

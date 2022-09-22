@@ -9,9 +9,8 @@ using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
 using Microsoft.Extensions.Options;
-using Microsoft.Identity.Client;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
+using System.ComponentModel;
 
 namespace CodeBreaker.ViewModels;
 
@@ -39,12 +38,12 @@ public class GamePageViewModelOptions
 public partial class GamePageViewModel
 {
     private readonly IGameClient _client;
-
     private int _moveNumber = 0;
-    private Guid _gameId = Guid.Empty;
+    private GameDto? _game;
     private readonly bool _enableDialogs = false;
     private readonly IDialogService _dialogService;
     private readonly IAuthService _authService;
+
     public GamePageViewModel(
         IGameClient client,
         IOptions<GamePageViewModelOptions> options,
@@ -70,14 +69,33 @@ public partial class GamePageViewModel
 
         PropertyChanged += (sender, e) =>
         {
-            if (_selectedColorPropertyNames.Contains(e.PropertyName))
-                SetMoveCommand.NotifyCanExecuteChanged();
-
             if (e.PropertyName == nameof(GameStatus))
                 WeakReferenceMessenger.Default.Send(new GameStateChangedMessage(GameStatus));
         };
 
+        Fields.ListChanged += (sender, e) =>
+            SetMoveCommand.NotifyCanExecuteChanged();
+
         SetGamerNameIfAvailable();
+    }
+
+    public GameDto? Game
+    {
+        get => _game;
+        set
+        {
+            OnPropertyChanging(nameof(Game));
+            OnPropertyChanging(nameof(Fields));
+            _game = value;
+
+            Fields.Clear();
+
+            for (int i = 0; i < value?.Type.Holes; i++)
+                Fields.Add(new ());
+
+            OnPropertyChanged(nameof(Game));
+            OnPropertyChanged(nameof(Fields));
+        }
     }
 
     [ObservableProperty]
@@ -87,7 +105,7 @@ public partial class GamePageViewModel
     [ObservableProperty]
     private bool _isNamePredefined = false;
 
-    public ObservableCollection<string> ColorList { get; } = new();
+    public BindingList<SelectedFieldViewModel> Fields { get; } = new();
 
     public ObservableCollection<SelectionAndKeyPegs> GameMoves { get; } = new();
 
@@ -112,13 +130,8 @@ public partial class GamePageViewModel
 
             GameStatus = GameMode.Started;
 
-            _gameId = response.Game.GameId;
+            Game = response.Game;
             _moveNumber++;
-
-            ColorList.Clear();
-
-            foreach (string color in response.Game.Type.Fields)
-                ColorList.Add(color);
         }
         catch (Exception ex)
         {
@@ -139,7 +152,6 @@ public partial class GamePageViewModel
     {
         ClearSelectedColor();
         GameMoves.Clear();
-        ColorList.Clear();
         GameStatus = GameMode.NotRunning;
         ErrorMessage.IsVisible = false;
         ErrorMessage.Message = string.Empty;
@@ -156,12 +168,15 @@ public partial class GamePageViewModel
             InProgress = true;
             WeakReferenceMessenger.Default.Send(new GameMoveMessage(GameMoveValue.Started));
 
-            if (_selectedColor1 is null || _selectedColor2 is null || _selectedColor3 is null || _selectedColor4 is null)
+            if (_game is null)
+                throw new InvalidOperationException("no game running");
+
+            if (Fields.Count != _game.Value.Type.Holes || Fields.Any(x => !x.IsSet))
                 throw new InvalidOperationException("all colors need to be selected before invoking this method");
 
-            string[] selection = { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 };
+            string[] selection = Fields.Select(x => x.Value!).ToArray();
 
-            CreateMoveResponse response = await _client.SetMoveAsync(_gameId, selection);
+            CreateMoveResponse response = await _client.SetMoveAsync(_game.Value.GameId, selection);
 
             SelectionAndKeyPegs selectionAndKeyPegs = new(selection, response.KeyPegs.ToModel(), _moveNumber++);
             GameMoves.Add(selectionAndKeyPegs);
@@ -206,14 +221,12 @@ public partial class GamePageViewModel
     }
 
     private bool CanSetMove =>
-        new[] { _selectedColor1, _selectedColor2, _selectedColor3, _selectedColor4 }.All(s => s is not null);
+        Fields.All(s => s is not null && s.IsSet);
 
     private void ClearSelectedColor()
     {
-        SelectedColor1 = null;
-        SelectedColor2 = null;
-        SelectedColor3 = null;
-        SelectedColor4 = null;
+        for (int i = 0; i < Fields.Count; i++)
+            Fields[i].Reset();
 
         SetMoveCommand.NotifyCanExecuteChanged();
     }
@@ -228,20 +241,6 @@ public partial class GamePageViewModel
         Name = gamerName;
         IsNamePredefined = true;
     }
-
-    [ObservableProperty]
-    private string? _selectedColor1;
-
-    [ObservableProperty]
-    private string? _selectedColor2;
-
-    [ObservableProperty]
-    private string? _selectedColor3;
-
-    [ObservableProperty]
-    private string? _selectedColor4;
-
-    private readonly string[] _selectedColorPropertyNames = { nameof(SelectedColor1), nameof(SelectedColor2), nameof(SelectedColor3), nameof(SelectedColor4) };
 
     public InfoMessageViewModel ErrorMessage { get; } = new InfoMessageViewModel { IsError = true, Title = "Error" };
 
