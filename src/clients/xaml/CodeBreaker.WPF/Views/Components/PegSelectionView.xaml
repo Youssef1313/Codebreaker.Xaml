@@ -3,55 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:conv="clr-namespace:CodeBreaker.WPF.Converters"
-             xmlns:local="clr-namespace:CodeBreaker.WPF.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             x:Name="PegSelectionViewControl">
     <UserControl.Resources>
         <DataTemplate x:Key="SelectColorTemplate">
             <Grid>
                 <Ellipse Fill="{Binding Mode=OneWay, Converter={StaticResource ColorConverter}}" Width="60" Height="60" />
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="SelectColorItemTemplate">
+            <ComboBox
+                Margin="8"
+                ItemsSource="{Binding ElementName=PegSelectionViewControl, Path=ViewModel.Game.Type.Fields, Mode=OneWay}"
+                ItemTemplate="{StaticResource SelectColorTemplate}"
+                SelectedItem="{Binding Value, Mode=TwoWay}" />
+        </DataTemplate>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="80" />
-            <ColumnDefinition SharedSizeGroup="pegsizegroup" Width="auto" />
-            <ColumnDefinition SharedSizeGroup="pegsizegroup" Width="auto" />
-            <ColumnDefinition SharedSizeGroup="pegsizegroup" Width="auto" />
-            <ColumnDefinition SharedSizeGroup="pegsizegroup" Width="auto" />
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
-        <ComboBox 
-            Margin="8"
-            Grid.Column="1"
-            ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" 
-            ItemTemplate="{StaticResource SelectColorTemplate}"
-            SelectedItem="{Binding ViewModel.SelectedColor1, Mode=TwoWay}" />
-        <ComboBox 
-            Margin="8"
-            Grid.Column="2"
-            ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" 
-            ItemTemplate="{StaticResource SelectColorTemplate}"
-            SelectedItem="{Binding ViewModel.SelectedColor2, Mode=TwoWay}" />
-        <ComboBox 
-            Margin="8"
-            Grid.Column="3"
-            ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}" 
-            ItemTemplate="{StaticResource SelectColorTemplate}"                
-            SelectedItem="{Binding ViewModel.SelectedColor3, Mode=TwoWay}" />
-        <ComboBox 
-            Margin="8"
-            Grid.Column="4"
-            ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
-            ItemTemplate="{StaticResource SelectColorTemplate}"                
-            SelectedItem="{Binding ViewModel.SelectedColor4, Mode=TwoWay}" />
+    <StackPanel Orientation="Horizontal">
+        <ItemsControl
+            ItemsSource="{Binding ViewModel.Fields, Mode=OneWay}"
+            ItemTemplate="{StaticResource SelectColorItemTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
         <Button 
             Margin="8"
-            Grid.Column="5" 
             Content="Set Move" 
             Command="{Binding ViewModel.SetMoveCommand, Mode=OneWay}" />
-
-    </Grid>
+    </StackPanel>
 </UserControl>
