@@ -34,7 +34,7 @@ public sealed partial class App : Application, IDisposable
             })
             .ConfigureServices((context, services) =>
             {
-                services.Configure<GamePageViewModelOptions>(options => options.EnableDialogs = true);
+                services.Configure<GamePageViewModelOptions>(options => options.EnableDialogs = false);
                 services.AddTransient<IDialogService, Services.WPFDialogService>();
                 services.AddScoped<GamePageViewModel>();
                 services.AddScoped<IAuthService, AuthService>();

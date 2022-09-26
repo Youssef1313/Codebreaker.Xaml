@@ -16,46 +16,45 @@
         <conv:ColorNameToBrushConverter x:Key="ColorConverter" />
     </Window.Resources>
 
-    <Grid x:Name="MainGrid" Grid.IsSharedSizeScope="True">
-        <VisualStateManager.VisualStateGroups>
-            <VisualStateGroup x:Name="GameModes">
-                <VisualState x:Name="NotRunning"/>
-                <VisualState x:Name="Started">
-                    <Storyboard>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textName" Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="textEditName" Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="buttonStart" Storyboard.TargetProperty="(UIElement.Visibility)">
-                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Hidden}"/>
-                        </ObjectAnimationUsingKeyFrames>
-                    </Storyboard>
-                </VisualState>
-                <VisualState x:Name="MoveSet"/>
-                <VisualState x:Name="Lost"/>
-                <VisualState x:Name="Won"/>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="auto" />
-        </Grid.ColumnDefinitions>
-        <Menu>
 
-        </Menu>
-        <ProgressBar 
-            Height="40" Margin="12"
-            Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Minimum="0" Maximum="100" IsIndeterminate="True" 
-            Visibility="{Binding ViewModel.InProgress, Converter={StaticResource BoolToVisibilityConverter}}" />
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <!-- TODO: Create component for this, to make it (more) generic. -->
+            <Grid Visibility="{Binding Path=ViewModel.InfoMessage.IsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Information: " VerticalAlignment="Center" Margin="8,0" />
+                <TextBlock Grid.Column="1" Text="{Binding ViewModel.InfoMessage.Message, Mode=OneWay}" VerticalAlignment="Center" Margin="8,0" />
+                <Button
+                    Grid.Column="2"
+                    Content="{Binding ViewModel.InfoMessage.ActionTitle, Mode=OneWay}" Padding="30,8"
+                    Command="{Binding ViewModel.InfoMessage.ActionCommand, Mode=OneWay}" />
+            </Grid>
+            <Grid Visibility="{Binding Path=ViewModel.ErrorMessage.IsVisible, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Error: " VerticalAlignment="Center" Margin="8,0" />
+                <TextBlock Grid.Column="1" Text="{Binding ViewModel.ErrorMessage.Message, Mode=OneWay}" VerticalAlignment="Center" Margin="8,0" />
+                <Button
+                    Grid.Column="2"
+                    Content="{Binding ViewModel.ErrorMessage.ActionTitle, Mode=OneWay}" Padding="30,8"
+                    Command="{Binding ViewModel.ErrorMessage.ActionCommand, Mode=OneWay}" />
+            </Grid>
+        </StackPanel>
 
         <Grid Grid.Row="1" Margin="8" Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Start}">
             <Grid.RowDefinitions>
@@ -66,31 +65,31 @@
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="1*" />
             </Grid.ColumnDefinitions>
-        <TextBlock 
-            x:Name="textName"
+            <TextBlock 
+                x:Name="textName"
                 Grid.Row="0" Grid.Column="0"
                 Text="Enter your name:" />
-        <TextBox 
-            x:Name="textEditName"            
+            <TextBox 
+                x:Name="textEditName"            
                 Grid.Row="1" Grid.Column="0"
                 VerticalContentAlignment="Center"
-            Text="{Binding ViewModel.Name, Mode=TwoWay}" />
-        <Button
-            x:Name="buttonStart"            
+                Text="{Binding ViewModel.Name, Mode=TwoWay}" />
+            <Button
+                x:Name="buttonStart"
                 Margin="8,0,0,0"
                 Padding="6"
                 Grid.Row="1" Grid.Column="1"
                 Content="Start Game" 
-            Command="{Binding ViewModel.StartGameCommand, Mode=OneTime}"  />
+                Command="{Binding ViewModel.StartGameCommand, Mode=OneTime}"  />
         </Grid>
-        
-        <components:PegSelectionView 
+
+        <components:PegSelectionView
             Grid.Row="1"
             Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Cancelable}"
             Margin="86,0,0,8"
             ViewModel="{Binding ViewModel, ElementName=Self, Mode=OneWay}" />
 
-        <ListView 
+        <ListView
             Height="Auto"
             Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
             Grid.Row="2"
