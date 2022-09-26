@@ -15,10 +15,10 @@ public partial class GameWindow : Window
 
         InitializeComponent();
 
-        WeakReferenceMessenger.Default.Register<GameStateChangedMessage>(this, (r, m) =>
-        {
-            VisualStateManager.GoToElementState(MainGrid, m.GameMode.ToString(), true);
-        });
+        //WeakReferenceMessenger.Default.Register<GameStateChangedMessage>(this, (r, m) =>
+        //{
+        //    VisualStateManager.GoToElementState(MainGrid, m.GameMode.ToString(), true);
+        //});
     }
 
     public GamePageViewModel ViewModel

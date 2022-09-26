@@ -8,13 +8,13 @@
              x:Name="PegSelectionViewControl">
     <UserControl.Resources>
         <DataTemplate x:Key="SelectColorTemplate">
-            <Grid>
-                <Ellipse Fill="{Binding Mode=OneWay, Converter={StaticResource ColorConverter}}" Width="60" Height="60" />
-            </Grid>
+            <Ellipse Fill="{Binding Mode=OneWay, Converter={StaticResource ColorConverter}}" Width="60" Height="60" />
         </DataTemplate>
         <DataTemplate x:Key="SelectColorItemTemplate">
             <ComboBox
-                Margin="8"
+                Margin="0,0,8,0"
+                MinWidth="88"
+                MinHeight="60"
                 ItemsSource="{Binding ElementName=PegSelectionViewControl, Path=ViewModel.Game.Type.Fields, Mode=OneWay}"
                 ItemTemplate="{StaticResource SelectColorTemplate}"
                 SelectedItem="{Binding Value, Mode=TwoWay}" />
@@ -31,7 +31,7 @@
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         <Button 
-            Margin="8"
+            Padding="40,0"
             Content="Set Move" 
             Command="{Binding ViewModel.SetMoveCommand, Mode=OneWay}" />
     </StackPanel>
