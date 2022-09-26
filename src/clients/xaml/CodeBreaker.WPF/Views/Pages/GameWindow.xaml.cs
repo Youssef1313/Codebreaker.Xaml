@@ -4,9 +4,9 @@ using System.Windows;
 
 namespace CodeBreaker.WPF.Views.Pages;
 
-public partial class MainWindow : Window
+public partial class GameWindow : Window
 {
-    public MainWindow()
+    public GameWindow()
     {
         ViewModel = (Application.Current as App)?.GetService<GamePageViewModel>() ??
                 throw new InvalidOperationException();
@@ -28,5 +28,5 @@ public partial class MainWindow : Window
     }
 
     public static readonly DependencyProperty ViewModelProperty =
-        DependencyProperty.Register("ViewModel", typeof(GamePageViewModel), typeof(MainWindow), new PropertyMetadata(null));
+        DependencyProperty.Register("ViewModel", typeof(GamePageViewModel), typeof(GameWindow), new PropertyMetadata(null));
 }
