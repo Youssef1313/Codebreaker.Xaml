@@ -10,7 +10,6 @@ using CommunityToolkit.Mvvm.Messaging;
 
 using Microsoft.Extensions.Options;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace CodeBreaker.ViewModels;
 
@@ -73,9 +72,6 @@ public partial class GamePageViewModel
                 WeakReferenceMessenger.Default.Send(new GameStateChangedMessage(GameStatus));
         };
 
-        Fields.ListChanged += (sender, e) =>
-            SetMoveCommand.NotifyCanExecuteChanged();
-
         SetGamerNameIfAvailable();
     }
 
@@ -91,7 +87,11 @@ public partial class GamePageViewModel
             Fields.Clear();
 
             for (int i = 0; i < value?.Type.Holes; i++)
-                Fields.Add(new ());
+            {
+                SelectedFieldViewModel field = new();
+                field.PropertyChanged += (sender, e) => SetMoveCommand.NotifyCanExecuteChanged();
+                Fields.Add(field);
+            }
 
             OnPropertyChanged(nameof(Game));
             OnPropertyChanged(nameof(Fields));
@@ -105,7 +105,7 @@ public partial class GamePageViewModel
     [ObservableProperty]
     private bool _isNamePredefined = false;
 
-    public BindingList<SelectedFieldViewModel> Fields { get; } = new();
+    public ObservableCollection<SelectedFieldViewModel> Fields { get; } = new(); // BindingList does not work here
 
     public ObservableCollection<SelectionAndKeyPegs> GameMoves { get; } = new();
 
