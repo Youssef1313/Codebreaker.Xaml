@@ -5,10 +5,10 @@ using CommunityToolkit.Mvvm.Messaging;
 
 namespace CodeBreaker.MAUI.Views.Pages;
 
-public partial class MainPage : ContentPage
+public partial class GamePage : ContentPage
 {
 
-	public MainPage(GamePageViewModel viewModel)
+	public GamePage(GamePageViewModel viewModel)
 	{
 		ViewModel = viewModel;
 

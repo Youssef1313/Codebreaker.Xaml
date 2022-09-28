@@ -39,7 +39,7 @@ public static class MauiProgram
         {
 			client.BaseAddress = new(builder.Configuration["ApiBase"]);
 		});
-		builder.Services.AddTransient<MainPage>();
+		builder.Services.AddTransient<GamePage>();
 		return builder.Build();
 	}
 }

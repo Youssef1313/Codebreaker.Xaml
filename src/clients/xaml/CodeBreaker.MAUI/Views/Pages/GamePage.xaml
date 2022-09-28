@@ -5,7 +5,7 @@
              xmlns:components="clr-namespace:CodeBreaker.MAUI.Views.Components"
              xmlns:conv="clr-namespace:CodeBreaker.MAUI.Converters"
              Title="Codebreaker"
-             x:Class="CodeBreaker.MAUI.Views.Pages.MainPage">
+             x:Class="CodeBreaker.MAUI.Views.Pages.GamePage">
     
     <ContentPage.Resources>
         <conv:GameStatusToIsVisibleConverter x:Key="GameStatusVisibleConverter" />
