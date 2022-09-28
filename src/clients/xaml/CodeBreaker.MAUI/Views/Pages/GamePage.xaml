@@ -22,9 +22,9 @@
             Padding="30,0" 
             VerticalOptions="FillAndExpand">
                 <ActivityIndicator 
-                IsRunning="{Binding ViewModel.InProgress, Mode=OneWay}" 
-                HorizontalOptions="Center" 
-                VerticalOptions="Center" />
+                    IsRunning="{Binding ViewModel.InProgress, Mode=OneWay}" 
+                    HorizontalOptions="Center" 
+                    VerticalOptions="Center" />
 
                 <HorizontalStackLayout
                     IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Start}">
@@ -40,8 +40,7 @@
 
                 </HorizontalStackLayout>
 
-                <components:PegSelectionView
-                    IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"/>
+                <components:PegSelectionView IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}" />
 
                 <ListView
                     IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"

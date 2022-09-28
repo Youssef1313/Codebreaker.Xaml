@@ -22,7 +22,6 @@ public class ColornameToBrushConverter : IValueConverter
     public Brush YellowBrush { get; set; } = s_yellowBrush;
     private Brush EmptyBrush { get; set; } = s_emptyBrush;
 
-
     public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         // with .NET MAUI (contrary to other XAML technologies,

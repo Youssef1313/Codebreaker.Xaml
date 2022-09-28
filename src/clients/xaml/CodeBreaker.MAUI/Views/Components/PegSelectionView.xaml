@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CodeBreaker.MAUI.Views.Components.PegSelectionView">
-    <HorizontalStackLayout Margin="10,0">
+             xmlns:local="clr-namespace:CodeBreaker.MAUI.Views.Components"
+             xmlns:vm="clr-namespace:CodeBreaker.ViewModels;assembly=CodeBreaker.ViewModels"
+             xmlns:pages="clr-namespace:CodeBreaker.MAUI.Views.Pages"
+             x:Class="CodeBreaker.MAUI.Views.Components.PegSelectionView"
+             x:Name="PegSelectionViewControl">
+    <HorizontalStackLayout Margin="10,0"
+                           BindableLayout.ItemsSource="{Binding Path=ViewModel.Fields, Mode=OneWay}">
+        <BindableLayout.ItemTemplate>
+            <DataTemplate>
+                <Picker
+                    ItemsSource="{Binding Path=BindingContext.ViewModel.Game.Type.Fields, Mode=OneWay, Source={x:Reference PegSelectionViewControl}}"
+                    SelectedItem="{Binding Value, Mode=TwoWay}" />
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
         <HorizontalStackLayout.Resources>
             <Style TargetType="Picker">
                 <Setter Property="Background" Value="DarkGray" />
@@ -12,17 +24,5 @@
                 <Setter Property="WidthRequest" Value="50" />
             </Style>
         </HorizontalStackLayout.Resources>
-        <Picker x:Name="guess1"
-                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
-                SelectedItem="{Binding ViewModel.SelectedColor1, Mode=TwoWay}" />
-        <Picker x:Name="guess2"
-                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
-                SelectedItem="{Binding ViewModel.SelectedColor2, Mode=TwoWay}" />
-        <Picker x:Name="guess3"
-                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
-                SelectedItem="{Binding ViewModel.SelectedColor3, Mode=TwoWay}" />
-        <Picker x:Name="guess4"
-                ItemsSource="{Binding ViewModel.ColorList, Mode=OneWay}"
-                SelectedItem="{Binding ViewModel.SelectedColor4, Mode=TwoWay}" />
     </HorizontalStackLayout>
 </ContentView>
