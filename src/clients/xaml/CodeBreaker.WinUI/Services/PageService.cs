@@ -1,7 +1,7 @@
 ﻿using CodeBreaker.ViewModels;
 using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Views;
-
+using CodeBreaker.WinUI.Views.Pages;
 
 namespace CodeBreaker.WinUI.Services;
 
@@ -12,7 +12,7 @@ public class PageService : IPageService
     public PageService()
     {
         Configure<AuthPageViewModel, AuthPage>();
-        Configure<CodeBreaker6x4ViewModel, GamePage>();
+        Configure<GamePageViewModel, GamePage>();
         Configure<LivePageViewModel, LivePage>();
     }
 

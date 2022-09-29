@@ -1,0 +1,42 @@
+﻿<UserControl
+    x:Class="CodeBreaker.WinUI.Views.Components.PegSelectionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:CodeBreaker.ViewModels"
+    mc:Ignorable="d"
+    x:Name="PegSelectionViewControl">
+    <UserControl.Resources>
+        <DataTemplate x:Key="SelectColorTemplate">
+            <Grid>
+                <Ellipse Fill="{Binding Mode=OneWay, Converter={StaticResource ColorConverter}}" Width="60" Height="60" />
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="SelectColorItemTemplate" x:DataType="vm:SelectedFieldViewModel">
+            <ComboBox
+                Margin="4" Width="112"
+                ItemsSource="{Binding ElementName=PegSelectionViewControl, Path=DataContext.Game.Type.Fields, Mode=OneWay}"
+                SelectedItem="{x:Bind Path=Value, Mode=TwoWay}"
+                ItemTemplate="{StaticResource SelectColorTemplate}" />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <ItemsControl
+            Grid.Column="0"
+            ItemsSource="{x:Bind Path=ViewModel.Fields, Mode=OneWay}"
+            ItemTemplate="{StaticResource SelectColorItemTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" Height="92" Margin="16,0,0,0" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <AppBarButton Label="Move" Command="{x:Bind ViewModel.SetMoveCommand, Mode=OneWay}" Grid.Column="1" Margin="4" Icon="Send" />
+    </Grid>
+</UserControl>

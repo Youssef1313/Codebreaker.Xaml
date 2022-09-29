@@ -11,10 +11,10 @@ internal class GameStatusToVisibilityConverter : IValueConverter
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
         static Visibility GetStartVisibility(GameMode gameMode) =>
-            (gameMode is GameMode.Started or GameMode.MoveSet) ? Visibility.Collapsed : Visibility.Visible;
+            (gameMode is not GameMode.NotRunning) ? Visibility.Collapsed : Visibility.Visible;
 
         static Visibility GetRunningVisibility(GameMode gameMode) =>
-            gameMode != GameMode.NotRunning ? Visibility.Visible : Visibility.Collapsed;
+            (gameMode is GameMode.NotRunning) ? Visibility.Collapsed : Visibility.Visible;
 
         static Visibility GetCancelVisibility(GameMode gameMode) =>
             (gameMode is GameMode.Started or GameMode.MoveSet) ? Visibility.Visible : Visibility.Collapsed;

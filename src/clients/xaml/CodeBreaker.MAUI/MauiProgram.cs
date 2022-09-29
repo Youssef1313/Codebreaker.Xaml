@@ -5,6 +5,7 @@ using CodeBreaker.MAUI.Services;
 using CodeBreaker.Services;
 using CodeBreaker.Services.Authentication;
 using Microsoft.Extensions.Configuration;
+using CodeBreaker.MAUI.Views.Pages;
 
 namespace CodeBreaker.MAUI;
 
@@ -30,15 +31,15 @@ public static class MauiProgram
 
         builder.Configuration.AddJsonStream(FileSystem.OpenAppPackageFileAsync("appsettings.json").Result);
         builder.Configuration.AddJsonStream(FileSystem.OpenAppPackageFileAsync($"appsettings.{Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}.json").Result);
-        builder.Services.Configure<CodeBreaker6x4ViewModelOptions>(options => options.EnableDialogs = true);
+        builder.Services.Configure<GamePageViewModelOptions>(options => options.EnableDialogs = true);
         builder.Services.AddScoped<IDialogService, MauiDialogService>();
         builder.Services.AddSingleton<IAuthService, AuthService>();
-        builder.Services.AddScoped<CodeBreaker6x4ViewModel>();
+        builder.Services.AddScoped<GamePageViewModel>();
 		builder.Services.AddHttpClient<IGameClient, GameClient>(client =>
         {
 			client.BaseAddress = new(builder.Configuration["ApiBase"]);
 		});
-		builder.Services.AddTransient<MainPage>();
+		builder.Services.AddTransient<GamePage>();
 		return builder.Build();
 	}
 }

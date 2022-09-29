@@ -17,7 +17,7 @@
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
     <None Remove="appsettings.Production.json" />
-    <None Remove="Styles\Codebreaker6x4Styles.xaml" />
+    <None Remove="Styles\CodeBreakerTemplates.xaml" />
     <None Remove="Views\AuthPage.xaml" />
     <None Remove="Views\KeyPegsView.xaml" />
     <None Remove="Views\LivePage.xaml" />
@@ -72,24 +72,24 @@
 
 
   <ItemGroup>
-    <Page Update="Styles\Codebreaker6x4Styles.xaml">
+    <Page Update="Views\Templates\CodeBreakerTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
 
 
   <ItemGroup>
-    <Page Update="Views\KeyPegsView.xaml">
+    <Page Update="Views\Components\KeyPegsView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Update="Views\LivePage.xaml">
+    <Page Update="Views\Pages\LivePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
 
 
   <ItemGroup>
-    <Page Update="Views\PegSelectionView.xaml">
+    <Page Update="Views\Components\PegSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -125,7 +125,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Views\AuthPage.xaml">
+    <Page Update="Views\Pages\AuthPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

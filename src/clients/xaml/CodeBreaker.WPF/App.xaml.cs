@@ -34,9 +34,9 @@ public sealed partial class App : Application, IDisposable
             })
             .ConfigureServices((context, services) =>
             {
-                services.Configure<CodeBreaker6x4ViewModelOptions>(options => options.EnableDialogs = true);
+                services.Configure<GamePageViewModelOptions>(options => options.EnableDialogs = false);
                 services.AddTransient<IDialogService, Services.WPFDialogService>();
-                services.AddScoped<CodeBreaker6x4ViewModel>();
+                services.AddScoped<GamePageViewModel>();
                 services.AddScoped<IAuthService, AuthService>();
                 services.AddHttpClient<IGameClient, GameClient>(client =>
                 {

@@ -14,6 +14,7 @@ using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Services;
 using CodeBreaker.WinUI.ViewModels;
 using CodeBreaker.WinUI.Views;
+using CodeBreaker.WinUI.Views.Pages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -44,7 +45,7 @@ public partial class App : Application
             // Other Activation Handlers
 
             // Services
-            services.Configure<CodeBreaker6x4ViewModelOptions>(options => options.EnableDialogs = false);
+            services.Configure<GamePageViewModelOptions>(options => options.EnableDialogs = false);
             services.Configure<LiveClientOptions>(context.Configuration);
 
             services.AddTransient<INavigationViewService, NavigationViewService>();
@@ -63,7 +64,7 @@ public partial class App : Application
             services.AddTransient<AuthPage>();
 
             services.AddHttpClient<IGameClient, GameClient>((HttpClient client) => client.BaseAddress = new(context.Configuration["ApiBase"]));
-            services.AddScoped<CodeBreaker6x4ViewModel>();
+            services.AddScoped<GamePageViewModel>();
             services.AddTransient<GamePage>();
 
             services.AddSingleton<LiveClient>();

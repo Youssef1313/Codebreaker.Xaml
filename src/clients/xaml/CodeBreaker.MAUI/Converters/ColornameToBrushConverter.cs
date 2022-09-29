@@ -6,13 +6,13 @@ namespace CodeBreaker.MAUI.Converters;
 
 public class ColornameToBrushConverter : IValueConverter
 {
-    private static Brush s_blackBrush = new SolidColorBrush(Colors.Black);
-    private static Brush s_whiteBrush = new SolidColorBrush(Colors.White);
-    private static Brush s_redBrush = new SolidColorBrush(Color.FromArgb("#d13438"));
-    private static Brush s_greenBrush = new SolidColorBrush(Color.FromArgb("#00ad56"));
-    private static Brush s_blueBrush = new SolidColorBrush(Color.FromArgb("#4f6bed"));
-    private static Brush s_yellowBrush = new SolidColorBrush(Color.FromArgb("#fce100"));
-    private static Brush s_emptyBrush = new SolidColorBrush(Color.FromArgb("#a0aeb2"));
+    private readonly static Brush s_blackBrush = new SolidColorBrush(Colors.Black);
+    private readonly static Brush s_whiteBrush = new SolidColorBrush(Colors.White);
+    private readonly static Brush s_redBrush = new SolidColorBrush(Color.FromArgb("#d13438"));
+    private readonly static Brush s_greenBrush = new SolidColorBrush(Color.FromArgb("#00ad56"));
+    private readonly static Brush s_blueBrush = new SolidColorBrush(Color.FromArgb("#4f6bed"));
+    private readonly static Brush s_yellowBrush = new SolidColorBrush(Color.FromArgb("#fce100"));
+    private readonly static Brush s_emptyBrush = new SolidColorBrush(Color.FromArgb("#a0aeb2"));
 
     public Brush BlackBrush { get; set; } = s_blackBrush;
     public Brush WhiteBrush { get; set; } = s_whiteBrush;
@@ -21,7 +21,6 @@ public class ColornameToBrushConverter : IValueConverter
     public Brush BlueBrush { get; set; } = s_blueBrush;
     public Brush YellowBrush { get; set; } = s_yellowBrush;
     private Brush EmptyBrush { get; set; } = s_emptyBrush;
-
 
     public object? Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
