@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CodeBreaker.Shared.Models.Data;
 
-namespace CodeBreaker.ViewModels;
+namespace CodeBreaker.ViewModels.Components;
 
 public class GameViewModel
 {

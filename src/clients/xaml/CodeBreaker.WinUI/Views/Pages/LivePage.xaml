@@ -7,7 +7,7 @@
     xmlns:ic="using:Microsoft.Xaml.Interactions.Core"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:components="using:CodeBreaker.WinUI.Views.Components"
-    xmlns:vm="using:CodeBreaker.ViewModels"
+    xmlns:vm="using:CodeBreaker.ViewModels.Components"
     xmlns:conv="using:CodeBreaker.WinUI.Converters"
     mc:Ignorable="d">
     <i:Interaction.Behaviors>
