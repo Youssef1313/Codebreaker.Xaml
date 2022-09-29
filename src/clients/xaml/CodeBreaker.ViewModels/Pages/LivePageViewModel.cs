@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using CodeBreaker.Services;
 using CodeBreaker.Shared.Models.Data;
+using CodeBreaker.ViewModels.Components;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 

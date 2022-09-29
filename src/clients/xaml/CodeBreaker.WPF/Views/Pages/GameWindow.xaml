@@ -6,7 +6,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:components="clr-namespace:CodeBreaker.WPF.Views.Components"
         xmlns:conv="clr-namespace:CodeBreaker.WPF.Converters"
-        xmlns:local="clr-namespace:CodeBreaker.WPF"
         mc:Ignorable="d"
         Title="CodeBreaker" Height="450" Width="800">
     <Window.Resources>
