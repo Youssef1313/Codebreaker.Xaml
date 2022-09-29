@@ -2,6 +2,7 @@
 using CodeBreaker.Services.Authentication;
 using CodeBreaker.Shared.Models.Api;
 using CodeBreaker.Shared.Models.Data;
+using CodeBreaker.Shared.Models.Extensions;
 using CodeBreaker.ViewModels.Services;
 
 using CommunityToolkit.Mvvm.ComponentModel;
