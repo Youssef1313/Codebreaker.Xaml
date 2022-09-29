@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using CodeBreaker.LiveService.Shared;
+﻿using CodeBreaker.Shared.Models.Live;
 
 namespace CodeBreaker.ViewModels;
 
