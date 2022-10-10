@@ -120,7 +120,7 @@ public partial class GamePageViewModel
     public bool IsNameEnterable => !InProgress && !_isNamePredefined;
 
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
-    private async Task StartGameAsync()
+    public async Task StartGameAsync()
     {
         try
         {
@@ -162,7 +162,7 @@ public partial class GamePageViewModel
     }
 
     [RelayCommand(CanExecute = nameof(CanSetMove), AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
-    private async Task SetMoveAsync()
+    public async Task SetMoveAsync()
     {
         try
         {
@@ -179,7 +179,7 @@ public partial class GamePageViewModel
 
             CreateMoveResponse response = await _client.SetMoveAsync(_game.Value.GameId, selection);
 
-            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, response.KeyPegs.ToModel(), _moveNumber++);
+            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, response.KeyPegs, _moveNumber++);
             GameMoves.Add(selectionAndKeyPegs);
             GameStatus = GameMode.MoveSet;
 
@@ -248,7 +248,7 @@ public partial class GamePageViewModel
     public InfoMessageViewModel InfoMessage { get; }
 }
 
-public record SelectionAndKeyPegs(string[] GuessPegs, KeyPegs KeyPegs, int MoveNumber);
+public record SelectionAndKeyPegs(string[] GuessPegs, KeyPegsDto KeyPegs, int MoveNumber);
 
 public record class GameStateChangedMessage(GameMode GameMode);
 
