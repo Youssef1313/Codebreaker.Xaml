@@ -1,4 +1,5 @@
-﻿using CodeBreaker.ViewModels;
+﻿using CodeBreaker.Shared.Models.Extensions;
+using CodeBreaker.ViewModels;
 
 using System.Globalization;
 
@@ -12,7 +13,7 @@ internal class SelectionAndKeyPegToKeyVisibleConverter : IValueConverter
         ArgumentNullException.ThrowIfNull(parameter);
         
         if (value is SelectionAndKeyPegs selection && int.TryParse(parameter.ToString(), out int ix ))
-            return ix < selection.KeyPegs.Total;
+            return ix < selection.KeyPegs.ToModel().Total;
 
         return false;
     }
