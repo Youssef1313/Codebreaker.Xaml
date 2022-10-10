@@ -1,4 +1,5 @@
-﻿using CodeBreaker.ViewModels;
+﻿using CodeBreaker.Shared.Models.Extensions;
+using CodeBreaker.ViewModels;
 
 using Microsoft.UI.Xaml.Data;
 
@@ -12,7 +13,7 @@ public class SelectionAndKeyPegToKeyVisibilityConverter : IValueConverter
         
         if (value is SelectionAndKeyPegs selection && int.TryParse(parameter.ToString(), out int ix))
         {
-            return (ix < selection.KeyPegs.Total) 
+            return (ix < selection.KeyPegs.ToModel().Total) 
                 ? Visibility.Visible 
                 : Visibility.Collapsed;
         }
