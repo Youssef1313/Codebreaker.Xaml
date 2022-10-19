@@ -94,7 +94,13 @@
             Orientation="Horizontal"
             Grid.Row="1"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Cancelable}">
-            <!--<AppBarButton Label="Cancel" Icon="Cancel" IsEnabled="False" />-->
+            <Button Command="{x:Bind ViewModel.CancelGameCommand, Mode=OneTime}" Height="92" Margin="0,-6,4,0" Width="100">
+                <StackPanel Orientation="Vertical" Spacing="05">
+                    <SymbolIcon Symbol="Cancel" Visibility="{x:Bind ViewModel.CancelGameCommand.IsRunning, Mode=OneWay,Converter={StaticResource BoolToVisibility},ConverterParameter=True}" />
+                    <ProgressRing Visibility="{x:Bind ViewModel.CancelGameCommand.IsRunning, Mode=OneWay}" />
+                    <TextBlock Text="Cancel" />
+                </StackPanel>
+            </Button>
             <components:PegSelectionView 
                 Grid.Row="2"
                 ViewModel="{x:Bind ViewModel, Mode=OneWay}" />

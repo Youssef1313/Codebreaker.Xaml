@@ -117,10 +117,13 @@ public partial class GamePageViewModel
     [ObservableProperty]
     private bool _inProgress = false;
 
+    [ObservableProperty]
+    private bool _isCancelling = false;
+
     public bool IsNameEnterable => !InProgress && !_isNamePredefined;
 
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
-    public async Task StartGameAsync()
+    private async Task StartGameAsync()
     {
         try
         {
@@ -149,20 +152,35 @@ public partial class GamePageViewModel
         }
     }
 
-    private void InitializeValues()
+    [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
+    private async Task CancelGameAsync()
     {
-        ClearSelectedColor();
-        GameMoves.Clear();
-        GameStatus = GameMode.NotRunning;
-        ErrorMessage.IsVisible = false;
-        ErrorMessage.Message = string.Empty;
-        InfoMessage.IsVisible = false;
-        InfoMessage.Message = string.Empty;
-        _moveNumber = 0;
+        if (Game is null)
+            throw new InvalidOperationException("No game running");
+
+        IsCancelling = true;
+
+        try
+        {
+            await _client.CancelGameAsync(Game!.Value.GameId);
+            GameStatus = GameMode.NotRunning;
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage.IsVisible = true;
+            ErrorMessage.Message = ex.Message;
+
+            if (_enableDialogs)
+                await _dialogService.ShowMessageAsync(ErrorMessage.Message);
+        }
+        finally
+        {
+            IsCancelling = false;
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanSetMove), AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
-    public async Task SetMoveAsync()
+    private async Task SetMoveAsync()
     {
         try
         {
@@ -241,6 +259,18 @@ public partial class GamePageViewModel
 
         Name = gamerName;
         IsNamePredefined = true;
+    }
+
+    private void InitializeValues()
+    {
+        ClearSelectedColor();
+        GameMoves.Clear();
+        GameStatus = GameMode.NotRunning;
+        ErrorMessage.IsVisible = false;
+        ErrorMessage.Message = string.Empty;
+        InfoMessage.IsVisible = false;
+        InfoMessage.Message = string.Empty;
+        _moveNumber = 0;
     }
 
     public InfoMessageViewModel ErrorMessage { get; } = new InfoMessageViewModel { IsError = true, Title = "Error" };
