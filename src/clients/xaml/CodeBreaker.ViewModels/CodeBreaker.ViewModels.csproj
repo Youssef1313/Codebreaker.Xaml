@@ -17,13 +17,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CNInnovation.Codebreaker.Services" Version="2.0.0-beta1.1" />
+    <PackageReference Include="CNInnovation.Codebreaker.Shared" Version="2.0.0-beta1.24" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\shared\CodeBreaker.Shared\CodeBreaker.Shared.csproj" />
-    <ProjectReference Include="..\..\shared\CodeBreaker.Services\CodeBreaker.Services.csproj" />
   </ItemGroup>
 
 </Project>
