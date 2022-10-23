@@ -1,4 +1,5 @@
 ﻿using System.Windows.Input;
+using Microsoft.UI.Xaml.Controls.Primitives;
 
 namespace CodeBreaker.WinUI.CustomAttachedProperties;
 
@@ -21,7 +22,7 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new (false)
         );
-    public static void SetEnabled(Button element, bool value)
+    public static void SetEnabled(ButtonBase element, bool value)
     {
         element.SetValue(EnabledProperty, value);
 
@@ -30,7 +31,7 @@ public class Confirm : DependencyObject
         else
             element.Click -= ElementClickCallback;
     }
-    public static bool GetEnabled(Button element) =>
+    public static bool GetEnabled(ButtonBase element) =>
         (bool?)element.GetValue(EnabledProperty) ?? false;
     #endregion
 
@@ -42,9 +43,9 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new("Confirmation required")
         );
-    public static void SetTitle(Button element, string value) =>
+    public static void SetTitle(ButtonBase element, string value) =>
         element.SetValue(TitleProperty, value);
-    public static string? GetTitle(Button element) =>
+    public static string? GetTitle(ButtonBase element) =>
         (string?)element.GetValue(TitleProperty);
     #endregion
 
@@ -56,9 +57,9 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new("Are you sure?")
         );
-    public static void SetContent(Button element, string value) =>
+    public static void SetContent(ButtonBase element, string value) =>
         element.SetValue(ContentProperty, value);
-    public static string? GetContent(Button element) =>
+    public static string? GetContent(ButtonBase element) =>
         (string?)element.GetValue(ContentProperty);
     #endregion
 
@@ -73,9 +74,9 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new("OK")
         );
-    public static void SetPrimaryText(Button element, string value) =>
+    public static void SetPrimaryText(ButtonBase element, string value) =>
         element.SetValue(PrimaryTextProperty, value);
-    public static string? GetPrimaryText(Button element) =>
+    public static string? GetPrimaryText(ButtonBase element) =>
         (string?)element.GetValue(PrimaryTextProperty);
 
     /// <summary>
@@ -88,9 +89,9 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new (null)
         );
-    public static void SetPrimaryCommand(Button element, ICommand value) =>
+    public static void SetPrimaryCommand(ButtonBase element, ICommand value) =>
         element.SetValue(PrimaryCommandProperty, value);
-    public static ICommand? GetPrimaryCommand(Button element) =>
+    public static ICommand? GetPrimaryCommand(ButtonBase element) =>
         (ICommand?)element.GetValue(PrimaryCommandProperty);
 
     /// <summary>
@@ -103,9 +104,9 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new(null)
         );
-    public static void SetPrimaryCommandParameter(Button element, object? value) =>
+    public static void SetPrimaryCommandParameter(ButtonBase element, object? value) =>
         element.SetValue(PrimaryCommandProperty, value);
-    public static object? GetPrimaryCommandParameter(Button element) =>
+    public static object? GetPrimaryCommandParameter(ButtonBase element) =>
         (object?)element.GetValue(PrimaryCommandProperty);
     #endregion
 
@@ -120,9 +121,9 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new(null)
         );
-    public static void SetSecondaryText(Button element, string value) =>
+    public static void SetSecondaryText(ButtonBase element, string value) =>
         element.SetValue(SecondaryTextProperty, value);
-    public static string? GetSecondaryText(Button element) =>
+    public static string? GetSecondaryText(ButtonBase element) =>
         (string?)element.GetValue(SecondaryTextProperty);
 
     /// <summary>
@@ -135,9 +136,9 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new (null)
         );
-    public static void SetSecondaryCommand(Button element, ICommand value) =>
+    public static void SetSecondaryCommand(ButtonBase element, ICommand value) =>
         element.SetValue(SecondaryCommandProperty, value);
-    public static ICommand? GetSecondaryCommand(Button element) =>
+    public static ICommand? GetSecondaryCommand(ButtonBase element) =>
         (ICommand?)element.GetValue(SecondaryCommandProperty);
 
     /// <summary>
@@ -150,9 +151,9 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new(null)
         );
-    public static void SetSecondaryCommandParameter(Button element, object? value) =>
+    public static void SetSecondaryCommandParameter(ButtonBase element, object? value) =>
         element.SetValue(SecondaryCommandProperty, value);
-    public static object? GetSecondaryCommandParameter(Button element) =>
+    public static object? GetSecondaryCommandParameter(ButtonBase element) =>
         (object?)element.GetValue(SecondaryCommandProperty);
     #endregion
 
@@ -167,9 +168,9 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new("Cancel")
         );
-    public static void SetCloseText(Button element, string value) =>
+    public static void SetCloseText(ButtonBase element, string value) =>
         element.SetValue(CloseTextProperty, value);
-    public static string? GetCloseText(Button element) =>
+    public static string? GetCloseText(ButtonBase element) =>
         (string?)element.GetValue(CloseTextProperty);
 
     /// <summary>
@@ -182,9 +183,9 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new(null)
         );
-    public static void SetCloseCommand(Button element, ICommand value) =>
+    public static void SetCloseCommand(ButtonBase element, ICommand value) =>
         element.SetValue(CloseCommandProperty, value);
-    public static ICommand? GetCloseCommand(Button element) =>
+    public static ICommand? GetCloseCommand(ButtonBase element) =>
         (ICommand?)element.GetValue(CloseCommandProperty);
 
     /// <summary>
@@ -197,9 +198,9 @@ public class Confirm : DependencyObject
             typeof(Confirm),
             new(null)
         );
-    public static void SetCloseCommandParameter(Button element, object? value) =>
+    public static void SetCloseCommandParameter(ButtonBase element, object? value) =>
         element.SetValue(CloseCommandProperty, value);
-    public static object? GetCloseCommandParameter(Button element) =>
+    public static object? GetCloseCommandParameter(ButtonBase element) =>
         (object?)element.GetValue(CloseCommandProperty);
     #endregion
 
@@ -208,9 +209,9 @@ public class Confirm : DependencyObject
 
 
     private static void ElementClickCallback(object sender, RoutedEventArgs e) =>
-        ShowDialogAsync((Button)sender);
+        ShowDialogAsync((ButtonBase)sender);
 
-    private static async void ShowDialogAsync(Button element) =>
+    private static async void ShowDialogAsync(ButtonBase element) =>
         await new ContentDialog()
         {
             Title = GetTitle(element),
