@@ -6,6 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>CNInnovation.Codebreaker.ViewModels</PackageId>
+    <Authors>CN innovation</Authors>
+    <Company>CN innovation</Company>
+    <PackageDescription>
+      Codebreaker shared view-model types for XAML-based applications with WinUI, WPF, .NET MAUI, Platform Uno
+    </PackageDescription>
+    <RepositoryUrl>https://github.com/CNinnovation/codebreakerpackages</RepositoryUrl>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
