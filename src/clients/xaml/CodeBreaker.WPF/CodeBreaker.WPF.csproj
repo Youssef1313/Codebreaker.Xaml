@@ -28,12 +28,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CNInnovation.Codebreaker.ViewModels" Version="2.0.0-beta1.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\CodeBreaker.ViewModels\CodeBreaker.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
