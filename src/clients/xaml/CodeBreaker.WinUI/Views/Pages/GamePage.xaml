@@ -7,6 +7,7 @@
     xmlns:components="using:CodeBreaker.WinUI.Views.Components"
     xmlns:conv="using:CodeBreaker.WinUI.Converters"
     xmlns:toolkitConverters="using:CommunityToolkit.WinUI.UI.Converters"
+    xmlns:ca="using:CodeBreaker.WinUI.CustomAttachedProperties"
     mc:Ignorable="d">
     <Page.Resources>
         <conv:GameStatusToVisibilityConverter x:Key="GameStatusVisibility" />
@@ -94,7 +95,14 @@
             Orientation="Horizontal"
             Grid.Row="1"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Cancelable}">
-            <Button Command="{x:Bind ViewModel.CancelGameCommand, Mode=OneTime}" Height="92" Margin="0,-6,4,0" Width="100">
+            <Button
+                Height="92" Margin="0,-6,4,0" Width="100"
+                ca:Confirm.Enabled="True"
+                ca:Confirm.Title="Cancel game"
+                ca:Confirm.Content="Do you really want to cancel the current game?"
+                ca:Confirm.PrimaryCommand="{x:Bind ViewModel.CancelGameCommand, Mode=OneTime}"
+                ca:Confirm.PrimaryText="Yes"
+                ca:Confirm.CloseText="No">
                 <StackPanel Orientation="Vertical" Spacing="05">
                     <SymbolIcon Symbol="Cancel" Visibility="{x:Bind ViewModel.CancelGameCommand.IsRunning, Mode=OneWay,Converter={StaticResource BoolToVisibility},ConverterParameter=True}" />
                     <ProgressRing Visibility="{x:Bind ViewModel.CancelGameCommand.IsRunning, Mode=OneWay}" />
