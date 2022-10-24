@@ -23,34 +23,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <InfoBar 
-            Grid.Row="0" 
-            Severity="Informational"
-            IsOpen="{x:Bind ViewModel.InfoMessage.IsVisible, Mode=OneWay}"
-            Message="{x:Bind ViewModel.InfoMessage.Message, Mode=OneWay}"
-            IsIconVisible="True" 
-            IsClosable="True">
-            <InfoBar.ActionButton>
-                <Button
-                    Visibility="{x:Bind Path=ViewModel.InfoMessage.HasAction, Converter={StaticResource BoolToVisibility}, ConverterParameter=False}"
-                    Command="{x:Bind Path=ViewModel.InfoMessage.ActionCommand, Mode=OneTime}"
-                    Content="{x:Bind Path=ViewModel.InfoMessage.ActionTitle, Mode=OneTime}" />
-            </InfoBar.ActionButton>
-        </InfoBar>
-        <InfoBar
-            Grid.Row="0"
-            IsOpen="{x:Bind ViewModel.ErrorMessage.IsVisible, Mode=OneWay}"
-            Severity="Error"
-            Message="{x:Bind ViewModel.ErrorMessage.Message, Mode=OneWay}"
-            IsIconVisible="True"
-            IsClosable="True">
-            <InfoBar.ActionButton>
-                <Button
-                    Visibility="{x:Bind Path=ViewModel.ErrorMessage.HasAction, Converter={StaticResource BoolToVisibility}, ConverterParameter=False}"
-                    Command="{x:Bind Path=ViewModel.ErrorMessage.ActionCommand, Mode=OneTime}"
-                    Content="{x:Bind Path=ViewModel.ErrorMessage.ActionTitle, Mode=OneTime}" />
-            </InfoBar.ActionButton>
-        </InfoBar>
+        <!-- info and error messages -->
+        <components:InfoBarMessages Grid.Row="0" Messages="{x:Bind ViewModel.InfoBarMessageService.Messages, Mode=OneWay}" />
         <!--Startgame section-->
         <Grid
             Grid.Row="1"
