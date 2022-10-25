@@ -1,10 +1,7 @@
 ﻿using CodeBreaker.Services;
 using CodeBreaker.Services.Authentication;
 using CodeBreaker.Shared.Models.Api;
-using CodeBreaker.Shared.Models.Data;
-using CodeBreaker.Shared.Models.Extensions;
 using CodeBreaker.ViewModels.Services;
-
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
@@ -55,18 +52,6 @@ public partial class GamePageViewModel
         _authService = authService;
         _enableDialogs = options.Value.EnableDialogs;
 
-        InfoMessage = new InfoMessageViewModel
-        {
-            IsError = false,
-            Title = "Information",
-            ActionTitle = "Continue",
-            ActionCommand = new RelayCommand(() =>
-            {
-                GameStatus = GameMode.NotRunning;
-                InfoMessage!.IsVisible = false;
-            })
-        };
-
         PropertyChanged += (sender, e) =>
         {
             if (e.PropertyName == nameof(GameStatus))
@@ -75,6 +60,8 @@ public partial class GamePageViewModel
 
         SetGamerNameIfAvailable();
     }
+
+    public InfoBarMessageService InfoBarMessageService { get; } = new();
 
     public GameDto? Game
     {
@@ -117,10 +104,13 @@ public partial class GamePageViewModel
     [ObservableProperty]
     private bool _inProgress = false;
 
+    [ObservableProperty]
+    private bool _isCancelling = false;
+
     public bool IsNameEnterable => !InProgress && !_isNamePredefined;
 
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
-    public async Task StartGameAsync()
+    private async Task StartGameAsync()
     {
         try
         {
@@ -136,12 +126,16 @@ public partial class GamePageViewModel
         }
         catch (Exception ex)
         {
-            ErrorMessage.IsVisible = true;
-            ErrorMessage.Message = ex.Message;
-            if (_enableDialogs)
+            InfoMessageViewModel message = InfoMessageViewModel.Error(ex.Message);
+            message.ActionCommand = new RelayCommand(() =>
             {
-                await _dialogService.ShowMessageAsync(ErrorMessage.Message);
-            }
+                GameStatus = GameMode.NotRunning;
+                message.Close();
+            });
+            InfoBarMessageService.ShowMessage(message);
+
+            if (_enableDialogs)
+                await _dialogService.ShowMessageAsync(ex.Message);
         }
         finally
         {
@@ -149,20 +143,34 @@ public partial class GamePageViewModel
         }
     }
 
-    private void InitializeValues()
+    [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
+    private async Task CancelGameAsync()
     {
-        ClearSelectedColor();
-        GameMoves.Clear();
-        GameStatus = GameMode.NotRunning;
-        ErrorMessage.IsVisible = false;
-        ErrorMessage.Message = string.Empty;
-        InfoMessage.IsVisible = false;
-        InfoMessage.Message = string.Empty;
-        _moveNumber = 0;
+        if (Game is null)
+            throw new InvalidOperationException("No game running");
+
+        IsCancelling = true;
+
+        try
+        {
+            await _client.CancelGameAsync(Game!.Value.GameId);
+            GameStatus = GameMode.NotRunning;
+        }
+        catch (Exception ex)
+        {
+            InfoBarMessageService.ShowError(ex.Message);
+
+            if (_enableDialogs)
+                await _dialogService.ShowMessageAsync(ex.Message);
+        }
+        finally
+        {
+            IsCancelling = false;
+        }
     }
 
     [RelayCommand(CanExecute = nameof(CanSetMove), AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
-    public async Task SetMoveAsync()
+    private async Task SetMoveAsync()
     {
         try
         {
@@ -188,31 +196,26 @@ public partial class GamePageViewModel
             if (response.Won)
             {
                 GameStatus = GameMode.Won;
-                InfoMessage.Message = "Congratulations - you won!";
-                InfoMessage.IsVisible = true;
+                InfoBarMessageService.ShowInformation("Congratulations - you won!");
+
                 if (_enableDialogs)
-                {
-                    await _dialogService.ShowMessageAsync(InfoMessage.Message);
-                }
+                    await _dialogService.ShowMessageAsync("Congratulations - you won!");
             }
             else if (response.Ended)
             {
                 GameStatus = GameMode.Lost;
-                InfoMessage.Message = "Sorry, you didn't find the matching colors!";
-                InfoMessage.IsVisible = true;
+                InfoBarMessageService.ShowInformation("Sorry, you didn't find the matching colors!");
+
                 if (_enableDialogs)
-                {
-                    await _dialogService.ShowMessageAsync(InfoMessage.Message);
-                }
+                    await _dialogService.ShowMessageAsync("Sorry, you didn't find the matching colors!");
             }
         }
         catch (Exception ex)
         {
-            ErrorMessage.IsVisible = true;
-            ErrorMessage.Message = ex.Message;
+            InfoBarMessageService.ShowError(ex.Message);
 
             if (_enableDialogs)
-                await _dialogService.ShowMessageAsync(ErrorMessage.Message);
+                await _dialogService.ShowMessageAsync(ex.Message);
         }
         finally
         {
@@ -243,9 +246,14 @@ public partial class GamePageViewModel
         IsNamePredefined = true;
     }
 
-    public InfoMessageViewModel ErrorMessage { get; } = new InfoMessageViewModel { IsError = true, Title = "Error" };
-
-    public InfoMessageViewModel InfoMessage { get; }
+    private void InitializeValues()
+    {
+        ClearSelectedColor();
+        GameMoves.Clear();
+        GameStatus = GameMode.NotRunning;
+        InfoBarMessageService.Clear();
+        _moveNumber = 0;
+    }
 }
 
 public record SelectionAndKeyPegs(string[] GuessPegs, KeyPegsDto KeyPegs, int MoveNumber);

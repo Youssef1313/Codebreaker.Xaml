@@ -7,6 +7,7 @@
     xmlns:components="using:CodeBreaker.WinUI.Views.Components"
     xmlns:conv="using:CodeBreaker.WinUI.Converters"
     xmlns:toolkitConverters="using:CommunityToolkit.WinUI.UI.Converters"
+    xmlns:ca="using:CodeBreaker.WinUI.CustomAttachedProperties"
     mc:Ignorable="d">
     <Page.Resources>
         <conv:GameStatusToVisibilityConverter x:Key="GameStatusVisibility" />
@@ -22,34 +23,8 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <InfoBar 
-            Grid.Row="0" 
-            Severity="Informational"
-            IsOpen="{x:Bind ViewModel.InfoMessage.IsVisible, Mode=OneWay}"
-            Message="{x:Bind ViewModel.InfoMessage.Message, Mode=OneWay}"
-            IsIconVisible="True" 
-            IsClosable="True">
-            <InfoBar.ActionButton>
-                <Button
-                    Visibility="{x:Bind Path=ViewModel.InfoMessage.HasAction, Converter={StaticResource BoolToVisibility}, ConverterParameter=False}"
-                    Command="{x:Bind Path=ViewModel.InfoMessage.ActionCommand, Mode=OneTime}"
-                    Content="{x:Bind Path=ViewModel.InfoMessage.ActionTitle, Mode=OneTime}" />
-            </InfoBar.ActionButton>
-        </InfoBar>
-        <InfoBar
-            Grid.Row="0"
-            IsOpen="{x:Bind ViewModel.ErrorMessage.IsVisible, Mode=OneWay}"
-            Severity="Error"
-            Message="{x:Bind ViewModel.ErrorMessage.Message, Mode=OneWay}"
-            IsIconVisible="True"
-            IsClosable="True">
-            <InfoBar.ActionButton>
-                <Button
-                    Visibility="{x:Bind Path=ViewModel.ErrorMessage.HasAction, Converter={StaticResource BoolToVisibility}, ConverterParameter=False}"
-                    Command="{x:Bind Path=ViewModel.ErrorMessage.ActionCommand, Mode=OneTime}"
-                    Content="{x:Bind Path=ViewModel.ErrorMessage.ActionTitle, Mode=OneTime}" />
-            </InfoBar.ActionButton>
-        </InfoBar>
+        <!-- info and error messages -->
+        <components:InfoBarMessages Grid.Row="0" Messages="{x:Bind ViewModel.InfoBarMessageService.Messages, Mode=OneWay}" />
         <!--Startgame section-->
         <Grid
             Grid.Row="1"
@@ -94,7 +69,20 @@
             Orientation="Horizontal"
             Grid.Row="1"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Cancelable}">
-            <!--<AppBarButton Label="Cancel" Icon="Cancel" IsEnabled="False" />-->
+            <Button
+                Height="92" Margin="0,-6,4,0" Width="100"
+                ca:Confirm.Enabled="True"
+                ca:Confirm.Title="Cancel game"
+                ca:Confirm.Content="Do you really want to cancel the current game?"
+                ca:Confirm.PrimaryCommand="{x:Bind ViewModel.CancelGameCommand, Mode=OneTime}"
+                ca:Confirm.PrimaryText="Yes"
+                ca:Confirm.CloseText="No">
+                <StackPanel Orientation="Vertical" Spacing="05">
+                    <SymbolIcon Symbol="Cancel" Visibility="{x:Bind ViewModel.CancelGameCommand.IsRunning, Mode=OneWay,Converter={StaticResource BoolToVisibility},ConverterParameter=True}" />
+                    <ProgressRing Visibility="{x:Bind ViewModel.CancelGameCommand.IsRunning, Mode=OneWay}" />
+                    <TextBlock Text="Cancel" />
+                </StackPanel>
+            </Button>
             <components:PegSelectionView 
                 Grid.Row="2"
                 ViewModel="{x:Bind ViewModel, Mode=OneWay}" />

@@ -5,9 +5,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:CodeBreaker.ViewModels"
+    xmlns:toolkitConverters="using:CommunityToolkit.WinUI.UI.Converters"
     mc:Ignorable="d"
     x:Name="PegSelectionViewControl">
     <UserControl.Resources>
+        <toolkitConverters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
         <DataTemplate x:Key="SelectColorTemplate">
             <Grid>
                 <Ellipse Fill="{Binding Mode=OneWay, Converter={StaticResource ColorConverter}}" Width="60" Height="60" />
@@ -15,10 +17,12 @@
         </DataTemplate>
         <DataTemplate x:Key="SelectColorItemTemplate" x:DataType="vm:SelectedFieldViewModel">
             <ComboBox
-                Margin="4" Width="112"
+                Margin="04" Width="112"
+                Height="92"
                 ItemsSource="{Binding ElementName=PegSelectionViewControl, Path=DataContext.Game.Type.Fields, Mode=OneWay}"
                 SelectedItem="{x:Bind Path=Value, Mode=TwoWay}"
-                ItemTemplate="{StaticResource SelectColorTemplate}" />
+                ItemTemplate="{StaticResource SelectColorTemplate}"
+                PlaceholderText="❓" HorizontalContentAlignment="Center" FontSize="40" />
         </DataTemplate>
     </UserControl.Resources>
 
@@ -33,10 +37,16 @@
             ItemTemplate="{StaticResource SelectColorItemTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Height="92" Margin="16,0,0,0" />
+                    <StackPanel Orientation="Horizontal" Margin="15,0,15,10" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <AppBarButton Label="Move" Command="{x:Bind ViewModel.SetMoveCommand, Mode=OneWay}" Grid.Column="1" Margin="4" Icon="Send" />
+        <Button Command="{x:Bind ViewModel.SetMoveCommand, Mode=OneTime}" Grid.Column="1" Margin="4" VerticalAlignment="Top" Height="92" Width="100">
+            <StackPanel Orientation="Vertical" Spacing="5">
+                <SymbolIcon Symbol="Send" Visibility="{x:Bind ViewModel.SetMoveCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolToVisibility}, ConverterParameter=True}" />
+                <ProgressRing Visibility="{x:Bind ViewModel.SetMoveCommand.IsRunning, Mode=OneWay}" />
+                <TextBlock Text="Move" />
+            </StackPanel>
+        </Button>
     </Grid>
 </UserControl>

@@ -19,6 +19,7 @@
     <None Remove="appsettings.Production.json" />
     <None Remove="Styles\CodeBreakerTemplates.xaml" />
     <None Remove="Views\AuthPage.xaml" />
+    <None Remove="Views\Components\InfoBarMessages.xaml" />
     <None Remove="Views\KeyPegsView.xaml" />
     <None Remove="Views\LivePage.xaml" />
     <None Remove="Views\PegSelectionView.xaml" />
@@ -117,6 +118,12 @@
 
   <ItemGroup>
     <Resource Remove="Views\LivePage.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\Components\InfoBarMessages.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
