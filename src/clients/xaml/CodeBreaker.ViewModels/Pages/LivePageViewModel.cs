@@ -18,12 +18,12 @@ public partial class LivePageViewModel
         _liveClient = liveClient;
         _liveClient.OnGameEvent += (sender, args) =>
         {
-            if (args.Data is null) return;
+            if (args.Data?.Game is null) return;
             context?.Post(_ => Games.Add(new GameViewModel(args.Data)), null);
         };
         _liveClient.OnMoveEvent += (sender, args) =>
         {
-            if (args.Data is null) return;
+            if (args.Data?.Move is null) return;
             Move move = args.Data;
             GameViewModel? game = Games.Where(x => x.GameId == args.GameId).SingleOrDefault();
             context?.Post(_ => game?.Moves.Add(new MoveViewModel(move)), null);
