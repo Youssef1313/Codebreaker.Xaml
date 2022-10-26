@@ -40,14 +40,13 @@
                 <TextBox
                     IsEnabled="{x:Bind ViewModel.IsNameEnterable, Mode=OneWay}"
                     x:Name="TextName"
-                    Header="Gamername"
+                    x:Uid="GamePage_NameInput"
                     VerticalAlignment="Center"
-                    PlaceholderText="Enter your Gamername"
                     Text="{x:Bind ViewModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <ToolTipService.ToolTip>
                     <ToolTip
+                        x:Uid="GamePage_NameAlreadyProvidedTooltip"
                         IsEnabled="{x:Bind Path=ViewModel.IsNamePredefined, Mode=OneWay}"
-                        Content="The gamername was already defined during sign-up"
                         Placement="Bottom" />
                 </ToolTipService.ToolTip>
             </Grid>
@@ -60,7 +59,7 @@
                 <StackPanel Orientation="Vertical" Spacing="5">
                     <SymbolIcon Symbol="Play" Visibility="{x:Bind Path=ViewModel.StartGameCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolToVisibility}, ConverterParameter=True}" />
                     <ProgressRing Visibility="{x:Bind Path=ViewModel.StartGameCommand.IsRunning, Mode=OneWay}" Width="20" Height="20" />
-                    <TextBlock Text="Start the game" />
+                    <TextBlock x:Uid="GamePage_StartButtonText" />
                 </StackPanel>
             </Button>
         </Grid>
@@ -80,7 +79,7 @@
                 <StackPanel Orientation="Vertical" Spacing="05">
                     <SymbolIcon Symbol="Cancel" Visibility="{x:Bind ViewModel.CancelGameCommand.IsRunning, Mode=OneWay,Converter={StaticResource BoolToVisibility},ConverterParameter=True}" />
                     <ProgressRing Visibility="{x:Bind ViewModel.CancelGameCommand.IsRunning, Mode=OneWay}" />
-                    <TextBlock Text="Cancel" />
+                    <TextBlock x:Uid="GamePage_CancelButtonText" />
                 </StackPanel>
             </Button>
             <components:PegSelectionView 

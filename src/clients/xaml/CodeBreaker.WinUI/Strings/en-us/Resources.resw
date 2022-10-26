@@ -177,4 +177,16 @@
   <data name="AuthPage_WelcomTo.Text" xml:space="preserve">
     <value>Welcome to</value>
   </data>
+  <data name="GamePage_NameAlreadyProvidedTooltip.Content" xml:space="preserve">
+    <value>The gamername was already defined during sign-up</value>
+  </data>
+  <data name="GamePage_NameInput.Header" xml:space="preserve">
+    <value>Gamername</value>
+  </data>
+  <data name="GamePage_NameInput.PlaceholderText" xml:space="preserve">
+    <value>Enter your gamername</value>
+  </data>
+  <data name="GamePage_StartButtonText.Text" xml:space="preserve">
+    <value>Start the game</value>
+  </data>
 </root>
