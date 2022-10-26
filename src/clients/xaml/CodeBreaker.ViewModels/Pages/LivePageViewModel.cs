@@ -17,12 +17,12 @@ public partial class LivePageViewModel
         _liveClient = liveClient;
         _liveClient.OnGameEvent += (sender, args) =>
         {
-            if (args.Data is null) return;
+            if (args.Data?.Game is null) return;
             Games.Add(new GameViewModel(args.Data));
         };
         _liveClient.OnMoveEvent += (sender, args) =>
         {
-            if (args.Data is null) return;
+            if (args.Data?.Move is null) return;
             Move move = args.Data;
             GameViewModel? game = Games.Where(x => x.GameId == args.GameId).SingleOrDefault();
             game?.Moves.Add(new MoveViewModel(move));
