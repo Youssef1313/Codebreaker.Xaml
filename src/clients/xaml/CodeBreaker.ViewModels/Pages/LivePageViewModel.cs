@@ -14,18 +14,19 @@ public partial class LivePageViewModel
 
     public LivePageViewModel(LiveClient liveClient)
     {
+        SynchronizationContext? context = SynchronizationContext.Current; // The context of the UI-thread.
         _liveClient = liveClient;
         _liveClient.OnGameEvent += (sender, args) =>
         {
             if (args.Data is null) return;
-            Games.Add(new GameViewModel(args.Data));
+            context?.Post(_ => Games.Add(new GameViewModel(args.Data)), null);
         };
         _liveClient.OnMoveEvent += (sender, args) =>
         {
             if (args.Data is null) return;
             Move move = args.Data;
             GameViewModel? game = Games.Where(x => x.GameId == args.GameId).SingleOrDefault();
-            game?.Moves.Add(new MoveViewModel(move));
+            context?.Post(_ => game?.Moves.Add(new MoveViewModel(move)), null);
         };
     }
 
