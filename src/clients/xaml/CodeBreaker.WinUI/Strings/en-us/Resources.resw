@@ -177,6 +177,9 @@
   <data name="AuthPage_WelcomTo.Text" xml:space="preserve">
     <value>Welcome to</value>
   </data>
+  <data name="GamePage_CancelButtonText.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="GamePage_NameAlreadyProvidedTooltip.Content" xml:space="preserve">
     <value>The gamername was already defined during sign-up</value>
   </data>
