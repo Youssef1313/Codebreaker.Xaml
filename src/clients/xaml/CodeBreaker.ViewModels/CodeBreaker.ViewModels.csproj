@@ -17,8 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CNInnovation.Codebreaker.Services" Version="2.0.0-beta1.1" />
-    <PackageReference Include="CNInnovation.Codebreaker.Shared" Version="2.0.0-beta1.24" />
+    <PackageReference Include="CNInnovation.Codebreaker.Services" Version="2.0.0-beta1.5" />
+    <PackageReference Include="CNInnovation.Codebreaker.Shared" Version="2.0.0-beta1.26" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
   </ItemGroup>

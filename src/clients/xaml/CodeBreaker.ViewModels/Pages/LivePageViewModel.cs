@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using CodeBreaker.Services;
-using CodeBreaker.Shared.Models.Data;
 using CodeBreaker.ViewModels.Components;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -17,15 +16,14 @@ public partial class LivePageViewModel
         _liveClient = liveClient;
         _liveClient.OnGameEvent += (sender, args) =>
         {
-            if (args.Data is null) return;
-            Games.Add(new GameViewModel(args.Data));
+            if (args.Data?.Game is null) return;
+            Games.Add(new GameViewModel(args.Data.Game));
         };
         _liveClient.OnMoveEvent += (sender, args) =>
         {
-            if (args.Data is null) return;
-            Move move = args.Data;
-            GameViewModel? game = Games.Where(x => x.GameId == args.GameId).SingleOrDefault();
-            game?.Moves.Add(new MoveViewModel(move));
+            if (args.Data?.Move is null) return;
+            GameViewModel? game = Games.Where(x => x.GameId == args.Data.GameId).SingleOrDefault();
+            game?.Moves.Add(new MoveViewModel(args.Data.Move));
         };
     }
 
