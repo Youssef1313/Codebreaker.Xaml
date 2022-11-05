@@ -19,6 +19,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Windows.ApplicationModel;
+using Windows.Globalization;
 using Xaml = Microsoft.UI.Xaml;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -114,5 +115,6 @@ public partial class App : Application
         base.OnLaunched(args);
         var activationService = GetService<IActivationService>();
         await activationService.ActivateAsync(args);
+        ApplicationLanguages.PrimaryLanguageOverride = "de";
     }
 }

@@ -7,6 +7,7 @@
     xmlns:helpers="using:CodeBreaker.WinUI.Helpers"
     xmlns:behaviors="using:CodeBreaker.WinUI.Behaviors"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
     Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
     Loaded="OnLoaded">
 
@@ -44,12 +45,12 @@
                 TODO: Update item icons by updating FontIcon.Glyph properties.
                 https://docs.microsoft.com/windows/apps/design/style/segoe-fluent-icons-font#icon-list
                 -->
-                <NavigationViewItem x:Uid="Shell_Game" helpers:NavigationHelper.NavigateTo="CodeBreaker.ViewModels.GamePageViewModel">
+                <NavigationViewItem Content="{cme:ResourceString Name=ShellPage_GameTab}" helpers:NavigationHelper.NavigateTo="CodeBreaker.ViewModels.GamePageViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem x:Uid="Shell_Live" helpers:NavigationHelper.NavigateTo="CodeBreaker.ViewModels.LivePageViewModel">
+                <NavigationViewItem Content="{cme:ResourceString Name=ShellPage_LiveTab}" helpers:NavigationHelper.NavigateTo="CodeBreaker.ViewModels.LivePageViewModel">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xf785;" />
                     </NavigationViewItem.Icon>

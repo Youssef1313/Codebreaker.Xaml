@@ -6,6 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="using:CodeBreaker.ViewModels"
     xmlns:toolkitConverters="using:CommunityToolkit.WinUI.UI.Converters"
+    xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
     mc:Ignorable="d"
     x:Name="PegSelectionViewControl">
     <UserControl.Resources>
@@ -45,7 +46,7 @@
             <StackPanel Orientation="Vertical" Spacing="5">
                 <SymbolIcon Symbol="Send" Visibility="{x:Bind ViewModel.SetMoveCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolToVisibility}, ConverterParameter=True}" />
                 <ProgressRing Visibility="{x:Bind ViewModel.SetMoveCommand.IsRunning, Mode=OneWay}" />
-                <TextBlock Text="Move" />
+                <TextBlock Text="{cme:ResourceString Name=PegSelection_MakeMove}" />
             </StackPanel>
         </Button>
     </Grid>

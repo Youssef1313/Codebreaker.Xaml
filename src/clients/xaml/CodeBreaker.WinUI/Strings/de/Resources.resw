@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>CodeBreaker.WinUI</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>CodeBreaker.WinUI</value>
+  </data>
+  <data name="ShellPage_GameTab" xml:space="preserve">
+    <value>Spiel</value>
+  </data>
+  <data name="ShellPage_Blank" xml:space="preserve">
+    <value>Leer</value>
+  </data>
+  <data name="Settings_Personalization" xml:space="preserve">
+    <value>Personalisierung</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Darstellung</value>
+  </data>
+  <data name="Settings_Theme_Light" xml:space="preserve">
+    <value>Hell</value>
+  </data>
+  <data name="Settings_Theme_Dark" xml:space="preserve">
+    <value>Dunkel</value>
+  </data>
+  <data name="Settings_Theme_Default" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="Settings_About" xml:space="preserve">
+    <value>Über diese Applikation</value>
+  </data>
+  <data name="Settings_AboutDescription" xml:space="preserve">
+    <value>TODO: Replace with your app description.</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLink" xml:space="preserve">
+    <value>Datenschutzerklärung</value>
+  </data>
+  <data name="ShellPage_LiveTab" xml:space="preserve">
+    <value>Live</value>
+  </data>
+  <data name="AuthPage_ContinueAsGuest" xml:space="preserve">
+    <value>Als Gast fortfahren</value>
+  </data>
+  <data name="AuthPage_GuestTooltip" xml:space="preserve">
+    <value>Sie können spielen, werden aber nicht in der Bestenliste angeführt</value>
+  </data>
+  <data name="AuthPage_Or" xml:space="preserve">
+    <value>oder</value>
+  </data>
+  <data name="AuthPage_SignIn" xml:space="preserve">
+    <value>Einloggen</value>
+  </data>
+  <data name="AuthPage_SignUp" xml:space="preserve">
+    <value>registrieren</value>
+  </data>
+  <data name="GamePage_CancelButtonText" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="GamePage_NameAlreadyProvidedTooltip" xml:space="preserve">
+    <value>Der Spielername wurde bereits während der Registrierung angegeben</value>
+  </data>
+  <data name="GamePage_NameInput" xml:space="preserve">
+    <value>Spielername</value>
+  </data>
+  <data name="GamePage_NameInputPlaceholder" xml:space="preserve">
+    <value>Geben Sie Ihren Spielernamen ein</value>
+  </data>
+  <data name="GamePage_StartButtonText" xml:space="preserve">
+    <value>Spiel starten</value>
+  </data>
+  <data name="AuthPage_WelcomeTo" xml:space="preserve">
+    <value>Willkommen zu</value>
+  </data>
+  <data name="SettingsPage_PrivacyTermsLinkNavigateUri" xml:space="preserve">
+    <value>https://YourPrivacyUrlGoesHere/</value>
+  </data>
+  <data name="GamePage_CancelConfirmContent" xml:space="preserve">
+    <value>Wollen Sie das Spiel wirklich abbrechen?</value>
+  </data>
+  <data name="GamePage_CancelConfirmTitle" xml:space="preserve">
+    <value>Spiel abbrechen</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="PegSelection_MakeMove" xml:space="preserve">
+    <value>Zug machen</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="LivePage_WaitingForGames" xml:space="preserve">
+    <value>Warte auf Spiele... ⌛</value>
+  </data>
+</root>

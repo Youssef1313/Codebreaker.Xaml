@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
@@ -13,10 +14,17 @@
     <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
     <Company>CN innovation</Company>
   </PropertyGroup>
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
+    <TranslationReport Condition="'$(Configuration)' == 'Release'">true</TranslationReport>
+    <SuppressPseudoWarning Condition="'$(Configuration)' == 'Debug'">true</SuppressPseudoWarning>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
     <None Remove="appsettings.Production.json" />
+    <None Remove="MultilingualResources\CodeBreaker.WinUI.de.xlf" />
     <None Remove="Styles\CodeBreakerTemplates.xaml" />
     <None Remove="Views\AuthPage.xaml" />
     <None Remove="Views\Components\InfoBarMessages.xaml" />
@@ -24,18 +32,15 @@
     <None Remove="Views\LivePage.xaml" />
     <None Remove="Views\PegSelectionView.xaml" />
   </ItemGroup>
-
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
-
   <!-- Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
        Tools extension to be activated for this project even if the Windows App SDK Nuget
        package has not yet been restored -->
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Include="appsettings.Production.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -54,7 +59,6 @@
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="CNInnovation.Codebreaker.ViewModels" Version="2.0.0-beta1.1" />
     <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.1.2" />
@@ -65,15 +69,11 @@
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
   </ItemGroup>
-
-
   <ItemGroup>
     <Page Update="Views\Templates\CodeBreakerTemplates.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
-
   <ItemGroup>
     <Page Update="Views\Components\KeyPegsView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -82,15 +82,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
-
   <ItemGroup>
     <Page Update="Views\Components\PegSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
-
   <ItemGroup>
     <Page Update="Styles\FontSizes.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -102,24 +98,23 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  
   <PropertyGroup>
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
   </PropertyGroup>
-
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\v$(MultilingualAppToolkitVersion)\Microsoft.Multilingual.PriResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.PriResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
   <ItemGroup>
     <CustomAdditionalCompileInputs Remove="Views\LivePage.xaml" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Remove="Views\LivePage.xaml" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\CodeBreaker.ViewModels\CodeBreaker.ViewModels.csproj" />
   </ItemGroup>
@@ -129,10 +124,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Page Update="Views\Pages\AuthPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\CodeBreaker.WinUI.de.xlf" />
   </ItemGroup>
 </Project>
