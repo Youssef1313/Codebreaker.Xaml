@@ -102,4 +102,7 @@
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
   </data>
+  <data name="LivePage_WaitingForGames" xml:space="preserve">
+    <value>Warte auf Spiele... ⌛</value>
+  </data>
 </root>
