@@ -4,32 +4,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Grid>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="15">
             <TextBlock Style="{StaticResource HeaderTextBlockStyle}">
-            <Run x:Uid="AuthPage_WelcomTo" />
-            <Run FontStyle="Italic">CodeBreaker</Run>
+            <Run Text="{cme:ResourceString Name=AuthPage_WelcomeTo}" />
+            <Run FontStyle="Italic" Text="{cme:ResourceString Name=AppDisplayName}" />
             </TextBlock>
             <StackPanel Orientation="Horizontal" Spacing="15">
                 <Button Command="{x:Bind Path=ViewModel.LoginCommand, Mode=OneTime}">
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <SymbolIcon Symbol="Contact" />
                         <TextBlock>
-                            <Run x:Uid="AuthPage_SignIn" />
-                            <Run FontStyle="Italic" x:Uid="AuthPage_Or" />
-                            <Run x:Uid="AuthPage_SignUp" />
+                            <Run Text="{cme:ResourceString Name=AuthPage_SignIn}" />
+                            <Run FontStyle="Italic" Text="{cme:ResourceString Name=AuthPage_Or}" />
+                            <Run Text="{cme:ResourceString Name=AuthPage_SignUp}" />
                         </TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Command="{x:Bind Path=ViewModel.ContinueAsGuestCommand, Mode=OneTime}">
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <SymbolIcon Symbol="OtherUser" />
-                        <TextBlock x:Uid="AuthPage_ContinueAsGuest" />
+                        <TextBlock Text="{cme:ResourceString Name=AuthPage_ContinueAsGuest}" />
                     </StackPanel>
                     <ToolTipService.ToolTip>
-                        <ToolTip x:Uid="AuthPage_GuestTooltip" Placement="Bottom" />
+                        <ToolTip Content="{cme:ResourceString Name=AuthPage_GuestTooltip}" Placement="Bottom" />
                     </ToolTipService.ToolTip>
                 </Button>
                 <ProgressRing IsActive="{x:Bind Path=ViewModel.LoginCommand.IsRunning, Mode=OneWay}" />

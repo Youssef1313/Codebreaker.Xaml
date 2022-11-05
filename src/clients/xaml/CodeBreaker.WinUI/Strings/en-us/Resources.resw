@@ -123,73 +123,91 @@
   <data name="AppDescription" xml:space="preserve">
     <value>CodeBreaker.WinUI</value>
   </data>
-  <data name="Shell_Game.Content" xml:space="preserve">
+  <data name="ShellPage_GameTab" xml:space="preserve">
     <value>Game</value>
   </data>
-  <data name="Shell_Blank.Content" xml:space="preserve">
+  <data name="ShellPage_Blank" xml:space="preserve">
     <value>Blank</value>
   </data>
-  <data name="Settings_Personalization.Text" xml:space="preserve">
+  <data name="Settings_Personalization" xml:space="preserve">
     <value>Personalization</value>
   </data>
-  <data name="Settings_Theme.Text" xml:space="preserve">
+  <data name="Settings_Theme" xml:space="preserve">
     <value>Theme</value>
   </data>
-  <data name="Settings_Theme_Light.Content" xml:space="preserve">
+  <data name="Settings_Theme_Light" xml:space="preserve">
     <value>Light</value>
   </data>
-  <data name="Settings_Theme_Dark.Content" xml:space="preserve">
+  <data name="Settings_Theme_Dark" xml:space="preserve">
     <value>Dark</value>
   </data>
-  <data name="Settings_Theme_Default.Content" xml:space="preserve">
+  <data name="Settings_Theme_Default" xml:space="preserve">
     <value>Default</value>
   </data>
-  <data name="Settings_About.Text" xml:space="preserve">
+  <data name="Settings_About" xml:space="preserve">
     <value>About this application</value>
   </data>
-  <data name="Settings_AboutDescription.Text" xml:space="preserve">
+  <data name="Settings_AboutDescription" xml:space="preserve">
     <value>TODO: Replace with your app description.</value>
   </data>
-  <data name="SettingsPage_PrivacyTermsLink.Content" xml:space="preserve">
+  <data name="SettingsPage_PrivacyTermsLink" xml:space="preserve">
     <value>Privacy Statement</value>
   </data>
-  <data name="SettingsPage_PrivacyTermsLink.NavigateUri" xml:space="preserve">
+  <data name="SettingsPage_PrivacyTermsLinkNavigateUri" xml:space="preserve">
     <value>https://YourPrivacyUrlGoesHere/</value>
   </data>
-  <data name="Shell_Live.Content" xml:space="preserve">
+  <data name="ShellPage_LiveTab" xml:space="preserve">
     <value>Live</value>
   </data>
-  <data name="AuthPage_ContinueAsGuest.Text" xml:space="preserve">
+  <data name="AuthPage_ContinueAsGuest" xml:space="preserve">
     <value>Continue as Guest</value>
   </data>
-  <data name="AuthPage_GuestTooltip.Content" xml:space="preserve">
+  <data name="AuthPage_GuestTooltip" xml:space="preserve">
     <value>You can play games, but you won't get listed in the scoreboard.</value>
   </data>
-  <data name="AuthPage_Or.Text" xml:space="preserve">
+  <data name="AuthPage_Or" xml:space="preserve">
     <value>or</value>
   </data>
-  <data name="AuthPage_SignIn.Text" xml:space="preserve">
+  <data name="AuthPage_SignIn" xml:space="preserve">
     <value>Sign in</value>
   </data>
-  <data name="AuthPage_SignUp.Text" xml:space="preserve">
+  <data name="AuthPage_SignUp" xml:space="preserve">
     <value>sign up</value>
   </data>
-  <data name="AuthPage_WelcomTo.Text" xml:space="preserve">
+  <data name="AuthPage_WelcomeTo" xml:space="preserve">
     <value>Welcome to</value>
   </data>
-  <data name="GamePage_CancelButtonText.Text" xml:space="preserve">
+  <data name="GamePage_CancelButtonText" xml:space="preserve">
     <value>Cancel</value>
   </data>
-  <data name="GamePage_NameAlreadyProvidedTooltip.Content" xml:space="preserve">
+  <data name="GamePage_NameAlreadyProvidedTooltip" xml:space="preserve">
     <value>The gamername was already defined during sign-up</value>
   </data>
-  <data name="GamePage_NameInput.Header" xml:space="preserve">
+  <data name="GamePage_NameInput" xml:space="preserve">
     <value>Gamername</value>
   </data>
-  <data name="GamePage_NameInput.PlaceholderText" xml:space="preserve">
+  <data name="GamePage_NameInputPlaceholder" xml:space="preserve">
     <value>Enter your gamername</value>
   </data>
-  <data name="GamePage_StartButtonText.Text" xml:space="preserve">
-    <value>Start the game</value>
+  <data name="GamePage_StartButtonText" xml:space="preserve">
+    <value>Start game</value>
+  </data>
+  <data name="GamePage_CancelConfirmContent" xml:space="preserve">
+    <value>Do you really want to cancel the game?</value>
+  </data>
+  <data name="GamePage_CancelConfirmTitle" xml:space="preserve">
+    <value>Cancel game</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="PegSelection_MakeMove" xml:space="preserve">
+    <value>Move</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="LivePage_WaitingForGames" xml:space="preserve">
+    <value>Waiting for games... ⌛</value>
   </data>
 </root>
