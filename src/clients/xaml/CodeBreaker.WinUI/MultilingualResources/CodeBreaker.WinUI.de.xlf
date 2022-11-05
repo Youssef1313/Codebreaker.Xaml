@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="de" original="CODEBREAKER.WINUI/STRINGS/EN-US/RESOURCES.RESW" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="1.0.0.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="CODEBREAKER.WINUI/STRINGS/EN-US/RESOURCES.RESW" datatype="resx">
+        <trans-unit id="AppDisplayName" translate="yes" xml:space="preserve">
+          <source>CodeBreaker.WinUI</source>
+          <target state="final">CodeBreaker.WinUI</target>
+        </trans-unit>
+        <trans-unit id="AppDescription" translate="yes" xml:space="preserve">
+          <source>CodeBreaker.WinUI</source>
+          <target state="final">CodeBreaker.WinUI</target>
+        </trans-unit>
+        <trans-unit id="ShellPage_GameTab" translate="yes" xml:space="preserve">
+          <source>Game</source>
+          <target state="final">Spiel</target>
+        </trans-unit>
+        <trans-unit id="ShellPage_Blank" translate="yes" xml:space="preserve">
+          <source>Blank</source>
+          <target state="final">Leer</target>
+        </trans-unit>
+        <trans-unit id="Settings_Personalization" translate="yes" xml:space="preserve">
+          <source>Personalization</source>
+          <target state="final">Personalisierung</target>
+        </trans-unit>
+        <trans-unit id="Settings_Theme" translate="yes" xml:space="preserve">
+          <source>Theme</source>
+          <target state="final">Darstellung</target>
+        </trans-unit>
+        <trans-unit id="Settings_Theme_Light" translate="yes" xml:space="preserve">
+          <source>Light</source>
+          <target state="final">Hell</target>
+        </trans-unit>
+        <trans-unit id="Settings_Theme_Dark" translate="yes" xml:space="preserve">
+          <source>Dark</source>
+          <target state="final">Dunkel</target>
+        </trans-unit>
+        <trans-unit id="Settings_Theme_Default" translate="yes" xml:space="preserve">
+          <source>Default</source>
+          <target state="final">Standard</target>
+        </trans-unit>
+        <trans-unit id="Settings_About" translate="yes" xml:space="preserve">
+          <source>About this application</source>
+          <target state="final">Über diese Applikation</target>
+        </trans-unit>
+        <trans-unit id="Settings_AboutDescription" translate="yes" xml:space="preserve">
+          <source>TODO: Replace with your app description.</source>
+          <target state="needs-review-translation">TODO: Replace with your app description.</target>
+        </trans-unit>
+        <trans-unit id="SettingsPage_PrivacyTermsLink" translate="yes" xml:space="preserve">
+          <source>Privacy Statement</source>
+          <target state="final">Datenschutzerklärung</target>
+        </trans-unit>
+        <trans-unit id="ShellPage_LiveTab" translate="yes" xml:space="preserve">
+          <source>Live</source>
+          <target state="final">Live</target>
+        </trans-unit>
+        <trans-unit id="AuthPage_ContinueAsGuest" translate="yes" xml:space="preserve">
+          <source>Continue as Guest</source>
+          <target state="final">Als Gast fortfahren</target>
+        </trans-unit>
+        <trans-unit id="AuthPage_GuestTooltip" translate="yes" xml:space="preserve">
+          <source>You can play games, but you won't get listed in the scoreboard.</source>
+          <target state="final">Sie können spielen, werden aber nicht in der Bestenliste angeführt</target>
+        </trans-unit>
+        <trans-unit id="AuthPage_Or" translate="yes" xml:space="preserve">
+          <source>or</source>
+          <target state="final">oder</target>
+        </trans-unit>
+        <trans-unit id="AuthPage_SignIn" translate="yes" xml:space="preserve">
+          <source>Sign in</source>
+          <target state="final">Einloggen</target>
+        </trans-unit>
+        <trans-unit id="AuthPage_SignUp" translate="yes" xml:space="preserve">
+          <source>sign up</source>
+          <target state="final">registrieren</target>
+        </trans-unit>
+        <trans-unit id="GamePage_CancelButtonText" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="final">Abbrechen</target>
+        </trans-unit>
+        <trans-unit id="GamePage_NameAlreadyProvidedTooltip" translate="yes" xml:space="preserve">
+          <source>The gamername was already defined during sign-up</source>
+          <target state="final">Der Spielername wurde bereits während der Registrierung angegeben</target>
+        </trans-unit>
+        <trans-unit id="GamePage_NameInput" translate="yes" xml:space="preserve">
+          <source>Gamername</source>
+          <target state="final">Spielername</target>
+        </trans-unit>
+        <trans-unit id="GamePage_NameInputPlaceholder" translate="yes" xml:space="preserve">
+          <source>Enter your gamername</source>
+          <target state="final">Geben Sie Ihren Spielernamen ein</target>
+        </trans-unit>
+        <trans-unit id="GamePage_StartButtonText" translate="yes" xml:space="preserve">
+          <source>Start game</source>
+          <target state="final">Spiel starten</target>
+        </trans-unit>
+        <trans-unit id="AuthPage_WelcomeTo" translate="yes" xml:space="preserve">
+          <source>Welcome to</source>
+          <target state="final">Willkommen zu</target>
+        </trans-unit>
+        <trans-unit id="SettingsPage_PrivacyTermsLinkNavigateUri" translate="yes" xml:space="preserve">
+          <source>https://YourPrivacyUrlGoesHere/</source>
+          <target state="needs-review-translation">https://YourPrivacyUrlGoesHere/</target>
+        </trans-unit>
+        <trans-unit id="GamePage_CancelConfirmContent" translate="yes" xml:space="preserve">
+          <source>Do you really want to cancel the game?</source>
+          <target state="final">Wollen Sie das Spiel wirklich abbrechen?</target>
+        </trans-unit>
+        <trans-unit id="GamePage_CancelConfirmTitle" translate="yes" xml:space="preserve">
+          <source>Cancel game</source>
+          <target state="final">Spiel abbrechen</target>
+        </trans-unit>
+        <trans-unit id="No" translate="yes" xml:space="preserve">
+          <source>No</source>
+          <target state="final">Nein</target>
+        </trans-unit>
+        <trans-unit id="PegSelection_MakeMove" translate="yes" xml:space="preserve">
+          <source>Move</source>
+          <target state="final">Zug machen</target>
+        </trans-unit>
+        <trans-unit id="Yes" translate="yes" xml:space="preserve">
+          <source>Yes</source>
+          <target state="final">Ja</target>
+        </trans-unit>
+        <trans-unit id="LivePage_WaitingForGames" translate="yes" xml:space="preserve">
+          <source>Waiting for games... ⌛</source>
+          <target state="final">Warte auf Spiele... ⌛</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
