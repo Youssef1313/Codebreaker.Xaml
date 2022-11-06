@@ -4,7 +4,6 @@ global using Microsoft.UI.Xaml;
 global using Microsoft.UI.Xaml.Controls;
 global using Microsoft.UI.Xaml.Navigation;
 global using Microsoft.Xaml.Interactivity;
-using System.Diagnostics;
 using CodeBreaker.Services;
 using CodeBreaker.Services.Authentication;
 using CodeBreaker.ViewModels;
@@ -13,13 +12,11 @@ using CodeBreaker.WinUI.Activation;
 using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Services;
 using CodeBreaker.WinUI.ViewModels;
-using CodeBreaker.WinUI.Views;
 using CodeBreaker.WinUI.Views.Pages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Windows.ApplicationModel;
-using Windows.Globalization;
 using Xaml = Microsoft.UI.Xaml;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -115,6 +112,5 @@ public partial class App : Application
         base.OnLaunched(args);
         var activationService = GetService<IActivationService>();
         await activationService.ActivateAsync(args);
-        ApplicationLanguages.PrimaryLanguageOverride = "de";
     }
 }
