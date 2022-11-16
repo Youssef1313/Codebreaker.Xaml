@@ -9,10 +9,29 @@
 // Navigation.SetNavigateTo(navigationViewItem, typeof(MainViewModel).FullName);
 public class NavigationHelper : DependencyObject
 {
-    public static string GetNavigateTo(NavigationViewItem item) => (string)item.GetValue(NavigateToProperty);
+    #region ViewModelName
+    public static readonly DependencyProperty NavigateByViewModelNameProperty =
+        DependencyProperty.RegisterAttached(
+            "NavigateByViewModelName",
+            typeof(string),
+            typeof(NavigationHelper),
+            new PropertyMetadata(null)
+        );
+    public static string GetNavigateByViewModelName(NavigationViewItem item) =>
+        (string)item.GetValue(NavigateByViewModelNameProperty);
+    public static void SetNavigateByViewModelName(NavigationViewItem item, string value) =>
+        item.SetValue(NavigateByViewModelNameProperty, value);
+    #endregion
 
-    public static void SetNavigateTo(NavigationViewItem item, string value) => item.SetValue(NavigateToProperty, value);
+    #region ViewModelType
 
-    public static readonly DependencyProperty NavigateToProperty =
-        DependencyProperty.RegisterAttached("NavigateTo", typeof(string), typeof(NavigationHelper), new PropertyMetadata(null));
+    #endregion
+
+    #region PageName
+
+    #endregion
+
+    #region PageType
+
+    #endregion
 }
