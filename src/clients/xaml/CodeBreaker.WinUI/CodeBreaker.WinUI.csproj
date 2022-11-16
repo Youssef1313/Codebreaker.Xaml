@@ -116,9 +116,6 @@
   <ItemGroup>
     <Resource Remove="Views\LivePage.xaml" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CodeBreaker.ViewModels\CodeBreaker.ViewModels.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <Page Update="Views\Components\InfoBarMessages.xaml">
