@@ -30,6 +30,7 @@
     <None Remove="Views\Components\InfoBarMessages.xaml" />
     <None Remove="Views\KeyPegsView.xaml" />
     <None Remove="Views\LivePage.xaml" />
+    <None Remove="Views\Pages\SettingsPage.xaml" />
     <None Remove="Views\PegSelectionView.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +61,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CNInnovation.Codebreaker.ViewModels" Version="2.0.0-beta1.1" />
+    <PackageReference Include="CNInnovation.Codebreaker.ViewModels" Version="2.0.0-beta1.6" />
     <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.1.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
@@ -131,5 +132,10 @@
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\CodeBreaker.WinUI.de.xlf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Pages\SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
