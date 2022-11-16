@@ -46,12 +46,12 @@
                 TODO: Update item icons by updating FontIcon.Glyph properties.
                 https://docs.microsoft.com/windows/apps/design/style/segoe-fluent-icons-font#icon-list
                 -->
-                <NavigationViewItem Content="{cme:ResourceString Name=ShellPage_GameTab}" ca:NavigationHelper.NavigateByViewModelName="CodeBreaker.ViewModels.GamePageViewModel">
+                <NavigationViewItem Content="{cme:ResourceString Name=ShellPage_GameTab}" ca:NavigationHelper.NavigateByPageName="CodeBreaker.WinUI.Views.Pages.GamePage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe7c3;" />
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="{cme:ResourceString Name=ShellPage_LiveTab}" ca:NavigationHelper.NavigateByViewModelName="CodeBreaker.ViewModels.LivePageViewModel">
+                <NavigationViewItem Content="{cme:ResourceString Name=ShellPage_LiveTab}" ca:NavigationHelper.NavigateByPageName="CodeBreaker.WinUI.Views.Pages.LivePage">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xf785;" />
                     </NavigationViewItem.Icon>

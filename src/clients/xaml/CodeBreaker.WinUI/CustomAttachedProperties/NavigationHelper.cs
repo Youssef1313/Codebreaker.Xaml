@@ -33,7 +33,7 @@ public class NavigationHelper : DependencyObject
         );
     public static string GetNavigateByViewModelType(NavigationViewItem item) =>
         (string)item.GetValue(NavigateByViewModelTypeProperty);
-    public static void SetNavigateByViewModelType(NavigationViewItem item, string value) =>
+    public static void SetNavigateByViewModelType(NavigationViewItem item, Type value) =>
         item.SetValue(NavigateByViewModelTypeProperty, value);
     #endregion
 
@@ -61,7 +61,7 @@ public class NavigationHelper : DependencyObject
         );
     public static string GetNavigateByPageType(NavigationViewItem item) =>
         (string)item.GetValue(NavigateByPageTypeProperty);
-    public static void SetNavigateByPageType(NavigationViewItem item, string value) =>
+    public static void SetNavigateByPageType(NavigationViewItem item, Type value) =>
         item.SetValue(NavigateByPageTypeProperty, value);
     #endregion
 }

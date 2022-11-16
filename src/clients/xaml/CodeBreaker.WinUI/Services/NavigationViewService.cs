@@ -50,9 +50,17 @@ public class NavigationViewService : INavigationViewService
         }
         else
         {
-            if (args.InvokedItemContainer is NavigationViewItem selectedItem && 
-                selectedItem.GetValue(NavigationHelper.NavigateByViewModelNameProperty) is string pageKey)
-                _navigationService.NavigateToViewModel(pageKey);
+            if (args.InvokedItemContainer is not NavigationViewItem selectedItem)
+                return;
+
+            if (selectedItem.GetValue(NavigationHelper.NavigateByViewModelNameProperty) is string viewModelKey)
+                _navigationService.NavigateToViewModel(viewModelKey);
+            else if (selectedItem.GetValue(NavigationHelper.NavigateByViewModelTypeProperty) is Type viewModelType)
+                _navigationService.NavigateToView(viewModelType);
+            else if (selectedItem.GetValue(NavigationHelper.NavigateByPageNameProperty) is string pageKey)
+                _navigationService.NavigateToView(pageKey);
+            else if (selectedItem.GetValue(NavigationHelper.NavigateByPageTypeProperty) is Type pageType)
+                _navigationService.NavigateToView(pageType);
         }
     }
 
@@ -77,8 +85,17 @@ public class NavigationViewService : INavigationViewService
 
     private bool IsMenuItemForPageType(NavigationViewItem menuItem, Type sourcePageType)
     {
-        if (menuItem.GetValue(NavigationHelper.NavigateByViewModelNameProperty) is string pageKey)
-            return _pageService.GetPageTypeByViewModel(pageKey) == sourcePageType;
+        if (menuItem.GetValue(NavigationHelper.NavigateByViewModelNameProperty) is string viewModelKey)
+            return _pageService.GetPageTypeByViewModel(viewModelKey) == sourcePageType;
+
+        if (menuItem.GetValue(NavigationHelper.NavigateByPageNameProperty) is string pageKey)
+            return _pageService.GetPageTypeByPageName(pageKey) == sourcePageType;
+
+        if (menuItem.GetValue(NavigationHelper.NavigateByViewModelTypeProperty) is Type viewModelType)
+            return _pageService.GetPageTypeByViewModel(viewModelType) == sourcePageType;
+
+        if (menuItem.GetValue(NavigationHelper.NavigateByPageTypeProperty) is Type pageType)
+            return pageType == sourcePageType;
 
         return false;
     }
