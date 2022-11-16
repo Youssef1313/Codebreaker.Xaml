@@ -24,14 +24,44 @@ public class NavigationHelper : DependencyObject
     #endregion
 
     #region ViewModelType
-
+    public static readonly DependencyProperty NavigateByViewModelTypeProperty =
+        DependencyProperty.RegisterAttached(
+            "NavigateByViewModelType",
+            typeof(Type),
+            typeof(NavigationHelper),
+            new PropertyMetadata(null)
+        );
+    public static string GetNavigateByViewModelType(NavigationViewItem item) =>
+        (string)item.GetValue(NavigateByViewModelTypeProperty);
+    public static void SetNavigateByViewModelType(NavigationViewItem item, string value) =>
+        item.SetValue(NavigateByViewModelTypeProperty, value);
     #endregion
 
     #region PageName
-
+    public static readonly DependencyProperty NavigateByPageNameProperty =
+        DependencyProperty.RegisterAttached(
+            "NavigateByPageName",
+            typeof(string),
+            typeof(NavigationHelper),
+            new PropertyMetadata(null)
+        );
+    public static string GetNavigateByPageName(NavigationViewItem item) =>
+        (string)item.GetValue(NavigateByPageNameProperty);
+    public static void SetNavigateByPageName(NavigationViewItem item, string value) =>
+        item.SetValue(NavigateByPageNameProperty, value);
     #endregion
 
     #region PageType
-
+    public static readonly DependencyProperty NavigateByPageTypeProperty =
+        DependencyProperty.RegisterAttached(
+            "NavigateByPageType",
+            typeof(Type),
+            typeof(NavigationHelper),
+            new PropertyMetadata(null)
+        );
+    public static string GetNavigateByPageType(NavigationViewItem item) =>
+        (string)item.GetValue(NavigateByPageTypeProperty);
+    public static void SetNavigateByPageType(NavigationViewItem item, string value) =>
+        item.SetValue(NavigateByPageTypeProperty, value);
     #endregion
 }
