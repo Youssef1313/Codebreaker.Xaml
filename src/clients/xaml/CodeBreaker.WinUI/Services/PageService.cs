@@ -1,13 +1,14 @@
 ﻿using CodeBreaker.ViewModels;
 using CodeBreaker.WinUI.Contracts.Services;
-using CodeBreaker.WinUI.Views;
 using CodeBreaker.WinUI.Views.Pages;
 
 namespace CodeBreaker.WinUI.Services;
 
 public class PageService : IPageService
 {
-    private readonly Dictionary<string, Type> _pages = new();
+    private readonly Dictionary<string, Type> _viewModelTypeNameToPageType = new();
+
+    private readonly Dictionary<Type, Type> _viewModelTypeToPageType = new();
 
     public PageService()
     {
@@ -19,9 +20,9 @@ public class PageService : IPageService
     public Type GetPageType(string key)
     {
         Type? pageType;
-        lock (_pages)
+        lock (_viewModelTypeNameToPageType)
         {
-            if (!_pages.TryGetValue(key, out pageType))
+            if (!_viewModelTypeNameToPageType.TryGetValue(key, out pageType))
             {
                 throw new ArgumentException($"Page not found: {key}. Did you forget to call PageService.Configure?");
             }
@@ -34,23 +35,30 @@ public class PageService : IPageService
         where VM : class
         where V : Page
     {
-        lock (_pages)
+        lock (_viewModelTypeNameToPageType)
         {
-            var key = typeof(VM).FullName;
-            if (key is null) throw new InvalidOperationException();
+            Type? vmType = typeof(VM);
+            string? vmTypeKey = vmType?.FullName;
 
-            if (_pages.ContainsKey(key))
-            {
-                throw new ArgumentException($"The key {key} is already configured in PageService");
-            }
+            if (vmTypeKey is null || /* just to satisfy compiler warnings -> */ vmType is null)
+                throw new InvalidOperationException();
 
-            var type = typeof(V);
-            if (_pages.Any(p => p.Value == type))
-            {
-                throw new ArgumentException($"This type is already configured with key {_pages.First(p => p.Value == type).Key}");
-            }
+            if (_viewModelTypeNameToPageType.ContainsKey(vmTypeKey))
+                throw new ArgumentException($"The key {vmTypeKey} is already configured in {nameof(PageService)}");
 
-            _pages.Add(key, type);
+            if (_viewModelTypeToPageType.ContainsKey(vmType))
+                throw new ArgumentException($"The type {vmType} is already configured in {nameof(PageService)}");
+
+            Type? pageType = typeof(V);
+
+            if (_viewModelTypeNameToPageType.Any(p => p.Value == pageType))
+                throw new ArgumentException($"This type is already configured with key {_viewModelTypeNameToPageType.First(p => p.Value == pageType).Key}");
+
+            if (_viewModelTypeToPageType.Any(p => p.Value == pageType))
+                throw new ArgumentException($"This type is already configured with key {_viewModelTypeToPageType.First(p => p.Value == pageType).Key}");
+
+            _viewModelTypeNameToPageType.Add(vmTypeKey, pageType);
+            _viewModelTypeToPageType.Add(vmType, pageType);
         }
     }
 }

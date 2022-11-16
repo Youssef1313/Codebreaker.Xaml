@@ -1,4 +1,5 @@
 ﻿using CodeBreaker.WinUI.Contracts.Services;
+using CodeBreaker.WinUI.Views.Pages;
 
 namespace CodeBreaker.WinUI.Services;
 
@@ -44,37 +45,30 @@ public class NavigationViewService : INavigationViewService
     {
         if (args.IsSettingsInvoked)
         {
-            // Navigate to the settings page.
+            _navigationService.NavigateTo(typeof(SettingsPage));
         }
         else
         {
             if (args.InvokedItemContainer is NavigationViewItem selectedItem && 
                 selectedItem.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
-            {
                 _navigationService.NavigateTo(pageKey);
-            }
         }
     }
 
     private NavigationViewItem? GetSelectedItem(IEnumerable<object>? menuItems, Type pageType)
     {
         if (menuItems is null)
-        {
             return null;
-        }
 
         foreach (var item in menuItems.OfType<NavigationViewItem>())
         {
             if (IsMenuItemForPageType(item, pageType))
-            {
                 return item;
-            }
 
-            var selectedChild = GetSelectedItem(item.MenuItems, pageType);
+            NavigationViewItem? selectedChild = GetSelectedItem(item.MenuItems, pageType);
+
             if (selectedChild != null)
-            {
                 return selectedChild;
-            }
         }
 
         return null;
@@ -83,9 +77,7 @@ public class NavigationViewService : INavigationViewService
     private bool IsMenuItemForPageType(NavigationViewItem menuItem, Type sourcePageType)
     {
         if (menuItem.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
-        {
             return _pageService.GetPageType(pageKey) == sourcePageType;
-        }
 
         return false;
     }
