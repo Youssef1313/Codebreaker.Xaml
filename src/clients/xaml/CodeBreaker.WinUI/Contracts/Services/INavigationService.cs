@@ -2,7 +2,7 @@
 
 namespace CodeBreaker.WinUI.Contracts.Services;
 
-public interface INavigationService : INavigationServiceCore
+public interface INavigationService : IViewModelNavigationService
 {
     event NavigatedEventHandler Navigated;
 
@@ -10,5 +10,7 @@ public interface INavigationService : INavigationServiceCore
 
     Frame Frame { get; set; }
 
-    bool NavigateTo(Type pageType, object? parameter = default, bool clearNavigation = false);
+    bool NavigateToView(Type pageType, object? parameter = default, bool clearNavigation = false);
+
+    bool NavigateToView(string pageKey, object? parameter = default, bool clearNavigation = false);
 }

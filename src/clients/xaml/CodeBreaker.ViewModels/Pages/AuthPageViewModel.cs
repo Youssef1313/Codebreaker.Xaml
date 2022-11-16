@@ -17,11 +17,11 @@ public partial class AuthPageViewModel
 
     private readonly ILogger _logger;
 
-    private readonly INavigationServiceCore _navigationService;
+    private readonly IViewModelNavigationService _navigationService;
 
     private readonly IAuthDefinition _authDefinition = new ApiServiceAuthDefinition();
 
-    public AuthPageViewModel(IAuthService authService, IDialogService dialogService, ILogger<AuthPageViewModel> logger, INavigationServiceCore navigationService)
+    public AuthPageViewModel(IAuthService authService, IDialogService dialogService, ILogger<AuthPageViewModel> logger, IViewModelNavigationService navigationService)
     {
         _authService = authService;
         _dialogService = dialogService;
@@ -42,10 +42,10 @@ public partial class AuthPageViewModel
             return;
         }
 
-        _navigationService.NavigateTo(typeof(GamePageViewModel).FullName!, clearNavigation: true);
+        _navigationService.NavigateToViewModel(typeof(GamePageViewModel), clearNavigation: true);
     }
 
     [RelayCommand]
     private void ContinueAsGuest() =>
-        _navigationService.NavigateTo(typeof(GamePageViewModel).FullName!, clearNavigation: true);
+        _navigationService.NavigateToViewModel(typeof(GamePageViewModel), clearNavigation: true);
 }

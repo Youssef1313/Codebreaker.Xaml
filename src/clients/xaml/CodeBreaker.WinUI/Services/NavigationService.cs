@@ -1,9 +1,5 @@
-﻿using CodeBreaker.Services;
-using CodeBreaker.WinUI.Contracts.Services;
+﻿using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Contracts.ViewModels;
-
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 
 namespace CodeBreaker.WinUI.Services;
 
@@ -71,12 +67,12 @@ public class NavigationService : INavigationService
         return true;
     }
 
-    public bool NavigateTo(Type pageType, object? parameter = default, bool clearNavigation = false)
+    public bool NavigateToView(Type pageType, object? parameter = default, bool clearNavigation = false)
     {
         if (_frame?.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParameterUsed)))
         {
             if (_frame is null)
-                throw new InvalidOperationException();
+                throw new InvalidOperationException("Frame is null");
 
             _frame.Tag = clearNavigation;
             object? vmBeforeNavigation = _frame.GetPageViewModel();
@@ -96,10 +92,22 @@ public class NavigationService : INavigationService
         return false;
     }
 
-    public bool NavigateTo(string pageKey, object? parameter = default, bool clearNavigation = false)
+    public bool NavigateToView(string pageKey, object? parameter = default, bool clearNavigation = false)
     {
-        Type? pageType = _pageService.GetPageType(pageKey);
-        return NavigateTo(pageType, parameter, clearNavigation);
+        Type? pageType = _pageService.GetPageTypeByPageName(pageKey);
+        return NavigateToView(pageType, parameter, clearNavigation);
+    }
+
+    public bool NavigateToViewModel(Type viewModelType, object? parameter = default, bool clearNavigation = false)
+    {
+        Type? pageType = _pageService.GetPageTypeByViewModel(viewModelType);
+        return NavigateToView(pageType, parameter, clearNavigation);
+    }
+
+    public bool NavigateToViewModel(string viewModelKey, object? parameter = default, bool clearNavigation = false)
+    {
+        Type? pageType = _pageService.GetPageTypeByViewModel(viewModelKey);
+        return NavigateToView(pageType, parameter, clearNavigation);
     }
 
     private void OnNavigated(object sender, NavigationEventArgs e)

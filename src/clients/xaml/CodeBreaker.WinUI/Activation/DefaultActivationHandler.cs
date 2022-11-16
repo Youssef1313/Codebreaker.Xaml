@@ -1,6 +1,5 @@
 ﻿using CodeBreaker.ViewModels;
 using CodeBreaker.WinUI.Contracts.Services;
-using CodeBreaker.WinUI.ViewModels;
 
 namespace CodeBreaker.WinUI.Activation;
 
@@ -19,13 +18,9 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
         return _navigationService.Frame.Content == null;
     }
 
-    protected override async Task HandleInternalAsync(LaunchActivatedEventArgs? args)
+    protected override Task HandleInternalAsync(LaunchActivatedEventArgs? args)
     {
-        string? fullName = typeof(AuthPageViewModel).FullName;
-        if (fullName is null) throw new InvalidOperationException();
-        
-        _navigationService.NavigateTo(fullName, args?.Arguments);
-
-        await Task.CompletedTask;
+        _navigationService.NavigateToViewModel(typeof(AuthPageViewModel), args?.Arguments);
+        return Task.CompletedTask;
     }
 }
