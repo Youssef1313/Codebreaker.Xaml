@@ -1,4 +1,5 @@
 ﻿using CodeBreaker.WinUI.Contracts.Services;
+using CodeBreaker.WinUI.CustomAttachedProperties;
 using CodeBreaker.WinUI.Views.Pages;
 
 namespace CodeBreaker.WinUI.Services;

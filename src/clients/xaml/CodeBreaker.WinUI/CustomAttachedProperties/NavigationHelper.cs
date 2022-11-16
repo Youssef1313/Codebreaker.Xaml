@@ -1,13 +1,13 @@
-﻿namespace CodeBreaker.WinUI.Helpers;
+﻿namespace CodeBreaker.WinUI.CustomAttachedProperties;
 
 // Helper class to set the navigation target for a NavigationViewItem.
 //
 // Usage in XAML:
-// <NavigationViewItem x:Uid="Shell_Game" Icon="Document" helpers:NavigationHelper.NavigateTo="AppName.ViewModels.MainViewModel" />
+// <NavigationViewItem x:Uid="Shell_Game" Icon="Document" helpers:Navigation.NavigateTo="AppName.ViewModels.MainViewModel" />
 //
 // Usage in code:
-// NavigationHelper.SetNavigateTo(navigationViewItem, typeof(MainViewModel).FullName);
-public class NavigationHelper
+// Navigation.SetNavigateTo(navigationViewItem, typeof(MainViewModel).FullName);
+public class NavigationHelper : DependencyObject
 {
     public static string GetNavigateTo(NavigationViewItem item) => (string)item.GetValue(NavigateToProperty);
 
