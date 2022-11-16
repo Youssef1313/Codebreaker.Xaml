@@ -42,10 +42,10 @@ public partial class AuthPageViewModel
             return;
         }
 
-        _navigationService.NavigateTo(typeof(GamePageViewModel).FullName!, clearNavigation: true);
+        _navigationService.NavigateToViewModel(typeof(GamePageViewModel), clearNavigation: true);
     }
 
     [RelayCommand]
     private void ContinueAsGuest() =>
-        _navigationService.NavigateTo(typeof(GamePageViewModel).FullName!, clearNavigation: true);
+        _navigationService.NavigateToViewModel(typeof(GamePageViewModel), clearNavigation: true);
 }
