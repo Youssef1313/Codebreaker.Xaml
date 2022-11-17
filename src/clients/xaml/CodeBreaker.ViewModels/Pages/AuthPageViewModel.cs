@@ -21,7 +21,7 @@ public partial class AuthPageViewModel
 
     private readonly IAuthDefinition _authDefinition = new ApiServiceAuthDefinition();
 
-    public AuthPageViewModel(IAuthService authService, IDialogService dialogService, ILogger<AuthPageViewModel> logger, INavigationServiceCore navigationService)
+    public AuthPageViewModel(IAuthService authService, IDialogService dialogService, ILogger<AuthPageViewModel> logger, IViewModelNavigationService navigationService)
     {
         _authService = authService;
         _dialogService = dialogService;
