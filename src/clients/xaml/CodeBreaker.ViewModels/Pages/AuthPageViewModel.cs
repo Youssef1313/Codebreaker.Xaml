@@ -17,7 +17,7 @@ public partial class AuthPageViewModel
 
     private readonly ILogger _logger;
 
-    private readonly INavigationServiceCore _navigationService;
+    private readonly IViewModelNavigationService _navigationService;
 
     private readonly IAuthDefinition _authDefinition = new ApiServiceAuthDefinition();
 
