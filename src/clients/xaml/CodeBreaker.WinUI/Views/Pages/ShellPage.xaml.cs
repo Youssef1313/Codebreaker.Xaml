@@ -34,7 +34,7 @@ public sealed partial class ShellPage : Page
         WeakReferenceMessenger.Default.Register<ChangeNavigationPaneVisibility>(this, (s, args) => NavigationViewControl.IsPaneVisible = args.IsVisible);
     }
 
-    private void OnLoaded(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    private void OnLoaded(object sender, RoutedEventArgs e)
     {
         TitleBarHelper.UpdateTitleBar(RequestedTheme);
 

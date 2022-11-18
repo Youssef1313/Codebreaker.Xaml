@@ -1,9 +1,5 @@
-﻿using CodeBreaker.Services;
-using CodeBreaker.WinUI.Contracts.Services;
+﻿using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Contracts.ViewModels;
-
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Navigation;
 
 namespace CodeBreaker.WinUI.Services;
 
@@ -48,54 +44,46 @@ public class NavigationService : INavigationService
     private void RegisterFrameEvents()
     {
         if (_frame is not null)
-        {
             _frame.Navigated += OnNavigated;
-        }
     }
 
     private void UnregisterFrameEvents()
     {
         if (_frame is not null)
-        {
             _frame.Navigated -= OnNavigated;
-        }
     }
 
     public bool GoBack()
     {
-        if (CanGoBack)
-        {
-            var vmBeforeNavigation = _frame?.GetPageViewModel();
-            _frame?.GoBack();
-            if (vmBeforeNavigation is INavigationAware navigationAware)
-            {
-                navigationAware.OnNavigatedFrom();
-            }
+        if (!CanGoBack)
+            return false;
 
-            return true;
-        }
+        object? vmBeforeNavigation = _frame?.GetPageViewModel();
+        _frame?.GoBack();
 
-        return false;
+        if (vmBeforeNavigation is INavigationAware navigationAware)
+            navigationAware.OnNavigatedFrom();
+
+        return true;
     }
 
-    public bool NavigateTo(string pageKey, object? parameter = default, bool clearNavigation = false)
+    public bool NavigateToView(Type pageType, object? parameter = default, bool clearNavigation = false)
     {
-        var pageType = _pageService.GetPageType(pageKey);
-
         if (_frame?.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParameterUsed)))
         {
-            if (_frame is null) throw new InvalidOperationException();
+            if (_frame is null)
+                throw new InvalidOperationException("Frame is null");
 
             _frame.Tag = clearNavigation;
-            var vmBeforeNavigation = _frame.GetPageViewModel();
-            var navigated = _frame.Navigate(pageType, parameter);
+            object? vmBeforeNavigation = _frame.GetPageViewModel();
+            bool navigated = _frame.Navigate(pageType, parameter);
+
             if (navigated)
             {
                 _lastParameterUsed = parameter;
+
                 if (vmBeforeNavigation is INavigationAware navigationAware)
-                {
                     navigationAware.OnNavigatedFrom();
-                }
             }
 
             return navigated;
@@ -104,22 +92,37 @@ public class NavigationService : INavigationService
         return false;
     }
 
+    public bool NavigateToView(string pageKey, object? parameter = default, bool clearNavigation = false)
+    {
+        Type? pageType = _pageService.GetPageTypeByPageName(pageKey);
+        return NavigateToView(pageType, parameter, clearNavigation);
+    }
+
+    public bool NavigateToViewModel(Type viewModelType, object? parameter = default, bool clearNavigation = false)
+    {
+        Type? pageType = _pageService.GetPageTypeByViewModel(viewModelType);
+        return NavigateToView(pageType, parameter, clearNavigation);
+    }
+
+    public bool NavigateToViewModel(string viewModelKey, object? parameter = default, bool clearNavigation = false)
+    {
+        Type? pageType = _pageService.GetPageTypeByViewModel(viewModelKey);
+        return NavigateToView(pageType, parameter, clearNavigation);
+    }
+
     private void OnNavigated(object sender, NavigationEventArgs e)
     {
-        if (sender is Frame frame)
-        {
-            var clearNavigation = (bool)frame.Tag;
-            if (clearNavigation)
-            {
-                frame.BackStack.Clear();
-            }
+        if (sender is not Frame frame)
+            return;
 
-            if (frame.GetPageViewModel() is INavigationAware navigationAware)
-            {
-                navigationAware.OnNavigatedTo(e.Parameter);
-            }
+        bool clearNavigation = (bool)frame.Tag;
 
-            Navigated?.Invoke(sender, e);
-        }
+        if (clearNavigation)
+            frame.BackStack.Clear();
+
+        if (frame.GetPageViewModel() is INavigationAware navigationAware)
+            navigationAware.OnNavigatedTo(e.Parameter);
+
+        Navigated?.Invoke(sender, e);
     }
 }

@@ -51,7 +51,7 @@ public partial class App : Application
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddSingleton<IPageService, PageService>();
             services.AddSingleton<INavigationService, NavigationService>();
-            services.AddSingleton<INavigationServiceCore>(x => x.GetRequiredService<INavigationService>());
+            services.AddSingleton<IViewModelNavigationService>(x => x.GetRequiredService<INavigationService>());
             services.AddScoped<IDialogService, WinUIDialogService>();
 
             services.AddTransient<ShellPage>();
