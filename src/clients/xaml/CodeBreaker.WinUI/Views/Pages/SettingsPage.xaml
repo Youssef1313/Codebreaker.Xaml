@@ -5,10 +5,57 @@
     xmlns:local="using:CodeBreaker.WinUI.Views.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
+    xmlns:converter="using:CodeBreaker.WinUI.Converters"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <converter:ElementThemeToIntConverter x:Key="ElementThemeToIntConverter" />
+    </Page.Resources>
+    <StackPanel Padding="25,20" Spacing="30">
+        <RadioButtons
+            Header="{cme:ResourceString Name=Settings_Theme}"
+            SelectedIndex="{x:Bind Path=ViewModel.Theme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ElementThemeToIntConverter}}">
+            <RadioButtons.Resources>
+                <Style TargetType="StackPanel">
+                    <Setter Property="Spacing" Value="10" />
+                </Style>
+            </RadioButtons.Resources>
+            <RadioButton Tag="system">
+                <RadioButton.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe770;" /> <!-- Icon "System" -->
+                        <TextBlock Text="{cme:ResourceString Name=Settings_Theme_Default}" />
+                    </StackPanel>
+                </RadioButton.Content>
+            </RadioButton>
+            <RadioButton Tag="light">
+                <RadioButton.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe706;" /> <!-- Icon "Brightness" -->
+                        <TextBlock Text="{cme:ResourceString Name=Settings_Theme_Light}" />
+                    </StackPanel>
+                </RadioButton.Content>
+            </RadioButton>
+            <RadioButton Tag="dark">
+                <RadioButton.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xe708;" /> <!-- Icon "QuietHours" -->
+                        <TextBlock Text="{cme:ResourceString Name=Settings_Theme_Dark}" />
+                    </StackPanel>
+                </RadioButton.Content>
+            </RadioButton>
+        </RadioButtons>
 
-    <Grid>
-        <TextBlock Text="TODO" />
-    </Grid>
+        <InfoBar
+            Message="{cme:ResourceString Name=SettingsPage_LanguageChangeInfoMessage}"
+            IsIconVisible="True"
+            IsOpen="{x:Bind Path=ViewModel.LanguageChangeInfoBarVisible, Mode=OneWay}"
+            IsClosable="False" />
+        <ComboBox
+            Header="{cme:ResourceString Name=Settings_Language}"
+            PlaceholderText="{cme:ResourceString Name=Settings_Language}"
+            ItemsSource="{x:Bind Path=ViewModel.LanguageSelections, Mode=OneTime}" DisplayMemberPath="Text"
+            SelectedValue="{x:Bind Path=ViewModel.LanguageKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedValuePath="Key" />
+    </StackPanel>
 </Page>

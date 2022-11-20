@@ -76,7 +76,7 @@ public class NavigationService : INavigationService
 
             _frame.Tag = clearNavigation;
             object? vmBeforeNavigation = _frame.GetPageViewModel();
-            bool navigated = _frame.Navigate(pageType, parameter);
+            bool navigated = _frame.Navigate(pageType, parameter);      // If the page class has constructor parameters, this method will throw an exception
 
             if (navigated)
             {

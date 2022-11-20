@@ -2,10 +2,12 @@
 using CodeBreaker.WinUI.Messages;
 using CodeBreaker.WinUI.ViewModels;
 using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.UI;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 
 using Windows.System;
+using Windows.UI;
 
 namespace CodeBreaker.WinUI.Views.Pages;
 

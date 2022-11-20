@@ -130,6 +130,26 @@
           <source>Waiting for games... ⌛</source>
           <target state="final">Warte auf Spiele... ⌛</target>
         </trans-unit>
+        <trans-unit id="Settings_Language" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="final">Sprache</target>
+        </trans-unit>
+        <trans-unit id="Settings_Language_English" translate="yes" xml:space="preserve">
+          <source>English</source>
+          <target state="final">Englisch</target>
+        </trans-unit>
+        <trans-unit id="Settings_Language_German" translate="yes" xml:space="preserve">
+          <source>German</source>
+          <target state="final">Deutsch</target>
+        </trans-unit>
+        <trans-unit id="SettingsPage_LanguageChangeInfoMessage" translate="yes" xml:space="preserve">
+          <source>The language will change after the next start of the application.</source>
+          <target state="final">Die Sprache wird beim nächsten Start der Applikation geändert.</target>
+        </trans-unit>
+        <trans-unit id="Settings_Language_Default" translate="yes" xml:space="preserve">
+          <source>Default</source>
+          <target state="final">Standard</target>
+        </trans-unit>
       </group>
     </body>
   </file>

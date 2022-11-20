@@ -53,9 +53,14 @@ public partial class App : Application
             services.AddSingleton<INavigationService, NavigationService>();
             services.AddSingleton<IViewModelNavigationService>(x => x.GetRequiredService<INavigationService>());
             services.AddScoped<IDialogService, WinUIDialogService>();
+            services.AddSingleton<ISettingsService, SettingsService>();
 
             services.AddTransient<ShellPage>();
             services.AddTransient<ShellViewModel>();
+
+            services.AddSingleton<ISettingsService, SettingsService>();
+            services.AddScoped<SettingsPageViewModel>();
+            services.AddTransient<SettingsPage>();
 
             services.AddSingleton<IAuthService, AuthService>();
             services.AddScoped<AuthPageViewModel>();
@@ -112,5 +117,6 @@ public partial class App : Application
         base.OnLaunched(args);
         var activationService = GetService<IActivationService>();
         await activationService.ActivateAsync(args);
+        GetService<ISettingsService>().TrySettingStoredTheme();
     }
 }

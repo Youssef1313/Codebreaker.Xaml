@@ -210,4 +210,19 @@
   <data name="LivePage_WaitingForGames" xml:space="preserve">
     <value>Waiting for games... ⌛</value>
   </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Settings_Language_English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Settings_Language_German" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="SettingsPage_LanguageChangeInfoMessage" xml:space="preserve">
+    <value>The language will change after the next start of the application.</value>
+  </data>
+  <data name="Settings_Language_Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
 </root>
