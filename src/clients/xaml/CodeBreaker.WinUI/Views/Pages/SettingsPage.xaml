@@ -13,6 +13,7 @@
         <converter:ElementThemeToIntConverter x:Key="ElementThemeToIntConverter" />
     </Page.Resources>
     <StackPanel Padding="25,20" Spacing="30">
+        <!-- Theme -->
         <RadioButtons
             Header="{cme:ResourceString Name=Settings_Theme}"
             SelectedIndex="{x:Bind Path=ViewModel.Theme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource ElementThemeToIntConverter}}">
@@ -47,6 +48,7 @@
             </RadioButton>
         </RadioButtons>
 
+        <!--Language-->
         <InfoBar
             Message="{cme:ResourceString Name=SettingsPage_LanguageChangeInfoMessage}"
             IsIconVisible="True"

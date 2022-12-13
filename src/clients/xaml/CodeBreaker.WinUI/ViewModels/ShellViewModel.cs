@@ -1,6 +1,6 @@
 ﻿using CodeBreaker.Services;
 using CodeBreaker.WinUI.Contracts.Services;
-
+using CodeBreaker.WinUI.Views.Pages;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 using Microsoft.UI.Xaml.Navigation;
@@ -32,6 +32,13 @@ public partial class ShellViewModel
     private void OnNavigated(object sender, NavigationEventArgs e)
     {
         IsBackEnabled = NavigationService.CanGoBack;
+
+        if (e.SourcePageType == typeof(SettingsPage))
+        {
+            Selected = NavigationViewService.SettingsItem;
+            return;
+        }
+
         var selectedItem = NavigationViewService.GetSelectedItem(e.SourcePageType);
         if (selectedItem != null)
         {
