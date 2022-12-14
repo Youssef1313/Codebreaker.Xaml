@@ -115,8 +115,8 @@ public partial class App : Application
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         base.OnLaunched(args);
-        var activationService = GetService<IActivationService>();
-        await activationService.ActivateAsync(args);
+        //await GetService<IAuthService>().RegisterPersistentTokenCacheAsync();     // TODO: Add after update of Services-NuGetPackage
+        await GetService<IActivationService>().ActivateAsync(args);
         GetService<ISettingsService>().TrySettingStoredTheme();
     }
 }
