@@ -79,8 +79,16 @@
             </Grid>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem
-                    Content="Account"
-                    ca:NavigationViewItemHelper.IconGlyph="&#xe77b;" />
+                    Visibility="{x:Bind ViewModel.IsAuthenticated, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=False}"
+                    Content="{x:Bind ViewModel.User.FullName, Mode=OneWay}"
+                    ca:NavigationViewItemHelper.IconGlyph="&#xe77b;"
+                    />
+                <NavigationViewItem
+                    Visibility="{x:Bind ViewModel.IsAuthenticated, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True}"
+                    Content="Login or register"
+                    SelectsOnInvoked="False"
+                    ca:NavigationViewItemHelper.IconGlyph="&#xe77b;"
+                    ca:NavigationViewItemHelper.Command="{x:Bind ViewModel.LoginCommand}" />
             </NavigationView.FooterMenuItems>
         </NavigationView>
     </Grid>
