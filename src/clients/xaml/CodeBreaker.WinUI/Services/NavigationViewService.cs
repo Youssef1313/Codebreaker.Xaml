@@ -53,6 +53,12 @@ public class NavigationViewService : INavigationViewService
             if (args.InvokedItemContainer is not NavigationViewItem selectedItem)
                 return;
 
+            if (selectedItem.GetValue(NavigationViewItemHelper.CommandProperty) is ICommand command)
+            {
+                var commandArgument = selectedItem.GetValue(NavigationViewItemHelper.CommandArgumentProperty);
+                command.Execute(commandArgument);
+            }
+
             if (selectedItem.GetValue(NavigationHelper.NavigateByViewModelNameProperty) is string viewModelKey)
                 _navigationService.NavigateToViewModel(viewModelKey);
             else if (selectedItem.GetValue(NavigationHelper.NavigateByViewModelTypeProperty) is Type viewModelType)
