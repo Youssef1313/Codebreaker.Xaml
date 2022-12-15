@@ -1,4 +1,5 @@
-﻿using CodeBreaker.WinUI.Contracts.Services;
+﻿using System.Windows.Input;
+using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.CustomAttachedProperties;
 using CodeBreaker.WinUI.Views.Pages;
 
@@ -38,7 +39,15 @@ public class NavigationViewService : INavigationViewService
         }
     }
 
-    public NavigationViewItem? GetSelectedItem(Type pageType) => GetSelectedItem(_navigationView?.MenuItems, pageType);
+    public NavigationViewItem? GetSelectedItem(Type pageType)
+    {
+        IEnumerable<object>? menuItems = _navigationView?.MenuItems;
+        IEnumerable<object>? footerMenuItems = _navigationView?.FooterMenuItems;
+        IEnumerable<object>? allMenuItems = footerMenuItems is null
+            ? menuItems
+            : menuItems?.Concat(footerMenuItems);
+        return GetSelectedItem(allMenuItems, pageType);
+    }
 
     private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args) => _navigationService.GoBack();
 
