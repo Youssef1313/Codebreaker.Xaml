@@ -1,4 +1,5 @@
-﻿using CodeBreaker.ViewModels;
+﻿using CodeBreaker.Services.Authentication;
+using CodeBreaker.ViewModels;
 using CodeBreaker.WinUI.Contracts.Services;
 
 namespace CodeBreaker.WinUI.Activation;
@@ -7,9 +8,12 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
 {
     private readonly INavigationService _navigationService;
 
-    public DefaultActivationHandler(INavigationService navigationService)
+    private readonly IAuthService _authService;
+
+    public DefaultActivationHandler(INavigationService navigationService, IAuthService authService)
     {
         _navigationService = navigationService;
+        _authService = authService;
     }
 
     protected override bool CanHandleInternal(LaunchActivatedEventArgs? args)
@@ -20,7 +24,12 @@ public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventAr
 
     protected override Task HandleInternalAsync(LaunchActivatedEventArgs? args)
     {
-        _navigationService.NavigateToViewModel(typeof(AuthPageViewModel), args?.Arguments);
+        Type pageType = _authService.IsAuthenticated
+            ? typeof(GamePageViewModel)
+            : typeof(AuthPageViewModel);
+
+        _navigationService.NavigateToViewModel(pageType, args?.Arguments);
+
         return Task.CompletedTask;
     }
 }
