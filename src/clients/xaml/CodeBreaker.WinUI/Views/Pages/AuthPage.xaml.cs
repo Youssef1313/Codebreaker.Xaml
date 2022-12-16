@@ -29,8 +29,7 @@ public sealed partial class AuthPage : Page
     {
         ViewModel = App.GetService<AuthPageViewModel>();
         InitializeComponent();
-        this.CallOnceOnUnloaded((_, _) => WeakReferenceMessenger.Default.Send(new ChangeNavigationPaneVisibility(true)));
-        WeakReferenceMessenger.Default.Send(new ChangeNavigationPaneVisibility(false));
+        this.HideNavigationPaneForThisPage();
     }
 
     public AuthPageViewModel ViewModel { get; private init; }

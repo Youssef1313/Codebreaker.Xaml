@@ -31,7 +31,6 @@ public sealed partial class ShellPage : Page
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();
-        NavigationViewControl.IsPaneVisible = false;
         WeakReferenceMessenger.Default.UnregisterAllOnUnloaded(this);
         WeakReferenceMessenger.Default.Register<ChangeNavigationPaneVisibility>(this, (s, args) => NavigationViewControl.IsPaneVisible = args.IsVisible);
     }
