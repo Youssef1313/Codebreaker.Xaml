@@ -6,6 +6,7 @@ global using Microsoft.UI.Xaml.Navigation;
 global using Microsoft.Xaml.Interactivity;
 using CodeBreaker.Services;
 using CodeBreaker.Services.Authentication;
+using CodeBreaker.Services.Authentication.Definitions;
 using CodeBreaker.ViewModels;
 using CodeBreaker.ViewModels.Services;
 using CodeBreaker.WinUI.Activation;
@@ -115,8 +116,10 @@ public partial class App : Application
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         base.OnLaunched(args);
-        //await GetService<IAuthService>().RegisterPersistentTokenCacheAsync();     // TODO: Add after update of Services-NuGetPackage
-        await GetService<IActivationService>().ActivateAsync(args);
+        IAuthService authService = GetService<IAuthService>();
+        await authService.RegisterPersistentTokenCacheAsync();
+        await authService.TryAquireTokenSilentlyAsync(new ApiServiceAuthDefinition());
         GetService<ISettingsService>().TrySettingStoredTheme();
+        await GetService<IActivationService>().ActivateAsync(args);
     }
 }
