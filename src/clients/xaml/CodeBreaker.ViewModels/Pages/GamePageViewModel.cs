@@ -59,6 +59,8 @@ public partial class GamePageViewModel
         };
 
         SetGamerNameIfAvailable();
+
+        _authService.OnAuthenticationStateChanged += (_, _) => SetGamerNameIfAvailable();
     }
 
     public InfoBarMessageService InfoBarMessageService { get; } = new();
@@ -240,10 +242,15 @@ public partial class GamePageViewModel
         string? gamerName = _authService.LastUserInformation?.GamerName;
 
         if (string.IsNullOrWhiteSpace(gamerName))
-            return;
-
-        Name = gamerName;
-        IsNamePredefined = true;
+        {
+            Name = string.Empty;
+            IsNamePredefined = false;
+        }
+        else
+        {
+            Name = gamerName;
+            IsNamePredefined = true;
+        }
     }
 
     private void InitializeValues()
