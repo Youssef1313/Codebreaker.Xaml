@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.Messaging;
+using Microsoft.UI.Xaml.Media;
 
 namespace CodeBreaker.WinUI.Helpers;
 
@@ -27,5 +28,23 @@ internal static class PageExtensions
         }
 
         page.Unloaded += Callback;
+    }
+
+    public static IEnumerable<T> FindItemsOfType<T>(this Page page, DependencyObject obj)
+        where T : DependencyObject
+    {
+        for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+        {
+            DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+
+            if (child is null)
+                yield break;
+
+            if (child is T item)
+                yield return item;
+
+            foreach (T childOfChild in page.FindItemsOfType<T>(child))
+                yield return childOfChild;
+        }
     }
 }
