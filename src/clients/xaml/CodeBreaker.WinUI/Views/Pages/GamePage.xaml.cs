@@ -9,7 +9,7 @@ using Microsoft.UI.Xaml.Shapes;
 
 namespace CodeBreaker.WinUI.Views.Pages;
 
-public sealed partial class GamePage : Page
+public sealed partial class GamePage : Page, IRecipient<GameMoveMessage>
 {
     public GamePageViewModel ViewModel { get; }
 
@@ -17,8 +17,13 @@ public sealed partial class GamePage : Page
     {
         ViewModel = App.GetService<GamePageViewModel>();
         InitializeComponent();
+        //this.ChangeNavigationPaneDisplayModeForThisPage(NavigationViewPaneDisplayMode.LeftCompact);   // Just for demonstration
 
-        WeakReferenceMessenger.Default.Register<GameMoveMessage>(this, (r, m) =>
+        WeakReferenceMessenger.Default.Register(this);
+        WeakReferenceMessenger.Default.UnregisterAllOnUnloaded(this);
+    }
+
+    public void Receive(GameMoveMessage message)
         {
             static void Animate(ConnectedAnimationService animationService, string key, UIElement target)
             {     
@@ -30,9 +35,9 @@ public sealed partial class GamePage : Page
                 animation.TryStart(target);
             }
             
-            if (m.GameMoveValue is GameMoveValue.Completed)
+        if (message.GameMoveValue is GameMoveValue.Completed)
             {
-                var selectionAndKeyPegs = m.SelectionAndKeyPegs;
+            var selectionAndKeyPegs = message.SelectionAndKeyPegs;
                 if (selectionAndKeyPegs is null) throw new InvalidOperationException();
                 
                 var animationService = ConnectedAnimationService.GetForCurrentView();
