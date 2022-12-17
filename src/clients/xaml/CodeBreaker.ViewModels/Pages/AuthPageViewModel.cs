@@ -19,7 +19,7 @@ public partial class AuthPageViewModel
 
     private readonly IViewModelNavigationService _navigationService;
 
-    private readonly IAuthDefinition _authDefinition = new ApiServiceAuthDefinition();
+    private static readonly IAuthDefinition _authDefinition = new ApiServiceAuthDefinition();
 
     public AuthPageViewModel(IAuthService authService, IDialogService dialogService, ILogger<AuthPageViewModel> logger, IViewModelNavigationService navigationService)
     {
