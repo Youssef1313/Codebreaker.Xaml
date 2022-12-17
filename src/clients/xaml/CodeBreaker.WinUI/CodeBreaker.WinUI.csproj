@@ -62,7 +62,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CNInnovation.Codebreaker.ViewModels" Version="2.0.0-beta1.10" />
+    <PackageReference Include="CNInnovation.Codebreaker.ViewModels" Version="2.0.0-beta1.11" />
     <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="7.0.0" />
