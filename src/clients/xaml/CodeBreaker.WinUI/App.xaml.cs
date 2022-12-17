@@ -8,6 +8,7 @@ using CodeBreaker.Services;
 using CodeBreaker.Services.Authentication;
 using CodeBreaker.Services.Authentication.Definitions;
 using CodeBreaker.ViewModels;
+using CodeBreaker.ViewModels.Pages;
 using CodeBreaker.ViewModels.Services;
 using CodeBreaker.WinUI.Activation;
 using CodeBreaker.WinUI.Contracts.Services;
@@ -74,6 +75,9 @@ public partial class App : Application
             services.AddSingleton<LiveClient>();
             services.AddScoped<LivePageViewModel>();
             services.AddTransient<LivePage>();
+
+            services.AddScoped<AccountPageViewModel>();
+            services.AddTransient<AccountPage>();
         })
         .Build();
 

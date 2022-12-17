@@ -150,6 +150,41 @@
           <source>Default</source>
           <target state="final">Standard</target>
         </trans-unit>
+        <trans-unit id="AccountPage_GamerNameHeader" translate="yes" xml:space="preserve">
+          <source>Gamername</source>
+          <target state="final">Spielername</target>
+        </trans-unit>
+        <trans-unit id="AccountPage_LogoutButton" translate="yes" xml:space="preserve">
+          <source>Signout</source>
+          <target state="needs-review-translation">Ausloggen</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="AccountPage_MailHeader" translate="yes" xml:space="preserve">
+          <source>E-Mail</source>
+          <target state="final">E-Mail</target>
+        </trans-unit>
+        <trans-unit id="AccountPage_NameHeader" translate="yes" xml:space="preserve">
+          <source>Name</source>
+          <target state="final">Name</target>
+        </trans-unit>
+        <trans-unit id="AccountPage_LogoutConfirmCloseText" translate="yes" xml:space="preserve">
+          <source>No, keep me signed in</source>
+          <target state="needs-review-translation">Nein, angemeldet bleiben</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="AccountPage_LogoutConfirmContent" translate="yes" xml:space="preserve">
+          <source>Do you really want to sign out?</source>
+          <target state="final">Wollen Sie sich wirklich abmelden?</target>
+        </trans-unit>
+        <trans-unit id="AccountPage_LogoutConfirmPrimaryText" translate="yes" xml:space="preserve">
+          <source>Yes, sign me out</source>
+          <target state="needs-review-translation">Ja, abmelden</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
+        <trans-unit id="AccountPage_LogoutConfirmTitle" translate="yes" xml:space="preserve">
+          <source>Signout</source>
+          <target state="final">Abmelden</target>
+        </trans-unit>
       </group>
     </body>
   </file>

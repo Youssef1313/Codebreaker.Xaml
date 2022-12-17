@@ -1,6 +1,3 @@
-<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
-<!-- Licensed under the MIT License. See LICENSE in the project root for license information. -->
-
 <Page
     x:Class="CodeBreaker.WinUI.Views.Pages.AccountPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -8,10 +5,42 @@
     xmlns:local="using:CodeBreaker.WinUI.Views.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkitControls="using:CommunityToolkit.WinUI.UI.Controls"
+    xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
+    xmlns:ca="using:CodeBreaker.WinUI.CustomAttachedProperties"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="toolkitControls:HeaderedContentControl">
+            <Setter Property="Margin" Value="0,0,0,25" />
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontSize="{ThemeResource MediumFontSize}" FontWeight="Medium" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
-    <Grid>
-
+    <Grid Margin="20,15">
+        <StackPanel>
+            <toolkitControls:HeaderedContentControl Header="{cme:ResourceString Name=AccountPage_NameHeader}" Content="Sebastian Szvetecz" />
+            <toolkitControls:HeaderedContentControl Header="{cme:ResourceString Name=AccountPage_MailHeader}" Content="sebastian@szvetecz.at" />
+            <toolkitControls:HeaderedContentControl Header="{cme:ResourceString Name=AccountPage_GamerNameHeader}" Content="szv_gamer" />
+            <Button
+                Style="{StaticResource AccentButtonStyle}"
+                ca:Confirm.Enabled="True"
+                ca:Confirm.Title="{cme:ResourceString Name=AccountPage_LogoutConfirmTitle}"
+                ca:Confirm.Content="{cme:ResourceString Name=AccountPage_LogoutConfirmContent}"
+                ca:Confirm.PrimaryText="{cme:ResourceString Name=AccountPage_LogoutConfirmPrimaryText}"
+                ca:Confirm.CloseText="{cme:ResourceString Name=AccountPage_LogoutConfirmCloseText}"
+                ca:Confirm.PrimaryCommand="{x:Bind ViewModel.LogoutCommand}">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="{cme:ResourceString Name=AccountPage_LogoutButton}" />
+                    <FontIcon Glyph="&#xf3b1;" />
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>
