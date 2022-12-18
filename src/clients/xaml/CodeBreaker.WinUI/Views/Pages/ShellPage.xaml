@@ -7,11 +7,14 @@
     xmlns:helpers="using:CodeBreaker.WinUI.Helpers"
     xmlns:behaviors="using:CodeBreaker.WinUI.Behaviors"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:toolkitConverters="using:CommunityToolkit.WinUI.UI.Converters"
     xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
     xmlns:ca="using:CodeBreaker.WinUI.CustomAttachedProperties"
     Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
     Loaded="OnLoaded">
-
+    <Page.Resources>
+        <toolkitConverters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Page.Resources>
     <Grid>
         <Grid x:Name="AppTitleBar"
               Canvas.ZIndex="1"
@@ -79,8 +82,17 @@
             </Grid>
             <NavigationView.FooterMenuItems>
                 <NavigationViewItem
-                    Content="Account"
-                    ca:NavigationViewItemHelper.IconGlyph="&#xe77b;" />
+                    Visibility="{x:Bind ViewModel.IsAuthenticated, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=False}"
+                    Content="{x:Bind ViewModel.User.FullName, Mode=OneWay}"
+                    ca:NavigationViewItemHelper.IconGlyph="&#xe77b;"
+                    ca:NavigationHelper.NavigateByPageName="CodeBreaker.WinUI.Views.Pages.AccountPage"
+                    />
+                <NavigationViewItem
+                    Visibility="{x:Bind ViewModel.IsAuthenticated, Mode=OneWay, Converter={StaticResource BoolToVisibilityConverter}, ConverterParameter=True}"
+                    Content="Login or register"
+                    SelectsOnInvoked="False"
+                    ca:NavigationViewItemHelper.IconGlyph="&#xe77b;"
+                    ca:NavigationViewItemHelper.Command="{x:Bind ViewModel.LoginCommand}" />
             </NavigationView.FooterMenuItems>
         </NavigationView>
     </Grid>

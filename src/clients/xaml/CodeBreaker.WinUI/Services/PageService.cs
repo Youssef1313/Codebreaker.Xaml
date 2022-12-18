@@ -1,5 +1,6 @@
 ﻿using CodeBreaker.ViewModels;
 using CodeBreaker.WinUI.Contracts.Services;
+using CodeBreaker.WinUI.ViewModels;
 using CodeBreaker.WinUI.Views.Pages;
 
 namespace CodeBreaker.WinUI.Services;
@@ -26,7 +27,8 @@ public class PageService : IPageService
         Configure<AuthPageViewModel, AuthPage>();
         Configure<GamePageViewModel, GamePage>();
         Configure<LivePageViewModel, LivePage>();
-        Configure<SettingsPage>(); // page without viewmodel
+        Configure<SettingsPageViewModel, SettingsPage>();
+        Configure<AccountPage>();
     }
 
     /// <summary>

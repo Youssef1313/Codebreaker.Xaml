@@ -120,4 +120,28 @@
   <data name="Settings_Language_Default" xml:space="preserve">
     <value>Standard</value>
   </data>
+  <data name="AccountPage_GamerNameHeader" xml:space="preserve">
+    <value>Spielername</value>
+  </data>
+  <data name="AccountPage_LogoutButton" xml:space="preserve">
+    <value>Ausloggen</value>
+  </data>
+  <data name="AccountPage_MailHeader" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="AccountPage_NameHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AccountPage_LogoutConfirmCloseText" xml:space="preserve">
+    <value>Nein, angemeldet bleiben</value>
+  </data>
+  <data name="AccountPage_LogoutConfirmContent" xml:space="preserve">
+    <value>Wollen Sie sich wirklich abmelden?</value>
+  </data>
+  <data name="AccountPage_LogoutConfirmPrimaryText" xml:space="preserve">
+    <value>Ja, abmelden</value>
+  </data>
+  <data name="AccountPage_LogoutConfirmTitle" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
 </root>
