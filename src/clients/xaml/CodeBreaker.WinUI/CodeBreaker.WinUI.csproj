@@ -24,6 +24,7 @@
     <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
     <None Remove="appsettings.Production.json" />
+    <None Remove="MainWindow.xaml" />
     <None Remove="MultilingualResources\CodeBreaker.WinUI.de.xlf" />
     <None Remove="Styles\CodeBreakerTemplates.xaml" />
     <None Remove="Views\AuthPage.xaml" />
@@ -69,6 +70,7 @@
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.221116.1" />
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.755" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
+    <PackageReference Include="WinUIEx" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Templates\CodeBreakerTemplates.xaml">
@@ -129,6 +131,11 @@
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\CodeBreaker.WinUI.de.xlf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Pages\SettingsPage.xaml">
