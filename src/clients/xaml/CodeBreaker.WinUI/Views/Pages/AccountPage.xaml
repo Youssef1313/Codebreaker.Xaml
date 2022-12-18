@@ -8,8 +8,7 @@
     xmlns:toolkitControls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
     xmlns:ca="using:CodeBreaker.WinUI.CustomAttachedProperties"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
     <Page.Resources>
         <Style TargetType="toolkitControls:HeaderedContentControl">
             <Setter Property="Margin" Value="0,0,0,25" />
@@ -23,7 +22,7 @@
         </Style>
     </Page.Resources>
 
-    <Grid Margin="20,15">
+    <Grid>
         <StackPanel>
             <toolkitControls:HeaderedContentControl Header="{cme:ResourceString Name=AccountPage_NameHeader}" Content="Sebastian Szvetecz" />
             <toolkitControls:HeaderedContentControl Header="{cme:ResourceString Name=AccountPage_MailHeader}" Content="sebastian@szvetecz.at" />
