@@ -225,4 +225,28 @@
   <data name="Settings_Language_Default" xml:space="preserve">
     <value>Default</value>
   </data>
+  <data name="AccountPage_GamerNameHeader" xml:space="preserve">
+    <value>Gamername</value>
+  </data>
+  <data name="AccountPage_LogoutButton" xml:space="preserve">
+    <value>Signout</value>
+  </data>
+  <data name="AccountPage_LogoutConfirmCloseText" xml:space="preserve">
+    <value>No, keep me signed in</value>
+  </data>
+  <data name="AccountPage_LogoutConfirmContent" xml:space="preserve">
+    <value>Do you really want to sign out?</value>
+  </data>
+  <data name="AccountPage_LogoutConfirmPrimaryText" xml:space="preserve">
+    <value>Yes, sign me out</value>
+  </data>
+  <data name="AccountPage_LogoutConfirmTitle" xml:space="preserve">
+    <value>Signout</value>
+  </data>
+  <data name="AccountPage_MailHeader" xml:space="preserve">
+    <value>E-Mail</value>
+  </data>
+  <data name="AccountPage_NameHeader" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>

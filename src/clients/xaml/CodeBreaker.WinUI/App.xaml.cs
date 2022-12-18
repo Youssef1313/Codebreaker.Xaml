@@ -6,7 +6,9 @@ global using Microsoft.UI.Xaml.Navigation;
 global using Microsoft.Xaml.Interactivity;
 using CodeBreaker.Services;
 using CodeBreaker.Services.Authentication;
+using CodeBreaker.Services.Authentication.Definitions;
 using CodeBreaker.ViewModels;
+using CodeBreaker.ViewModels.Pages;
 using CodeBreaker.ViewModels.Services;
 using CodeBreaker.WinUI.Activation;
 using CodeBreaker.WinUI.Contracts.Services;
@@ -71,6 +73,9 @@ public partial class App : Application
             services.AddSingleton<LiveClient>();
             services.AddScoped<LivePageViewModel>();
             services.AddTransient<LivePage>();
+
+            services.AddScoped<AccountPageViewModel>();
+            services.AddTransient<AccountPage>();
         })
         .Build();
 
@@ -113,8 +118,10 @@ public partial class App : Application
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         base.OnLaunched(args);
-        var activationService = GetService<IActivationService>();
-        await activationService.ActivateAsync(args);
+        IAuthService authService = GetService<IAuthService>();
+        await authService.RegisterPersistentTokenCacheAsync();
+        await authService.TryAquireTokenSilentlyAsync(new ApiServiceAuthDefinition());
         GetService<ISettingsService>().TrySettingStoredTheme();
+        await GetService<IActivationService>().ActivateAsync(args);
     }
 }

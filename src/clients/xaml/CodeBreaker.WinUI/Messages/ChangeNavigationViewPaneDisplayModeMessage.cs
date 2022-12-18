@@ -1,0 +1,3 @@
+﻿namespace CodeBreaker.WinUI.Messages;
+
+internal record ChangeNavigationViewPaneDisplayModeMessage(NavigationViewPaneDisplayMode RequestedDisplayMode);

@@ -12,7 +12,10 @@ using Windows.UI;
 namespace CodeBreaker.WinUI.Views.Pages;
 
 // TODO: Update NavigationViewItem titles and icons in ShellPage.xaml.
-public sealed partial class ShellPage : Page
+public sealed partial class ShellPage : Page,
+    IRecipient<ChangeNavigationPaneVisibilityMessage>,
+    IRecipient<ChangeNavigationViewPaneDisplayModeMessage>,
+    IRecipient<CurrentNavigationViewPaneDisplayModeRequestMessage>
 {
     public ShellViewModel ViewModel { get; }
 
@@ -31,9 +34,8 @@ public sealed partial class ShellPage : Page
         App.MainWindow.SetTitleBar(AppTitleBar);
         App.MainWindow.Activated += MainWindow_Activated;
         AppTitleBarText.Text = "AppDisplayName".GetLocalized();
-        NavigationViewControl.IsPaneVisible = false;
+        WeakReferenceMessenger.Default.RegisterAll(this);
         WeakReferenceMessenger.Default.UnregisterAllOnUnloaded(this);
-        WeakReferenceMessenger.Default.Register<ChangeNavigationPaneVisibility>(this, (s, args) => NavigationViewControl.IsPaneVisible = args.IsVisible);
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -84,4 +86,13 @@ public sealed partial class ShellPage : Page
 
         args.Handled = result;
     }
+
+    void IRecipient<ChangeNavigationViewPaneDisplayModeMessage>.Receive(ChangeNavigationViewPaneDisplayModeMessage message) =>
+        NavigationViewControl.PaneDisplayMode = message.RequestedDisplayMode;
+
+    void IRecipient<ChangeNavigationPaneVisibilityMessage>.Receive(ChangeNavigationPaneVisibilityMessage message) =>
+        NavigationViewControl.IsPaneVisible = message.IsVisible;
+
+    void IRecipient<CurrentNavigationViewPaneDisplayModeRequestMessage>.Receive(CurrentNavigationViewPaneDisplayModeRequestMessage message) =>
+        message.Reply(NavigationViewControl.PaneDisplayMode);
 }
