@@ -9,9 +9,7 @@
     xmlns:i="using:Microsoft.Xaml.Interactivity"
     xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
     xmlns:ca="using:CodeBreaker.WinUI.CustomAttachedProperties"
-    Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
     Loaded="OnLoaded">
-
     <Grid>
         <Grid x:Name="AppTitleBar"
               Canvas.ZIndex="1"
