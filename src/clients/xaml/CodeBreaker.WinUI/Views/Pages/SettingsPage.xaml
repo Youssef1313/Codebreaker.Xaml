@@ -7,12 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
     xmlns:converter="using:CodeBreaker.WinUI.Converters"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
     <Page.Resources>
         <converter:ElementThemeToIntConverter x:Key="ElementThemeToIntConverter" />
     </Page.Resources>
-    <StackPanel Padding="25,20" Spacing="30">
+    <StackPanel Spacing="30">
         <!-- Theme -->
         <RadioButtons
             Header="{cme:ResourceString Name=Settings_Theme}"

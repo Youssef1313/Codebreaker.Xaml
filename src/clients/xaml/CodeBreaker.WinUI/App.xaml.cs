@@ -20,9 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Windows.ApplicationModel;
 using Xaml = Microsoft.UI.Xaml;
-
-// To learn more about WinUI, the WinUI project structure,
-// and more about our project templates, see: http://aka.ms/winui-project-info.
+using WinUIEx;
 
 namespace CodeBreaker.WinUI;
 
@@ -87,7 +85,7 @@ public partial class App : Application
         where T : class => 
         DefaultScope.ServiceProvider.GetRequiredService<T>();
 
-    public static Window MainWindow { get; set; } = new Window() { Title = "AppDisplayName".GetLocalized() };
+    public static WindowEx MainWindow { get; } = new MainWindow();
 
     /// <summary>
     /// Initializes the singleton application object.  This is the first line of authored code

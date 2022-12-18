@@ -10,7 +10,6 @@
     xmlns:toolkitConverters="using:CommunityToolkit.WinUI.UI.Converters"
     xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
     xmlns:ca="using:CodeBreaker.WinUI.CustomAttachedProperties"
-    Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
     Loaded="OnLoaded">
     <Page.Resources>
         <toolkitConverters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
