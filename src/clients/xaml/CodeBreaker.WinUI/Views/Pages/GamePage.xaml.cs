@@ -1,7 +1,6 @@
 ﻿using CodeBreaker.ViewModels;
 
 using CommunityToolkit.Mvvm.Messaging;
-
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Shapes;
 
@@ -25,10 +24,11 @@ public sealed partial class GamePage : Page, IRecipient<GameMoveMessage>
     {
         static void Animate(ConnectedAnimationService animationService, string key, UIElement target)
         {
-            var animation = animationService?.GetAnimation(key);
-            // the default animation configuration is a GravityConnectedAnimationConfiguration, which is good for this scenario
+            var animation = animationService.GetAnimation(key);
+            animation.Configuration = new BasicConnectedAnimationConfiguration();
 
-            if (animation is null) return;
+            if (animation is null)
+                return;
 
             animation.TryStart(target);
         }
@@ -39,12 +39,13 @@ public sealed partial class GamePage : Page, IRecipient<GameMoveMessage>
             if (selectionAndKeyPegs is null) throw new InvalidOperationException();
 
             var animationService = ConnectedAnimationService.GetForCurrentView();
+            animationService.DefaultDuration = TimeSpan.FromMilliseconds(500);
             var container = listGameMoves.ItemContainerGenerator.ContainerFromItem(selectionAndKeyPegs);
 
             var items = this.FindItemsOfType<Ellipse>(container).Take(4).ToArray(); // the first 4 ellipses are the guesses, the next 4 the key pegs
 
             for (int i = 0; i < 4; i++)
-                Animate(animationService, $"guess{i + 1}", items[i]);
+                Animate(animationService, $"guess{i}", items[i]);
         }
     }
 }

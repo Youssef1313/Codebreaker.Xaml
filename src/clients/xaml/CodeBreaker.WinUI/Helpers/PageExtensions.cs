@@ -30,7 +30,7 @@ internal static class PageExtensions
         page.Unloaded += Callback;
     }
 
-    public static IEnumerable<T> FindItemsOfType<T>(this Page page, DependencyObject obj)
+    public static IEnumerable<T> FindItemsOfType<T>(this DependencyObject dependencyObject, DependencyObject obj)
         where T : DependencyObject
     {
         for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
@@ -43,7 +43,7 @@ internal static class PageExtensions
             if (child is T item)
                 yield return item;
 
-            foreach (T childOfChild in page.FindItemsOfType<T>(child))
+            foreach (T childOfChild in dependencyObject.FindItemsOfType<T>(child))
                 yield return childOfChild;
         }
     }
