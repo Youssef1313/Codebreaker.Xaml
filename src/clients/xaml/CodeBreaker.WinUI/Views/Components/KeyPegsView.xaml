@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <ItemsControl ItemsSource="{x:Bind Path=Pegs, Mode=TwoWay}">
+    <ItemsControl ItemsSource="{x:Bind Path=Pegs, Mode=OneTime}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
                 <StackPanel Orientation="Horizontal" Spacing="20" />
