@@ -21,6 +21,8 @@ using Microsoft.Extensions.Hosting;
 using Windows.ApplicationModel;
 using Xaml = Microsoft.UI.Xaml;
 using WinUIEx;
+using CodeBreaker.Shared.Exceptions;
+using CodeBreaker.Services.Options;
 
 namespace CodeBreaker.WinUI;
 
@@ -45,6 +47,7 @@ public partial class App : Application
             // Services
             services.Configure<GamePageViewModelOptions>(options => options.EnableDialogs = false);
             services.Configure<LiveClientOptions>(context.Configuration);
+            services.Configure<AuthOptions>(context.Configuration);
 
             services.AddTransient<INavigationViewService, NavigationViewService>();
 
@@ -66,7 +69,8 @@ public partial class App : Application
             services.AddScoped<AuthPageViewModel>();
             services.AddTransient<AuthPage>();
 
-            services.AddHttpClient<IGameClient, GameClient>((HttpClient client) => client.BaseAddress = new(context.Configuration["ApiBase"]));
+            string apiBase = context.Configuration["ApiBase"] ?? throw new ConfigurationNotFoundException("ApiBase");
+            services.AddHttpClient<IGameClient, GameClient>((HttpClient client) => client.BaseAddress = new(apiBase));
             services.AddScoped<GamePageViewModel>();
             services.AddTransient<GamePage>();
 
