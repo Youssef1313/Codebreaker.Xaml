@@ -18,6 +18,10 @@ public partial class AccountPageViewModel
         _navigationService = navigationService;
     }
 
+    public bool IsAuthenticated => _authService.IsAuthenticated;
+
+    public UserInformation? UserInformation => _authService.LastUserInformation;
+
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
     private async Task LogoutAsync(CancellationToken cancellationToken = default)
     {
