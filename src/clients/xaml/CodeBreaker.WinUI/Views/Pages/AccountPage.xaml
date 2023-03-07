@@ -8,8 +8,10 @@
     xmlns:toolkitControls="using:CommunityToolkit.WinUI.UI.Controls"
     xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
     xmlns:ca="using:CodeBreaker.WinUI.CustomAttachedProperties"
+    xmlns:c="using:CodeBreaker.WinUI.Converters"
     mc:Ignorable="d">
     <Page.Resources>
+        <c:FirstOrDefaultConverter x:Key="FirstOrDefaultConverter" />
         <Style TargetType="toolkitControls:HeaderedContentControl">
             <Setter Property="Margin" Value="0,0,0,25" />
             <Setter Property="HeaderTemplate">
@@ -24,9 +26,9 @@
 
     <Grid>
         <StackPanel>
-            <toolkitControls:HeaderedContentControl Header="{cme:ResourceString Name=AccountPage_NameHeader}" Content="Sebastian Szvetecz" />
-            <toolkitControls:HeaderedContentControl Header="{cme:ResourceString Name=AccountPage_MailHeader}" Content="sebastian@szvetecz.at" />
-            <toolkitControls:HeaderedContentControl Header="{cme:ResourceString Name=AccountPage_GamerNameHeader}" Content="szv_gamer" />
+            <toolkitControls:HeaderedContentControl Header="{cme:ResourceString Name=AccountPage_NameHeader}" Content="{x:Bind ViewModel.UserInformation.FullName}" />
+            <toolkitControls:HeaderedContentControl Header="{cme:ResourceString Name=AccountPage_MailHeader}" Content="{x:Bind ViewModel.UserInformation.EmailAddresses, Converter={StaticResource FirstOrDefaultConverter}}" />
+            <toolkitControls:HeaderedContentControl Header="{cme:ResourceString Name=AccountPage_GamerNameHeader}" Content="{x:Bind ViewModel.UserInformation.GamerName}" />
             <Button
                 Style="{StaticResource AccentButtonStyle}"
                 ca:Confirm.Enabled="True"
