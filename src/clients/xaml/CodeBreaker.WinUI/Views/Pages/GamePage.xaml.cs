@@ -25,11 +25,11 @@ public sealed partial class GamePage : Page, IRecipient<GameMoveMessage>
         static void Animate(ConnectedAnimationService animationService, string key, UIElement target)
         {
             var animation = animationService.GetAnimation(key);
-            animation.Configuration = new BasicConnectedAnimationConfiguration();
 
             if (animation is null)
                 return;
 
+            animation.Configuration = new BasicConnectedAnimationConfiguration();
             animation.TryStart(target);
         }
 
