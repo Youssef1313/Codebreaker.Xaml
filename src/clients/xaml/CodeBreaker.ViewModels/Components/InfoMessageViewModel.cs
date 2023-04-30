@@ -12,8 +12,7 @@ public enum InfoMessageSeverity
     Error
 }
 
-[ObservableObject]
-public partial class InfoMessageViewModel
+public partial class InfoMessageViewModel : ObservableObject
 {
     public static InfoMessageViewModel Error(string content)
     {

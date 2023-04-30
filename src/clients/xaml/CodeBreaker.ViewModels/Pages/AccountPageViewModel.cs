@@ -5,8 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace CodeBreaker.ViewModels.Pages;
 
-[ObservableObject]
-public partial class AccountPageViewModel
+public partial class AccountPageViewModel : ObservableObject
 {
     private readonly IAuthService _authService;
 
