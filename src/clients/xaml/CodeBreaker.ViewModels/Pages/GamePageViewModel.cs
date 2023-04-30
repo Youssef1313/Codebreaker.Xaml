@@ -108,7 +108,7 @@ public partial class GamePageViewModel : ObservableObject
     [ObservableProperty]
     private bool _isCancelling = false;
 
-    public bool IsNameEnterable => !InProgress && !_isNamePredefined;
+    public bool IsNameEnterable => !InProgress && !IsNamePredefined;
 
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
     private async Task StartGameAsync()
@@ -118,7 +118,7 @@ public partial class GamePageViewModel : ObservableObject
             InitializeValues();
 
             InProgress = true;
-            CreateGameResponse response = await _client.StartGameAsync(_name, "6x4Game");
+            CreateGameResponse response = await _client.StartGameAsync(Name, "6x4Game");
 
             GameStatus = GameMode.Started;
 
