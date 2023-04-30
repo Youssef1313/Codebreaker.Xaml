@@ -31,8 +31,7 @@ public class GamePageViewModelOptions
     public bool EnableDialogs { get; set; } = false;
 }
 
-[ObservableObject]
-public partial class GamePageViewModel
+public partial class GamePageViewModel : ObservableObject
 {
     private readonly IGameClient _client;
     private int _moveNumber = 0;

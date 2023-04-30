@@ -6,8 +6,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace CodeBreaker.ViewModels;
 
-[ObservableObject]
-public partial class LivePageViewModel
+public partial class LivePageViewModel : ObservableObject
 {
     private readonly LiveClient _liveClient;
 
@@ -29,7 +28,6 @@ public partial class LivePageViewModel
     }
 
     public ObservableCollection<GameViewModel> Games { get; private init; } = new();
-
 
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true, IncludeCancelCommand = true)]
     public async Task StartStreamingAsync(CancellationToken token = default)
