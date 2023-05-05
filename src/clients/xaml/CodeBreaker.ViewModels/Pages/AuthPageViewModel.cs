@@ -8,8 +8,7 @@ using CodeBreaker.Services.Authentication.Definitions;
 
 namespace CodeBreaker.ViewModels;
 
-[ObservableObject]
-public partial class AuthPageViewModel
+public partial class AuthPageViewModel : ObservableObject
 {
     private readonly IAuthService _authService;
 

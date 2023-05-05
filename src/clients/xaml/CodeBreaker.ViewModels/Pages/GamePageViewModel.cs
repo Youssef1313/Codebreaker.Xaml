@@ -31,8 +31,7 @@ public class GamePageViewModelOptions
     public bool EnableDialogs { get; set; } = false;
 }
 
-[ObservableObject]
-public partial class GamePageViewModel
+public partial class GamePageViewModel : ObservableObject
 {
     private readonly IGameClient _client;
     private int _moveNumber = 0;
@@ -109,7 +108,7 @@ public partial class GamePageViewModel
     [ObservableProperty]
     private bool _isCancelling = false;
 
-    public bool IsNameEnterable => !InProgress && !_isNamePredefined;
+    public bool IsNameEnterable => !InProgress && !IsNamePredefined;
 
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
     private async Task StartGameAsync()
@@ -119,7 +118,7 @@ public partial class GamePageViewModel
             InitializeValues();
 
             InProgress = true;
-            CreateGameResponse response = await _client.StartGameAsync(_name, "6x4Game");
+            CreateGameResponse response = await _client.StartGameAsync(Name, "6x4Game");
 
             GameStatus = GameMode.Started;
 

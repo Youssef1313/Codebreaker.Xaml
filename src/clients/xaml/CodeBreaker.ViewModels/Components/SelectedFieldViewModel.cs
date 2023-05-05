@@ -2,8 +2,7 @@
 
 namespace CodeBreaker.ViewModels;
 
-[ObservableObject]
-public partial class SelectedFieldViewModel
+ public partial class SelectedFieldViewModel : ObservableObject
 {
     [ObservableProperty]
     private string? _value;
