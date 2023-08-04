@@ -1,0 +1,46 @@
+name: Analyzers lib
+
+on:
+
+  # Automatically trigger it when detected changes in repo
+  push:
+    branches: 
+      [ main ]
+    paths:
+    - 'src/clients/xaml/Codebreaker.GameAPIs.ViewModels/**'
+    - 'src/clients/xaml/Codebreaker.GameAPIs.ViewModels.Tests/**'
+    - 'src/Codebreaker.ViewModels.sln'
+    - '.github/workflows/codebreaker-lib-viewmodels.yml'
+    - '.github/workflows/createnuget-withbuildnumber.yml'
+    - '.github/workflows/publishnuget-azuredevops.yml'
+    - '.github/workflows/publishnuget-nugetserver.yml'
+
+  # Allow manually trigger 
+  workflow_dispatch:    
+
+jobs:
+  build:
+    uses: CodebreakerApp/Codebreaker.XAML/.github/workflows/createnuget-withbuildnumber.yml@main
+    with:
+      version-suffix: beta.
+      version-number: ${{ github.run_number }}
+      version-offset: 10
+      solutionfile-path: src/Codebreaker.ViewModels.sln
+      projectfile-path: src/clients/xaml/Codebreaker.GameAPIs.ViewModels/Codebreaker.ViewModels.csproj
+      dotnet-version: '8.0.x'
+      artifact-name: codebreaker-viewmodels
+      branch-name: main
+
+  publishdevops:
+    uses: CodebreakerApp/Codebreaker.XAML/.github/workflows/publishnuget-azuredevops.yml@main
+    needs: build
+    with:
+      artifact-name: codebreaker-viewmodels
+    secrets: inherit
+
+  # publishnuget:
+  #   uses: CodebreakerApp/Codebreaker.XAML/.github/workflows/publishnuget-nugetserver.yml@main
+  #   needs: publishdevops
+  #   with:
+  #     artifact-name: codebreaker-viewmodels
+  #   secrets: inherit

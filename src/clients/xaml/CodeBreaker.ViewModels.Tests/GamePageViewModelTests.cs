@@ -1,47 +1,27 @@
-using CodeBreaker.Services;
-using CodeBreaker.Services.Authentication;
-using CodeBreaker.Shared.Models.Api;
-using CodeBreaker.ViewModels.Services;
-
-using Microsoft.Extensions.Options;
-
-using Moq;
-
 namespace CodeBreaker.ViewModels.Tests;
 
 public class GamePageViewModelTests
 {
-    private readonly GamePageViewModel _viewModel;
+    private readonly ColorGamePageViewModel _viewModel;
 
     public GamePageViewModelTests()
     {
-        Mock<IGameClient> gameClient = new();
-        gameClient.Setup(
-            client => client.StartGameAsync("Test", "6x4Game"))
-            .ReturnsAsync(new CreateGameResponse()
+        (Guid GameType, int NumberCodes, int MaxMoves, IDictionary<string, string[]> FieldValues) returnValue = 
+            (Guid.NewGuid(), 4, 12, new Dictionary<string, string[]>()
             {
-                Game = new ()
-                {
-                    GameId = Guid.NewGuid(),
-                    Start = DateTime.Now,
-                    Type = new (
-                        "6x4Game",
-                        new List<string>() { "Black", "White", "Red", "Green", "Blue", "Yellow" }.AsReadOnly(),
-                        4,
-                        12),
-                    Username = "Test",
-                    Code = new List<string>() { "Black", "White", "Black", "Red" }.AsReadOnly()
-                }
+                { "colors", new string[] { "Black", "White", "Red", "Green", "Blue", "Yellow" } }
             });
+
+        Mock<IGamesClient> gameClient = new();
+        gameClient.Setup(
+            client => client.StartGameAsync(GameType.Game6x4, "Test", CancellationToken.None)).ReturnsAsync(returnValue);
 
         Mock<IOptions<GamePageViewModelOptions>> options = new();
         options.Setup(o => o.Value).Returns(new GamePageViewModelOptions() { EnableDialogs = false });
 
         Mock<IDialogService> dialogService = new();
 
-        Mock<IAuthService> authService = new();
-
-        _viewModel = new GamePageViewModel(gameClient.Object, options.Object, dialogService.Object, authService.Object);
+        _viewModel = new ColorGamePageViewModel(gameClient.Object, options.Object, dialogService.Object);
     }
     
     [Fact]

@@ -1,13 +1,15 @@
-﻿using CodeBreaker.Services;
-using CodeBreaker.Services.Authentication;
-using CodeBreaker.Shared.Models.Api;
+﻿using System.Collections.ObjectModel;
+
+using Codebreaker.GameAPIs.Client;
+using Codebreaker.GameAPIs.Client.Models;
+
 using CodeBreaker.ViewModels.Services;
+
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 
 using Microsoft.Extensions.Options;
-using System.Collections.ObjectModel;
 
 namespace CodeBreaker.ViewModels;
 
@@ -31,24 +33,21 @@ public class GamePageViewModelOptions
     public bool EnableDialogs { get; set; } = false;
 }
 
-public partial class GamePageViewModel : ObservableObject
+public partial class ColorGamePageViewModel : ObservableObject
 {
-    private readonly IGameClient _client;
+    private readonly IGamesClient _client;
     private int _moveNumber = 0;
-    private GameDto? _game;
+
     private readonly bool _enableDialogs = false;
     private readonly IDialogService _dialogService;
-    private readonly IAuthService _authService;
 
-    public GamePageViewModel(
-        IGameClient client,
+    public ColorGamePageViewModel(
+        IGamesClient client,
         IOptions<GamePageViewModelOptions> options,
-        IDialogService dialogService,
-        IAuthService authService)
+        IDialogService dialogService)
     {
         _client = client;
         _dialogService = dialogService;
-        _authService = authService;
         _enableDialogs = options.Value.EnableDialogs;
 
         PropertyChanged += (sender, e) =>
@@ -56,15 +55,12 @@ public partial class GamePageViewModel : ObservableObject
             if (e.PropertyName == nameof(GameStatus))
                 WeakReferenceMessenger.Default.Send(new GameStateChangedMessage(GameStatus));
         };
-
-        SetGamerNameIfAvailable();
-
-        _authService.OnAuthenticationStateChanged += (_, _) => SetGamerNameIfAvailable();
     }
 
     public InfoBarMessageService InfoBarMessageService { get; } = new();
 
-    public GameDto? Game
+    private Models.Game? _game;
+    public Models.Game? Game
     {
         get => _game;
         set
@@ -75,7 +71,7 @@ public partial class GamePageViewModel : ObservableObject
 
             Fields.Clear();
 
-            for (int i = 0; i < value?.Type.Holes; i++)
+            for (int i = 0; i < _game?.NumberCodes; i++)
             {
                 SelectedFieldViewModel field = new();
                 field.PropertyChanged += (sender, e) => SetMoveCommand.NotifyCanExecuteChanged();
@@ -94,7 +90,7 @@ public partial class GamePageViewModel : ObservableObject
     [ObservableProperty]
     private bool _isNamePredefined = false;
 
-    public ObservableCollection<SelectedFieldViewModel> Fields { get; } = new(); // BindingList does not work here
+    public ObservableCollection<SelectedFieldViewModel> Fields { get; } = new();
 
     public ObservableCollection<SelectionAndKeyPegs> GameMoves { get; } = new();
 
@@ -118,11 +114,14 @@ public partial class GamePageViewModel : ObservableObject
             InitializeValues();
 
             InProgress = true;
-            CreateGameResponse response = await _client.StartGameAsync(Name, "6x4Game");
+            (Guid gameId, int numberCodes, int maxMoves, IDictionary<string, string[]> fieldValues) = await _client.StartGameAsync(GameType.Game6x4, Name);
 
             GameStatus = GameMode.Started;
 
-            Game = response.Game;
+            Game = new Models.Game(gameId, "Game6x4", Name, DateTime.Now, numberCodes, maxMoves)
+            {
+                FieldValues = fieldValues
+            };
             _moveNumber++;
         }
         catch (Exception ex)
@@ -144,31 +143,32 @@ public partial class GamePageViewModel : ObservableObject
         }
     }
 
-    [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
-    private async Task CancelGameAsync()
-    {
-        if (Game is null)
-            throw new InvalidOperationException("No game running");
+    // TODO: end of the game is not yet implemented (in the client library)
+//    [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
+//    private async Task CancelGameAsync()
+//    {
+//        if (Game is null)
+//            throw new InvalidOperationException("No game running");
 
-        IsCancelling = true;
+//        IsCancelling = true;
 
-        try
-        {
-            await _client.CancelGameAsync(Game!.Value.GameId);
-            GameStatus = GameMode.NotRunning;
-        }
-        catch (Exception ex)
-        {
-            InfoBarMessageService.ShowError(ex.Message);
+//        try
+//        {
+////            await _client.CancelGameAsync(Game!.Value.GameId);
+//            GameStatus = GameMode.NotRunning;
+//        }
+//        catch (Exception ex)
+//        {
+//            InfoBarMessageService.ShowError(ex.Message);
 
-            if (_enableDialogs)
-                await _dialogService.ShowMessageAsync(ex.Message);
-        }
-        finally
-        {
-            IsCancelling = false;
-        }
-    }
+//            if (_enableDialogs)
+//                await _dialogService.ShowMessageAsync(ex.Message);
+//        }
+//        finally
+//        {
+//            IsCancelling = false;
+//        }
+//    }
 
     [RelayCommand(CanExecute = nameof(CanSetMove), AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
     private async Task SetMoveAsync()
@@ -181,20 +181,20 @@ public partial class GamePageViewModel : ObservableObject
             if (_game is null)
                 throw new InvalidOperationException("no game running");
 
-            if (Fields.Count != _game.Value.Type.Holes || Fields.Any(x => !x.IsSet))
+            if (Fields.Count != _game.NumberCodes || Fields.Any(x => !x.IsSet))
                 throw new InvalidOperationException("all colors need to be selected before invoking this method");
 
-            string[] selection = Fields.Select(x => x.Value!).ToArray();
+            string[] guessPegs = Fields.Select(x => x.Value!).ToArray();
 
-            CreateMoveResponse response = await _client.SetMoveAsync(_game.Value.GameId, selection);
+            (string[] results, bool ended, bool isVictory) = await _client.SetMoveAsync(_game.GameId,  Name, GameType.Game6x4,  _moveNumber, guessPegs);
 
-            SelectionAndKeyPegs selectionAndKeyPegs = new(selection, response.KeyPegs, _moveNumber++);
+            SelectionAndKeyPegs selectionAndKeyPegs = new(guessPegs, results, _moveNumber++);
             GameMoves.Add(selectionAndKeyPegs);
             GameStatus = GameMode.MoveSet;
 
             WeakReferenceMessenger.Default.Send(new GameMoveMessage(GameMoveValue.Completed, selectionAndKeyPegs));
 
-            if (response.Won)
+            if (isVictory)
             {
                 GameStatus = GameMode.Won;
                 InfoBarMessageService.ShowInformation("Congratulations - you won!");
@@ -202,7 +202,7 @@ public partial class GamePageViewModel : ObservableObject
                 if (_enableDialogs)
                     await _dialogService.ShowMessageAsync("Congratulations - you won!");
             }
-            else if (response.Ended)
+            else if (ended)
             {
                 GameStatus = GameMode.Lost;
                 InfoBarMessageService.ShowInformation("Sorry, you didn't find the matching colors!");
@@ -236,21 +236,21 @@ public partial class GamePageViewModel : ObservableObject
         SetMoveCommand.NotifyCanExecuteChanged();
     }
 
-    private void SetGamerNameIfAvailable()
-    {
-        string? gamerName = _authService.LastUserInformation?.GamerName;
+    //private void SetGamerNameIfAvailable()
+    //{
+    //    string? gamerName = _authService.LastUserInformation?.GamerName;
 
-        if (string.IsNullOrWhiteSpace(gamerName))
-        {
-            Name = string.Empty;
-            IsNamePredefined = false;
-        }
-        else
-        {
-            Name = gamerName;
-            IsNamePredefined = true;
-        }
-    }
+    //    if (string.IsNullOrWhiteSpace(gamerName))
+    //    {
+    //        Name = string.Empty;
+    //        IsNamePredefined = false;
+    //    }
+    //    else
+    //    {
+    //        Name = gamerName;
+    //        IsNamePredefined = true;
+    //    }
+    //}
 
     private void InitializeValues()
     {
@@ -262,7 +262,7 @@ public partial class GamePageViewModel : ObservableObject
     }
 }
 
-public record SelectionAndKeyPegs(string[] GuessPegs, KeyPegsDto KeyPegs, int MoveNumber);
+public record SelectionAndKeyPegs(string[] GuessPegs, string[] KeyPegs, int MoveNumber);
 
 public record class GameStateChangedMessage(GameMode GameMode);
 

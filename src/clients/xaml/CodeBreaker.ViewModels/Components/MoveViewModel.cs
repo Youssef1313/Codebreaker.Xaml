@@ -1,4 +1,5 @@
-﻿using CodeBreaker.Shared.Models.Data;
+﻿using Codebreaker.GameAPIs.Client.Models;
+
 
 namespace CodeBreaker.ViewModels.Components;
 
@@ -13,5 +14,5 @@ public class MoveViewModel
 
     public IReadOnlyList<string> GuessPegs => _move.GuessPegs;
 
-    public KeyPegs? KeyPegs => _move.KeyPegs;
+    public string[] KeyPegs => _move.KeyPegs;
 }
