@@ -25,7 +25,7 @@ jobs:
       version-suffix: beta.
       version-number: ${{ github.run_number }}
       version-offset: 10
-      solutionfile-path: src/Codebreaker.ViewModels.sln
+      solutionfile-path: src/CodeBreaker.ViewModels.sln
       projectfile-path: src/clients/xaml/Codebreaker.GameAPIs.ViewModels/Codebreaker.ViewModels.csproj
       dotnet-version: '8.0.x'
       artifact-name: codebreaker-viewmodels
