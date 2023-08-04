@@ -1,0 +1,20 @@
+<Project>
+  <PropertyGroup>
+    <Product>Codebreaker</Product>
+    <ProductName>Codebreaker</ProductName>
+    <Authors>CN innovation</Authors>
+    <Company>CN innovation</Company>
+    <PackageProjectUrl>https://github.com/codebreakerapp/Codebreaker.Backend</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/codebreakerapp/Codebreaker.Backend</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/codebreakerapp/Codebreaker.Backend/releases</PackageReleaseNotes>
+    <Copyright>(c) CN innovation</Copyright>
+    <IncludeSymbols>True</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <VersionPrefix>3.5.0</VersionPrefix>
+  </PropertyGroup>
+</Project>
