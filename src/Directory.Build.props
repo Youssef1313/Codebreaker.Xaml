@@ -4,9 +4,9 @@
     <ProductName>Codebreaker</ProductName>
     <Authors>CN innovation</Authors>
     <Company>CN innovation</Company>
-    <PackageProjectUrl>https://github.com/codebreakerapp/Codebreaker.Backend</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/codebreakerapp/Codebreaker.Backend</RepositoryUrl>
-    <PackageReleaseNotes>https://github.com/codebreakerapp/Codebreaker.Backend/releases</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/codebreakerapp/Codebreaker.XAML</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/codebreakerapp/Codebreaker.XAML</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/codebreakerapp/Codebreaker.XAML/releases</PackageReleaseNotes>
     <Copyright>(c) CN innovation</Copyright>
     <IncludeSymbols>True</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>

@@ -9,6 +9,9 @@
 
   <PropertyGroup>
     <PackageId>CNInnovation.Codebreaker.ViewModels</PackageId>
+    <PackageTags>
+      Codebreaker;CNinnovation;GamesClient;
+    </PackageTags>
     <Description>
       This library contains shared view-model types for the Codebreaker app.
       See https://github.com/codebreakerapp for more information on the complete solution.
@@ -17,7 +20,8 @@
       This library contains shared view-model types for the Codebreaker app.
       See https://github.com/codebreakerapp for more information on the complete solution.
     </PackageDescription>
-    <RepositoryUrl>https://github.com/codebreakerapp/Codebreaker.Xaml</RepositoryUrl>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <PackageIcon>codebreaker.jpeg</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
