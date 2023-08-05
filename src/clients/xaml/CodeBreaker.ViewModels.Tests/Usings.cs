@@ -1,7 +1,8 @@
 global using Codebreaker.GameAPIs.Client;
 global using Codebreaker.GameAPIs.Client.Models;
 
-global using CodeBreaker.ViewModels.Services;
+global using Codebreaker.ViewModels;
+global using Codebreaker.ViewModels.Services;
 
 global using Microsoft.Extensions.Options;
 

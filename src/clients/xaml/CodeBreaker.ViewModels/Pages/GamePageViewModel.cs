@@ -22,7 +22,7 @@ public class GamePageViewModelOptions
     public bool EnableDialogs { get; set; } = false;
 }
 
-public partial class ColorGamePageViewModel : ObservableObject
+public partial class GamePageViewModel : ObservableObject
 {
     private readonly IGamesClient _client;
     private int _moveNumber = 0;
@@ -30,7 +30,7 @@ public partial class ColorGamePageViewModel : ObservableObject
     private readonly bool _enableDialogs = false;
     private readonly IDialogService _dialogService;
 
-    public ColorGamePageViewModel(
+    public GamePageViewModel(
         IGamesClient client,
         IOptions<GamePageViewModelOptions> options,
         IDialogService dialogService)
