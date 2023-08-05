@@ -1,7 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 
-using Codebreaker.GameAPIs.Client.Models;
-
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CodeBreaker.ViewModels.Models;

@@ -11,8 +11,6 @@ public class GameViewModel
     public GameViewModel(Game game)
     {
         _game = game;
-
-        ColorList = new List<string>(_game.FieldValues["colors"]);
     }
 
     public Guid GameId => _game.GameId;
@@ -21,7 +19,7 @@ public class GameViewModel
 
     public string GameType => _game.GameType;
 
-    public IReadOnlyList<string> ColorList { get; private set; }
+    public IDictionary<string, string[]> FieldValues => _game.FieldValues;
 
     public int NumberCodes => _game.NumberCodes;
 
