@@ -7,9 +7,9 @@ on:
     branches: 
       [ main ]
     paths:
-    - 'src/clients/xaml/CodeBreaker.ViewModels/**'
-    - 'src/clients/xaml/CodeBreaker.ViewModels.Tests/**'
-    - 'src/Codebreaker.ViewModels.sln'
+    - 'src/Codebreaker.ViewModels/**'
+    - 'src/Codebreaker.ViewModels.Tests/**'
+    - 'src/CodeBreaker.ViewModels.sln'
     - '.github/workflows/codebreaker-lib-viewmodels.yml'
     - '.github/workflows/createnuget-withbuildnumber.yml'
     - '.github/workflows/publishnuget-azuredevops.yml'
@@ -26,7 +26,7 @@ jobs:
       version-number: ${{ github.run_number }}
       version-offset: 10
       solutionfile-path: src/CodeBreaker.ViewModels.sln
-      projectfile-path: src/clients/xaml/CodeBreaker.ViewModels/CodeBreaker.ViewModels.csproj
+      projectfile-path: src/Codebreaker.ViewModels/Codebreaker.ViewModels.csproj
       dotnet-version: '8.0.x'
       artifact-name: codebreaker-viewmodels
       branch-name: main
