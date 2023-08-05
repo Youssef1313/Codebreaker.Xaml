@@ -1,8 +1,8 @@
 ﻿<?xml version = "1.0" encoding = "UTF-8" ?>
 <Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:CodeBreaker.MAUI"
-             x:Class="CodeBreaker.MAUI.App"
+             xmlns:local="clr-namespace:Codebreaker.MAUI"
+             x:Class="Codebreaker.MAUI.App"
              UserAppTheme="Dark">
     <Application.Resources>
         <ResourceDictionary>

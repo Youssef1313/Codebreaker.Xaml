@@ -1,4 +1,4 @@
-﻿namespace CodeBreaker.MAUI.Views.Templates;
+﻿namespace Codebreaker.MAUI.Views.Templates;
 
 public partial class CodebreakerTemplates : ResourceDictionary
 {

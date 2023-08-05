@@ -1,8 +1,4 @@
-﻿using CodeBreaker.ViewModels.Services;
-
-using CommunityToolkit.Mvvm.Messaging;
-
-namespace CodeBreaker.MAUI.Services;
+﻿namespace Codebreaker.MAUI.Services;
 
 public class MauiDialogService : IDialogService
 {

@@ -1,9 +1,4 @@
-﻿using CodeBreaker.MAUI.Services;
-using CodeBreaker.ViewModels;
-
-using CommunityToolkit.Mvvm.Messaging;
-
-namespace CodeBreaker.MAUI.Views.Pages;
+﻿namespace Codebreaker.MAUI.Views.Pages;
 
 public partial class GamePage : ContentPage
 {

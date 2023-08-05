@@ -2,7 +2,7 @@ using System;
 using Microsoft.Maui;
 using Microsoft.Maui.Hosting;
 
-namespace CodeBreaker.MAUI;
+namespace Codebreaker.MAUI;
 
 class Program : MauiApplication
 {

@@ -1,8 +1,4 @@
-﻿using CodeBreaker.ViewModels;
-
-using System.Globalization;
-
-namespace CodeBreaker.MAUI.Converters;
+﻿namespace Codebreaker.MAUI.Converters;
 
 public class GameStatusToIsVisibleConverter : IValueConverter
 {
