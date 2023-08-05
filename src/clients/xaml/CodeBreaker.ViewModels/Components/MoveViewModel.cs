@@ -1,5 +1,4 @@
-﻿using Codebreaker.GameAPIs.Client.Models;
-
+﻿using CodeBreaker.ViewModels.Models;
 
 namespace CodeBreaker.ViewModels.Components;
 
@@ -12,7 +11,9 @@ public class MoveViewModel
 
     public int MoveNumber => _move.MoveNumber;
 
+    // TODO: read-only or updates?
     public IReadOnlyList<string> GuessPegs => _move.GuessPegs;
 
-    public string[] KeyPegs => _move.KeyPegs;
+    // TODO: read-only or updates?
+    public string[] KeyPegs => _move.KeyPegs.ToArray();
 }
