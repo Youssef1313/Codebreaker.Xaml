@@ -13,7 +13,7 @@ public class GameViewModel
 
     public string Name => _game.PlayerName;
 
-    public string GameType => _game.GameType;
+    public GameType GameType => _game.GameType;
 
     public IDictionary<string, string[]> FieldValues => _game.FieldValues;
 

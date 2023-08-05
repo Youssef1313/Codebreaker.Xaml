@@ -2,7 +2,7 @@
 
 public partial class Game(
     Guid gameId,
-    string gameType,
+    GameType gameType,
     string playerName,
     DateTime startTime,
     int numberCodes,
@@ -16,7 +16,7 @@ public partial class Game(
     /// <summary>
     /// Gets the type of the game. <see cref="GameType"/>
     /// </summary>
-    public string GameType { get; private set; } = gameType;
+    public GameType GameType { get; private set; } = gameType;
 
     /// <summary>
     /// Gets the name of the player.
