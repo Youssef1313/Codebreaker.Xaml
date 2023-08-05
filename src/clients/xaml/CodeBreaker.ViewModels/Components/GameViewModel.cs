@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-using Codebreaker.GameAPIs.Client.Models;
+using CodeBreaker.ViewModels.Models;
 
 namespace CodeBreaker.ViewModels.Components;
 
@@ -13,7 +13,6 @@ public class GameViewModel
         _game = game;
 
         ColorList = new List<string>(_game.FieldValues["colors"]);
-        Code = new List<string>(_game.Codes);
     }
 
     public Guid GameId => _game.GameId;
@@ -21,8 +20,6 @@ public class GameViewModel
     public string Name => _game.PlayerName;
 
     public string GameType => _game.GameType;
-
-    public IReadOnlyList<string> Code { get; private set; }
 
     public IReadOnlyList<string> ColorList { get; private set; }
 
