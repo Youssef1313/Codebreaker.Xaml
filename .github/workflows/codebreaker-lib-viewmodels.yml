@@ -28,7 +28,7 @@ jobs:
     uses: CodebreakerApp/Codebreaker.XAML/.github/workflows/createnuget-withbuildnumber.yml@main
     with:
       version-suffix: beta.
-      version-number: $BUILD_NUMBER
+      version-number: ${{ env.BUILD_NUMBER }}
       version-offset: 10
       solutionfile-path: src/CodeBreaker.ViewModels.sln
       projectfile-path: src/Codebreaker.ViewModels/Codebreaker.ViewModels.csproj
