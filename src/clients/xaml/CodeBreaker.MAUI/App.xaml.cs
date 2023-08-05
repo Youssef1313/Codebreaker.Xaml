@@ -1,4 +1,4 @@
-﻿namespace CodeBreaker.MAUI;
+﻿namespace Codebreaker.MAUI;
 
 public partial class App : Application
 {

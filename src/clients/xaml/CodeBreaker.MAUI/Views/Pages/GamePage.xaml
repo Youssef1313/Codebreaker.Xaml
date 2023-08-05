@@ -2,10 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:components="clr-namespace:CodeBreaker.MAUI.Views.Components"
-             xmlns:conv="clr-namespace:CodeBreaker.MAUI.Converters"
+             xmlns:components="clr-namespace:Codebreaker.MAUI.Views.Components"
+             xmlns:conv="clr-namespace:Codebreaker.MAUI.Converters"
              Title="Codebreaker"
-             x:Class="CodeBreaker.MAUI.Views.Pages.GamePage">
+             x:Class="Codebreaker.MAUI.Views.Pages.GamePage">
     
     <ContentPage.Resources>
         <conv:GameStatusToIsVisibleConverter x:Key="GameStatusVisibleConverter" />
@@ -41,7 +41,7 @@
                     <Entry
                         Grid.Column="0"
                         Grid.Row="1"
-                        IsEnabled="{Binding ViewModel.IsEnabled, Mode=OneWay}"
+                        IsEnabled="{Binding ViewModel.IsNameEnterable, Mode=OneWay}"
                         Text="{Binding ViewModel.Name, Mode=TwoWay }"
                         Placeholder="Enter your name"/>
                     <Button

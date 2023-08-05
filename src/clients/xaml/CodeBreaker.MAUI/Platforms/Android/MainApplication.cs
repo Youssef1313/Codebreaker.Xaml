@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace CodeBreaker.MAUI;
+namespace Codebreaker.MAUI;
 
 [Application]
 public class MainApplication : MauiApplication

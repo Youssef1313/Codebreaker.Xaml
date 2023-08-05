@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace CodeBreaker.MAUI;
+namespace Codebreaker.MAUI;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

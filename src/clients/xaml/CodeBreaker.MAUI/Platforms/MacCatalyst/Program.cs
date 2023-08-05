@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace CodeBreaker.MAUI;
+namespace Codebreaker.MAUI;
 
 public class Program
 {
