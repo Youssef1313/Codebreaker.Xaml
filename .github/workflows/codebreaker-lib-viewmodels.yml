@@ -1,4 +1,4 @@
-name: Analyzers lib
+name: Viewmodels lib
 
 on:
 
@@ -7,8 +7,8 @@ on:
     branches: 
       [ main ]
     paths:
-    - 'src/clients/xaml/Codebreaker.GameAPIs.ViewModels/**'
-    - 'src/clients/xaml/Codebreaker.GameAPIs.ViewModels.Tests/**'
+    - 'src/clients/xaml/Codebreaker.ViewModels/**'
+    - 'src/clients/xaml/Codebreaker.ViewModels.Tests/**'
     - 'src/Codebreaker.ViewModels.sln'
     - '.github/workflows/codebreaker-lib-viewmodels.yml'
     - '.github/workflows/createnuget-withbuildnumber.yml'
