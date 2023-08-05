@@ -1,6 +1,4 @@
-﻿using CodeBreaker.ViewModels.Models;
-
-namespace CodeBreaker.ViewModels.Components;
+﻿namespace Codebreaker.ViewModels.Components;
 
 public class MoveViewModel
 {

@@ -1,8 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿namespace Codebreaker.ViewModels;
 
-namespace CodeBreaker.ViewModels;
-
- public partial class SelectedFieldViewModel : ObservableObject
+public partial class SelectedFieldViewModel : ObservableObject
 {
     [ObservableProperty]
     private string? _value;

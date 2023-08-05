@@ -1,7 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using CommunityToolkit.Mvvm.Input;
-
-namespace CodeBreaker.ViewModels.Services;
+﻿namespace Codebreaker.ViewModels.Services;
 
 public class InfoBarMessageService
 {

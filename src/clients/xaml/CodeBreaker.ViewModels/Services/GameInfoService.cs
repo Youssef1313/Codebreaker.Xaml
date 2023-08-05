@@ -1,4 +1,4 @@
-﻿namespace CodeBreaker.ViewModels.Services;
+﻿namespace Codebreaker.ViewModels.Services;
 
 public class GameInfoService
 {

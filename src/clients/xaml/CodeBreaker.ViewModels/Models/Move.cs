@@ -1,8 +1,4 @@
-﻿using System.Collections.ObjectModel;
-
-using CommunityToolkit.Mvvm.ComponentModel;
-
-namespace CodeBreaker.ViewModels.Models;
+﻿namespace Codebreaker.ViewModels.Models;
 public partial class Move(Guid moveId, int moveNumber) : ObservableObject
 {
     public Guid MoveId { get; private set; } = moveId;
