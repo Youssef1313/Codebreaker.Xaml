@@ -1,17 +1,6 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Extensions.Options;
 
-using Codebreaker.GameAPIs.Client;
-using Codebreaker.GameAPIs.Client.Models;
-
-using CodeBreaker.ViewModels.Services;
-
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
-
-using Microsoft.Extensions.Options;
-
-namespace CodeBreaker.ViewModels;
+namespace Codebreaker.ViewModels;
 
 public enum GameMode
 {
