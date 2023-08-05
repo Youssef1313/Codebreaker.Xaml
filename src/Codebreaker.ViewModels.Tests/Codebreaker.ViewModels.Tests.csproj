@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CodeBreaker.ViewModels\CodeBreaker.ViewModels.csproj" />
+    <ProjectReference Include="..\Codebreaker.ViewModels\Codebreaker.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
