@@ -1,8 +1,10 @@
+
+
 namespace CodeBreaker.ViewModels.Tests;
 
 public class GamePageViewModelTests
 {
-    private readonly ColorGamePageViewModel _viewModel;
+    private readonly GamePageViewModel _viewModel;
 
     public GamePageViewModelTests()
     {
@@ -21,7 +23,7 @@ public class GamePageViewModelTests
 
         Mock<IDialogService> dialogService = new();
 
-        _viewModel = new ColorGamePageViewModel(gameClient.Object, options.Object, dialogService.Object);
+        _viewModel = new GamePageViewModel(gameClient.Object, options.Object, dialogService.Object);
     }
     
     [Fact]
