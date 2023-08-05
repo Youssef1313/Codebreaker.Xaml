@@ -107,7 +107,7 @@ public partial class ColorGamePageViewModel : ObservableObject
 
             GameStatus = GameMode.Started;
 
-            Game = new Models.Game(gameId, "Game6x4", Name, DateTime.Now, numberCodes, maxMoves)
+            Game = new Game(gameId, GameType.Game6x4, Name, DateTime.Now, numberCodes, maxMoves)
             {
                 FieldValues = fieldValues
             };
@@ -175,9 +175,9 @@ public partial class ColorGamePageViewModel : ObservableObject
 
             string[] guessPegs = Fields.Select(x => x.Value!).ToArray();
 
-            (string[] results, bool ended, bool isVictory) = await _client.SetMoveAsync(_game.GameId,  Name, GameType.Game6x4,  _moveNumber, guessPegs);
+            (string[] keyPegs, bool ended, bool isVictory) = await _client.SetMoveAsync(_game.GameId,  Name, GameType.Game6x4,  _moveNumber, guessPegs);
 
-            SelectionAndKeyPegs selectionAndKeyPegs = new(guessPegs, results, _moveNumber++);
+            SelectionAndKeyPegs selectionAndKeyPegs = new(guessPegs, keyPegs, _moveNumber++);
             GameMoves.Add(selectionAndKeyPegs);
             GameStatus = GameMode.MoveSet;
 
@@ -224,22 +224,6 @@ public partial class ColorGamePageViewModel : ObservableObject
 
         SetMoveCommand.NotifyCanExecuteChanged();
     }
-
-    //private void SetGamerNameIfAvailable()
-    //{
-    //    string? gamerName = _authService.LastUserInformation?.GamerName;
-
-    //    if (string.IsNullOrWhiteSpace(gamerName))
-    //    {
-    //        Name = string.Empty;
-    //        IsNamePredefined = false;
-    //    }
-    //    else
-    //    {
-    //        Name = gamerName;
-    //        IsNamePredefined = true;
-    //    }
-    //}
 
     private void InitializeValues()
     {
