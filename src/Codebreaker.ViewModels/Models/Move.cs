@@ -12,12 +12,12 @@ public partial class Move(Guid moveId, int moveNumber) : ObservableObject
     /// <summary>
     /// The guess pegs from the user for this move.
     /// </summary>
-    public ObservableCollection<string> GuessPegs { get; } = new();
+    public ObservableCollection<string> GuessPegs { get; } = [];
 
     /// <summary>
     /// The result from the analyer for this move based on the associated game that contains the move.
     /// </summary>
-    public ObservableCollection<string> KeyPegs { get; } = new();
+    public ObservableCollection<string> KeyPegs { get; } = [];
 
     public override string ToString() => $"{MoveNumber}. " +
         $"{string.Join('#', GuessPegs)} : " +

@@ -1,13 +1,8 @@
 ﻿namespace Codebreaker.ViewModels.Components;
 
-public class GameViewModel
+public class GameViewModel(Game game)
 {
-    private readonly Game _game;
-
-    public GameViewModel(Game game)
-    {
-        _game = game;
-    }
+    private readonly Game _game = game;
 
     public Guid GameId => _game.GameId;
 
@@ -23,5 +18,5 @@ public class GameViewModel
 
     public DateTime StartTime => _game.StartTime;
 
-    public ObservableCollection<MoveViewModel> Moves { get; } = new ObservableCollection<MoveViewModel>();
+    public ObservableCollection<MoveViewModel> Moves { get; } = [];
 }

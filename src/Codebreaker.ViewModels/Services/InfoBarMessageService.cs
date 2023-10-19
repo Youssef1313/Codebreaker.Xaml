@@ -2,7 +2,7 @@
 
 public class InfoBarMessageService
 {
-    public ObservableCollection<InfoMessageViewModel> Messages { get; } = new();
+    public ObservableCollection<InfoMessageViewModel> Messages { get; } = [];
 
     public void ShowMessage(InfoMessageViewModel message)
     {
