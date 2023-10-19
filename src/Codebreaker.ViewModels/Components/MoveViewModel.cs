@@ -1,11 +1,8 @@
 ﻿namespace Codebreaker.ViewModels.Components;
 
-public class MoveViewModel
+public class MoveViewModel(Move move)
 {
-    private readonly Move _move;
-
-    public MoveViewModel(Move move) =>
-        _move = move;
+    private readonly Move _move = move;
 
     public int MoveNumber => _move.MoveNumber;
 
