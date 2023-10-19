@@ -1,10 +1,4 @@
-﻿using CodeBreaker.ViewModels;
-
-using System.Globalization;
-using System.Windows;
-using System.Windows.Data;
-
-namespace CodeBreaker.WPF.Converters;
+﻿namespace Codebreaker.WPF.Converters;
 
 internal class GameStatusToVisibilityConverter : IValueConverter
 {

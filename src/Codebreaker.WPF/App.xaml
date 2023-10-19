@@ -1,7 +1,7 @@
-﻿<Application x:Class="CodeBreaker.WPF.App"
+﻿<Application x:Class="Codebreaker.WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:CodeBreaker.WPF"
+             xmlns:local="clr-namespace:Codebreaker.WPF"
              StartupUri="Views/Pages/GameWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>

@@ -1,8 +1,6 @@
-﻿using CodeBreaker.ViewModels.Services;
+﻿
 
-using System.Windows;
-
-namespace CodeBreaker.WPF.Services;
+namespace Codebreaker.WPF.Services;
 
 public class WPFDialogService : IDialogService
 {

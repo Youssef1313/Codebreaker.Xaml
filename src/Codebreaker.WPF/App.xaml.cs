@@ -1,15 +1,4 @@
-﻿using CodeBreaker.Services;
-using CodeBreaker.Services.Authentication;
-using CodeBreaker.ViewModels;
-using CodeBreaker.ViewModels.Services;
-
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
-using System.Configuration;
-using System.Windows;
-
-namespace CodeBreaker.WPF;
+﻿namespace Codebreaker.WPF;
 
 /// <summary>
 /// Interaction logic for App.xaml
@@ -34,11 +23,10 @@ public sealed partial class App : Application, IDisposable
             })
             .ConfigureServices((context, services) =>
             {
-                services.Configure<GamePageViewModelOptions>(options => options.EnableDialogs = false);
+                services.Configure<GamePageViewModelOptions>(options => options.EnableDialogs = true);
                 services.AddTransient<IDialogService, Services.WPFDialogService>();
                 services.AddScoped<GamePageViewModel>();
-                services.AddScoped<IAuthService, AuthService>();
-                services.AddHttpClient<IGameClient, GameClient>(client =>
+                services.AddHttpClient<IGamesClient, GamesClient>(client =>
                 {
                     string uriString = context.Configuration["ApiBase"] ?? throw new ConfigurationErrorsException("ApiBase not configured");
                     client.BaseAddress = new Uri(uriString);

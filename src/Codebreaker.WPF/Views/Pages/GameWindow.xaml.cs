@@ -1,8 +1,4 @@
-﻿using CodeBreaker.ViewModels;
-using CommunityToolkit.Mvvm.Messaging;
-using System.Windows;
-
-namespace CodeBreaker.WPF.Views.Pages;
+﻿namespace Codebreaker.WPF.Views.Pages;
 
 public partial class GameWindow : Window
 {
