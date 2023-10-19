@@ -17,6 +17,9 @@ public enum GameMoveValue
     Completed
 }
 
+/// <summary>
+/// Configure to enable dialogs (via <see cref="IDialogService"/>), or use the <see cref="InfoBarMessageService"/>.
+/// </summary>
 public class GamePageViewModelOptions
 {
     public bool EnableDialogs { get; set; } = false;
@@ -46,9 +49,15 @@ public partial class GamePageViewModel : ObservableObject
         };
     }
 
+    /// <summary>
+    /// Information on the game - messages, errors, etc. See <see cref="InfoBarMessageService"/>.
+    /// </summary>
     public InfoBarMessageService InfoBarMessageService { get; } = new();
 
     private Models.Game? _game;
+    /// <summary>
+    /// <see cref="Models.Game"/> instance."/>
+    /// </summary>
     public Models.Game? Game
     {
         get => _game;
@@ -79,13 +88,19 @@ public partial class GamePageViewModel : ObservableObject
     [ObservableProperty]
     private bool _isNamePredefined = false;
 
-    public ObservableCollection<SelectedFieldViewModel> Fields { get; } = new();
+    public ObservableCollection<SelectedFieldViewModel> Fields { get; } = [];
 
-    public ObservableCollection<SelectionAndKeyPegs> GameMoves { get; } = new();
+    public ObservableCollection<SelectionAndKeyPegs> GameMoves { get; } = [];
 
+    /// <summary>
+    /// Status of the game. See <see cref="GameMode"/>.
+    /// </summary>
     [ObservableProperty]
     private GameMode _gameStatus = GameMode.NotRunning;
 
+    /// <summary>
+    /// An API call to the games-API is in-progress. Use to display progress indicators.
+    /// </summary>
     [NotifyPropertyChangedFor(nameof(IsNameEnterable))]
     [ObservableProperty]
     private bool _inProgress = false;
@@ -93,8 +108,19 @@ public partial class GamePageViewModel : ObservableObject
     [ObservableProperty]
     private bool _isCancelling = false;
 
+    /// <summary>
+    /// The player name can be entered.
+    /// </summary>
     public bool IsNameEnterable => !InProgress && !IsNamePredefined;
 
+    /// <summary>
+    /// Starts a new game using <see cref="IGamesClient"/>.
+    /// Updates the <see cref="GameStatus"/> property.
+    /// Initializes <see cref="Game"/>).
+    /// Increments the move number.
+    /// Shows <see cref="IDialogService"/> messages or <see cref="InfoBarMessageService"/> messages with errors.
+    /// </summary>
+    /// <returns>A task</returns>
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
     private async Task StartGameAsync()
     {
@@ -159,6 +185,11 @@ public partial class GamePageViewModel : ObservableObject
 //        }
 //    }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <returns>A task</returns>
+    /// <exception cref="InvalidOperationException"></exception>
     [RelayCommand(CanExecute = nameof(CanSetMove), AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
     private async Task SetMoveAsync()
     {
@@ -235,8 +266,19 @@ public partial class GamePageViewModel : ObservableObject
     }
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="GuessPegs">String representation of guesses</param>
+/// <param name="KeyPegs">String representation of results</param>
+/// <param name="MoveNumber">The move number</param>
 public record SelectionAndKeyPegs(string[] GuessPegs, string[] KeyPegs, int MoveNumber);
 
 public record class GameStateChangedMessage(GameMode GameMode);
 
+/// <summary>
+/// Messages sent when the games starts, or a move is set.
+/// </summary>
+/// <param name="GameMoveValue"><see cref="GameMoveValue"/></param>
+/// <param name="SelectionAndKeyPegs"><see cref="SelectionAndKeyPegs"/></param>
 public record class GameMoveMessage(GameMoveValue GameMoveValue, SelectionAndKeyPegs? SelectionAndKeyPegs = null);

@@ -1,30 +1,31 @@
 ﻿# CNinnovation.Codebreaker.ViewModels
 
-This library contains the `GamesClient` class to communicate with the Codebreaker service, and model types that are used for the communication.
+This library contains view-model types for XAML-based applications (WinUI, WPF, .NET MAUI...) to create Codebreaker games.
+
+It is part of the Codebreaker solution.
 
 See https://github.com/codebreakerapp for more information on the complete solution.
 
-
 ## The ViewModels
-
-TODO
 
 | Class | Description |
 |-------|-------------|
-| GamePageViewModel | TODO |
-| GameViewModel | TODO |
-| MoveViewModel | TODO |
-| InfoMessageViewModel | TODO |
+| GamePageViewModel | The GamePageViewModel is the view-model type for the game page with commands to start games, set moves. |
+| GameViewModel | The GameViewModel is the view-model type for game information. |
+| MoveViewModel | The MoveViewModel is the view-model type for a game move. |
+| InfoMessageViewModel | Alternative option of IDialogService |
 
+The `GamePageViewModel` is the main view-model type to communicate with the application.
 
-The `GamesClient` class is the main class to use for communication. It contains the following methods:
-
-| Method     | Description        |
+| Members     | Description        |
 |------------|--------------------|
-| StartGameAsync | Start a new game |
-| SetMoveAsync | Set guesses for a game move |
-| GetGameAsync | Get a game by id with all details and moves |
-| GetGamesAsync | Get a list of games with all details and moves (use the `GamesQuery` class to define the filter) |
+| ctor | Needs `IGamesClient` (communication with the games-service API), `IOptions<GamePageViewModelOptions>`, `IDialogService` |
+
+### Supporting types
+
+| Class | Description |
+|-------|-------------|
+| GameMode | An enumeration - is the game not running, started, are moves set, lost, won? |
 
 In the constructor, inject the `HttpClient` class. You can use `Microsoft.Extensions.Http` to configure the `HttpClient` class.
 
@@ -35,4 +36,4 @@ The following model types are used to return information about the game.
 | Model type | Description |
 |------------|-------------|
 | Game | Contains the game id, the game status, the game moves and the game result |
-| Move | Contains the move number, the guess and the result of the guess |
+| Move | Contains the move number, the guess (`GuessPegs`) and the result of the guess (`KeyPegs`) |
