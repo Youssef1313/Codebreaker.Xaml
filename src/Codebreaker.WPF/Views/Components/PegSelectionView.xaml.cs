@@ -1,9 +1,4 @@
-﻿using CodeBreaker.ViewModels;
-
-using System.Windows;
-using System.Windows.Controls;
-
-namespace CodeBreaker.WPF.Views.Components;
+﻿namespace Codebreaker.WPF.Views.Components;
 
 public partial class PegSelectionView : UserControl
 {
