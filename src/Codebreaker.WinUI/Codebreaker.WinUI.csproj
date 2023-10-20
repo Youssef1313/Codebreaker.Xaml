@@ -20,21 +20,7 @@
     <TranslationReport Condition="'$(Configuration)' == 'Release'">true</TranslationReport>
     <SuppressPseudoWarning Condition="'$(Configuration)' == 'Debug'">true</SuppressPseudoWarning>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="appsettings.Development.json" />
-    <None Remove="appsettings.json" />
-    <None Remove="appsettings.Production.json" />
-    <None Remove="MainWindow.xaml" />
-    <None Remove="MultilingualResources\CodeBreaker.WinUI.de.xlf" />
-    <None Remove="Styles\CodeBreakerTemplates.xaml" />
-    <None Remove="Views\AuthPage.xaml" />
-    <None Remove="Views\Components\InfoBarMessages.xaml" />
-    <None Remove="Views\KeyPegsView.xaml" />
-    <None Remove="Views\LivePage.xaml" />
-    <None Remove="Views\Pages\AccountPage.xaml" />
-    <None Remove="Views\Pages\SettingsPage.xaml" />
-    <None Remove="Views\PegSelectionView.xaml" />
-  </ItemGroup>
+  
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
