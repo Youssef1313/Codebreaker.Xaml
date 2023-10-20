@@ -69,7 +69,7 @@ public partial class App : Application
             services.AddScoped<AuthPageViewModel>();
             services.AddTransient<AuthPage>();
 
-            string apiBase = context.Configuration["ApiBase"] ?? throw new ConfigurationNotFoundException("ApiBase");
+            string apiBase = context.Configuration["ApiBase"] ?? throw new InvalidOperationException("ApiBase configuration not found");
             services.AddHttpClient<IGameClient, GameClient>((HttpClient client) => client.BaseAddress = new(apiBase));
             services.AddScoped<GamePageViewModel>();
             services.AddTransient<GamePage>();
