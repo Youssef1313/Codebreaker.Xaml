@@ -1,35 +1,17 @@
-﻿using CodeBreaker.Services.Authentication;
-using CodeBreaker.ViewModels;
-using CodeBreaker.WinUI.Contracts.Services;
+﻿using CodeBreaker.WinUI.Contracts.Services.Navigation;
 
 namespace CodeBreaker.WinUI.Activation;
 
-public class DefaultActivationHandler : ActivationHandler<LaunchActivatedEventArgs>
+public class DefaultActivationHandler(IWinUINavigationService navigationService) : ActivationHandler<LaunchActivatedEventArgs>
 {
-    private readonly INavigationService _navigationService;
-
-    private readonly IAuthService _authService;
-
-    public DefaultActivationHandler(INavigationService navigationService, IAuthService authService)
-    {
-        _navigationService = navigationService;
-        _authService = authService;
-    }
-
     protected override bool CanHandleInternal(LaunchActivatedEventArgs? args)
     {
         // None of the ActivationHandlers has handled the activation.
-        return _navigationService.Frame.Content == null;
+        return navigationService.Frame.Content == null;
     }
 
-    protected override Task HandleInternalAsync(LaunchActivatedEventArgs? args)
+    protected override async Task HandleInternalAsync(LaunchActivatedEventArgs? args)
     {
-        Type pageType = _authService.IsAuthenticated
-            ? typeof(GamePageViewModel)
-            : typeof(AuthPageViewModel);
-
-        _navigationService.NavigateToViewModel(pageType, args?.Arguments);
-
-        return Task.CompletedTask;
+        await navigationService.NavigateToAsync("GamePage", args?.Arguments);
     }
 }

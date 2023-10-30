@@ -1,5 +1,4 @@
-﻿using CodeBreaker.ViewModels.Services;
-
+﻿using Codebreaker.ViewModels.Services;
 using Windows.UI.Popups;
 
 namespace CodeBreaker.WinUI.Services;

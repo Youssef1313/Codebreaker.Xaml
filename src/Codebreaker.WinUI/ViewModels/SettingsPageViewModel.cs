@@ -1,11 +1,9 @@
-﻿using CodeBreaker.ViewModels.Services;
-using CodeBreaker.WinUI.Contracts.Services;
+﻿using CodeBreaker.WinUI.Contracts.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace CodeBreaker.WinUI.ViewModels;
 
-[ObservableObject]
-public partial class SettingsPageViewModel
+public partial class SettingsPageViewModel : ObservableObject
 {
     public record class LanguageSelectionItem(string Key, string Text);
 

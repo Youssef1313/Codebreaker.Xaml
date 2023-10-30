@@ -1,8 +1,4 @@
-using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.ViewModels;
-using CommunityToolkit.Mvvm.ComponentModel;
-using Windows.Foundation.Collections;
-using Windows.Globalization;
 
 namespace CodeBreaker.WinUI.Views.Pages;
 

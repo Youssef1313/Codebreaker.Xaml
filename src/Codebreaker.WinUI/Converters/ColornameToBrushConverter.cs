@@ -2,7 +2,6 @@
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Media;
 using Windows.UI;
-using static CodeBreaker.Shared.Models.Data.Colors;
 
 namespace CodeBreaker.WinUI.Converters;
 
@@ -34,12 +33,12 @@ public class ColornameToBrushConverter : IValueConverter
 
         return colorname switch
         {
-            Black => BlackBrush,
-            White => WhiteBrush,
-            Red => RedBrush,
-            Green => GreenBrush,
-            Blue => BlueBrush,
-            Yellow => YellowBrush,
+            "Black" => BlackBrush,
+            "White" => WhiteBrush,
+            "Red" => RedBrush,
+            "Green" => GreenBrush,
+            "Blue" => BlueBrush,
+            "Yellow" => YellowBrush,
             _ => EmptyBrush
         };
     }
