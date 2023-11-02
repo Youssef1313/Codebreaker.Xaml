@@ -1,6 +1,4 @@
-﻿using System.Windows.Input;
-
-namespace Codebreaker.ViewModels;
+﻿namespace Codebreaker.ViewModels.Components;
 
 public enum InfoMessageSeverity
 {
@@ -10,82 +8,38 @@ public enum InfoMessageSeverity
     Error
 }
 
-public partial class InfoMessageViewModel : ObservableObject
+public partial class InfoMessageViewModel(Action closeAction) : ObservableObject
 {
-    public static InfoMessageViewModel Error(string content)
-    {
-        InfoMessageViewModel message = new()
-        {
-            Title = "Error",
-            Message = content,
-            Severity = InfoMessageSeverity.Error,
-            ActionTitle = "OK"
-        };
-        message.ActionCommand = new RelayCommand(() => message.Close());
-        return message;
-    }
-
-    public static InfoMessageViewModel Warning(string content)
-    {
-        InfoMessageViewModel message = new()
-        {
-            Title = "Warning",
-            Message = content,
-            Severity = InfoMessageSeverity.Warning,
-            ActionTitle = "OK"
-        };
-        message.ActionCommand = new RelayCommand(() => message.Close());
-        return message;
-    }
-
-    public static InfoMessageViewModel Information(string content)
-    {
-        InfoMessageViewModel message = new()
-        {
-            Title = "Information",
-            Message = content,
-            Severity = InfoMessageSeverity.Info,
-            ActionTitle = "OK"
-        };
-        message.ActionCommand = new RelayCommand(() => message.Close());
-        return message;
-    }
-
-    public static InfoMessageViewModel Success(string content)
-    {
-        InfoMessageViewModel message = new()
-        {
-            Title = "Success",
-            Message = content,
-            Severity = InfoMessageSeverity.Success,
-            ActionTitle = "OK"
-        };
-        message.ActionCommand = new RelayCommand(() => message.Close());
-        return message;
-    }
-
-    internal ICollection<InfoMessageViewModel>? ContainingCollection { get; set; }
-
     [ObservableProperty]
-    private InfoMessageSeverity _severity = InfoMessageSeverity.Info;
+    private InfoMessageSeverity _severity;
 
     [ObservableProperty]
     private string _message = string.Empty;
 
     [ObservableProperty]
-    private string _title = string.Empty;
+    private string? _title;
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasAction))]
-    private ICommand? _actionCommand;
+    [NotifyCanExecuteChangedFor(nameof(ExecuteActionCommand))]
+    private Action? _action;
+
+    [RelayCommand]
+    public void ExecuteAction() => Action?.Invoke();
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(HasAction))]
-    private string? _actionTitle = "OK";
+    private string? _actionText = "OK";
 
-    public bool HasAction =>
-        ActionCommand is not null && ActionTitle is not null;
+    public bool HasAction => ExecuteActionCommand is not null && ActionText is not null;
 
-    public void Close() =>
-        ContainingCollection?.Remove(this);
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(CloseCommand))]
+    private Action _closeAction = closeAction;
+
+    [ObservableProperty]
+    private bool _isClosable;
+
+    [RelayCommand]
+    public void Close() => CloseAction();
 }
