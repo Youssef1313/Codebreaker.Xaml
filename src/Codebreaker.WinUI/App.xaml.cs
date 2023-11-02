@@ -48,8 +48,8 @@ public partial class App : Application
 
             services.AddSingleton<IActivationService, ActivationService>();
             services.AddPageService(builder => builder
-                .Configure<SettingsPage>("GamePage")
-                //.Configure<SettingsPage>("SettingsPage")
+                .Configure<GamePage>("GamePage")
+                .Configure<SettingsPage>("SettingsPage")
                 .Configure<ShellPage>("ShellPage"));
             services.AddSingleton<IWinUINavigationService, WinUINavigationService>();
             services.AddSingleton<INavigationService>(x => x.GetRequiredService<IWinUINavigationService>());
