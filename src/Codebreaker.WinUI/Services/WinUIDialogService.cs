@@ -1,13 +1,13 @@
-﻿using Codebreaker.ViewModels.Services;
-using Windows.UI.Popups;
+﻿using Codebreaker.ViewModels.Contracts.Services;
+using Codebreaker.ViewModels.Services;
 
 namespace CodeBreaker.WinUI.Services;
 
-internal class WinUIDialogService : IDialogService
+internal class WinUIDialogService(IInfoBarService infoBarService) : IDialogService
 {
-    public async Task ShowMessageAsync(string message)
+    public Task ShowMessageAsync(string message)
     {
-        MessageDialog dlg = new(message);
-        await dlg.ShowAsync();
+        infoBarService.New.WithMessage(message).Show();
+        return Task.CompletedTask;
     }
 }
