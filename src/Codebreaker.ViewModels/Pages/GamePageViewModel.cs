@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Codebreaker.ViewModels.Components;
+using Codebreaker.ViewModels.Contracts.Services;
+using Microsoft.Extensions.Options;
 
 namespace Codebreaker.ViewModels;
 
@@ -18,11 +20,10 @@ public enum GameMoveValue
 }
 
 /// <summary>
-/// Configure to enable dialogs (via <see cref="IDialogService"/>), or use the <see cref="InfoBarMessageService"/>.
+/// Configure to enable dialogs (via <see cref="IDialogService"/>), or use the <see cref="InfoBarService"/>.
 /// </summary>
 public class GamePageViewModelOptions
 {
-    public bool EnableDialogs { get; set; } = false;
 }
 
 public partial class GamePageViewModel : ObservableObject
@@ -30,17 +31,19 @@ public partial class GamePageViewModel : ObservableObject
     private readonly IGamesClient _client;
     private int _moveNumber = 0;
 
-    private readonly bool _enableDialogs = false;
     private readonly IDialogService _dialogService;
+    private readonly IInfoBarService _infoBarService;
 
     public GamePageViewModel(
         IGamesClient client,
         IOptions<GamePageViewModelOptions> options,
-        IDialogService dialogService)
+        IDialogService dialogService,
+        IInfoBarService infoBarService
+    )
     {
         _client = client;
         _dialogService = dialogService;
-        _enableDialogs = options.Value.EnableDialogs;
+        _infoBarService = infoBarService;
 
         PropertyChanged += (sender, e) =>
         {
@@ -52,13 +55,13 @@ public partial class GamePageViewModel : ObservableObject
     /// <summary>
     /// Information on the game - messages, errors, etc. See <see cref="InfoBarMessageService"/>.
     /// </summary>
-    public InfoBarMessageService InfoBarMessageService { get; } = new();
+    public InfoBarService InfoBarMessageService { get; } = new();
 
-    private Models.Game? _game;
+    private Game? _game;
     /// <summary>
     /// <see cref="Models.Game"/> instance."/>
     /// </summary>
-    public Models.Game? Game
+    public Game? Game
     {
         get => _game;
         set
@@ -141,16 +144,15 @@ public partial class GamePageViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            InfoMessageViewModel message = InfoMessageViewModel.Error(ex.Message);
-            message.ActionCommand = new RelayCommand(() =>
-            {
-                GameStatus = GameMode.NotRunning;
-                message.Close();
-            });
-            InfoBarMessageService.ShowMessage(message);
-
-            if (_enableDialogs)
-                await _dialogService.ShowMessageAsync(ex.Message);
+            _infoBarService.New
+                .IsErrorMessage()
+                .WithMessage(ex.Message)
+                .WithAction((message) =>
+                {
+                    GameStatus = GameMode.NotRunning;
+                    message.Close();
+                })
+                .Show();
         }
         finally
         {
@@ -217,26 +219,17 @@ public partial class GamePageViewModel : ObservableObject
             if (isVictory)
             {
                 GameStatus = GameMode.Won;
-                InfoBarMessageService.ShowInformation("Congratulations - you won!");
-
-                if (_enableDialogs)
-                    await _dialogService.ShowMessageAsync("Congratulations - you won!");
+                InfoBarMessageService.New.IsSuccessMessage().WithMessage("Congratulations - you won!").Show();
             }
             else if (ended)
             {
                 GameStatus = GameMode.Lost;
-                InfoBarMessageService.ShowInformation("Sorry, you didn't find the matching colors!");
-
-                if (_enableDialogs)
-                    await _dialogService.ShowMessageAsync("Sorry, you didn't find the matching colors!");
+                InfoBarMessageService.New.WithMessage("Sorry, you didn't find the matching colors!").Show();
             }
         }
         catch (Exception ex)
         {
-            InfoBarMessageService.ShowError(ex.Message);
-
-            if (_enableDialogs)
-                await _dialogService.ShowMessageAsync(ex.Message);
+            InfoBarMessageService.New.WithMessage(ex.Message).IsErrorMessage().Show();
         }
         finally
         {
