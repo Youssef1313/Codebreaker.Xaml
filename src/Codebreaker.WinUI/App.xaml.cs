@@ -53,6 +53,7 @@ public partial class App : Application
                 .Configure<ShellPage>("ShellPage"));
             services.AddSingleton<IWinUINavigationService, WinUINavigationService>();
             services.AddSingleton<INavigationService>(x => x.GetRequiredService<IWinUINavigationService>());
+            services.AddScoped<IInfoBarService, InfoBarService>();
             services.AddScoped<IDialogService, WinUIDialogService>();
             services.AddSingleton<ISettingsService, SettingsService>();
 

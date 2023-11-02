@@ -7,6 +7,7 @@
     xmlns:helpers="using:CodeBreaker.WinUI.Helpers"
     xmlns:behaviors="using:CodeBreaker.WinUI.Behaviors"
     xmlns:i="using:Microsoft.Xaml.Interactivity"
+    xmlns:components="using:CodeBreaker.WinUI.Views.Components"
     xmlns:toolkitConverters="using:CommunityToolkit.WinUI.UI.Converters"
     xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
     xmlns:ca="using:CodeBreaker.WinUI.CustomAttachedProperties"
@@ -72,8 +73,13 @@
                     </behaviors:NavigationViewHeaderBehavior.DefaultHeaderTemplate>
                 </behaviors:NavigationViewHeaderBehavior>
             </i:Interaction.Behaviors>
-            <Grid Margin="{StaticResource NavigationViewPageContentMargin}">
-                <Frame x:Name="NavigationFrame" />
+            <Grid Margin="{StaticResource NavigationViewPageContentMargin}" RowSpacing="{StaticResource Spacing3}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <components:InfoBarArea />
+                <Frame Grid.Row="1" x:Name="NavigationFrame" />
             </Grid>
             <NavigationView.FooterMenuItems>
             </NavigationView.FooterMenuItems>
