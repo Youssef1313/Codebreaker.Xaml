@@ -1,23 +1,34 @@
-﻿using CodeBreaker.WinUI.Contracts.Services;
+﻿using CodeBreaker.WinUI.Contracts.Services.Navigation;
 using CodeBreaker.WinUI.Contracts.ViewModels;
+using Microsoft.UI.Xaml.Media.Animation;
 
-namespace CodeBreaker.WinUI.Services;
+namespace CodeBreaker.WinUI.Services.Navigation;
 
 // For more information on navigation between pages see
 // https://github.com/microsoft/TemplateStudio/blob/main/docs/WinUI/navigation.md
-public class NavigationService : INavigationService
+public class WinUINavigationService : IWinUINavigationService
 {
     private readonly IPageService _pageService;
     private object? _lastParameterUsed;
     private Frame? _frame;
 
     public event NavigatedEventHandler? Navigated;
+    public event NavigationFailedEventHandler? NavigationFailed;
+
+    public NavigationTransitionInfo? EntranceNavigationTransition { get; set; }
+
+    public NavigationTransitionInfo? BackNavigationTransition { get; set; }
+
+    public WinUINavigationService(IPageService pageService)
+    {
+        _pageService = pageService;
+    }
 
     public Frame Frame
     {
         get
         {
-            if (_frame == null)
+            if (_frame is null)
             {
                 _frame = App.MainWindow.Content as Frame ?? throw new InvalidOperationException("MainWindow content is not a frame");
                 RegisterFrameEvents();
@@ -36,11 +47,6 @@ public class NavigationService : INavigationService
 
     public bool CanGoBack => Frame.CanGoBack;
 
-    public NavigationService(IPageService pageService)
-    {
-        _pageService = pageService;
-    }
-
     private void RegisterFrameEvents()
     {
         if (_frame is not null)
@@ -53,13 +59,22 @@ public class NavigationService : INavigationService
             _frame.Navigated -= OnNavigated;
     }
 
-    public bool GoBack()
+    public ValueTask<bool> GoBackAsync() =>
+        ValueTask.FromResult(GoBack());
+
+    public ValueTask<bool> NavigateToAsync(string pageKey, object? parameter = null, bool clearNavigation = false)
     {
-        if (!CanGoBack)
+        var pageType = _pageService.GetPageType(pageKey);
+        return ValueTask.FromResult(NavigateTo(pageType, parameter, clearNavigation));
+    }
+
+    private bool GoBack()
+    {
+        if (!CanGoBack || _frame is null)
             return false;
 
-        object? vmBeforeNavigation = _frame?.GetPageViewModel();
-        _frame?.GoBack();
+        object? vmBeforeNavigation = _frame.GetPageViewModel();
+        _frame.GoBack(BackNavigationTransition);
 
         if (vmBeforeNavigation is INavigationAware navigationAware)
             navigationAware.OnNavigatedFrom();
@@ -67,16 +82,13 @@ public class NavigationService : INavigationService
         return true;
     }
 
-    public bool NavigateToView(Type pageType, object? parameter = default, bool clearNavigation = false)
+    private bool NavigateTo(Type pageType, object? parameter, bool clearNavigation = false)
     {
-        if (_frame?.Content?.GetType() != pageType || (parameter != null && !parameter.Equals(_lastParameterUsed)))
+        if (_frame != null && (_frame.Content?.GetType() != pageType || parameter != null && !parameter.Equals(_lastParameterUsed)))
         {
-            if (_frame is null)
-                throw new InvalidOperationException("Frame is null");
-
-            _frame.Tag = clearNavigation;
-            object? vmBeforeNavigation = _frame.GetPageViewModel();
-            bool navigated = _frame.Navigate(pageType, parameter);      // If the page class has constructor parameters, this method will throw an exception
+            _frame!.Tag = clearNavigation;
+            var vmBeforeNavigation = _frame.GetPageViewModel();
+            var navigated = _frame.Navigate(pageType, parameter, EntranceNavigationTransition);
 
             if (navigated)
             {
@@ -90,24 +102,6 @@ public class NavigationService : INavigationService
         }
 
         return false;
-    }
-
-    public bool NavigateToView(string pageKey, object? parameter = default, bool clearNavigation = false)
-    {
-        Type? pageType = _pageService.GetPageTypeByPageName(pageKey);
-        return NavigateToView(pageType, parameter, clearNavigation);
-    }
-
-    public bool NavigateToViewModel(Type viewModelType, object? parameter = default, bool clearNavigation = false)
-    {
-        Type? pageType = _pageService.GetPageTypeByViewModel(viewModelType);
-        return NavigateToView(pageType, parameter, clearNavigation);
-    }
-
-    public bool NavigateToViewModel(string viewModelKey, object? parameter = default, bool clearNavigation = false)
-    {
-        Type? pageType = _pageService.GetPageTypeByViewModel(viewModelKey);
-        return NavigateToView(pageType, parameter, clearNavigation);
     }
 
     private void OnNavigated(object sender, NavigationEventArgs e)
@@ -124,5 +118,11 @@ public class NavigationService : INavigationService
             navigationAware.OnNavigatedTo(e.Parameter);
 
         Navigated?.Invoke(sender, e);
+    }
+
+    [Obsolete("Do not use.", true)]
+    public bool NavigateToViewModel(string viewModelKey, object? parameter = null, bool clearNavigation = false)
+    {
+        throw new NotImplementedException();
     }
 }

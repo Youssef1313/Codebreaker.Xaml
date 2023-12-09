@@ -1,13 +1,11 @@
-﻿using CodeBreaker.WinUI.Contracts.Services;
+﻿using CodeBreaker.WinUI.Contracts.Services.Navigation;
 using CodeBreaker.WinUI.Messages;
 using CodeBreaker.WinUI.ViewModels;
 using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.UI;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
 
 using Windows.System;
-using Windows.UI;
 
 namespace CodeBreaker.WinUI.Views.Pages;
 
@@ -78,12 +76,10 @@ public sealed partial class ShellPage : Page,
         return keyboardAccelerator;
     }
 
-    private static void OnKeyboardAcceleratorInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
+    private static async void OnKeyboardAcceleratorInvoked(KeyboardAccelerator sender, KeyboardAcceleratorInvokedEventArgs args)
     {
-        var navigationService = App.GetService<INavigationService>();
-
-        var result = navigationService.GoBack();
-
+        var navigationService = App.GetService<IWinUINavigationService>();
+        var result = await navigationService.GoBackAsync();
         args.Handled = result;
     }
 

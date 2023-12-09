@@ -1,13 +1,13 @@
 ﻿using System.Windows.Input;
-using CodeBreaker.WinUI.Contracts.Services;
+using CodeBreaker.WinUI.Contracts.Services.Navigation;
 using CodeBreaker.WinUI.CustomAttachedProperties;
 using CodeBreaker.WinUI.Views.Pages;
 
-namespace CodeBreaker.WinUI.Services;
+namespace CodeBreaker.WinUI.Services.Navigation;
 
 public class NavigationViewService : INavigationViewService
 {
-    private readonly INavigationService _navigationService;
+    private readonly IWinUINavigationService _navigationService;
 
     private readonly IPageService _pageService;
 
@@ -17,7 +17,7 @@ public class NavigationViewService : INavigationViewService
 
     public object? SettingsItem => _navigationView?.SettingsItem;
 
-    public NavigationViewService(INavigationService navigationService, IPageService pageService)
+    public NavigationViewService(IWinUINavigationService navigationService, IPageService pageService)
     {
         _navigationService = navigationService;
         _pageService = pageService;
@@ -49,13 +49,13 @@ public class NavigationViewService : INavigationViewService
         return GetSelectedItem(allMenuItems, pageType);
     }
 
-    private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args) => _navigationService.GoBack();
+    private async void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args) => await _navigationService.GoBackAsync();
 
-    private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
+    private async void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
     {
         if (args.IsSettingsInvoked)
         {
-            _navigationService.NavigateToView(typeof(SettingsPage));
+            await _navigationService.NavigateToAsync(nameof(SettingsPage));
         }
         else
         {
@@ -68,14 +68,8 @@ public class NavigationViewService : INavigationViewService
                 command.Execute(commandArgument);
             }
 
-            if (selectedItem.GetValue(NavigationHelper.NavigateByViewModelNameProperty) is string viewModelKey)
-                _navigationService.NavigateToViewModel(viewModelKey);
-            else if (selectedItem.GetValue(NavigationHelper.NavigateByViewModelTypeProperty) is Type viewModelType)
-                _navigationService.NavigateToView(viewModelType);
-            else if (selectedItem.GetValue(NavigationHelper.NavigateByPageNameProperty) is string pageKey)
-                _navigationService.NavigateToView(pageKey);
-            else if (selectedItem.GetValue(NavigationHelper.NavigateByPageTypeProperty) is Type pageType)
-                _navigationService.NavigateToView(pageType);
+            if (selectedItem.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
+                await _navigationService.NavigateToAsync(pageKey);
         }
     }
 
@@ -100,17 +94,8 @@ public class NavigationViewService : INavigationViewService
 
     private bool IsMenuItemForPageType(NavigationViewItem menuItem, Type sourcePageType)
     {
-        if (menuItem.GetValue(NavigationHelper.NavigateByViewModelNameProperty) is string viewModelKey)
-            return _pageService.GetPageTypeByViewModel(viewModelKey) == sourcePageType;
-
-        if (menuItem.GetValue(NavigationHelper.NavigateByPageNameProperty) is string pageKey)
-            return _pageService.GetPageTypeByPageName(pageKey) == sourcePageType;
-
-        if (menuItem.GetValue(NavigationHelper.NavigateByViewModelTypeProperty) is Type viewModelType)
-            return _pageService.GetPageTypeByViewModel(viewModelType) == sourcePageType;
-
-        if (menuItem.GetValue(NavigationHelper.NavigateByPageTypeProperty) is Type pageType)
-            return pageType == sourcePageType;
+        if (menuItem.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
+            return _pageService.GetPageType(pageKey) == sourcePageType;
 
         return false;
     }

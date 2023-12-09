@@ -4,12 +4,6 @@ global using Microsoft.UI.Xaml;
 global using Microsoft.UI.Xaml.Controls;
 global using Microsoft.UI.Xaml.Navigation;
 global using Microsoft.Xaml.Interactivity;
-using CodeBreaker.Services;
-using CodeBreaker.Services.Authentication;
-using CodeBreaker.Services.Authentication.Definitions;
-using CodeBreaker.ViewModels;
-using CodeBreaker.ViewModels.Pages;
-using CodeBreaker.ViewModels.Services;
 using CodeBreaker.WinUI.Activation;
 using CodeBreaker.WinUI.Contracts.Services;
 using CodeBreaker.WinUI.Services;
@@ -21,8 +15,12 @@ using Microsoft.Extensions.Hosting;
 using Windows.ApplicationModel;
 using Xaml = Microsoft.UI.Xaml;
 using WinUIEx;
-using CodeBreaker.Shared.Exceptions;
-using CodeBreaker.Services.Options;
+using CodeBreaker.WinUI.Services.Navigation;
+using CodeBreaker.WinUI.Contracts.Services.Navigation;
+using Codebreaker.ViewModels.Contracts.Services;
+using Codebreaker.ViewModels.Services;
+using Codebreaker.GameAPIs.Client;
+using Codebreaker.ViewModels;
 
 namespace CodeBreaker.WinUI;
 
@@ -45,16 +43,17 @@ public partial class App : Application
             // Other Activation Handlers
 
             // Services
-            services.Configure<GamePageViewModelOptions>(options => options.EnableDialogs = false);
-            services.Configure<LiveClientOptions>(context.Configuration);
-            services.Configure<AuthOptions>(context.Configuration);
 
             services.AddTransient<INavigationViewService, NavigationViewService>();
 
             services.AddSingleton<IActivationService, ActivationService>();
-            services.AddSingleton<IPageService, PageService>();
-            services.AddSingleton<INavigationService, NavigationService>();
-            services.AddSingleton<IViewModelNavigationService>(x => x.GetRequiredService<INavigationService>());
+            services.AddPageService(builder => builder
+                .Configure<GamePage>("GamePage")
+                .Configure<SettingsPage>("SettingsPage")
+                .Configure<ShellPage>("ShellPage"));
+            services.AddSingleton<IWinUINavigationService, WinUINavigationService>();
+            services.AddSingleton<INavigationService>(x => x.GetRequiredService<IWinUINavigationService>());
+            services.AddScoped<IInfoBarService, InfoBarService>();
             services.AddScoped<IDialogService, WinUIDialogService>();
             services.AddSingleton<ISettingsService, SettingsService>();
 
@@ -65,21 +64,10 @@ public partial class App : Application
             services.AddScoped<SettingsPageViewModel>();
             services.AddTransient<SettingsPage>();
 
-            services.AddSingleton<IAuthService, AuthService>();
-            services.AddScoped<AuthPageViewModel>();
-            services.AddTransient<AuthPage>();
-
             string apiBase = context.Configuration["ApiBase"] ?? throw new InvalidOperationException("ApiBase configuration not found");
-            services.AddHttpClient<IGameClient, GameClient>((HttpClient client) => client.BaseAddress = new(apiBase));
+            services.AddHttpClient<IGamesClient, GamesClient>((HttpClient client) => client.BaseAddress = new(apiBase));
             services.AddScoped<GamePageViewModel>();
-            services.AddTransient<GamePage>();
-
-            services.AddSingleton<LiveClient>();
-            services.AddScoped<LivePageViewModel>();
-            services.AddTransient<LivePage>();
-
-            services.AddScoped<AccountPageViewModel>();
-            services.AddTransient<AccountPage>();
+            //services.AddTransient<GamePage>();
         })
         .Build();
 
@@ -122,9 +110,6 @@ public partial class App : Application
     protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         base.OnLaunched(args);
-        IAuthService authService = GetService<IAuthService>();
-        await authService.RegisterPersistentTokenCacheAsync();
-        await authService.TryAquireTokenSilentlyAsync(new ApiServiceAuthDefinition());
         GetService<ISettingsService>().TrySettingStoredTheme();
         await GetService<IActivationService>().ActivateAsync(args);
     }

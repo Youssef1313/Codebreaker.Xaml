@@ -1,4 +1,5 @@
 ﻿using CodeBreaker.WinUI.Contracts.Services;
+using CodeBreaker.WinUI.Contracts.Services.Navigation;
 
 namespace CodeBreaker.WinUI.Behaviors;
 
@@ -44,14 +45,14 @@ public class NavigationViewHeaderBehavior : Behavior<NavigationView>
     {
         base.OnAttached();
         s_current = this;
-        var navigationService = App.GetService<INavigationService>();
+        var navigationService = App.GetService<IWinUINavigationService>();
         navigationService.Navigated += OnNavigated;
     }
 
     protected override void OnDetaching()
     {
         base.OnDetaching();
-        var navigationService = App.GetService<INavigationService>();
+        var navigationService = App.GetService<IWinUINavigationService>();
         navigationService.Navigated -= OnNavigated;
     }
 

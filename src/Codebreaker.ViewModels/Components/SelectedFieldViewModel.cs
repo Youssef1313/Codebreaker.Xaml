@@ -1,4 +1,4 @@
-﻿namespace Codebreaker.ViewModels;
+﻿namespace Codebreaker.ViewModels.Components;
 
 public partial class SelectedFieldViewModel : ObservableObject
 {

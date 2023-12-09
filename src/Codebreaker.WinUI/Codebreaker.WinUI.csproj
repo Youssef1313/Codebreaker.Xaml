@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
@@ -13,6 +12,7 @@
     <EnableMsixTooling>true</EnableMsixTooling>
     <Nullable>enable</Nullable>
     <Company>CN innovation</Company>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
   <PropertyGroup Label="MultilingualAppToolkit">
     <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
@@ -50,7 +50,6 @@
   </ItemGroup>
   <ItemGroup>
     <!--<PackageReference Include="CNInnovation.Codebreaker.ViewModels" Version="2.0.0-beta1.12" />-->
-    <PackageReference Include="CNInnovation.Codebreaker.ViewModels" Version="2.0.1-beta.1.22" />
     <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0-rc.2.23479.6" />
@@ -65,19 +64,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Templates\CodeBreakerTemplates.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Views\Components\KeyPegsView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="Views\Pages\LivePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Views\Components\PegSelectionView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
@@ -108,21 +94,25 @@
     <CustomAdditionalCompileInputs Remove="Views\LivePage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Remove="Views\LivePage.xaml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Page Update="Views\Components\InfoBarMessages.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <None Remove="Views\Components\InfoBarArea.xaml" />
+    <None Remove="Views\Components\PegSelectionComponent.xaml" />
+    <None Remove="Views\Pages\GamePage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\Pages\AuthPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+    <ProjectReference Include="..\Codebreaker.ViewModels\Codebreaker.ViewModels.csproj" />
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\CodeBreaker.WinUI.de.xlf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Components\InfoBarArea.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Pages\GamePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
@@ -130,12 +120,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\Pages\AccountPage.xaml">
+    <Page Update="Views\Pages\SettingsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\Pages\SettingsPage.xaml">
+    <Page Update="Views\Components\PegSelectionComponent.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

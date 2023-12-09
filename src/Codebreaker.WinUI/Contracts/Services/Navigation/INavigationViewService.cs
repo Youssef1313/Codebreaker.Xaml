@@ -1,4 +1,4 @@
-﻿namespace CodeBreaker.WinUI.Contracts.Services;
+﻿namespace CodeBreaker.WinUI.Contracts.Services.Navigation;
 
 public interface INavigationViewService
 {
