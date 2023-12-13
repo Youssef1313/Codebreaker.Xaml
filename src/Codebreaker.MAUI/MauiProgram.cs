@@ -1,4 +1,5 @@
-﻿using Codebreaker.ViewModels.Contracts.Services;
+﻿using Codebreaker.MAUI.Services.Navigation;
+using Codebreaker.ViewModels.Contracts.Services;
 using Microsoft.Extensions.Configuration;
 
 namespace Codebreaker.MAUI;
@@ -26,6 +27,8 @@ public static class MauiProgram
         builder.Configuration.AddJsonStream(FileSystem.OpenAppPackageFileAsync("appsettings.json").Result);
         builder.Configuration.AddJsonStream(FileSystem.OpenAppPackageFileAsync($"appsettings.{Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}.json").Result);
         builder.Services.Configure<GamePageViewModelOptions>(options => { });
+		builder.Services.AddNavigation<MauiNavigationService>(pages => pages
+			.Configure<GamePage>("GamePage"));
         builder.Services.AddScoped<IDialogService, MauiDialogService>();
 		builder.Services.AddScoped<IInfoBarService, InfoBarService>();
         builder.Services.AddScoped<GamePageViewModel>();
