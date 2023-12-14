@@ -1,17 +1,18 @@
-﻿using Codebreaker.ViewModels.Contracts.Services;
+﻿using Codebreaker.MAUI.DataStructures;
+using Codebreaker.ViewModels.Contracts.Services;
 
 namespace Codebreaker.MAUI.Services.Navigation;
 
 internal class MauiNavigationService : INavigationService
 {
-    private readonly Stack<string> _navigationStack = new(1000);
+    private readonly CircularStack<string> _navigationStack = new(1000);
 
     public MauiNavigationService()
     {
         _navigationStack.Push(Shell.Current.CurrentState.Location.ToString()); // Put the initial page on the stack
     }
 
-    public bool CanGoBack => _navigationStack.Count != 0;
+    public bool CanGoBack => !_navigationStack.IsEmpty;
 
     public async ValueTask<bool> GoBackAsync()
     {
@@ -23,7 +24,7 @@ internal class MauiNavigationService : INavigationService
 
     public async ValueTask<bool> NavigateToAsync(string key, object? parameter = null, bool clearNavigation = false)
     {
-        await Shell.Current.GoToAsync(key, new Dictionary<string, object?>
+        await Shell.Current.GoToAsync($"//{key}", new Dictionary<string, object?>  // Problem: Can't use Shell based navigation here. Eighter "//page" is not supported or "page" is not supported.
         {
             { "param", parameter }
         });
@@ -32,7 +33,6 @@ internal class MauiNavigationService : INavigationService
             _navigationStack.Clear();
 
         _navigationStack.Push(key);
-        // TODO: Check/limit the stack size
         return true;
     }
 }
