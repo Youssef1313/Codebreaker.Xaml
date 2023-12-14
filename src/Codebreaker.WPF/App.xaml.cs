@@ -44,11 +44,7 @@ public sealed partial class App : Application, IDisposable
         DefaultScope = _host.Services.CreateScope();
     }
 
-    public void Dispose()
-    {
-        DefaultScope.Dispose();
-        _host.Dispose();
-    }
+    public static new App Current => (Application.Current as App) ?? throw new InvalidOperationException("The current application is no \"App\"");
 
     public IServiceScope DefaultScope { get; private init; }
 
@@ -58,7 +54,12 @@ public sealed partial class App : Application, IDisposable
         where T : class =>
         DefaultScope.ServiceProvider.GetRequiredService<T>();
 
-    protected override void OnActivated(EventArgs e)
+    public void Dispose()
+    {
+        DefaultScope.Dispose();
+        _host.Dispose();
+    }
+
     protected override async void OnActivated(EventArgs e)
     {
         base.OnActivated(e);
