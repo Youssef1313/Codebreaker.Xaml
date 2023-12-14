@@ -87,6 +87,7 @@
                 Text="Move" 
                 IsVisible="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"
                 Command="{Binding ViewModel.SetMoveCommand, Mode=OneTime}" />
+            <Button Clicked="Button_Clicked" Text="To TestPage" />
         </VerticalStackLayout>
     </Grid>
 </ContentPage>
