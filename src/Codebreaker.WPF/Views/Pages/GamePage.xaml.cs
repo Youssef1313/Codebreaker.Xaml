@@ -1,11 +1,10 @@
 ﻿namespace Codebreaker.WPF.Views.Pages;
 
-public partial class GameWindow : Window
+public partial class GamePage : Page
 {
-    public GameWindow()
+    public GamePage()
     {
-        ViewModel = (Application.Current as App)?.GetService<GamePageViewModel>() ??
-                throw new InvalidOperationException();
+        ViewModel = App.Current.GetService<GamePageViewModel>();
 
         DataContext = this;
 
@@ -24,5 +23,5 @@ public partial class GameWindow : Window
     }
 
     public static readonly DependencyProperty ViewModelProperty =
-        DependencyProperty.Register("ViewModel", typeof(GamePageViewModel), typeof(GameWindow), new PropertyMetadata(null));
+        DependencyProperty.Register("ViewModel", typeof(GamePageViewModel), typeof(GamePage), new PropertyMetadata(null));
 }
