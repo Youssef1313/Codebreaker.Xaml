@@ -27,9 +27,11 @@ public sealed partial class App : Application, IDisposable
             })
             .ConfigureServices((context, services) =>
             {
-                services.Configure<GamePageViewModelOptions>(options => options.EnableDialogs = true);
+                services.Configure<GamePageViewModelOptions>(options => { });
                 services.AddSingleton<IWPFNavigationService, WPFNavigationService>();
                 services.AddSingleton<INavigationService>(x => x.GetRequiredService<IWPFNavigationService>());
+                services.AddTransient<IDialogService, WPFDialogService>();
+                services.AddSingleton<IInfoBarService, InfoBarService>();
                 services.AddScoped<GamePageViewModel>();
                 services.AddHttpClient<IGamesClient, GamesClient>(client =>
                 {
