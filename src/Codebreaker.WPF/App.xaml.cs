@@ -1,4 +1,8 @@
-﻿namespace Codebreaker.WPF;
+﻿using Codebreaker.ViewModels.Contracts.Services;
+using Codebreaker.WPF.Contracts;
+using Codebreaker.WPF.Services;
+
+namespace Codebreaker.WPF;
 
 /// <summary>
 /// Interaction logic for App.xaml
@@ -24,7 +28,8 @@ public sealed partial class App : Application, IDisposable
             .ConfigureServices((context, services) =>
             {
                 services.Configure<GamePageViewModelOptions>(options => options.EnableDialogs = true);
-                services.AddTransient<IDialogService, Services.WPFDialogService>();
+                services.AddSingleton<IWPFNavigationService, WPFNavigationService>();
+                services.AddSingleton<INavigationService>(x => x.GetRequiredService<IWPFNavigationService>());
                 services.AddScoped<GamePageViewModel>();
                 services.AddHttpClient<IGamesClient, GamesClient>(client =>
                 {
@@ -52,7 +57,9 @@ public sealed partial class App : Application, IDisposable
         DefaultScope.ServiceProvider.GetRequiredService<T>();
 
     protected override void OnActivated(EventArgs e)
+    protected override async void OnActivated(EventArgs e)
     {
         base.OnActivated(e);
+        await GetService<IWPFNavigationService>().NavigateToAsync("GamePage");
     }
 }
