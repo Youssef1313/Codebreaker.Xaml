@@ -7,7 +7,6 @@
         xmlns:components="clr-namespace:Codebreaker.WPF.Views.Components"
         xmlns:conv="clr-namespace:Codebreaker.WPF.Converters"
         mc:Ignorable="d"
-        d:DesignHeight="450" d:DesignWidth="800"
         Title="Codebreaker">
     <Page.Resources>
         <conv:GameStatusToVisibilityConverter x:Key="GameStatusVisibilityConverter" />
