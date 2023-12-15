@@ -6,8 +6,8 @@
         xmlns:pages="clr-namespace:Codebreaker.WPF.Views.Pages"
         mc:Ignorable="d"
         Title="Shell" Height="450" Width="800">
-    <Grid>
+    <StackPanel Orientation="Vertical">
         <TextBlock Text="Shell here" />
-        <Frame x:Name="NavigationFrame" />
-    </Grid>
+        <Frame x:Name="NavigationFrame" NavigationUIVisibility="Hidden" />
+    </StackPanel>
 </Page>

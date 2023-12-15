@@ -1,7 +1,7 @@
 ﻿using Codebreaker.ViewModels.Contracts.Services;
-using Codebreaker.WPF.Contracts.Services.Navigation;
 using Codebreaker.WPF.Services;
 using Codebreaker.WPF.Services.Navigation;
+using Codebreaker.WPF.Views.Pages;
 
 namespace Codebreaker.WPF;
 
@@ -29,8 +29,9 @@ public sealed partial class App : Application, IDisposable
             .ConfigureServices((context, services) =>
             {
                 services.Configure<GamePageViewModelOptions>(options => { });
-                services.AddSingleton<IWPFNavigationService, WPFNavigationService>();
-                services.AddSingleton<INavigationService>(x => x.GetRequiredService<IWPFNavigationService>());
+                services.AddNavigation<WPFNavigationService>(pages => pages
+                    .Configure<GamePage>("GamePage")
+                    .ConfigureInitialPage<GamePage>());
                 services.AddTransient<IDialogService, WPFDialogService>();
                 services.AddSingleton<IInfoBarService, InfoBarService>();
                 services.AddScoped<GamePageViewModel>();
@@ -59,11 +60,5 @@ public sealed partial class App : Application, IDisposable
     {
         DefaultScope.Dispose();
         _host.Dispose();
-    }
-
-    protected override async void OnActivated(EventArgs e)
-    {
-        base.OnActivated(e);
-        await GetService<IWPFNavigationService>().NavigateToAsync("GamePage");
     }
 }

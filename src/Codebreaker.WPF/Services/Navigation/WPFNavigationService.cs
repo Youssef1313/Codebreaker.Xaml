@@ -1,11 +1,12 @@
 ﻿using Codebreaker.WPF.Contracts.Services.Navigation;
-using Codebreaker.WPF.Views.Pages;
 
 namespace Codebreaker.WPF.Services.Navigation;
 
-internal class WPFNavigationService : IWPFNavigationService
+internal class WPFNavigationService(IPageService pageService) : IWPFNavigationService
 {
     private Frame? _frame;
+
+    private object? _lastParameterUsed;
 
     public Frame Frame
     {
@@ -18,7 +19,11 @@ internal class WPFNavigationService : IWPFNavigationService
         }
         set
         {
+            bool firstSet = _frame is null;
             _frame = value;
+
+            if (firstSet)
+                NavigateTo(pageService.GetInitialPage());
         }
     }
 
@@ -38,6 +43,25 @@ internal class WPFNavigationService : IWPFNavigationService
 
     public ValueTask<bool> NavigateToAsync(string key, object? parameter = null, bool clearNavigation = false)
     {
-        return ValueTask.FromResult(Frame.Navigate(new GamePage())); // TODO Replace with page from pageService
+        var page = pageService.GetPage(key);
+        return ValueTask.FromResult(NavigateTo(page, parameter, clearNavigation));
+    }
+
+    private bool NavigateTo(Page page, object? parameter = null, bool clearNavigation = false)
+    {
+        if (_frame != null && (_frame.Content?.GetType() != page.GetType() || parameter is not null && !parameter.Equals(_lastParameterUsed)))
+        {
+            _frame!.Tag = clearNavigation;
+            var navigated = _frame.Navigate(page);
+
+            if (navigated)
+            {
+                _lastParameterUsed = parameter;
+            }
+
+            return navigated;
+        }
+
+        return false;
     }
 }
