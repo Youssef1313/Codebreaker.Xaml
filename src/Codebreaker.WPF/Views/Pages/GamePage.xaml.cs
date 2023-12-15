@@ -1,10 +1,15 @@
-﻿namespace Codebreaker.WPF.Views.Pages;
+﻿using Codebreaker.ViewModels.Contracts.Services;
+
+namespace Codebreaker.WPF.Views.Pages;
 
 public partial class GamePage : Page
 {
+    private readonly INavigationService _navigationService;
+
     public GamePage()
     {
         ViewModel = App.Current.GetService<GamePageViewModel>();
+        _navigationService = App.Current.GetService<INavigationService>();
 
         DataContext = this;
 
@@ -24,4 +29,9 @@ public partial class GamePage : Page
 
     public static readonly DependencyProperty ViewModelProperty =
         DependencyProperty.Register("ViewModel", typeof(GamePageViewModel), typeof(GamePage), new PropertyMetadata(null));
+
+    private async void Button_Click(object sender, RoutedEventArgs e)
+    {
+        await _navigationService.NavigateToAsync("TestPage");
+    }
 }

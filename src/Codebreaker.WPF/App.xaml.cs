@@ -31,6 +31,7 @@ public sealed partial class App : Application, IDisposable
                 services.Configure<GamePageViewModelOptions>(options => { });
                 services.AddNavigation<WPFNavigationService>(pages => pages
                     .Configure<GamePage>("GamePage")
+                    .Configure<TestPage>("TestPage")
                     .ConfigureInitialPage<GamePage>());
                 services.AddTransient<IDialogService, WPFDialogService>();
                 services.AddSingleton<IInfoBarService, InfoBarService>();
