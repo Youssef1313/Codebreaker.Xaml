@@ -1,7 +1,7 @@
-﻿using Codebreaker.WPF.Contracts;
+﻿using Codebreaker.WPF.Contracts.Services.Navigation;
 using Codebreaker.WPF.Views.Pages;
 
-namespace Codebreaker.WPF.Services;
+namespace Codebreaker.WPF.Services.Navigation;
 
 internal class WPFNavigationService : IWPFNavigationService
 {

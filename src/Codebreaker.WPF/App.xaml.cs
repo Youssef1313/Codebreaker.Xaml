@@ -1,6 +1,7 @@
 ﻿using Codebreaker.ViewModels.Contracts.Services;
-using Codebreaker.WPF.Contracts;
+using Codebreaker.WPF.Contracts.Services.Navigation;
 using Codebreaker.WPF.Services;
+using Codebreaker.WPF.Services.Navigation;
 
 namespace Codebreaker.WPF;
 

@@ -1,4 +1,4 @@
-﻿using Codebreaker.WPF.Contracts;
+﻿using Codebreaker.WPF.Contracts.Services.Navigation;
 
 namespace Codebreaker.WPF.Views.Pages;
 
