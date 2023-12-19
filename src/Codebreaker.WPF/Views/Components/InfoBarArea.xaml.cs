@@ -12,11 +12,6 @@ public partial class InfoBarArea : UserControl
         ViewModel = App.Current.GetService<IInfoBarService>();
         InitializeComponent();
         DataContext = this;
-        ViewModel.New
-            .WithTitle("Test")
-            .WithMessage("TestMessage")
-            .WithSeverity(ViewModels.Components.InfoMessageSeverity.Success)
-            .Show();
     }
 
     public IInfoBarService ViewModel { get; }
