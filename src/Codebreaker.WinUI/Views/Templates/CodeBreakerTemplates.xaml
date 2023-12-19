@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="{Binding Path=MoveNumber}" FontSize="{ThemeResource LargeFontSize}" Margin="48,0" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="0" Text="{Binding Path=MoveNumber}" FontSize="{ThemeResource LargeFontSize}" Margin="48,0,10,0" VerticalAlignment="Center" />
             <Border Grid.Column="1" Margin="20,0,0,0" Padding="7" x:Name="ShadowTarget">
                 <ItemsControl ItemsSource="{Binding Path=GuessPegs}">
                     <ItemsControl.ItemsPanel>
