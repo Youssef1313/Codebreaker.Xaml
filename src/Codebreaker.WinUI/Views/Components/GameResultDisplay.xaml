@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:animations="using:CommunityToolkit.WinUI.UI.Animations"
     xmlns:converter="using:CodeBreaker.WinUI.Converters"
+    xmlns:cme="using:CodeBreaker.WinUI.CustomMarkupExtensions"
     mc:Ignorable="d">
     <UserControl.Resources>
         <converter:GameStatusToVisibilityConverter x:Key="GameStatusToVisibilityConverter" />
@@ -25,16 +26,16 @@
                     animations:Implicit.ShowAnimations="{StaticResource EntranceAnimation}"
                     animations:Implicit.HideAnimations="{StaticResource ExitAnimation}">
             <Image Source="ms-appx:///Assets/Animations/WonAnimation_300_opt.gif"  MaxHeight="300" />
-            <TextBlock Text="Congratulations - you won the game 🎉🏆" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" HorizontalAlignment="Center" Margin="0,50,0,20" />
-            <Button Content="Great, play again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{x:Bind WonCommand, Mode=OneTime}" Visibility="{x:Bind WonButtonVisibility, Mode=OneTime}" />
+            <TextBlock Text="{cme:ResourceString Name=GamePage_WonMessage}" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" HorizontalAlignment="Center" Margin="0,50,0,20" />
+            <Button Content="{cme:ResourceString Name=GamePage_WonButtonText}" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{x:Bind WonCommand, Mode=OneTime}" Visibility="{x:Bind WonButtonVisibility, Mode=OneTime}" />
         </StackPanel>
         <StackPanel Orientation="Vertical"
                     Visibility="{x:Bind GameMode, Mode=OneWay, Converter={StaticResource GameStatusToVisibilityConverter}, ConverterParameter=Lost}"
                     animations:Implicit.ShowAnimations="{StaticResource EntranceAnimation}"
                     animations:Implicit.HideAnimations="{StaticResource ExitAnimation}">
             <Image Source="ms-appx:///Assets/Animations/LostAnimation_300_opt.gif"  MaxHeight="300" />
-            <TextBlock Text="Oh no - you lost the game 😑" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" HorizontalAlignment="Center" Margin="0,50,0,20" />
-            <Button Content="Ok, try again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{x:Bind LostCommand, Mode=OneTime}" Visibility="{x:Bind LostButtonVisibility, Mode=OneTime}" />
+            <TextBlock Text="{cme:ResourceString Name=GamePage_LostMessage}" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" HorizontalAlignment="Center" Margin="0,50,0,20" />
+            <Button Content="{cme:ResourceString Name=GamePage_LostButtonText}" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{x:Bind LostCommand, Mode=OneTime}" Visibility="{x:Bind LostButtonVisibility, Mode=OneTime}" />
         </StackPanel>
     </Grid>
 </UserControl>
