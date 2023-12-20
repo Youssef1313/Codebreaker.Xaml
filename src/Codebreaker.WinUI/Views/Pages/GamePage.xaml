@@ -25,7 +25,11 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <components:GameResultDisplay GameMode="{x:Bind ViewModel.GameStatus, Mode=OneWay}" Grid.Row="0" />
+        <components:GameResultDisplay
+            Grid.Row="0"
+            GameMode="{x:Bind ViewModel.GameStatus, Mode=OneWay}"
+            WonCommand="{x:Bind ViewModel.StartGameCommand, Mode=OneTime}"
+            LostCommand="{x:Bind ViewModel.StartGameCommand, Mode=OneTime}" />
         <!--Startgame section-->
         <Grid
             Grid.Row="0"

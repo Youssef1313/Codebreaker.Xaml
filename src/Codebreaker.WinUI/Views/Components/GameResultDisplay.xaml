@@ -12,12 +12,15 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" Visibility="{x:Bind GameMode, Mode=OneWay, Converter={StaticResource GameStatusToVisibilityConverter}, ConverterParameter=Won}">
+            
             <Image Source="ms-appx:///Assets/Animations/WonAnimation_300_opt.gif"  MaxHeight="300" />
-            <TextBlock Text="Congratulations - you won the game 🎉🏆" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" HorizontalAlignment="Center" Margin="0,50,0,100" />
+            <TextBlock Text="Congratulations - you won the game 🎉🏆" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" HorizontalAlignment="Center" Margin="0,50,0,20" />
+            <Button Content="Great, play again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{x:Bind WonCommand, Mode=OneTime}" Visibility="{x:Bind WonButtonVisibility, Mode=OneTime}" />
         </StackPanel>
         <StackPanel Orientation="Vertical" Visibility="{x:Bind GameMode, Mode=OneWay, Converter={StaticResource GameStatusToVisibilityConverter}, ConverterParameter=Lost}">
             <Image Source="ms-appx:///Assets/Animations/LostAnimation_300_opt.gif"  MaxHeight="300" />
-            <TextBlock Text="Oh no - you lost the game 😑" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" HorizontalAlignment="Center" Margin="0,50,0,100" />
+            <TextBlock Text="Oh no - you lost the game 😑" FontSize="{ThemeResource TextStyleExtraLargeFontSize}" HorizontalAlignment="Center" Margin="0,50,0,20" />
+            <Button Content="Ok, try again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{x:Bind LostCommand, Mode=OneTime}" Visibility="{x:Bind LostButtonVisibility, Mode=OneTime}" />
         </StackPanel>
     </Grid>
 </UserControl>
