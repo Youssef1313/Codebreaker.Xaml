@@ -23,6 +23,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <components:GameResultDisplay
@@ -32,7 +33,7 @@
             LostCommand="{x:Bind ViewModel.StartGameCommand, Mode=OneTime}" />
         <!--Startgame section-->
         <Grid
-            Grid.Row="0"
+            Grid.Row="1"
             ColumnSpacing="25"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Start}">
             <Grid.ColumnDefinitions>
@@ -72,7 +73,7 @@
         <!--Gamebar section-->
         <StackPanel
             Orientation="Horizontal"
-            Grid.Row="0"
+            Grid.Row="1"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Cancelable}">
             <!--
             Cancelling the game is not yet implemented in the VM
@@ -91,13 +92,13 @@
                 </StackPanel>
             </Button>-->
             <components:PegSelectionComponent 
-                Grid.Row="1"
+                Grid.Row="2"
                 ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
         </StackPanel>
         <!--Move section-->
         <ListBox 
             x:Name="listGameMoves"
-            Grid.Row="2"
+            Grid.Row="3"
             Background="Transparent"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Running}"
             ItemsSource="{x:Bind ViewModel.GameMoves, Mode=OneWay}"
