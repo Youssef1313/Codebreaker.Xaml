@@ -82,6 +82,7 @@
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
     <Nullable>enable</Nullable>
     <UserSecretsId>4c0c5c37-65e2-4165-aeec-1e26bebf0b22</UserSecretsId>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
@@ -96,6 +97,7 @@
   <ItemGroup>
     <None Remove="Assets\Animations\LostAnimation_300_opt.gif" />
     <None Remove="Assets\Animations\WonAnimation_300_opt.gif" />
+    <None Remove="Views\Components\GameResultDisplay.xaml" />
     <None Remove="Views\Components\InfoBarArea.xaml" />
     <None Remove="Views\Components\PegSelectionComponent.xaml" />
     <None Remove="Views\Pages\GamePage.xaml" />
@@ -113,6 +115,11 @@
     <Content Update="Assets\Animations\WonAnimation_300_opt.gif">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Components\GameResultDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Components\InfoBarArea.xaml">
