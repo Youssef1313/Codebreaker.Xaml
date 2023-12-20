@@ -94,6 +94,8 @@
     <CustomAdditionalCompileInputs Remove="Views\LivePage.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\Animations\LostAnimation_300_opt.gif" />
+    <None Remove="Assets\Animations\WonAnimation_300_opt.gif" />
     <None Remove="Views\Components\InfoBarArea.xaml" />
     <None Remove="Views\Components\PegSelectionComponent.xaml" />
     <None Remove="Views\Pages\GamePage.xaml" />
@@ -103,6 +105,14 @@
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\CodeBreaker.WinUI.de.xlf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Assets\Animations\LostAnimation_300_opt.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\Animations\WonAnimation_300_opt.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Components\InfoBarArea.xaml">
