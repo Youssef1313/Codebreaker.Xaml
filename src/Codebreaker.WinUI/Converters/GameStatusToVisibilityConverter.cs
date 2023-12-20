@@ -10,6 +10,21 @@ public class GameStatusToVisibilityConverter : IValueConverter
         if (value is not GameMode gameMode)
             throw new InvalidOperationException("GameStatusToVisibilityConverter received an incorrect value type");
 
+        static Visibility GetStartVisibility(GameMode gameMode) =>
+        gameMode is not GameMode.NotRunning ? Visibility.Collapsed : Visibility.Visible;
+
+        static Visibility GetRunningVisibility(GameMode gameMode) =>
+            gameMode is GameMode.NotRunning ? Visibility.Collapsed : Visibility.Visible;
+
+        static Visibility GetCancelVisibility(GameMode gameMode) =>
+            gameMode is GameMode.Started or GameMode.MoveSet ? Visibility.Visible : Visibility.Collapsed;
+
+        static Visibility GetLostVisibility(GameMode gameMode) =>
+            gameMode is GameMode.Lost ? Visibility.Visible : Visibility.Collapsed;
+
+        static Visibility GetWonVisibility(GameMode gameMode) =>
+            gameMode is GameMode.Won ? Visibility.Visible : Visibility.Collapsed;
+
         string uiCategory = parameter?.ToString() ?? throw new InvalidOperationException("Pass a parameter to this converter");
 
         return uiCategory switch
@@ -25,19 +40,4 @@ public class GameStatusToVisibilityConverter : IValueConverter
 
     public object ConvertBack(object value, Type targetType, object parameter, string language) =>
         throw new NotImplementedException();
-
-    private static Visibility GetStartVisibility(GameMode gameMode) =>
-        gameMode is not GameMode.NotRunning ? Visibility.Collapsed : Visibility.Visible;
-
-    private static Visibility GetRunningVisibility(GameMode gameMode) =>
-        gameMode is GameMode.NotRunning ? Visibility.Collapsed : Visibility.Visible;
-
-    private static Visibility GetCancelVisibility(GameMode gameMode) =>
-        gameMode is GameMode.Started or GameMode.MoveSet ? Visibility.Visible : Visibility.Collapsed;
-
-    private static Visibility GetLostVisibility(GameMode gameMode) =>
-        gameMode is GameMode.Lost ? Visibility.Visible : Visibility.Collapsed;
-
-    private static Visibility GetWonVisibility(GameMode gameMode) =>
-        gameMode is GameMode.Won ? Visibility.Visible : Visibility.Collapsed;
 }
