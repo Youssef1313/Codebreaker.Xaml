@@ -144,4 +144,16 @@
   <data name="AccountPage_LogoutConfirmTitle" xml:space="preserve">
     <value>Abmelden</value>
   </data>
+  <data name="GamePage_LostButtonText" xml:space="preserve">
+    <value>Ok, erneut versuchen</value>
+  </data>
+  <data name="GamePage_LostMessage" xml:space="preserve">
+    <value>Oh nein - Sie haben das Spiel verloren 😑</value>
+  </data>
+  <data name="GamePage_WonButtonText" xml:space="preserve">
+    <value>Toll, erneut spielen</value>
+  </data>
+  <data name="GamePage_WonMessage" xml:space="preserve">
+    <value>Glückwunsch - Sie haben das Spiel gewonnen 🎉🏆</value>
+  </data>
 </root>
