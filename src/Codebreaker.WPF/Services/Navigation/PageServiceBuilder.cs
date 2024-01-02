@@ -6,19 +6,19 @@ internal class PageServiceBuilder
 
     private Func<Page>? _initialPage;
 
-    public PageServiceBuilder Configure<V>()
-        where V : Page, new() =>
-        Configure<V>(typeof(V).Name);
+    public PageServiceBuilder Configure<TView>()
+        where TView : Page, new() =>
+        Configure<TView>(typeof(TView).Name);
 
-    public PageServiceBuilder Configure<V>(string key)
-        where V : Page, new()
+    public PageServiceBuilder Configure<TView>(string key)
+        where TView : Page, new()
     {
         lock (_pages)
         {
             if (_pages.ContainsKey(key))
                 throw new ArgumentException($"The key {key} is already configured in {nameof(PageService)}");
 
-            var pageFactory = () => new V();
+            var pageFactory = () => new TView();
 
             if (_pages.ContainsValue(pageFactory))
                 throw new ArgumentException($"This type is already configured with key {_pages.First(p => p.Value == pageFactory).Key}");
@@ -29,10 +29,10 @@ internal class PageServiceBuilder
         return this;
     }
 
-    public PageServiceBuilder ConfigureInitialPage<V>()
-        where V : Page, new()
+    public PageServiceBuilder ConfigureInitialPage<TView>()
+        where TView : Page, new()
     {
-        _initialPage = () => new V();
+        _initialPage = () => new TView();
         return this;
     }
 
