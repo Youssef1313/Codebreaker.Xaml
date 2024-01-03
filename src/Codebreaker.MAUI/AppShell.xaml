@@ -7,15 +7,25 @@
     xmlns:pages="clr-namespace:Codebreaker.MAUI.Views.Pages"
     Shell.FlyoutBehavior="Disabled">
 
-    <FlyoutItem Route="Main">
+    <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate pages:GamePage}"
+        Route="GamePage" />
+    <ShellContent
+        Title="Test"
+        ContentTemplate="{DataTemplate pages:TestPage}"
+        Route="TestPage" />
+
+    <!--Also possible with routes "//Main/GamePage" ...-->
+    <!--<FlyoutItem Route="Main">
         <ShellContent
-            Title="Home"
-            ContentTemplate="{DataTemplate pages:GamePage}"
-            Route="GamePage" />
+        Title="Home"
+        ContentTemplate="{DataTemplate pages:GamePage}"
+        Route="GamePage" />
         <ShellContent
-            Title="Test"
-            ContentTemplate="{DataTemplate pages:TestPage}"
-            Route="TestPage" />
-    </FlyoutItem>
+        Title="Test"
+        ContentTemplate="{DataTemplate pages:TestPage}"
+        Route="TestPage" />
+    </FlyoutItem>-->
 
 </Shell>

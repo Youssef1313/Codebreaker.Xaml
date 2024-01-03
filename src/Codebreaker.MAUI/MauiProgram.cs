@@ -28,8 +28,8 @@ public static class MauiProgram
         builder.Configuration.AddJsonStream(FileSystem.OpenAppPackageFileAsync($"appsettings.{Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}.json").Result);
         builder.Services.Configure<GamePageViewModelOptions>(options => { });
 		builder.Services.AddNavigation<MauiNavigationService>(pages => pages
-			.Configure("GamePage", "//Main/GamePage")
-			.Configure("TestPage", "//Main/TestPage"));
+			.Configure("GamePage", "//GamePage")
+			.Configure("TestPage", "//TestPage"));
 		builder.Services.AddScoped<IDialogService, MauiDialogService>();
 		builder.Services.AddScoped<IInfoBarService, InfoBarService>();
         builder.Services.AddScoped<GamePageViewModel>();
