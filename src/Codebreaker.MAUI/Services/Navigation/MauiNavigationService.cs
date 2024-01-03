@@ -1,4 +1,5 @@
-﻿using Codebreaker.MAUI.DataStructures;
+﻿using Codebreaker.MAUI.Contracts.Services.Navigation;
+using Codebreaker.MAUI.DataStructures;
 using Codebreaker.ViewModels.Contracts.Services;
 
 namespace Codebreaker.MAUI.Services.Navigation;
@@ -7,9 +8,12 @@ internal class MauiNavigationService : INavigationService
 {
     private readonly CircularStack<string> _navigationStack = new(1000);
 
-    public MauiNavigationService()
+    private readonly IPageService _pageService;
+
+    public MauiNavigationService(IPageService pageService)
     {
         _navigationStack.Push(Shell.Current.CurrentState.Location.ToString()); // Put the initial page on the stack
+        _pageService = pageService;
     }
 
     public bool CanGoBack => !_navigationStack.IsEmpty;
@@ -24,7 +28,8 @@ internal class MauiNavigationService : INavigationService
 
     public async ValueTask<bool> NavigateToAsync(string key, object? parameter = null, bool clearNavigation = false)
     {
-        await Shell.Current.GoToAsync($"//{key}", new Dictionary<string, object?>  // Problem: Can't use Shell based navigation here. Eighter "//page" is not supported or "page" is not supported.
+        string shellRoute = _pageService[key];
+        await Shell.Current.GoToAsync(shellRoute, new Dictionary<string, object?>
         {
             { "param", parameter }
         });

@@ -2,14 +2,14 @@
 
 internal class PageServiceBuilder
 {
-    public PageServiceBuilder Configure<V>()
-        where V : Page =>
-        Configure<V>(typeof(V).Name);
+    private readonly Dictionary<string, string> _pageRoutes = new();
 
-    public PageServiceBuilder Configure<V>(string key)
-        where V : Page
+    public PageServiceBuilder Configure(string key, string shellRoute)
     {
-        Routing.RegisterRoute(key, typeof(V));
+        _pageRoutes.Add(key, shellRoute);
         return this;
     }
+
+    internal PageService Build() =>
+        new PageService(_pageRoutes);
 }

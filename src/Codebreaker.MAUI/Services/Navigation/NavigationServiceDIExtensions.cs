@@ -1,4 +1,5 @@
-﻿using Codebreaker.MAUI.Services.Navigation;
+﻿using Codebreaker.MAUI.Contracts.Services.Navigation;
+using Codebreaker.MAUI.Services.Navigation;
 using Codebreaker.ViewModels.Contracts.Services;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,7 @@ internal static class NavigationServiceDIExtensions
     {
         PageServiceBuilder pageServiceBuilder = new();
         builder(pageServiceBuilder);
+        services.AddScoped<IPageService>(_ => pageServiceBuilder.Build());
         services.AddScoped<INavigationService, TNavigationService>();
         return services;
     }
