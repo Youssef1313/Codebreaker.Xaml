@@ -13,59 +13,62 @@ public partial class GameResultDisplay : UserControl
 {
     public GameResultDisplay()
     {
-        DataContext = this;
         InitializeComponent();
     }
 
-    public GamePageViewModel ViewModel
+    public GameMode GameMode
     {
-        get => (GamePageViewModel)GetValue(ViewModelProperty);
-        set => SetValue(ViewModelProperty, value);
+        get => (GameMode)GetValue(GameModeProperty);
+        set
+        {
+            SetValue(GameModeProperty, value);
+            Debug.WriteLine(value);
+            OnPropertyChanged(nameof(GameMode));
+        }
     }
 
-    public static readonly DependencyProperty ViewModelProperty =
-        DependencyProperty.Register(nameof(ViewModel), typeof(GamePageViewModel), typeof(GameResultDisplay));
+    public static readonly DependencyProperty GameModeProperty =
+        DependencyProperty.Register(nameof(GameMode), typeof(GameMode), typeof(GameResultDisplay), new PropertyMetadata(GameMode.NotRunning, OnGameModeChanged));
 
+    public ICommand? LostCommand
+    {
+        get => (ICommand?)GetValue(LostCommandProperty);
+        set => SetValue(LostCommandProperty, value);
+    }
 
-    //public GameMode GameMode
-    //{
-    //    get => (GameMode)GetValue(GameModeProperty);
-    //    set
-    //    {
-    //        SetValue(GameModeProperty, value);
-    //        Debug.WriteLine(value);
-    //        OnPropertyChanged(nameof(GameMode));
-    //    }
-    //}
+    public static readonly DependencyProperty LostCommandProperty =
+        DependencyProperty.Register(nameof(LostCommand), typeof(ICommand), typeof(GameResultDisplay), new (OnLostCommandChanged));
 
-    //public static readonly DependencyProperty GameModeProperty =
-    //    DependencyProperty.Register(nameof(GameMode), typeof(GameMode), typeof(GameResultDisplay), new PropertyMetadata(GameMode.NotRunning, OnGameModeChanged));
+    public Visibility LostButtonVisibility => LostCommand is not null ? Visibility.Visible : Visibility.Collapsed;
 
-    //public ICommand? LostCommand
-    //{
-    //    get => (ICommand?)GetValue(LostCommandProperty);
-    //    set => SetValue(LostCommandProperty, value);
-    //}
+    public ICommand? WonCommand
+    {
+        get => (ICommand?)GetValue(WonCommandProperty);
+        set => SetValue(WonCommandProperty, value);
+    }
 
-    //public static readonly DependencyProperty LostCommandProperty =
-    //    DependencyProperty.Register(nameof(LostCommand), typeof(ICommand), typeof(GameResultDisplay));
+    public static readonly DependencyProperty WonCommandProperty =
+        DependencyProperty.Register(nameof(WonCommand), typeof(ICommand), typeof(GameResultDisplay), new (OnWonCommandChanged));
 
-    //public Visibility LostButtonVisibility => LostCommand is not null ? Visibility.Visible : Visibility.Collapsed;
+    public Visibility WonButtonVisibility => WonCommand is not null ? Visibility.Visible : Visibility.Collapsed;
 
-    //public ICommand? WonCommand
-    //{
-    //    get => (ICommand?)GetValue(WonCommandProperty);
-    //    set => SetValue(WonCommandProperty, value);
-    //}
+    private static void OnGameModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var a = (GameResultDisplay)d;
+        a.OnPropertyChanged(nameof(GameMode));
+    }
 
-    //public static readonly DependencyProperty WonCommandProperty =
-    //    DependencyProperty.Register(nameof(WonCommand), typeof(ICommand), typeof(GameResultDisplay));
+    private static void OnLostCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var that = (GameResultDisplay)d;
+        that.OnPropertyChanged(nameof(LostCommand));
+        that.OnPropertyChanged(nameof(LostButtonVisibility));
+    }
 
-    //public Visibility WonButtonVisibility => WonCommand is not null ? Visibility.Visible : Visibility.Collapsed;
-
-    //private static void OnGameModeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    //{
-    //    var a = (GameResultDisplay)d; 
-    //    a.OnPropertyChanged(nameof(GameMode));
-    //}
+    private static void OnWonCommandChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        var that = (GameResultDisplay)d;
+        that.OnPropertyChanged(nameof(WonCommand));
+        that.OnPropertyChanged(nameof(WonButtonVisibility));
+    }
 }
