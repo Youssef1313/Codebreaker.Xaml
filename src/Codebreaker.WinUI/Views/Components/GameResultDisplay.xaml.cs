@@ -37,7 +37,7 @@ public sealed partial class GameResultDisplay : UserControl
     }
 
     public static readonly DependencyProperty WonCommandProperty =
-        DependencyProperty.Register(nameof(LostCommand), typeof(ICommand), typeof(GameResultDisplay), new PropertyMetadata(null));
+        DependencyProperty.Register(nameof(WonCommand), typeof(ICommand), typeof(GameResultDisplay), new PropertyMetadata(null));
 
     public Visibility WonButtonVisibility => WonCommand is not null ? Visibility.Visible : Visibility.Collapsed;
 }
