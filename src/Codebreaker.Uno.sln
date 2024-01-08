@@ -3,39 +3,39 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34414.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{AE8EDA96-3D2D-486B-A1C6-6D03EBF14219}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Codebreaker.Uno\Source", "{AE8EDA96-3D2D-486B-A1C6-6D03EBF14219}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{819C74CA-010F-47C4-A3F3-72CBF1B80AB4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Codebreaker.Uno\Backend", "{819C74CA-010F-47C4-A3F3-72CBF1B80AB4}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{6C8C3DB4-54DD-4653-9171-AA1C0E7A10AB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Codebreaker.Uno\Platforms", "{6C8C3DB4-54DD-4653-9171-AA1C0E7A10AB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{23AB1B5D-3771-49E5-9592-B4F6766400A7}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Codebreaker.Uno\Tests", "{23AB1B5D-3771-49E5-9592-B4F6766400A7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.DataContracts", "CodebreakerUno.DataContracts\CodebreakerUno.DataContracts.csproj", "{DD6F20E7-B1DA-452D-93A1-17CFE2FF88C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.DataContracts", "Codebreaker.Uno\CodebreakerUno.DataContracts\CodebreakerUno.DataContracts.csproj", "{DD6F20E7-B1DA-452D-93A1-17CFE2FF88C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno", "CodebreakerUno\CodebreakerUno.csproj", "{C1A2749F-1D26-43DB-A40C-D0C97009750D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno", "Codebreaker.Uno\CodebreakerUno\CodebreakerUno.csproj", "{C1A2749F-1D26-43DB-A40C-D0C97009750D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Tests", "CodebreakerUno.Tests\CodebreakerUno.Tests.csproj", "{89124C76-12CD-42DF-92B3-994FC197A305}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Tests", "Codebreaker.Uno\CodebreakerUno.Tests\CodebreakerUno.Tests.csproj", "{89124C76-12CD-42DF-92B3-994FC197A305}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.UITests", "CodebreakerUno.UITests\CodebreakerUno.UITests.csproj", "{FD8C7757-FB28-44D2-9C1C-6117C7BEC98D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.UITests", "Codebreaker.Uno\CodebreakerUno.UITests\CodebreakerUno.UITests.csproj", "{FD8C7757-FB28-44D2-9C1C-6117C7BEC98D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Shared", "CodebreakerUno.Shared\CodebreakerUno.Shared.csproj", "{94D2E7C5-0608-46E7-89A4-13B9067C4356}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Shared", "Codebreaker.Uno\CodebreakerUno.Shared\CodebreakerUno.Shared.csproj", "{94D2E7C5-0608-46E7-89A4-13B9067C4356}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Mobile", "CodebreakerUno.Mobile\CodebreakerUno.Mobile.csproj", "{5C7BB473-814E-49AD-8093-6AE72E2A9EE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Mobile", "Codebreaker.Uno\CodebreakerUno.Mobile\CodebreakerUno.Mobile.csproj", "{5C7BB473-814E-49AD-8093-6AE72E2A9EE1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Windows", "CodebreakerUno.Windows\CodebreakerUno.Windows.csproj", "{8E76C746-2038-438E-8499-07308FE3C1C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Windows", "Codebreaker.Uno\CodebreakerUno.Windows\CodebreakerUno.Windows.csproj", "{8E76C746-2038-438E-8499-07308FE3C1C8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Wasm", "CodebreakerUno.Wasm\CodebreakerUno.Wasm.csproj", "{E42119D8-4169-489B-89F7-D6F5E1664F08}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Wasm", "Codebreaker.Uno\CodebreakerUno.Wasm\CodebreakerUno.Wasm.csproj", "{E42119D8-4169-489B-89F7-D6F5E1664F08}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Skia.Gtk", "CodebreakerUno.Skia.Gtk\CodebreakerUno.Skia.Gtk.csproj", "{D99EEF0E-679C-4D46-9EF5-4C2E763136E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Skia.Gtk", "Codebreaker.Uno\CodebreakerUno.Skia.Gtk\CodebreakerUno.Skia.Gtk.csproj", "{D99EEF0E-679C-4D46-9EF5-4C2E763136E3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Skia.Wpf", "CodebreakerUno.Skia.WPF\CodebreakerUno.Skia.Wpf.csproj", "{8005D35C-F85D-4912-9C7E-C7FF44CD3BCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Skia.Wpf", "Codebreaker.Uno\CodebreakerUno.Skia.WPF\CodebreakerUno.Skia.Wpf.csproj", "{8005D35C-F85D-4912-9C7E-C7FF44CD3BCB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Skia.Linux.FrameBuffer", "CodebreakerUno.Skia.Linux.FrameBuffer\CodebreakerUno.Skia.Linux.FrameBuffer.csproj", "{B0D497C1-7BDC-4CF9-BD97-B2F480518389}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Skia.Linux.FrameBuffer", "Codebreaker.Uno\CodebreakerUno.Skia.Linux.FrameBuffer\CodebreakerUno.Skia.Linux.FrameBuffer.csproj", "{B0D497C1-7BDC-4CF9-BD97-B2F480518389}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Server", "CodebreakerUno.Server\CodebreakerUno.Server.csproj", "{B0A34BC8-E62F-4348-BEF0-BA9F844FC3FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodebreakerUno.Server", "Codebreaker.Uno\CodebreakerUno.Server\CodebreakerUno.Server.csproj", "{B0A34BC8-E62F-4348-BEF0-BA9F844FC3FC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6EFFB8A0-69C9-4DDC-B575-00C374B83C60}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Codebreaker.Uno\Solution Items", "{6EFFB8A0-69C9-4DDC-B575-00C374B83C60}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		Directory.Build.props = Directory.Build.props
