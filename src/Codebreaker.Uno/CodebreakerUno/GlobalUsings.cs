@@ -1,4 +1,4 @@
-﻿global using System.Collections.Immutable;
+global using System.Collections.Immutable;
 global using System.Windows.Input;
 global using Microsoft.Extensions.DependencyInjection;
 global using Windows.Networking.Connectivity;
@@ -13,10 +13,6 @@ global using Microsoft.UI.Xaml.Navigation;
 global using Microsoft.Extensions.Options;
 global using CodebreakerUno.Business.Models;
 global using CodebreakerUno.Infrastructure;
-global using CodebreakerUno.DataContracts;
-global using CodebreakerUno.DataContracts.Serialization;
-global using CodebreakerUno.Services.Caching;
-global using CodebreakerUno.Services.Endpoints;
 global using Uno.UI;
 global using Windows.ApplicationModel;
 global using ApplicationExecutionState = Windows.ApplicationModel.Activation.ApplicationExecutionState;

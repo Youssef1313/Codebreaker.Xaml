@@ -64,10 +64,6 @@
   </Choose>
 
   <ItemGroup>
-    <ProjectReference Include="..\CodebreakerUno.DataContracts\CodebreakerUno.DataContracts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <UnoImage Include="Assets\**\*.svg" />
     <EmbeddedResource Include="appsettings.json" />
     <EmbeddedResource Include="appsettings.*.json" DependentUpon="appsettings.json" />
