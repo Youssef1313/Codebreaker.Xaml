@@ -1,5 +1,4 @@
 using System.Text.Json.Serialization.Metadata;
-using CodebreakerUno.DataContracts.Serialization;
 using Uno.Wasm.Bootstrap.Server;
 
 try
@@ -8,9 +7,7 @@ try
 
     // Configure the JsonOptions to use the generated WeatherForecastContext
     builder.Services.Configure<JsonOptions>(options =>
-        options.JsonSerializerOptions.TypeInfoResolver = JsonTypeInfoResolver.Combine(
-            WeatherForecastContext.Default
-        ));
+        options.JsonSerializerOptions.TypeInfoResolver = JsonTypeInfoResolver.Combine(/* ... */));
     // Configure the RouteOptions to use lowercase URLs
     builder.Services.Configure<RouteOptions>(options =>
         options.LowercaseUrls = true);
@@ -43,7 +40,6 @@ try
     app.UseUnoFrameworkFiles();
     app.MapFallbackToFile("index.html");
 
-    app.MapWeatherApi();
     app.UseStaticFiles();
 
     await app.RunAsync();

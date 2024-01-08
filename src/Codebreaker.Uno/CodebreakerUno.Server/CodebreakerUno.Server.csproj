@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CodebreakerUno.Wasm\CodebreakerUno.Wasm.csproj" />
-    <ProjectReference Include="..\CodebreakerUno.DataContracts\CodebreakerUno.DataContracts.csproj" />
   </ItemGroup>
 
   <ItemGroup>
