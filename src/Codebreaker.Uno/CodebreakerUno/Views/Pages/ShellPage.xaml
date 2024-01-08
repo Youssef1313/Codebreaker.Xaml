@@ -4,12 +4,50 @@
       xmlns:local="using:CodebreakerUno"
       xmlns:utu="using:Uno.Toolkit.UI"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-  <StackPanel utu:SafeArea.Insets="VisibleBounds"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Center">
-    <TextBlock AutomationProperties.AutomationId="HelloTextBlock"
-          Text="Hello Uno Platform"
-          HorizontalAlignment="Center" />
-    <Button Content="Hello there" />
-  </StackPanel>
+  <Grid>
+    <Grid x:Name="AppTitleBar"
+      Canvas.ZIndex="1"
+      Height="{x:Bind NavigationViewControl.CompactPaneLength}"
+      IsHitTestVisible="True"
+      VerticalAlignment="Top">
+      <Image Source="/Assets/WindowIcon.png"
+          HorizontalAlignment="Left"
+          Width="16"
+          Height="16" />
+      <TextBlock x:Name="AppTitleBarText"
+          VerticalAlignment="Center"
+          TextWrapping="NoWrap"
+          Style="{StaticResource CaptionTextBlockStyle}"
+          Margin="50,0,0,0"/>
+    </Grid>
+    <NavigationView
+      x:Name="NavigationViewControl"
+      Canvas.ZIndex="0"
+      IsBackButtonVisible="Visible"
+      IsSettingsVisible="True"
+      ExpandedModeThresholdWidth="1280"
+      Header="PageTitle">
+      <NavigationView.MenuItems>
+        <NavigationViewItem Content="Test" />
+      </NavigationView.MenuItems>
+      <NavigationView.HeaderTemplate>
+        <DataTemplate>
+          <Grid>
+            <TextBlock
+              Margin="-25,0,0,0"
+              Text="{Binding}"
+              Style="{ThemeResource TitleTextBlockStyle}" />
+          </Grid>
+        </DataTemplate>
+      </NavigationView.HeaderTemplate>
+      <Grid Margin="{StaticResource NavigationViewPageContentMargin}" RowSpacing="{StaticResource SpacingMd}">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition />
+        </Grid.RowDefinitions>
+        <!--<components:InfoBarArea />-->
+        <Frame Grid.Row="1" x:Name="NavigationFrame" />
+      </Grid>
+    </NavigationView>
+  </Grid>
 </Page>

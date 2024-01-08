@@ -1,8 +1,12 @@
+using CodebreakerUno.ViewModels;
+using CodebreakerUno.Views.Pages;
+
 namespace CodebreakerUno;
 
 public class App : Application
 {
-    protected Window? MainWindow { get; private set; }
+    protected internal Window? MainWindow { get; private set; }
+
     protected IHost? Host { get; private set; }
 
     internal new static App Current => (App)Application.Current;
@@ -69,8 +73,8 @@ public class App : Application
 #endif
                 .ConfigureServices((context, services) =>
                 {
-                    // TODO: Register your services
-                    //services.AddSingleton<IMyService, MyService>();
+                    services.AddTransient<ShellPage>();
+                    services.AddTransient<ShellViewModel>();
                 })
             );
         MainWindow = builder.Window;
@@ -82,24 +86,31 @@ public class App : Application
         Host = builder.Build();
         DefaultScope = Current.Host!.Services.CreateScope();
 
-        // Do not repeat app initialization when the Window already has content,
-        // just ensure that the window is active
-        if (MainWindow.Content is not Frame rootFrame)
+        if (MainWindow.Content is not ShellPage shellPage)
         {
-            // Create a Frame to act as the navigation context and navigate to the first page
-            rootFrame = new Frame();
-
-            // Place the frame in the current Window
-            MainWindow.Content = rootFrame;
+            var shell = Host.Services.GetRequiredService<ShellPage>();
+            MainWindow.Content = shell;
         }
 
-        if (rootFrame.Content == null)
-        {
-            // When the navigation stack isn't restored navigate to the first page,
-            // configuring the new page by passing required information as a navigation
-            // parameter
-            rootFrame.Navigate(typeof(Views.Pages.ShellPage), args.Arguments);
-        }
+        //// Do not repeat app initialization when the Window already has content,
+        //// just ensure that the window is active
+        //if (MainWindow.Content is not Frame rootFrame)
+        //{
+        //    // Create a Frame to act as the navigation context and navigate to the first page
+        //    rootFrame = new Frame();
+
+        //    // Place the frame in the current Window
+        //    MainWindow.Content = rootFrame;
+        //}
+
+        //if (rootFrame.Content == null)
+        //{
+        //    // When the navigation stack isn't restored navigate to the first page,
+        //    // configuring the new page by passing required information as a navigation
+        //    // parameter
+        //    rootFrame.Navigate(typeof(GamePage), args.Arguments);
+        //}
+
         // Ensure the current window is active
         MainWindow.Activate();
     }

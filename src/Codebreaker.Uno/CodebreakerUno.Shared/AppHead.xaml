@@ -10,6 +10,7 @@
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="ms-appx:///CodebreakerUno/AppResources.xaml" />
+        <ResourceDictionary Source="ms-appx:///CodebreakerUno/Styles/Thickness.xaml" />
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </local:App.Resources>
