@@ -1,0 +1,15 @@
+﻿<Page x:Class="CodebreakerUno.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:CodebreakerUno"
+      xmlns:utu="using:Uno.Toolkit.UI"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+  <StackPanel utu:SafeArea.Insets="VisibleBounds"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Center">
+    <TextBlock AutomationProperties.AutomationId="HelloTextBlock"
+          Text="Hello Uno Platform"
+          HorizontalAlignment="Center" />
+    <Button Content="Hello there" />
+  </StackPanel>
+</Page>
