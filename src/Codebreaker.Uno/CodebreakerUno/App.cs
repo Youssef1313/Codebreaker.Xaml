@@ -5,6 +5,14 @@ public class App : Application
     protected Window? MainWindow { get; private set; }
     protected IHost? Host { get; private set; }
 
+    internal new static App Current => (App)Application.Current;
+
+    public IServiceScope? DefaultScope { get; private set; }
+
+    public T GetService<T>()
+        where T : class =>
+        DefaultScope!.ServiceProvider.GetRequiredService<T>();
+
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
         var builder = this.CreateBuilder(args)
@@ -72,6 +80,7 @@ public class App : Application
 #endif
 
         Host = builder.Build();
+        DefaultScope = Current.Host!.Services.CreateScope();
 
         // Do not repeat app initialization when the Window already has content,
         // just ensure that the window is active
