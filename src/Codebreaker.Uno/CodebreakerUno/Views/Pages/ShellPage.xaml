@@ -6,6 +6,7 @@
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
   <Grid>
     <Grid x:Name="AppTitleBar"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       Canvas.ZIndex="1"
       Height="{x:Bind NavigationViewControl.CompactPaneLength}"
       IsHitTestVisible="True"
@@ -18,15 +19,19 @@
           VerticalAlignment="Center"
           TextWrapping="NoWrap"
           Style="{StaticResource CaptionTextBlockStyle}"
-          Margin="50,0,0,0"/>
+          Margin="5,0,0,0"/>
     </Grid>
     <NavigationView
       x:Name="NavigationViewControl"
       Canvas.ZIndex="0"
       IsBackButtonVisible="Visible"
+      IsBackEnabled="{x:Bind ViewModel.IsBackEnabled, Mode=OneWay}"
+      SelectedItem="{x:Bind ViewModel.Selected, Mode=OneWay}"
       IsSettingsVisible="True"
       ExpandedModeThresholdWidth="1280"
-      Header="PageTitle">
+      AlwaysShowHeader="True"
+      DisplayModeChanged="NavigationViewControl_DisplayModeChanged"
+      Header="{x:Bind ViewModel.Header, Mode=OneWay}">
       <NavigationView.MenuItems>
         <NavigationViewItem
           Content="Game"
@@ -37,13 +42,13 @@
         <DataTemplate>
           <Grid>
             <TextBlock
-              Margin="-25,0,0,0"
+              Margin="-25,20,0,0"
               Text="{Binding}"
               Style="{ThemeResource TitleTextBlockStyle}" />
           </Grid>
         </DataTemplate>
       </NavigationView.HeaderTemplate>
-      <Grid Margin="{StaticResource NavigationViewPageContentMargin}" RowSpacing="{StaticResource SpacingMd}">
+      <Grid Margin="30,0,30,0" RowSpacing="{StaticResource SpacingMd}">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto" />
           <RowDefinition />
