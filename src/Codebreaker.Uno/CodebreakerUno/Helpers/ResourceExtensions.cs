@@ -1,5 +1,3 @@
-using Windows.ApplicationModel.Resources;
-
 namespace CodebreakerUno.Helpers;
 
 internal static class ResourceExtensions
