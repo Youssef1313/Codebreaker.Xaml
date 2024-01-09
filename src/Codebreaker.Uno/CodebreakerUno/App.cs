@@ -1,4 +1,5 @@
 using Codebreaker.ViewModels.Contracts.Services;
+using Codebreaker.ViewModels.Services;
 using CodebreakerUno.Contracts.Services.Navigation;
 using CodebreakerUno.Services.Navigation;
 using CodebreakerUno.ViewModels;
@@ -76,6 +77,7 @@ public class App : Application
 #endif
                 .ConfigureServices((context, services) =>
                 {
+                    services.AddScoped<IInfoBarService, InfoBarService>();
                     services.AddTransient<INavigationViewService, NavigationViewService>();
                     services.AddTransient<ShellPage>();
                     services.AddTransient<ShellViewModel>();
