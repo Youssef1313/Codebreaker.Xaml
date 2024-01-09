@@ -8,7 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-  <Grid>
+  <StackPanel Orientation="Vertical">
     <TextBlock Text="Hello from the GamePage" />
-  </Grid>
+    <Button Click="ShowDemoInfoMessage" Content="Show message" />
+  </StackPanel>
 </Page>

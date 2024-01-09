@@ -1,3 +1,5 @@
+using Codebreaker.ViewModels.Contracts.Services;
+
 namespace CodebreakerUno.Views.Pages;
 
 /// <summary>
@@ -8,5 +10,10 @@ public sealed partial class GamePage : Page
     public GamePage()
     {
         InitializeComponent();
+    }
+
+    private void ShowDemoInfoMessage(object sender, RoutedEventArgs e)
+    {
+        App.Current.GetService<IInfoBarService>().New.WithMessage("Hello there").Show();
     }
 }
