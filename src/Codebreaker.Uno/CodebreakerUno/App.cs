@@ -1,3 +1,6 @@
+using Codebreaker.ViewModels.Contracts.Services;
+using CodebreakerUno.Contracts.Services.Navigation;
+using CodebreakerUno.Services.Navigation;
 using CodebreakerUno.ViewModels;
 using CodebreakerUno.Views.Pages;
 
@@ -17,7 +20,7 @@ public class App : Application
         where T : class =>
         DefaultScope!.ServiceProvider.GetRequiredService<T>();
 
-    protected override void OnLaunched(LaunchActivatedEventArgs args)
+    protected override async void OnLaunched(LaunchActivatedEventArgs args)
     {
         var builder = this.CreateBuilder(args)
             .Configure(host => host
@@ -73,8 +76,13 @@ public class App : Application
 #endif
                 .ConfigureServices((context, services) =>
                 {
+                    services.AddTransient<INavigationViewService, NavigationViewService>();
                     services.AddTransient<ShellPage>();
                     services.AddTransient<ShellViewModel>();
+
+                    services.AddNavigation(pages => pages
+                        .Configure<GamePage>("GamePage")
+                        .Configure<SettingsPage>("SettingsPage"));
                 })
             );
         MainWindow = builder.Window;
@@ -86,11 +94,13 @@ public class App : Application
         Host = builder.Build();
         DefaultScope = Current.Host!.Services.CreateScope();
 
-        if (MainWindow.Content is not ShellPage shellPage)
+        if (MainWindow.Content is not ShellPage)
         {
             var shell = Host.Services.GetRequiredService<ShellPage>();
             MainWindow.Content = shell;
         }
+
+        await Host.Services.GetRequiredService<INavigationService>().NavigateToAsync("GamePage");
 
         //// Do not repeat app initialization when the Window already has content,
         //// just ensure that the window is active
