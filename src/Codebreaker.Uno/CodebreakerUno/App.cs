@@ -99,29 +99,14 @@ public class App : Application
         if (MainWindow.Content is not ShellPage)
         {
             var shell = Host.Services.GetRequiredService<ShellPage>();
+            async void OnShellLoaded(object sender, RoutedEventArgs args)
+            {
+                await Host.Services.GetRequiredService<INavigationService>().NavigateToAsync("GamePage");
+                shell.Loaded -= OnShellLoaded;
+            }
+            shell.Loaded += OnShellLoaded;
             MainWindow.Content = shell;
         }
-
-        await Host.Services.GetRequiredService<INavigationService>().NavigateToAsync("GamePage");
-
-        //// Do not repeat app initialization when the Window already has content,
-        //// just ensure that the window is active
-        //if (MainWindow.Content is not Frame rootFrame)
-        //{
-        //    // Create a Frame to act as the navigation context and navigate to the first page
-        //    rootFrame = new Frame();
-
-        //    // Place the frame in the current Window
-        //    MainWindow.Content = rootFrame;
-        //}
-
-        //if (rootFrame.Content == null)
-        //{
-        //    // When the navigation stack isn't restored navigate to the first page,
-        //    // configuring the new page by passing required information as a navigation
-        //    // parameter
-        //    rootFrame.Navigate(typeof(GamePage), args.Arguments);
-        //}
 
         // Ensure the current window is active
         MainWindow.Activate();
