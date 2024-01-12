@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:local="using:CodebreakerUno"
       xmlns:ca="using:CodebreakerUno.CustomAttachedProperties"
+      xmlns:cme="using:CodebreakerUno.CustomMarkupExtensions"
       xmlns:components="using:CodebreakerUno.Views.Components"
       Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
   <Grid>
@@ -35,7 +36,7 @@
       Header="{x:Bind ViewModel.Header, Mode=OneWay}">
       <NavigationView.MenuItems>
         <NavigationViewItem
-          Content="Game"
+          Content="{cme:ResourceString Name=ShellPage_GameTab}"
           ca:NavigationHelper.NavigateTo="GamePage"
           ca:NavigationViewItemHelper.IconGlyph="&#xe7c3;" />
       </NavigationView.MenuItems>
