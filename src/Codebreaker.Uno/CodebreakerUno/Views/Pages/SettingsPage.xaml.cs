@@ -1,3 +1,5 @@
+using CodebreakerUno.ViewModels;
+
 namespace CodebreakerUno.Views.Pages;
 
 /// <summary>
@@ -7,6 +9,9 @@ public sealed partial class SettingsPage : Page
 {
     public SettingsPage()
     {
+        ViewModel = App.Current.GetService<SettingsPageViewModel>();
         InitializeComponent();
     }
+
+    public SettingsPageViewModel ViewModel { get; }
 }

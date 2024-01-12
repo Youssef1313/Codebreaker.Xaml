@@ -1,6 +1,8 @@
 using Codebreaker.ViewModels.Contracts.Services;
 using Codebreaker.ViewModels.Services;
+using CodebreakerUno.Contracts.Services;
 using CodebreakerUno.Contracts.Services.Navigation;
+using CodebreakerUno.Services;
 using CodebreakerUno.Services.Navigation;
 using CodebreakerUno.ViewModels;
 using CodebreakerUno.Views.Pages;
@@ -81,6 +83,8 @@ public class App : Application
                     services.AddTransient<INavigationViewService, NavigationViewService>();
                     services.AddTransient<ShellPage>();
                     services.AddTransient<ShellViewModel>();
+                    services.AddTransient<ISettingsService, SettingsService>();
+                    services.AddTransient<SettingsPageViewModel>();
 
                     services.AddNavigation(pages => pages
                         .Configure<GamePage>("GamePage")
