@@ -81,8 +81,12 @@ public class App : Application
                 {
                     services.AddScoped<IInfoBarService, InfoBarService>();
                     services.AddTransient<INavigationViewService, NavigationViewService>();
+
+                    services.AddTransient<IDialogService, UnoDialogService>();
+                    
                     services.AddTransient<ShellPage>();
                     services.AddTransient<ShellViewModel>();
+                    
                     services.AddTransient<ISettingsService, SettingsService>();
                     services.AddTransient<SettingsPageViewModel>();
 
