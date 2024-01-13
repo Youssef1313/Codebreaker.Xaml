@@ -1,3 +1,5 @@
+using Codebreaker.GameAPIs.Client;
+using Codebreaker.ViewModels;
 using Codebreaker.ViewModels.Contracts.Services;
 using Codebreaker.ViewModels.Services;
 using CodebreakerUno.Contracts.Services;
@@ -23,7 +25,7 @@ public class App : Application
         where T : class =>
         DefaultScope!.ServiceProvider.GetRequiredService<T>();
 
-    protected override async void OnLaunched(LaunchActivatedEventArgs args)
+    protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
         var builder = this.CreateBuilder(args)
             .Configure(host => host
@@ -89,6 +91,10 @@ public class App : Application
                     
                     services.AddTransient<ISettingsService, SettingsService>();
                     services.AddTransient<SettingsPageViewModel>();
+
+                    string apiBase = context.Configuration["ApiBase"] ?? throw new InvalidOperationException("ApiBase configuration not found");
+                    services.AddHttpClient<IGamesClient, GamesClient>((HttpClient client) => client.BaseAddress = new(apiBase));
+                    services.AddScoped<GamePageViewModel>();
 
                     services.AddNavigation(pages => pages
                         .Configure<GamePage>("GamePage")
