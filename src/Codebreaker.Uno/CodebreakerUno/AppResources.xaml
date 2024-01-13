@@ -7,7 +7,8 @@
     <!-- Load Uno.UI.Toolkit resources -->
     <ToolkitResources xmlns="using:Uno.Toolkit.UI" />
 
+    <ResourceDictionary Source="ms-appx:///CodebreakerUno/Styles/FontSizes.xaml" />
+    <ResourceDictionary Source="ms-appx:///CodebreakerUno/Styles/Thickness.xaml" />
+    <ResourceDictionary Source="ms-appx:///CodebreakerUno/Views/Templates/CodeBreakerTemplates.xaml" />
   </ResourceDictionary.MergedDictionaries>
-  <!-- Add resources here -->
-
 </ResourceDictionary>

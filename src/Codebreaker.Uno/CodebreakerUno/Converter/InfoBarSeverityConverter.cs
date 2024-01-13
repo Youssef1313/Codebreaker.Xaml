@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml.Data;
 
 namespace CodebreakerUno.Converters;
 
-public class InfoBarSeverityConverter : IValueConverter
+internal class InfoBarSeverityConverter : IValueConverter
 {
     public object? Convert(object value, Type targetType, object parameter, string language) =>
         value switch
