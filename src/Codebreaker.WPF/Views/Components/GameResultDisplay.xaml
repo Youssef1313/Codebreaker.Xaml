@@ -3,26 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Codebreaker.WPF.Views.Components"
              xmlns:converter="clr-namespace:Codebreaker.WPF.Converters"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800"
-             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+             d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converter:GameStatusToVisibilityConverter x:Key="GameStatusToVisibilityConverter" />
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical"
-                    Visibility="{Binding GameMode, Mode=OneWay, Converter={StaticResource GameStatusToVisibilityConverter}, ConverterParameter=Won}">
+                    Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToVisibilityConverter}, ConverterParameter=Won}">
             <Image Source="/Assets/Animations/WonAnimation_300_opt.gif" MaxHeight="300" />
             <TextBlock Text="Congratulations - you won the game 🎉🏆" FontSize="20" HorizontalAlignment="Center" Margin="0,50,0,20" />
-            <Button Content="Great, play again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{Binding WonCommand, Mode=OneWay}" Visibility="{Binding WonButtonVisibility, Mode=OneWay}" />
+            <Button Content="Great, play again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{Binding ViewModel.StartGameCommand, Mode=OneWay}" />
         </StackPanel>
         <StackPanel Orientation="Vertical"
-                    Visibility="{Binding GameMode, Mode=OneWay, Converter={StaticResource GameStatusToVisibilityConverter}, ConverterParameter=Lost}">
+                    Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToVisibilityConverter}, ConverterParameter=Lost}">
             <Image Source="/Assets/Animations/LostAnimation_300_opt.gif" MaxHeight="300" />
             <TextBlock Text="Oh no - you lost the game 😑" FontSize="20" HorizontalAlignment="Center" Margin="0,50,0,20" />
-            <Button Content="Ok, try again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{Binding LostCommand, Mode=OneWay}" Visibility="{Binding LostButtonVisibility, Mode=OneWay}" />
+            <Button Content="Ok, try again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{Binding ViewModel.StartGameCommand, Mode=OneWay}" />
         </StackPanel>
     </Grid>
 </UserControl>
