@@ -1,6 +1,6 @@
 using UIKit;
 
-namespace CodebreakerUno.MacCatalyst;
+namespace CodeBreaker.Uno.MacCatalyst;
 
 public class EntryPoint
 {

@@ -2,7 +2,7 @@ using Microsoft.UI;
 using Microsoft.UI.Xaml.Data;
 using Windows.UI;
 
-namespace CodebreakerUno.Converters;
+namespace CodeBreaker.Uno.Converters;
 
 public class ColornameToBrushConverter : IValueConverter
 {

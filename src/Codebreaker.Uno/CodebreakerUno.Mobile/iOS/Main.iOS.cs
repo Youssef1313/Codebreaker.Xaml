@@ -1,6 +1,6 @@
 using UIKit;
 
-namespace CodebreakerUno.iOS;
+namespace CodeBreaker.Uno.iOS;
 
 public class EntryPoint
 {

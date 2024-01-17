@@ -1,7 +1,7 @@
-using CodebreakerUno.Contracts.Services.Navigation;
-using CodebreakerUno.Views.Pages;
+using CodeBreaker.Uno.Contracts.Services.Navigation;
+using CodeBreaker.Uno.Views.Pages;
 
-namespace CodebreakerUno.ViewModels;
+namespace CodeBreaker.Uno.ViewModels;
 
 public partial class ShellViewModel : ObservableObject
 {

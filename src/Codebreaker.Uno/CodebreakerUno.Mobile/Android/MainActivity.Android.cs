@@ -4,7 +4,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 
-namespace CodebreakerUno.Droid;
+namespace CodeBreaker.Uno.Droid;
 
 [Activity(
     MainLauncher = true,

@@ -1,5 +1,5 @@
 
-namespace CodebreakerUno.Contracts.Services;
+namespace CodeBreaker.Uno.Contracts.Services;
 
 public interface ISettingsService
 {

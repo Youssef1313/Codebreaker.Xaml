@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.Messaging;
 
-namespace CodebreakerUno.Helpers;
+namespace CodeBreaker.Uno.Helpers;
 
 internal static class PageExtensions
 {

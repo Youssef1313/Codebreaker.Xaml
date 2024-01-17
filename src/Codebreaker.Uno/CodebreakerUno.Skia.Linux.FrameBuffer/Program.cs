@@ -3,7 +3,7 @@ using Microsoft.UI.Xaml;
 using Uno.UI.Runtime.Skia.Linux.FrameBuffer;
 using Windows.UI.Core;
 
-namespace CodebreakerUno.Skia.Framebuffer;
+namespace CodeBreaker.Uno.Skia.Framebuffer;
 public class Program
 {
     public static void Main(string[] args)

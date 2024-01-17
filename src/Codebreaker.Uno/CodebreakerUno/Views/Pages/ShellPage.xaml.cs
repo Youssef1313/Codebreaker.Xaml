@@ -1,7 +1,7 @@
-using CodebreakerUno.Helpers;
-using CodebreakerUno.ViewModels;
+using CodeBreaker.Uno.Helpers;
+using CodeBreaker.Uno.ViewModels;
 
-namespace CodebreakerUno.Views.Pages;
+namespace CodeBreaker.Uno.Views.Pages;
 
 public sealed partial class ShellPage : Page
 {

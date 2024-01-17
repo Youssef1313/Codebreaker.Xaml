@@ -1,4 +1,4 @@
-namespace CodebreakerUno.Business.Models;
+namespace CodeBreaker.Uno.Business.Models;
 
 public record AppConfig
 {

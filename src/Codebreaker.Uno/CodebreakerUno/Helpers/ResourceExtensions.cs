@@ -1,4 +1,4 @@
-namespace CodebreakerUno.Helpers;
+namespace CodeBreaker.Uno.Helpers;
 
 internal static class ResourceExtensions
 {

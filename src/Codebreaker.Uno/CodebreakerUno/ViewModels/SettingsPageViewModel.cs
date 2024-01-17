@@ -1,7 +1,7 @@
-using CodebreakerUno.Contracts.Services;
-using CodebreakerUno.Helpers;
+using CodeBreaker.Uno.Contracts.Services;
+using CodeBreaker.Uno.Helpers;
 
-namespace CodebreakerUno.ViewModels;
+namespace CodeBreaker.Uno.ViewModels;
 
 public partial class SettingsPageViewModel(ISettingsService settingsService) : ObservableObject
 {

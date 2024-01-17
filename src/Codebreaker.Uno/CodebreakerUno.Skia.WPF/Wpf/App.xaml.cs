@@ -1,7 +1,7 @@
 using Uno.UI.Runtime.Skia.Wpf;
 using WpfApp = System.Windows.Application;
 
-namespace CodebreakerUno.WPF;
+namespace CodeBreaker.Uno.WPF;
 public partial class App : WpfApp
 {
     public App()

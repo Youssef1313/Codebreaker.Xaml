@@ -1,6 +1,6 @@
 using Codebreaker.ViewModels.Contracts.Services;
-using CodebreakerUno.Contracts.Services.Navigation;
-using CodebreakerUno.Services.Navigation;
+using CodeBreaker.Uno.Contracts.Services.Navigation;
+using CodeBreaker.Uno.Services.Navigation;
 
 namespace Microsoft.Extensions.DependencyInjection;
 

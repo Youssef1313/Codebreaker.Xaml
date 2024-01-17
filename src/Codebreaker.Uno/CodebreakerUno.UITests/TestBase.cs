@@ -1,5 +1,5 @@
 
-namespace CodebreakerUno.UITests;
+namespace CodeBreaker.Uno.UITests;
 
 public class TestBase
 {

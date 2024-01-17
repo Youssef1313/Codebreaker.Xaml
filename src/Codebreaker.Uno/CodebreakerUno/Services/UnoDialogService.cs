@@ -1,7 +1,7 @@
 using Codebreaker.ViewModels.Contracts.Services;
 using Codebreaker.ViewModels.Services;
 
-namespace CodebreakerUno.Services;
+namespace CodeBreaker.Uno.Services;
 
 internal class UnoDialogService(IInfoBarService infoBarService) : IDialogService
 {

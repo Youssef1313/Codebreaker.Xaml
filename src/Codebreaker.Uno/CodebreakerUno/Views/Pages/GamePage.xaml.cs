@@ -1,10 +1,10 @@
 using Codebreaker.ViewModels;
-using CodebreakerUno.Helpers;
+using CodeBreaker.Uno.Helpers;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.UI.Xaml.Media.Animation;
 using Microsoft.UI.Xaml.Shapes;
 
-namespace CodebreakerUno.Views.Pages;
+namespace CodeBreaker.Uno.Views.Pages;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

@@ -1,4 +1,4 @@
-namespace CodebreakerUno.Infrastructure;
+namespace CodeBreaker.Uno.Infrastructure;
 
 internal class DebugHttpHandler : DelegatingHandler
 {

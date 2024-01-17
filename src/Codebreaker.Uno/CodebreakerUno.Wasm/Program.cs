@@ -1,4 +1,4 @@
-namespace CodebreakerUno.Wasm;
+namespace CodeBreaker.Uno.Wasm;
 
 public class Program
 {

@@ -1,7 +1,7 @@
 using Codebreaker.ViewModels;
 using Microsoft.UI.Xaml.Data;
 
-namespace CodebreakerUno.Converters;
+namespace CodeBreaker.Uno.Converters;
 
 internal class GameStatusToVisibilityConverter : IValueConverter
 {

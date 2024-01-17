@@ -1,4 +1,4 @@
-namespace CodebreakerUno.Contracts.Services.Navigation;
+namespace CodeBreaker.Uno.Contracts.Services.Navigation;
 
 internal interface IPageService
 {

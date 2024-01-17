@@ -1,9 +1,9 @@
-using CodebreakerUno.Contracts.Services.Navigation;
-using CodebreakerUno.Contracts.ViewModels;
-using CodebreakerUno.Helpers;
+using CodeBreaker.Uno.Contracts.Services.Navigation;
+using CodeBreaker.Uno.Contracts.ViewModels;
+using CodeBreaker.Uno.Helpers;
 using Microsoft.UI.Xaml.Media.Animation;
 
-namespace CodebreakerUno.Services.Navigation;
+namespace CodeBreaker.Uno.Services.Navigation;
 
 internal class UnoNavigationService(IPageService pageService) : IUnoNavigationService
 {

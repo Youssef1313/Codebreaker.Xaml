@@ -1,9 +1,9 @@
 using Codebreaker.ViewModels;
-using CodebreakerUno.Helpers;
+using CodeBreaker.Uno.Helpers;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.UI.Xaml.Media.Animation;
 
-namespace CodebreakerUno.Views.Components;
+namespace CodeBreaker.Uno.Views.Components;
 
 internal sealed partial class PegSelectionComponent : UserControl, IRecipient<GameMoveMessage>
 {

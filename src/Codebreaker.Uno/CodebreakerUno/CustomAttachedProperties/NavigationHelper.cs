@@ -1,4 +1,4 @@
-namespace CodebreakerUno.CustomAttachedProperties;
+namespace CodeBreaker.Uno.CustomAttachedProperties;
 
 // Helper class to set the navigation target for a NavigationViewItem.
 //

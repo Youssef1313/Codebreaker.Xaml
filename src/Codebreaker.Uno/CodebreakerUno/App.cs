@@ -2,14 +2,14 @@ using Codebreaker.GameAPIs.Client;
 using Codebreaker.ViewModels;
 using Codebreaker.ViewModels.Contracts.Services;
 using Codebreaker.ViewModels.Services;
-using CodebreakerUno.Contracts.Services;
-using CodebreakerUno.Contracts.Services.Navigation;
-using CodebreakerUno.Services;
-using CodebreakerUno.Services.Navigation;
-using CodebreakerUno.ViewModels;
-using CodebreakerUno.Views.Pages;
+using CodeBreaker.Uno.Contracts.Services;
+using CodeBreaker.Uno.Contracts.Services.Navigation;
+using CodeBreaker.Uno.Services;
+using CodeBreaker.Uno.Services.Navigation;
+using CodeBreaker.Uno.ViewModels;
+using CodeBreaker.Uno.Views.Pages;
 
-namespace CodebreakerUno;
+namespace CodeBreaker.Uno;
 
 public class App : Application
 {

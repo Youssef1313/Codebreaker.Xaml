@@ -1,8 +1,8 @@
-using CodebreakerUno.Contracts.Services;
+using CodeBreaker.Uno.Contracts.Services;
 using Windows.Foundation.Collections;
 using Windows.Globalization;
 
-namespace CodebreakerUno.Services;
+namespace CodeBreaker.Uno.Services;
 
 public class SettingsService : ISettingsService
 {

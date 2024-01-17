@@ -1,6 +1,6 @@
-using CodebreakerUno.ViewModels;
+using CodeBreaker.Uno.ViewModels;
 
-namespace CodebreakerUno.Views.Pages;
+namespace CodeBreaker.Uno.Views.Pages;
 
 /// <summary>
 /// An empty page that can be used on its own or navigated to within a Frame.

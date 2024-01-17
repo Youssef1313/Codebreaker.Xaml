@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml.Data;
 
-namespace CodebreakerUno.Converters;
+namespace CodeBreaker.Uno.Converters;
 
 internal class ElementThemeToIntConverter : IValueConverter
 {

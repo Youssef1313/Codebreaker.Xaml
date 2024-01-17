@@ -1,4 +1,4 @@
-namespace CodebreakerUno.Tests;
+namespace CodeBreaker.Uno.Tests;
 
 public class AppInfoTests
 {

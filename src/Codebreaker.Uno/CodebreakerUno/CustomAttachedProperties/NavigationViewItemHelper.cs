@@ -1,4 +1,4 @@
-namespace CodebreakerUno.CustomAttachedProperties;
+namespace CodeBreaker.Uno.CustomAttachedProperties;
 
 public partial class NavigationViewItemHelper : DependencyObject
 {

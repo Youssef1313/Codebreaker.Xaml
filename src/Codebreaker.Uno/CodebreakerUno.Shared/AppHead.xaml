@@ -1,8 +1,8 @@
-﻿<local:App x:Class="CodebreakerUno.AppHead"
+﻿<local:App x:Class="CodeBreaker.Uno.AppHead"
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        xmlns:wasm="http://platform.uno/wasm"
-       xmlns:local="using:CodebreakerUno"
+       xmlns:local="using:CodeBreaker.Uno"
        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
        mc:Ignorable="wasm">
 

@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="CodebreakerUno.Views.Pages.SettingsPage"
+    x:Class="CodeBreaker.Uno.Views.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:CodebreakerUno.Views.Pages"
+    xmlns:local="using:CodeBreaker.Uno.Views.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:cme="using:CodebreakerUno.CustomMarkupExtensions"
-    xmlns:converter="using:CodebreakerUno.Converters"
+    xmlns:cme="using:CodeBreaker.Uno.CustomMarkupExtensions"
+    xmlns:converter="using:CodeBreaker.Uno.Converters"
     mc:Ignorable="d">
   <Page.Resources>
     <converter:ElementThemeToIntConverter x:Key="ElementThemeToIntConverter" />

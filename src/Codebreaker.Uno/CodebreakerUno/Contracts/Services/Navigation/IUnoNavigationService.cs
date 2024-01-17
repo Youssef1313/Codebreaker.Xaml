@@ -1,7 +1,7 @@
 using Codebreaker.ViewModels.Contracts.Services;
 using Microsoft.UI.Xaml.Media.Animation;
 
-namespace CodebreakerUno.Contracts.Services.Navigation;
+namespace CodeBreaker.Uno.Contracts.Services.Navigation;
 
 public interface IUnoNavigationService : INavigationService
 {

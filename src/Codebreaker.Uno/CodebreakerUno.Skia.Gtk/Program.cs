@@ -2,7 +2,7 @@ using System;
 using GLib;
 using Uno.UI.Runtime.Skia.Gtk;
 
-namespace CodebreakerUno.Skia.Gtk;
+namespace CodeBreaker.Uno.Skia.Gtk;
 public class Program
 {
     public static void Main(string[] args)

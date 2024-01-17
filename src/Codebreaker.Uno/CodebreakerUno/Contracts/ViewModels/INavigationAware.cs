@@ -1,4 +1,4 @@
-namespace CodebreakerUno.Contracts.ViewModels;
+namespace CodeBreaker.Uno.Contracts.ViewModels;
 
 public interface INavigationAware
 {

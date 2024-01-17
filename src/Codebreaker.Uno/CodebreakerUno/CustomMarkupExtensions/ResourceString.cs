@@ -1,7 +1,7 @@
-using CodebreakerUno.Helpers;
+using CodeBreaker.Uno.Helpers;
 using Microsoft.UI.Xaml.Markup;
 
-namespace CodebreakerUno.CustomMarkupExtensions;
+namespace CodeBreaker.Uno.CustomMarkupExtensions;
 
 [MarkupExtensionReturnType(ReturnType = typeof(string))]
 internal class ResourceString : MarkupExtension

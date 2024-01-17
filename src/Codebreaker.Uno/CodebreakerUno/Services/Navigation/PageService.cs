@@ -1,6 +1,6 @@
-using CodebreakerUno.Contracts.Services.Navigation;
+using CodeBreaker.Uno.Contracts.Services.Navigation;
 
-namespace CodebreakerUno.Services.Navigation;
+namespace CodeBreaker.Uno.Services.Navigation;
 
 internal class PageService(Dictionary<string, Type> pages) : IPageService
 {

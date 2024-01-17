@@ -1,4 +1,4 @@
-namespace CodebreakerUno.Services.Navigation;
+namespace CodeBreaker.Uno.Services.Navigation;
 
 internal class PageServiceBuilder
 {

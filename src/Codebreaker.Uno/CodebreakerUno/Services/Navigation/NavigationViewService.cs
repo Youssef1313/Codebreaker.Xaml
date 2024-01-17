@@ -1,8 +1,8 @@
-using CodebreakerUno.Contracts.Services.Navigation;
-using CodebreakerUno.CustomAttachedProperties;
-using CodebreakerUno.Views.Pages;
+using CodeBreaker.Uno.Contracts.Services.Navigation;
+using CodeBreaker.Uno.CustomAttachedProperties;
+using CodeBreaker.Uno.Views.Pages;
 
-namespace CodebreakerUno.Services.Navigation;
+namespace CodeBreaker.Uno.Services.Navigation;
 
 internal class NavigationViewService(IUnoNavigationService navigationService, IPageService pageService) : INavigationViewService
 {
