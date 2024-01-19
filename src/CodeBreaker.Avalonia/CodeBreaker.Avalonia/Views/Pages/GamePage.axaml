@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="using:CodeBreaker.Avalonia.Views.Pages"
+             xmlns:components="using:CodeBreaker.Avalonia.Views.Components"
+             xmlns:converter="using:CodeBreaker.Avalonia.Converters"
+             xmlns:vm="using:Codebreaker.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CodeBreaker.Avalonia.Views.Pages.GamePage"
+             x:DataType="vm:GamePageViewModel"
+             x:Name="Self"
+             Padding="10">
+    <UserControl.Resources>
+        <converter:GameStatusToBooleanConverter x:Key="GameStatusToBooleanConverter" />
+    </UserControl.Resources>
+    <Grid RowDefinitions="Auto,*">
+        <Grid Grid.Row="0"
+              RowDefinitions="Auto,*"
+              ColumnDefinitions="3*,1*"
+              Margin="8"
+              IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToBooleanConverter}, ConverterParameter=Start}">
+            <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,0,5" Text="Enter your name:" />
+            <TextBox Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" />
+            <Button Grid.Row="1" Grid.Column="1" Margin="8,0,0,0" Padding="0,6" HorizontalAlignment="Stretch" Command="{Binding StartGameCommand, Mode=OneTime}">
+                <Grid RowDefinitions="*,5">
+                    <TextBlock Grid.Row="0" Text="Start Game" TextAlignment="Center" />
+                    <ProgressBar Grid.Row="1" IsIndeterminate="True" Margin="0,4,0,-8" IsVisible="{Binding InProgress, Mode=OneWay}" />
+                </Grid>
+            </Button>
+        </Grid>
+        <components:PegSelectionView
+            Grid.Row="0"
+            IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToBooleanConverter}, ConverterParameter=Cancelable}"
+            Margin="86,0,0,8" />
+        <ItemsControl
+            IsVisible="{Binding GameStatus, Mode=OneWay, ConverterParameter=Running}"
+            Grid.Row="1"
+            ItemsSource="{Binding GameMoves, Mode=OneWay}"
+            ItemTemplate="{StaticResource PegsTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+    </Grid>
+</UserControl>
