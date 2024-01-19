@@ -8,6 +8,7 @@ using Codebreaker.ViewModels.Services;
 using CodeBreaker.Avalonia.Services;
 using CodeBreaker.Avalonia.Views;
 using CodeBreaker.Avalonia.Views.Pages;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -19,7 +20,14 @@ public partial class App : Application
 
     public App()
     {
+        this.SetDotnetEnvironmentVariable();
+
         var builder = Host.CreateApplicationBuilder(Environment.GetCommandLineArgs());
+
+        // Configuration
+        builder.Configuration.AddAppSettingsJson();
+
+        // Services
         builder.Services.Configure<GamePageViewModelOptions>(options => { });
         builder.Services.AddScoped<IInfoBarService, InfoBarService>();
         builder.Services.AddTransient<IDialogService, AvaloniaDialogService>();
@@ -27,8 +35,7 @@ public partial class App : Application
         builder.Services.AddTransient<GamePage>();
         builder.Services.AddHttpClient<IGamesClient, GamesClient>(client =>
         {
-            string uriString = "https://codebreaker-gamesapi-3.purplebush-9a246700.westeurope.azurecontainerapps.io";// builder.Configuration["ApiBase"] ?? throw new InvalidOperationException("ApiBase not configured");
-            client.BaseAddress = new(uriString);
+            client.BaseAddress = new(builder.Configuration.GetRequired("ApiBase"));
         });
         _host = builder.Build();
         DefaultScope = _host!.Services.CreateScope();
