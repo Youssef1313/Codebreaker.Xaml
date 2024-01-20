@@ -1,0 +1,76 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="using:CodeBreaker.Avalonia.Views.Components"
+             xmlns:converter="using:CodeBreaker.Avalonia.Converters"
+             xmlns:vmComponents="using:Codebreaker.ViewModels.Components"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CodeBreaker.Avalonia.Views.Components.InfoBarArea"
+             x:DataType="local:InfoBarArea">
+    <UserControl.Resources>
+        <converter:InfoBarSeverityConverter x:Key="InfoBarSeverityConverter" />
+    </UserControl.Resources>
+    <UserControl.Styles>
+        <Style Selector="Border.Information">
+            <Setter Property="Background" Value="{DynamicResource InformationBackground}" />
+        </Style>
+        <Style Selector="Border.Success">
+            <Setter Property="Background" Value="{DynamicResource SuccessBackground}" />
+        </Style>
+        <Style Selector="Border.Warning">
+            <Setter Property="Background" Value="{DynamicResource WarningBackground}" />
+        </Style>
+        <Style Selector="Border.Error">
+            <Setter Property="Background" Value="{DynamicResource ErrorBackground}" />
+        </Style>
+        <Style Selector="TextBlock.Title">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+    </UserControl.Styles>
+    <ItemsControl ItemsSource="{Binding InfoBarService.Messages, Mode=OneWay}" MaxHeight="200">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Vertical" Spacing="8" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate x:DataType="vmComponents:InfoMessageViewModel">
+                <Border 
+                    Classes.Information="{Binding Severity, Mode=OneTime, Converter={StaticResource InfoBarSeverityConverter}, ConverterParameter=Info}"
+                    Classes.Success="{Binding Severity, Mode=OneTime, Converter={StaticResource InfoBarSeverityConverter}, ConverterParameter=Success}"
+                    Classes.Warning="{Binding Severity, Mode=OneTime, Converter={StaticResource InfoBarSeverityConverter}, ConverterParameter=Warning}"
+                    Classes.Error="{Binding Severity, Mode=OneTime, Converter={StaticResource InfoBarSeverityConverter}, ConverterParameter=Error}"
+                    CornerRadius="5" Padding="10,8">
+                    <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto">
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Margin="0,0,0,5"
+                                   Classes="Title"
+                                   Text="{Binding Title, Mode=OneTime}"
+                                   IsVisible="{Binding Title, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                        <StackPanel Grid.Row="1" Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding Message, Mode=OneTime}" />
+                            <Button
+                                IsVisible="{Binding HasAction, Mode=OneTime}"
+                                Command="{Binding ExecuteActionCommand, Mode=OneTime}"
+                                Content="{Binding ActionText, Mode=OneTime}" />
+                        </StackPanel>
+                        <Button Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
+                                Width="30" Height="30" VerticalAlignment="Center"
+                                IsVisible="{Binding IsClosable, Mode=OneTime}"
+                                Command="{Binding CloseCommand, Mode=OneTime}">
+                            <PathIcon MaxWidth="10" MaxHeight="10">
+                                <PathIcon.Data>
+                                    <StreamGeometry>
+                                        M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708
+                                    </StreamGeometry>
+                                </PathIcon.Data>
+                            </PathIcon>
+                        </Button>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>
