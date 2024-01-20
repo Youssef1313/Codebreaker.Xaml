@@ -10,6 +10,20 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceInclude Source="/Views/Templates/CodebreakerTemplates.axaml" />
             </ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="InformationBackground">#f6f6f680</SolidColorBrush>
+                    <SolidColorBrush x:Key="SuccessBackground">#dff6dd</SolidColorBrush>
+                    <SolidColorBrush x:Key="WarningBackground">#fff4ce</SolidColorBrush>
+                    <SolidColorBrush x:Key="ErrorBackground">#fde7e9</SolidColorBrush>
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="InformationBackground">#ffffff10</SolidColorBrush>
+                    <SolidColorBrush x:Key="SuccessBackground">#393d1b</SolidColorBrush>
+                    <SolidColorBrush x:Key="WarningBackground">#433519</SolidColorBrush>
+                    <SolidColorBrush x:Key="ErrorBackground">#442726</SolidColorBrush>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
         </ResourceDictionary>
     </Application.Resources>
     
