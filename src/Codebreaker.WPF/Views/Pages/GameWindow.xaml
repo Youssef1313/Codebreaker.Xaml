@@ -54,6 +54,10 @@
                     Command="{Binding ViewModel.ErrorMessage.ActionCommand, Mode=OneWay}" />
             </Grid>
         </StackPanel>-->
+        <components:GameResultDisplay
+            Panel.ZIndex="1"
+            Grid.Row="0"
+            ViewModel="{Binding ViewModel, Mode=OneWay}" />
 
         <Grid Grid.Row="1" Margin="8" Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Start}">
             <Grid.RowDefinitions>
