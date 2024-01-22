@@ -12,12 +12,12 @@
             <ItemsControl ItemsSource="{Binding Path=GuessPegs}" Grid.Column="1">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" Margin="16,0,0,0" />
+                        <StackPanel Orientation="Horizontal" Margin="16,0,0,0" Spacing="45" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type system:String}">
-                        <Ellipse Width="68" Height="68" Margin="12,4" Fill="{Binding Converter={StaticResource ColorConverter}}" />
+                        <Ellipse Width="68" Height="68" Fill="{Binding Converter={StaticResource ColorConverter}}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
@@ -25,12 +25,12 @@
             <ItemsControl Grid.Column="2" ItemsSource="{Binding Path=KeyPegs, Mode=OneTime}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
+                        <StackPanel Orientation="Horizontal" Spacing="10" Margin="30,0,0,0" />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="{x:Type system:String}">
-                        <Ellipse Width="16" Height="16" Fill="{Binding Converter={StaticResource KeyPegColorNameToBrushConverter}}" Margin="10,0" />
+                        <Ellipse Width="16" Height="16" Fill="{Binding Converter={StaticResource KeyPegColorNameToBrushConverter}}" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

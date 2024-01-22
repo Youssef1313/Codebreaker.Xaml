@@ -44,7 +44,7 @@
             Command="{Binding SetMoveCommand, Mode=OneWay}">
             <Grid RowDefinitions="*,5">
                 <TextBlock Grid.Row="0" Text="Set Move" TextAlignment="Center" VerticalAlignment="Center" MinWidth="100" />
-                <ProgressBar Grid.Row="1" IsIndeterminate="True" Margin="0,4,0,0" IsVisible="{Binding InProgress, Mode=OneWay}" />
+                <ProgressBar Grid.Row="1" IsIndeterminate="True" Margin="0,4,0,0" IsVisible="{Binding InProgress, Mode=OneWay}" HorizontalAlignment="Stretch" />
             </Grid>
         </Button>
     </StackPanel>
