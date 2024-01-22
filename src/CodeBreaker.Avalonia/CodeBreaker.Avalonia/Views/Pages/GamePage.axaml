@@ -31,12 +31,12 @@
             </Button>
         </Grid>
         <components:PegSelectionView
-            Grid.Row="2"
+            Grid.Row="1"
             IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToBooleanConverter}, ConverterParameter=Cancelable}"
             Margin="86,0,0,8" />
         <ItemsControl
             IsVisible="{Binding GameStatus, Mode=OneWay, ConverterParameter=Running}"
-            Grid.Row="1"
+            Grid.Row="2"
             ItemsSource="{Binding GameMoves, Mode=OneWay}"
             ItemTemplate="{StaticResource PegsTemplate}">
             <ItemsControl.ItemsPanel>

@@ -40,7 +40,7 @@
         </ItemsControl>
         <Button
             Padding="0"
-            VerticalAlignment="Stretch" VerticalContentAlignment="Stretch"
+            VerticalAlignment="Stretch"
             Command="{Binding SetMoveCommand, Mode=OneWay}">
             <Grid RowDefinitions="*,5">
                 <TextBlock Grid.Row="0" Text="Set Move" TextAlignment="Center" VerticalAlignment="Center" MinWidth="100" />
