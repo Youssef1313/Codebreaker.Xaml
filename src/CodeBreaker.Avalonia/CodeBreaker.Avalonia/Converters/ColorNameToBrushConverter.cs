@@ -18,8 +18,8 @@ public class ColorNameToBrushConverter : IValueConverter
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) =>
         value switch
         {
-            "Purple" => s_orangeBrush,
-            "Orange" => s_purpleBrush,
+            "Purple" => s_purpleBrush,
+            "Orange" => s_orangeBrush,
             "Red" => s_redBrush,
             "Green" => s_greenBrush,
             "Blue" => s_blueBrush,
