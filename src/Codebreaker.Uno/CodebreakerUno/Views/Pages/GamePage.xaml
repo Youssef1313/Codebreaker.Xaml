@@ -25,7 +25,10 @@
       <RowDefinition Height="auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-    <!--Startgame section-->
+    <components:GameResultDisplay
+        Grid.Row="0"
+        ViewModel="{x:Bind ViewModel, Mode=OneTime}" />
+        <!--Startgame section-->
     <Grid
         Grid.Row="0"
         ColumnSpacing="25"
