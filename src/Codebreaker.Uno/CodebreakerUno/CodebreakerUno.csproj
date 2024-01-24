@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="CNInnovation.Codebreaker.ViewModels" />
+    <PackageReference Include="CommunityToolkit.WinUI.Animations" />
     <PackageReference Include="CommunityToolkit.WinUI.Converters" />
     <PackageReference Include="SkiaSharp" />
     <PackageReference Include="Uno.WinUI" />
@@ -72,5 +73,22 @@
     <EmbeddedResource Include="appsettings.json" />
     <EmbeddedResource Include="appsettings.*.json" DependentUpon="appsettings.json" />
     <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Components\GameResultDisplay.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Components\GameResultDisplay.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Assets\Animations\LostAnimation_300_opt.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\Animations\WonAnimation_300_opt.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>
