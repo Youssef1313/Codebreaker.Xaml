@@ -52,11 +52,6 @@ public partial class GamePageViewModel : ObservableObject
         };
     }
 
-    /// <summary>
-    /// Information on the game - messages, errors, etc. See <see cref="InfoBarMessageService"/>.
-    /// </summary>
-    public InfoBarService InfoBarMessageService { get; } = new();
-
     private Game? _game;
     /// <summary>
     /// <see cref="Models.Game"/> instance."/>
@@ -121,7 +116,7 @@ public partial class GamePageViewModel : ObservableObject
     /// Updates the <see cref="GameStatus"/> property.
     /// Initializes <see cref="Game"/>).
     /// Increments the move number.
-    /// Shows <see cref="IDialogService"/> messages or <see cref="InfoBarMessageService"/> messages with errors.
+    /// Shows <see cref="IDialogService"/> messages or <see cref="_infoBarService"/> messages with errors.
     /// </summary>
     /// <returns>A task</returns>
     [RelayCommand(AllowConcurrentExecutions = false, FlowExceptionsToTaskScheduler = true)]
@@ -219,17 +214,17 @@ public partial class GamePageViewModel : ObservableObject
             if (isVictory)
             {
                 GameStatus = GameMode.Won;
-                InfoBarMessageService.New.IsSuccessMessage().WithMessage("Congratulations - you won!").Show();
+                _infoBarService.New.IsSuccessMessage().WithMessage("Congratulations - you won!").Show();
             }
             else if (ended)
             {
                 GameStatus = GameMode.Lost;
-                InfoBarMessageService.New.WithMessage("Sorry, you didn't find the matching colors!").Show();
+                _infoBarService.New.WithMessage("Sorry, you didn't find the matching colors!").Show();
             }
         }
         catch (Exception ex)
         {
-            InfoBarMessageService.New.WithMessage(ex.Message).IsErrorMessage().Show();
+            _infoBarService.New.WithMessage(ex.Message).IsErrorMessage().Show();
         }
         finally
         {
@@ -254,7 +249,7 @@ public partial class GamePageViewModel : ObservableObject
         ClearSelectedColor();
         GameMoves.Clear();
         GameStatus = GameMode.NotRunning;
-        InfoBarMessageService.Clear();
+        _infoBarService.Clear();
         _moveNumber = 0;
     }
 }
