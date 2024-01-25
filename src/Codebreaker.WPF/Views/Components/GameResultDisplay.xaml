@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converter="clr-namespace:Codebreaker.WPF.Converters"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -12,13 +13,13 @@
     <Grid>
         <StackPanel Orientation="Vertical"
                     Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToVisibilityConverter}, ConverterParameter=Won}">
-            <Image Source="/Assets/Animations/WonAnimation_300_opt.gif" MaxHeight="300" />
+            <Image gif:ImageBehavior.AnimatedSource="/Assets/Animations/WonAnimation_300_opt.gif" MaxHeight="300" />
             <TextBlock Text="Congratulations - you won the game 🎉🏆" FontSize="20" HorizontalAlignment="Center" Margin="0,50,0,20" />
             <Button Content="Great, play again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{Binding ViewModel.StartGameCommand, Mode=OneWay}" />
         </StackPanel>
         <StackPanel Orientation="Vertical"
                     Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToVisibilityConverter}, ConverterParameter=Lost}">
-            <Image Source="/Assets/Animations/LostAnimation_300_opt.gif" MaxHeight="300" />
+            <Image gif:ImageBehavior.AnimatedSource="/Assets/Animations/LostAnimation_300_opt.gif" MaxHeight="300" />
             <TextBlock Text="Oh no - you lost the game 😑" FontSize="20" HorizontalAlignment="Center" Margin="0,50,0,20" />
             <Button Content="Ok, try again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{Binding ViewModel.StartGameCommand, Mode=OneWay}" />
         </StackPanel>
