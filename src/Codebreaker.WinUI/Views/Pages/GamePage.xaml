@@ -27,9 +27,7 @@
         </Grid.RowDefinitions>
         <components:GameResultDisplay
             Grid.Row="0"
-            GameMode="{x:Bind ViewModel.GameStatus, Mode=OneWay}"
-            WonCommand="{x:Bind ViewModel.StartGameCommand, Mode=OneTime}"
-            LostCommand="{x:Bind ViewModel.StartGameCommand, Mode=OneTime}" />
+            ViewModel="{x:Bind ViewModel, Mode=OneTime}" />
         <!--Startgame section-->
         <Grid
             Grid.Row="0"
