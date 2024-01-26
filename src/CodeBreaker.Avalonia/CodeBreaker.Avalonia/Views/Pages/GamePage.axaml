@@ -14,9 +14,8 @@
     <UserControl.Resources>
         <converter:GameStatusToBooleanConverter x:Key="GameStatusToBooleanConverter" />
     </UserControl.Resources>
-    <Grid RowDefinitions="Auto,Auto,*">
-        <components:InfoBarArea Grid.Row="0" Margin="0,0,0,20"/>
-        <Grid Grid.Row="1"
+    <Grid RowDefinitions="Auto,*">
+        <Grid Grid.Row="0"
               RowDefinitions="Auto,*"
               ColumnDefinitions="3*,1*"
               Margin="8"
@@ -31,12 +30,12 @@
             </Button>
         </Grid>
         <components:PegSelectionView
-            Grid.Row="1"
+            Grid.Row="0"
             IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToBooleanConverter}, ConverterParameter=Cancelable}"
             Margin="55,0,0,15" />
         <ItemsControl
             IsVisible="{Binding GameStatus, Mode=OneWay, ConverterParameter=Running}"
-            Grid.Row="2"
+            Grid.Row="1"
             ItemsSource="{Binding GameMoves, Mode=OneWay}"
             ItemTemplate="{StaticResource PegsTemplate}">
             <ItemsControl.ItemsPanel>

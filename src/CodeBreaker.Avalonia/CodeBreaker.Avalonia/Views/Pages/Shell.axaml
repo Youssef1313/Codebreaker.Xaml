@@ -3,9 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="using:CodeBreaker.Avalonia.Views.Pages"
+             xmlns:components="using:CodeBreaker.Avalonia.Views.Components"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CodeBreaker.Avalonia.Shell">
     <Grid RowDefinitions="Auto, *">
+        <components:InfoBarArea Grid.Row="0" Margin="0,0,0,20"/>
         <ContentPresenter Grid.Row="1">
             <ContentPresenter.Content>
                 <pages:GamePage />
