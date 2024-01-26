@@ -7,8 +7,6 @@
 
     <conv:ColornameToBrushConverter x:Key="ColorConverter" />
     <conv:PegColorToBrushConverter x:Key="PegColorConverter" />
-    <!--<conv:SelectionAndKeyPegToKeyVisibleConverter x:Key="KeyVisibleConverter" /> TODO: it seems this is not in use (yet?)-->
-    <!--<conv:IntToEnumerableConverter x:Key="IntToEnumerableConverter" />-->
 
     <DataTemplate x:Key="SelectColorTemplate">
         <StackLayout>
