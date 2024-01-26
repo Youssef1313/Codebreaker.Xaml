@@ -32,7 +32,6 @@ public partial class App : Application
         builder.Services.AddScoped<IInfoBarService, InfoBarService>();
         builder.Services.AddTransient<IDialogService, AvaloniaDialogService>();
         builder.Services.AddScoped<GamePageViewModel>();
-        builder.Services.AddTransient<GamePage>();
         builder.Services.AddHttpClient<IGamesClient, GamesClient>(client =>
         {
             client.BaseAddress = new(builder.Configuration.GetRequired("ApiBase"));
@@ -60,12 +59,12 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow()
             {
-                Content = _host.Services.GetRequiredService<GamePage>()
+                Content = new Shell()
             };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new GamePage();
+            singleViewPlatform.MainView = new Shell();
         }
 
         base.OnFrameworkInitializationCompleted();
