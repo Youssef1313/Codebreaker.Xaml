@@ -9,13 +9,4 @@ public partial class GameResultDisplay : UserControl
     {
         InitializeComponent();
     }
-
-    public GamePageViewModel ViewModel
-    {
-        get { return (GamePageViewModel)GetValue(ViewModelProperty); }
-        set { SetValue(ViewModelProperty, value); }
-    }
-
-    public static readonly DependencyProperty ViewModelProperty =
-        DependencyProperty.Register(nameof(ViewModel), typeof(GamePageViewModel), typeof(GameResultDisplay));
 }
