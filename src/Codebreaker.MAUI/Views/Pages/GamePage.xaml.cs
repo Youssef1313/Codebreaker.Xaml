@@ -5,9 +5,7 @@ public partial class GamePage : ContentPage
 
 	public GamePage(GamePageViewModel viewModel)
 	{
-		ViewModel = viewModel;
-
-		BindingContext = this;
+		BindingContext = viewModel;
 		InitializeComponent();
 
 		WeakReferenceMessenger.Default.Register<InfoMessage>(this, async (r, m) =>
@@ -15,6 +13,4 @@ public partial class GamePage : ContentPage
 			await DisplayAlert("Info", m.Text, "Close");
 		});
 	}
-
-	public GamePageViewModel ViewModel { get; }
 }

@@ -2,21 +2,21 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Codebreaker.MAUI.Views.Components"
+             xmlns:vm="clr-namespace:Codebreaker.ViewModels;assembly=Codebreaker.ViewModels"
              xmlns:converter="clr-namespace:Codebreaker.MAUI.Converters"
              x:Class="Codebreaker.MAUI.Views.Components.GameResultDisplay"
-             x:Name="this">
-    <!--x:DataType="{Type local:GameResultDisplay}">-->
-    <!-- When specifying the DataType, the Error "input string was not in a correct format" occurs for the bindings below -->
+             x:Name="this"
+             x:DataType="{x:Type vm:GamePageViewModel}">
     <Grid>
-        <VerticalStackLayout IsVisible="{Binding GameMode, Mode=OneWay, Converter={converter:GameStatusToIsVisibleConverter}, ConverterParameter=Won}">
+        <VerticalStackLayout IsVisible="{Binding GameStatus, Mode=OneWay, Converter={converter:GameStatusToIsVisibleConverter}, ConverterParameter=Won}">
             <Image Source="wonanimation_300_opt.gif" IsAnimationPlaying="True" MaximumHeightRequest="300" />
             <Label Text="Congratulations - you won the game 🎉🏆" FontSize="20" HorizontalOptions="Center" Margin="0,50,0,20" />
-            <Button Text="Great, play again" HorizontalOptions="Center" Margin="0,0,0,100" Command="{Binding WonCommand, Mode=OneWay}" IsVisible="{Binding IsWonButtonVisible, Mode=OneWay}" />
+            <Button Text="Great, play again" HorizontalOptions="Center" Margin="0,0,0,100" Command="{Binding StartGameCommand, Mode=OneTime}" />
         </VerticalStackLayout>
-        <VerticalStackLayout IsVisible="{Binding GameMode, Mode=OneWay, Converter={converter:GameStatusToIsVisibleConverter}, ConverterParameter=Lost}">
+        <VerticalStackLayout IsVisible="{Binding GameStatus, Mode=OneWay, Converter={converter:GameStatusToIsVisibleConverter}, ConverterParameter=Lost}">
             <Image Source="lostanimation_300_opt.gif" IsAnimationPlaying="True" MaximumHeightRequest="300" />
             <Label Text="Oh no - you lost the game 😑" FontSize="20" HorizontalOptions="Center" Margin="0,50,0,20" />
-            <Button Text="Ok, try again" HorizontalOptions="Center" Margin="0,0,0,100" Command="{Binding LostCommand, Mode=OneWay}" IsVisible="{Binding IsLostButtonVisible, Mode=OneWay}" />
+            <Button Text="Ok, try again" HorizontalOptions="Center" Margin="0,0,0,100" Command="{Binding StartGameCommand, Mode=OneTime}" />
         </VerticalStackLayout>
     </Grid>
 </ContentView>
