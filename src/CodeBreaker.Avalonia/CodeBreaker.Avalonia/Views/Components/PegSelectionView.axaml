@@ -1,0 +1,51 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="using:CodeBreaker.Avalonia.Views.Components"
+             xmlns:converter="using:CodeBreaker.Avalonia.Converters"
+             xmlns:vm="using:Codebreaker.ViewModels"
+             xmlns:vm_components="using:Codebreaker.ViewModels.Components"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CodeBreaker.Avalonia.Views.Components.PegSelectionView"
+             x:Name="PegSelectionViewControl"
+             x:DataType="vm:GamePageViewModel">
+    <UserControl.Resources>
+        <converter:ColorNameToBrushConverter x:Key="ColorNameToBrushConverter" />
+        <converter:FieldValuesToColorsConverter x:Key="FieldValuesToColorsConverter" />
+        <DataTemplate x:Key="SelectColorItemTemplate" x:DataType="vm_components:SelectedFieldViewModel">
+            <ComboBox
+                Margin="0,0,8,0"
+                MinWidth="88"
+                MinHeight="60"
+                ItemsSource="{Binding ElementName=PegSelectionViewControl, Path=((vm:GamePageViewModel)DataContext).Game.FieldValues, Converter={StaticResource FieldValuesToColorsConverter}, Mode=OneWay}"
+                SelectedItem="{Binding Value, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Ellipse Fill="{Binding Mode=OneWay, Converter={StaticResource ColorNameToBrushConverter}}" Width="60" Height="60" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel Orientation="Horizontal">
+        <ItemsControl
+            ItemsSource="{Binding Fields, Mode=OneWay}"
+            ItemTemplate="{StaticResource SelectColorItemTemplate}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <Button
+            Padding="0"
+            VerticalAlignment="Stretch"
+            Command="{Binding SetMoveCommand, Mode=OneWay}">
+            <Grid RowDefinitions="*,5">
+                <TextBlock Grid.Row="0" Text="Set Move" TextAlignment="Center" VerticalAlignment="Center" MinWidth="100" />
+                <ProgressBar Grid.Row="1" IsIndeterminate="True" Margin="0,4,0,0" IsVisible="{Binding InProgress, Mode=OneWay}" HorizontalAlignment="Stretch" />
+            </Grid>
+        </Button>
+    </StackPanel>
+</UserControl>
