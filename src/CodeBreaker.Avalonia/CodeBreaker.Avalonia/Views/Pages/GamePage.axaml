@@ -16,6 +16,7 @@
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,Auto,*">
         <components:InfoBarArea Grid.Row="0" Margin="0,0,0,20"/>
+        <components:GameResultDisplay Grid.Row="1" />
         <Grid Grid.Row="1"
               RowDefinitions="Auto,*"
               ColumnDefinitions="3*,1*"

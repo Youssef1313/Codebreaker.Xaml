@@ -25,6 +25,9 @@
             <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <components:GameResultDisplay
+            Grid.Row="0"
+            ViewModel="{x:Bind ViewModel, Mode=OneTime}" />
         <!--Startgame section-->
         <Grid
             Grid.Row="0"
@@ -63,6 +66,7 @@
                 </StackPanel>
             </Button>
         </Grid>
+        <components:GameResultDisplay Grid.Row="0" />
         <!--Gamebar section-->
         <StackPanel
             Orientation="Horizontal"
