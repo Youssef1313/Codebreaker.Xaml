@@ -14,7 +14,7 @@
     <UserControl.Resources>
         <converter:GameStatusToBooleanConverter x:Key="GameStatusToBooleanConverter" />
     </UserControl.Resources>
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,*,Auto">
         <Grid Grid.Row="0"
               RowDefinitions="Auto,*"
               ColumnDefinitions="3*,1*"
@@ -44,5 +44,6 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
+        <Button Grid.Row="2" Content="To TestPage" Click="ToTestPageButtonClicked" />
     </Grid>
 </UserControl>
