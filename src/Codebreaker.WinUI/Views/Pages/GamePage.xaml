@@ -23,12 +23,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <!--Startgame section-->
         <Grid
-            Grid.Row="1"
+            Grid.Row="0"
             ColumnSpacing="25"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Start}">
             <Grid.ColumnDefinitions>
@@ -85,15 +84,18 @@
                     <TextBlock Text="{cme:ResourceString Name=GamePage_CancelButtonText}" />
                 </StackPanel>
             </Button>-->
-            <components:PegSelectionComponent 
-                Grid.Row="2"
-                ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
+                <components:PegSelectionComponent 
+            Grid.Row="3"
+            Margin="65,0,0,0"
+            ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
         </StackPanel>
         <!--Move section-->
         <ListBox 
             x:Name="listGameMoves"
-            Grid.Row="3"
+            Grid.Row="2"
             Background="Transparent"
+            SelectedIndex="-1"
+            IsHitTestVisible="False"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Running}"
             ItemsSource="{x:Bind ViewModel.GameMoves, Mode=OneWay}"
             ItemTemplate="{StaticResource PegsTemplate}" />

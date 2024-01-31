@@ -1,0 +1,10 @@
+{
+	"profiles": {
+		"CodebreakerUno.Windows (Unpackaged)": {
+			"commandName": "Project"
+		},
+		"CodebreakerUno.Windows (Package)": {
+			"commandName": "MsixPackage"
+		}
+	}
+}
