@@ -5,7 +5,9 @@ using Codebreaker.GameAPIs.Client;
 using Codebreaker.ViewModels;
 using Codebreaker.ViewModels.Contracts.Services;
 using Codebreaker.ViewModels.Services;
+using CodeBreaker.Avalonia.Contracts.Services.Navigation;
 using CodeBreaker.Avalonia.Services;
+using CodeBreaker.Avalonia.Services.Navigation;
 using CodeBreaker.Avalonia.Views;
 using CodeBreaker.Avalonia.Views.Pages;
 using Microsoft.Extensions.Configuration;
@@ -28,11 +30,14 @@ public partial class App : Application
         builder.Configuration.AddAppSettingsJson();
 
         // Services
+        builder.Services.AddNavigation<AvaloniaNavigationService>(pages => pages
+            .Configure<GamePage>("GamePage")
+            .Configure<TestPage>("TestPage")
+            .ConfigureInitialPage("GamePage"));
         builder.Services.Configure<GamePageViewModelOptions>(options => { });
         builder.Services.AddScoped<IInfoBarService, InfoBarService>();
         builder.Services.AddTransient<IDialogService, AvaloniaDialogService>();
         builder.Services.AddScoped<GamePageViewModel>();
-        builder.Services.AddTransient<GamePage>();
         builder.Services.AddHttpClient<IGamesClient, GamesClient>(client =>
         {
             client.BaseAddress = new(builder.Configuration.GetRequired("ApiBase"));
@@ -60,12 +65,12 @@ public partial class App : Application
         {
             desktop.MainWindow = new MainWindow()
             {
-                Content = _host.Services.GetRequiredService<GamePage>()
+                Content = new Shell()
             };
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
-            singleViewPlatform.MainView = new GamePage();
+            singleViewPlatform.MainView = new Shell();
         }
 
         base.OnFrameworkInitializationCompleted();

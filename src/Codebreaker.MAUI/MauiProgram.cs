@@ -1,4 +1,5 @@
-﻿using Codebreaker.ViewModels.Contracts.Services;
+﻿using Codebreaker.MAUI.Services.Navigation;
+using Codebreaker.ViewModels.Contracts.Services;
 using Microsoft.Extensions.Configuration;
 
 namespace Codebreaker.MAUI;
@@ -26,8 +27,11 @@ public static class MauiProgram
         builder.Configuration.AddJsonStream(FileSystem.OpenAppPackageFileAsync("appsettings.json").Result);
         builder.Configuration.AddJsonStream(FileSystem.OpenAppPackageFileAsync($"appsettings.{Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}.json").Result);
         builder.Services.Configure<GamePageViewModelOptions>(options => { });
+		builder.Services.AddNavigation<MauiNavigationService>(pages => pages
+			.Configure("GamePage", "//GamePage")
+			.Configure("TestPage", "//TestPage"));
+		builder.Services.AddScoped<IDialogService, MauiDialogService>();
 		builder.Services.AddScoped<IInfoBarService, InfoBarService>();
-        builder.Services.AddScoped<IDialogService, MauiDialogService>();
         builder.Services.AddScoped<GamePageViewModel>();
 		builder.Services.AddHttpClient<IGamesClient, GamesClient>(client =>
 		{
@@ -35,6 +39,7 @@ public static class MauiProgram
 				throw new InvalidOperationException("Could not find ApiBase configuration"));
 		});
 		builder.Services.AddTransient<GamePage>();
+		builder.Services.AddTransient<TestPage>();
 		return builder.Build();
 	}
 }

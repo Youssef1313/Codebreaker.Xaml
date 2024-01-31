@@ -85,9 +85,10 @@
                 Margin="20"
                 HorizontalOptions="Fill"
                 VerticalOptions="End"
-                Text="Move" 
+                Text="Move"
                 IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Cancelable}"
                 Command="{Binding SetMoveCommand, Mode=OneTime}" />
+            <Button Clicked="Button_Clicked" Text="To TestPage" />
         </VerticalStackLayout>
     </Grid>
 </ContentPage>

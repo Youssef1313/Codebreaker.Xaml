@@ -261,4 +261,7 @@
   <data name="GamePage_WonMessage" xml:space="preserve">
     <value>Congratulations - you won the game 🎉🏆</value>
   </data>
+  <data name="GamePage_NameInputHeader" xml:space="preserve">
+    <value>Please enter your gamername:</value>
+  </data>
 </root>

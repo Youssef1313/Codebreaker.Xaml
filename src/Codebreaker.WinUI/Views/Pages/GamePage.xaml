@@ -41,11 +41,11 @@
                 <!-- The extra grid and the empy (enabled) TextBlock are necessary for showing the tooltip over the (disabled) TextBox. -->
                 <TextBlock />
                 <TextBox
-                IsEnabled="{x:Bind ViewModel.IsNameEnterable, Mode=OneWay}"
-                Header="{cme:ResourceString Name=GamePage_NameInputHeader}"
-                PlaceholderText="{cme:ResourceString Name=GamePage_NameInputPlaceholder}"
-                VerticalAlignment="Center"
-                Text="{x:Bind ViewModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    IsEnabled="{x:Bind ViewModel.IsNameEnterable, Mode=OneWay}"
+                    Header="{cme:ResourceString Name=GamePage_NameInputHeader}"
+                    PlaceholderText="{cme:ResourceString Name=GamePage_NameInputPlaceholder}"
+                    VerticalAlignment="Center"
+                    Text="{x:Bind ViewModel.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <ToolTipService.ToolTip>
                     <ToolTip
                     Content="{cme:ResourceString Name=GamePage_NameAlreadyProvidedTooltip}"
@@ -89,9 +89,9 @@
                 </StackPanel>
             </Button>-->
                 <components:PegSelectionComponent 
-            Grid.Row="3"
-            Margin="65,0,0,0"
-            ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
+                    Grid.Row="3"
+                    Margin="65,0,0,0"
+                    ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
         </StackPanel>
         <!--Move section-->
         <ListBox 
