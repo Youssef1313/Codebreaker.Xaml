@@ -21,7 +21,10 @@ internal class MauiNavigationService : INavigationService
     public async ValueTask<bool> GoBackAsync()
     {
         if (_navigationStack.TryPop(out _) && _navigationStack.TryPeek(out var route))
-            return await Shell.Current.GoToAsync(route);
+        {
+            await Shell.Current.GoToAsync(route);
+            return true;
+        }
 
         return false;
     }
