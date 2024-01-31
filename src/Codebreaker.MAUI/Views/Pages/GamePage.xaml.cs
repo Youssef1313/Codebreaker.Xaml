@@ -8,10 +8,8 @@ public partial class GamePage : ContentPage
 
 	public GamePage(GamePageViewModel viewModel, INavigationService navigationService)
 	{
-		ViewModel = viewModel;
 		_navigationService = navigationService;
-
-		BindingContext = this;
+		BindingContext = viewModel;
 		InitializeComponent();
 
 		WeakReferenceMessenger.Default.Register<InfoMessage>(this, async (r, m) =>
@@ -19,8 +17,6 @@ public partial class GamePage : ContentPage
 			await DisplayAlert("Info", m.Text, "Close");
 		});
 	}
-
-	public GamePageViewModel ViewModel { get; }
 
     private async void Button_Clicked(object sender, EventArgs e)
     {

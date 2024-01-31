@@ -156,8 +156,7 @@
         </trans-unit>
         <trans-unit id="AccountPage_LogoutButton" translate="yes" xml:space="preserve">
           <source>Signout</source>
-          <target state="needs-review-translation">Ausloggen</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Ausloggen</target>
         </trans-unit>
         <trans-unit id="AccountPage_MailHeader" translate="yes" xml:space="preserve">
           <source>E-Mail</source>
@@ -169,8 +168,7 @@
         </trans-unit>
         <trans-unit id="AccountPage_LogoutConfirmCloseText" translate="yes" xml:space="preserve">
           <source>No, keep me signed in</source>
-          <target state="needs-review-translation">Nein, angemeldet bleiben</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Nein, angemeldet bleiben</target>
         </trans-unit>
         <trans-unit id="AccountPage_LogoutConfirmContent" translate="yes" xml:space="preserve">
           <source>Do you really want to sign out?</source>
@@ -178,12 +176,27 @@
         </trans-unit>
         <trans-unit id="AccountPage_LogoutConfirmPrimaryText" translate="yes" xml:space="preserve">
           <source>Yes, sign me out</source>
-          <target state="needs-review-translation">Ja, abmelden</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Ja, abmelden</target>
         </trans-unit>
         <trans-unit id="AccountPage_LogoutConfirmTitle" translate="yes" xml:space="preserve">
           <source>Signout</source>
           <target state="final">Abmelden</target>
+        </trans-unit>
+        <trans-unit id="GamePage_LostButtonText" translate="yes" xml:space="preserve">
+          <source>Ok, try again</source>
+          <target state="final">Ok, erneut versuchen</target>
+        </trans-unit>
+        <trans-unit id="GamePage_LostMessage" translate="yes" xml:space="preserve">
+          <source>Oh no - you lost the game 😑</source>
+          <target state="final">Oh nein - Sie haben das Spiel verloren 😑</target>
+        </trans-unit>
+        <trans-unit id="GamePage_WonButtonText" translate="yes" xml:space="preserve">
+          <source>Great, play again</source>
+          <target state="final">Toll, erneut spielen</target>
+        </trans-unit>
+        <trans-unit id="GamePage_WonMessage" translate="yes" xml:space="preserve">
+          <source>Congratulations - you won the game 🎉🏆</source>
+          <target state="final">Glückwunsch - Sie haben das Spiel gewonnen 🎉🏆</target>
         </trans-unit>
       </group>
     </body>

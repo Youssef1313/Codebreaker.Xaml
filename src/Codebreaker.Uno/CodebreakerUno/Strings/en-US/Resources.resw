@@ -184,10 +184,10 @@
     <value>The gamername was already defined during sign-up</value>
   </data>
   <data name="GamePage_NameInput" xml:space="preserve">
-    <value>Player name</value>
+    <value>Gamername</value>
   </data>
   <data name="GamePage_NameInputPlaceholder" xml:space="preserve">
-    <value>Enter your player name</value>
+    <value>Enter your gamername</value>
   </data>
   <data name="GamePage_StartButtonText" xml:space="preserve">
     <value>Start game</value>
@@ -249,7 +249,16 @@
   <data name="AccountPage_NameHeader" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="GamePage_NameInputHeader" xml:space="preserve">
-    <value>Please enter your player name</value>
+  <data name="GamePage_LostButtonText" xml:space="preserve">
+    <value>Ok, try again</value>
+  </data>
+  <data name="GamePage_LostMessage" xml:space="preserve">
+    <value>Oh no - you lost the game 😑</value>
+  </data>
+  <data name="GamePage_WonButtonText" xml:space="preserve">
+    <value>Great, play again</value>
+  </data>
+  <data name="GamePage_WonMessage" xml:space="preserve">
+    <value>Congratulations - you won the game 🎉🏆</value>
   </data>
 </root>

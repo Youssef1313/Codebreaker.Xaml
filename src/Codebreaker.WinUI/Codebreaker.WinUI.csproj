@@ -51,6 +51,7 @@
   <ItemGroup>
     <PackageReference Include="CNInnovation.Codebreaker.ViewModels" Version="3.5.0-beta.29" />
     <PackageReference Include="CommunityToolkit.WinUI.UI" Version="7.1.2" />
+    <PackageReference Include="CommunityToolkit.WinUI.UI.Animations" Version="7.1.2" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
@@ -82,6 +83,7 @@
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
     <Nullable>enable</Nullable>
     <UserSecretsId>4c0c5c37-65e2-4165-aeec-1e26bebf0b22</UserSecretsId>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
@@ -94,12 +96,28 @@
     <CustomAdditionalCompileInputs Remove="Views\LivePage.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\Animations\LostAnimation_300_opt.gif" />
+    <None Remove="Assets\Animations\WonAnimation_300_opt.gif" />
+    <None Remove="Views\Components\GameResultDisplay.xaml" />
     <None Remove="Views\Components\InfoBarArea.xaml" />
     <None Remove="Views\Components\PegSelectionComponent.xaml" />
     <None Remove="Views\Pages\GamePage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\CodeBreaker.WinUI.de.xlf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Assets\Animations\LostAnimation_300_opt.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Assets\Animations\WonAnimation_300_opt.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Views\Components\GameResultDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Views\Components\InfoBarArea.xaml">

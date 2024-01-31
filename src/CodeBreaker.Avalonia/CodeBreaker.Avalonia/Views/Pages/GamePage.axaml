@@ -15,6 +15,7 @@
         <converter:GameStatusToBooleanConverter x:Key="GameStatusToBooleanConverter" />
     </UserControl.Resources>
     <Grid RowDefinitions="Auto,*,Auto">
+        <components:GameResultDisplay Grid.Row="0" />
         <Grid Grid.Row="0"
               RowDefinitions="Auto,*"
               ColumnDefinitions="3*,1*"

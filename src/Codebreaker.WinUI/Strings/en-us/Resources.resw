@@ -249,4 +249,16 @@
   <data name="AccountPage_NameHeader" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="GamePage_LostButtonText" xml:space="preserve">
+    <value>Ok, try again</value>
+  </data>
+  <data name="GamePage_LostMessage" xml:space="preserve">
+    <value>Oh no - you lost the game 😑</value>
+  </data>
+  <data name="GamePage_WonButtonText" xml:space="preserve">
+    <value>Great, play again</value>
+  </data>
+  <data name="GamePage_WonMessage" xml:space="preserve">
+    <value>Congratulations - you won the game 🎉🏆</value>
+  </data>
 </root>
