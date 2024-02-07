@@ -94,14 +94,15 @@
                     ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
         </StackPanel>
         <!--Move section-->
-        <ListBox 
-            x:Name="listGameMoves"
-            Grid.Row="2"
-            Background="Transparent"
-            SelectedIndex="-1"
-            IsHitTestVisible="False"
-            Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Running}"
-            ItemsSource="{x:Bind ViewModel.GameMoves, Mode=OneWay}"
-            ItemTemplate="{StaticResource PegsTemplate}" />
+        <ScrollViewer Grid.Row="2" Padding="0,0,0,15" x:Name="pegScrollView">
+            <ListBox 
+                x:Name="listGameMoves"
+                Background="Transparent"
+                SelectedIndex="-1"
+                IsHitTestVisible="False"
+                Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Running}"
+                ItemsSource="{x:Bind ViewModel.GameMoves, Mode=OneWay}"
+                ItemTemplate="{StaticResource PegsTemplate}" />
+        </ScrollViewer>
     </Grid>
 </Page>
