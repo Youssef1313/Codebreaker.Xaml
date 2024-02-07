@@ -40,5 +40,9 @@ public sealed partial class GamePage : Page, IRecipient<GameMoveMessage>
                 animation.Configuration = new BasicConnectedAnimationConfiguration();
                 animation.TryStart(ellipse);
             });
+
+        // Scroll to bottom
+        pegScrollViewer.UpdateLayout();
+        pegScrollViewer.ScrollToVerticalOffset(pegScrollViewer.ScrollableHeight);
     }
 }
