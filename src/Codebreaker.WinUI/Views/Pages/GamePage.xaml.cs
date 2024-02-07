@@ -43,7 +43,7 @@ public sealed partial class GamePage : Page, IRecipient<GameMoveMessage>
             });
 
         // Scroll to bottom
-        pegScrollView.UpdateLayout();
-        pegScrollView.ScrollToVerticalOffset(1000000000);
+        pegScrollViewer.UpdateLayout();
+        pegScrollViewer.ScrollToVerticalOffset(pegScrollViewer.ScrollableHeight);
     }
 }

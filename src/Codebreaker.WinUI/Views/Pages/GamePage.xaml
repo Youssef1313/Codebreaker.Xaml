@@ -94,7 +94,7 @@
                     ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
         </StackPanel>
         <!--Move section-->
-        <ScrollViewer Grid.Row="2" Padding="0,0,0,15" x:Name="pegScrollView">
+        <ScrollViewer Grid.Row="2" Padding="0,0,0,15" x:Name="pegScrollViewer">
             <ListBox 
                 x:Name="listGameMoves"
                 Background="Transparent"
