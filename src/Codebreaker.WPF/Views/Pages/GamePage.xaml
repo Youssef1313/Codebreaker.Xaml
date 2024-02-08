@@ -94,13 +94,13 @@
             Margin="86,0,0,8"
             ViewModel="{Binding ViewModel, ElementName=Self, Mode=OneWay}" />
 
+        <ScrollViewer Grid.Row="2" Padding="0,0,0,15" x:Name="pegScrollViewer">
         <ListView
             Height="Auto"
             Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
-            Grid.Row="2"
-            Background="LightGray"
             ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}"
             ItemTemplate="{StaticResource PegsTemplate}" />
+        </ScrollViewer>
 
         <TextBlock Grid.Row="3" Text="{Binding ViewModel.GameStatus,Mode=OneWay}" />
             <ProgressBar
