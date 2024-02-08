@@ -99,11 +99,19 @@
             ItemTemplate="{StaticResource PegsTemplate}" />
         </ScrollViewer>
 
-        <TextBlock Grid.Row="3" Text="{Binding ViewModel.GameStatus,Mode=OneWay}" />
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="{Binding ViewModel.GameStatus,Mode=OneWay}" />
             <ProgressBar
-            Grid.Row="3"
+                Grid.Column="1"
             Height="15"
             Minimum="0" Maximum="100" IsIndeterminate="True" 
             Visibility="{Binding ViewModel.InProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
+            <Button Grid.Column="2" Click="Button_Click" Content="To TestPage" Padding="15,2" />
+        </Grid>
         </Grid>
 </Page>
