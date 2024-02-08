@@ -24,7 +24,7 @@
                     Background="DarkGray"
                     TextColor="White"
                     Margin="0,0,4,0"
-                    MinimumWidthRequest="45"
+                    MinimumWidthRequest="50"
                     WidthRequest="88" />
             </DataTemplate>
         </BindableLayout.ItemTemplate>
