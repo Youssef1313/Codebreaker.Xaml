@@ -1,8 +1,10 @@
 ﻿using Codebreaker.ViewModels.Contracts.Services;
+using Codebreaker.WPF.Helpers;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Codebreaker.WPF.Views.Pages;
 
-public partial class GamePage : Page
+public partial class GamePage : Page, IRecipient<GameMoveMessage>
 {
     private readonly INavigationService _navigationService;
 
@@ -10,15 +12,10 @@ public partial class GamePage : Page
     {
         ViewModel = App.Current.GetService<GamePageViewModel>();
         _navigationService = App.Current.GetService<INavigationService>();
-
         DataContext = this;
-
         InitializeComponent();
-
-        //WeakReferenceMessenger.Default.Register<GameStateChangedMessage>(this, (r, m) =>
-        //{
-        //    VisualStateManager.GoToElementState(MainGrid, m.GameMode.ToString(), true);
-        //});
+        WeakReferenceMessenger.Default.Register(this);
+        WeakReferenceMessenger.Default.UnregisterAllOnUnloaded(this);
     }
 
     public GamePageViewModel ViewModel
@@ -33,5 +30,14 @@ public partial class GamePage : Page
     private async void Button_Click(object sender, RoutedEventArgs e)
     {
         await _navigationService.NavigateToAsync("TestPage");
+    }
+
+    public void Receive(GameMoveMessage message)
+    {
+        if (message.GameMoveValue is not GameMoveValue.Completed)
+            return;
+
+        pegScrollViewer.UpdateLayout();
+        pegScrollViewer.ScrollToBottom();
     }
 }
