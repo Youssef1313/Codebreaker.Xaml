@@ -15,6 +15,8 @@ public sealed partial class GamePage : Page, IRecipient<GameMoveMessage>
     {
         ViewModel = App.Current.GetService<GamePageViewModel>();
         InitializeComponent();
+        WeakReferenceMessenger.Default.Register(this);
+        WeakReferenceMessenger.Default.UnregisterAllOnUnloaded(this);
     }
 
     public GamePageViewModel ViewModel { get; }
