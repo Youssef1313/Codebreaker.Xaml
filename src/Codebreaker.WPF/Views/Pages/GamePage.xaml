@@ -93,9 +93,10 @@
 
         <ScrollViewer Grid.Row="2" Padding="0,0,0,15" x:Name="pegScrollViewer">
         <ListView
-            Height="Auto"
+                BorderThickness="0"
                 SelectedIndex="-1"
                 IsHitTestVisible="False"
+                HorizontalContentAlignment="Stretch"
             Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
             ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}"
             ItemTemplate="{StaticResource PegsTemplate}" />
