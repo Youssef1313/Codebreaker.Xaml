@@ -15,9 +15,6 @@
         <conv:ColorNameToBrushConverter x:Key="ColorConverter" />
     </Page.Resources>
 
-    <StackPanel Orientation="Vertical">
-        <Button Click="Button_Click" Content="To TestPage" />
-
         <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -109,5 +106,4 @@
             Minimum="0" Maximum="100" IsIndeterminate="True" 
             Visibility="{Binding ViewModel.InProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
         </Grid>
-    </StackPanel>
 </Page>
