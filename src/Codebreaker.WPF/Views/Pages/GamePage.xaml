@@ -15,7 +15,7 @@
         <conv:ColorNameToBrushConverter x:Key="ColorConverter" />
     </Page.Resources>
 
-        <Grid>
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -25,35 +25,35 @@
 
         <!--<StackPanel Orientation="Vertical" Grid.Row="0">
             --><!-- TODO: Create component for this, to make it (more) generic. --><!--
-            <Grid Visibility="{Binding Path=ViewModel.InfoMessage.IsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+                <Grid Visibility="{Binding Path=ViewModel.InfoMessage.IsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Information: " VerticalAlignment="Center" Margin="8,0" />
-                <TextBlock Grid.Column="1" Text="{Binding ViewModel.InfoMessage.Message, Mode=OneWay}" VerticalAlignment="Center" Margin="8,0" />
-                <Button
-                    Grid.Column="2"
-                    Content="{Binding ViewModel.InfoMessage.ActionTitle, Mode=OneWay}" Padding="30,8"
-                    Command="{Binding ViewModel.InfoMessage.ActionCommand, Mode=OneWay}" />
-            </Grid>
-            <Grid Visibility="{Binding Path=ViewModel.ErrorMessage.IsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+                    <TextBlock Text="Information: " VerticalAlignment="Center" Margin="8,0" />
+                    <TextBlock Grid.Column="1" Text="{Binding ViewModel.InfoMessage.Message, Mode=OneWay}" VerticalAlignment="Center" Margin="8,0" />
+                    <Button
+                        Grid.Column="2"
+                        Content="{Binding ViewModel.InfoMessage.ActionTitle, Mode=OneWay}" Padding="30,8"
+                        Command="{Binding ViewModel.InfoMessage.ActionCommand, Mode=OneWay}" />
+                </Grid>
+                <Grid Visibility="{Binding Path=ViewModel.ErrorMessage.IsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Error: " VerticalAlignment="Center" Margin="8,0" />
-                <TextBlock Grid.Column="1" Text="{Binding ViewModel.ErrorMessage.Message, Mode=OneWay}" VerticalAlignment="Center" Margin="8,0" />
-                <Button
-                    Grid.Column="2"
-                    Content="{Binding ViewModel.ErrorMessage.ActionTitle, Mode=OneWay}" Padding="30,8"
-                    Command="{Binding ViewModel.ErrorMessage.ActionCommand, Mode=OneWay}" />
-            </Grid>
-        </StackPanel>-->
+                    <TextBlock Text="Error: " VerticalAlignment="Center" Margin="8,0" />
+                    <TextBlock Grid.Column="1" Text="{Binding ViewModel.ErrorMessage.Message, Mode=OneWay}" VerticalAlignment="Center" Margin="8,0" />
+                    <Button
+                        Grid.Column="2"
+                        Content="{Binding ViewModel.ErrorMessage.ActionTitle, Mode=OneWay}" Padding="30,8"
+                        Command="{Binding ViewModel.ErrorMessage.ActionCommand, Mode=OneWay}" />
+                </Grid>
+            </StackPanel>-->
         <components:GameResultDisplay
             Panel.ZIndex="1"
             Grid.Row="0"/>
@@ -92,14 +92,14 @@
             ViewModel="{Binding ViewModel, ElementName=Self, Mode=OneWay}" />
 
         <ScrollViewer Grid.Row="2" Padding="0,0,0,15" x:Name="pegScrollViewer">
-        <ListView
+            <ListView
                 BorderThickness="0"
                 SelectedIndex="-1"
                 IsHitTestVisible="False"
                 HorizontalContentAlignment="Stretch"
-            Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
-            ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}"
-            ItemTemplate="{StaticResource PegsTemplate}" />
+                Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibilityConverter}, ConverterParameter=Running}"
+                ItemsSource="{Binding ViewModel.GameMoves, Mode=OneWay}"
+                ItemTemplate="{StaticResource PegsTemplate}" />
         </ScrollViewer>
 
         <Grid Grid.Row="3">
@@ -111,10 +111,10 @@
             <TextBlock Grid.Column="0" Text="{Binding ViewModel.GameStatus,Mode=OneWay}" />
             <ProgressBar
                 Grid.Column="1"
-            Height="15"
-            Minimum="0" Maximum="100" IsIndeterminate="True" 
-            Visibility="{Binding ViewModel.InProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                Height="15"
+                Minimum="0" Maximum="100" IsIndeterminate="True" 
+                Visibility="{Binding ViewModel.InProgress, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <Button Grid.Column="2" Click="Button_Click" Content="To TestPage" Padding="15,2" />
         </Grid>
-        </Grid>
+    </Grid>
 </Page>
