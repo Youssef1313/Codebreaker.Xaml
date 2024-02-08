@@ -9,7 +9,7 @@
     <conv:IntToEnumerableConverter x:Key="IntToEnumerableConverter" />-->
 
     <DataTemplate x:Key="PegsTemplate">
-        <Grid Background="Transparent">
+        <Grid Background="LightGray">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto" />
                 <ColumnDefinition Width="auto" />
