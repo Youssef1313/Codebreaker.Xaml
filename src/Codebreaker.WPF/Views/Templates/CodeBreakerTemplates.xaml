@@ -4,9 +4,6 @@
 
     <conv:KeyPegColorNameToBrushConverter x:Key="KeyPegColorNameToBrushConverter" />
     <conv:ColorNameToBrushConverter x:Key="ColorConverter" />
-    <!--<conv:ColorNameToBrushConverter x:Key="ColorConverter" />
-    <conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />
-    <conv:IntToEnumerableConverter x:Key="IntToEnumerableConverter" />-->
 
     <DataTemplate x:Key="PegsTemplate">
         <Grid Background="LightGray">
@@ -29,23 +26,18 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
 
-            <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <ItemsControl Grid.Row="0" ItemsSource="{Binding Path=KeyPegs, Mode=OneTime}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <StackPanel Orientation="Horizontal" />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Ellipse Width="16" Height="16" Fill="{Binding Converter={StaticResource KeyPegColorNameToBrushConverter}}" Margin="10,0" />
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </Grid>
+            <ItemsControl Grid.Column="2" ItemsSource="{Binding Path=KeyPegs, Mode=OneTime}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Ellipse Width="16" Height="16" Fill="{Binding Converter={StaticResource KeyPegColorNameToBrushConverter}}" Margin="10,0" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </Grid>
     </DataTemplate>
 </ResourceDictionary>
