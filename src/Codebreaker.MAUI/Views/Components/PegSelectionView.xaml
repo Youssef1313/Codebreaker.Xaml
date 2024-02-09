@@ -12,8 +12,11 @@
     <ContentView.Resources>
         <conv:DictionaryToValuesConverter x:Key="DictionaryToValuesConverter" />
     </ContentView.Resources>
-    <HorizontalStackLayout Margin="10,0"
-                           BindableLayout.ItemsSource="{Binding Path=Fields, Mode=OneWay}">
+    <VerticalStackLayout>
+        <Label Text="Select your colors" FontSize="Header" />
+        <HorizontalStackLayout
+            BindableLayout.ItemsSource="{Binding Path=Fields, Mode=OneWay}"
+            Spacing="4">
         <BindableLayout.ItemTemplate>
             <DataTemplate>
                 <Picker
@@ -29,4 +32,5 @@
             </DataTemplate>
         </BindableLayout.ItemTemplate>
     </HorizontalStackLayout>
+    </VerticalStackLayout>
 </ContentView>
