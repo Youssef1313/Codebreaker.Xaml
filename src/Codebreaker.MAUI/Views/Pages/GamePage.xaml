@@ -29,8 +29,8 @@
                 FlexLayout.Grow="2">
                 <Label
                     VerticalTextAlignment="Center"
-                    Text="Enter your Gamername:" 
-                    FontSize="18" />
+                    Text="Enter your Gamername" 
+                    FontSize="Header" />
                 <Entry
                     IsEnabled="{Binding IsNameEnterable, Mode=OneWay}"
                     Text="{Binding Name, Mode=TwoWay }"
@@ -60,7 +60,6 @@
         <FlexLayout
             Grid.Row="1"
             MaximumWidthRequest="700"
-            Padding="15,0"
             IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Cancelable}"
             Wrap="Wrap"
             JustifyContent="Center"
