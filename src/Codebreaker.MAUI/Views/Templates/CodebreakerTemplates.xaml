@@ -22,9 +22,9 @@
 
     <DataTemplate x:Key="PegsTemplate">
         <ViewCell>
-            <Grid ColumnDefinitions="Auto, Auto, Auto">
-                <Border Grid.Column="1" StrokeThickness="2" Stroke="{StaticResource Black}">
-                    <HorizontalStackLayout Margin="16,0,0,0" BindableLayout.ItemsSource="{Binding Path=GuessPegs}">
+            <Grid ColumnDefinitions="*, 400, *" HorizontalOptions="FillAndExpand">
+                <HorizontalStackLayout Grid.Column="1">
+                    <HorizontalStackLayout HorizontalOptions="Start" Margin="16,0,0,0" BindableLayout.ItemsSource="{Binding Path=GuessPegs}">
                         <HorizontalStackLayout.Resources>
                             <Style TargetType="Ellipse">
                                 <Setter Property="WidthRequest" Value="38" />
@@ -38,14 +38,9 @@
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </HorizontalStackLayout>
-                </Border>
 
-                <Border
-                    Grid.Column="2"
-                    StrokeThickness="2"
-                    Stroke="{StaticResource Black}">
-                    <Grid Margin="12,0,0,0" RowDefinitions="*, *">
-                        <Grid.Resources>
+                    <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Path=KeyPegs}" HorizontalOptions="Start" Margin="12,0,0,0">
+                        <HorizontalStackLayout.Resources>
                             <Style TargetType="Ellipse">
                                 <Setter Property="Stroke" Value="White" />
                                 <Setter Property="StrokeThickness" Value="2" />
@@ -53,16 +48,14 @@
                                 <Setter Property="HeightRequest" Value="16" />
                                 <Setter Property="Margin" Value="8" />
                             </Style>
-                        </Grid.Resources>
-                        <HorizontalStackLayout BindableLayout.ItemsSource="{Binding Path=KeyPegs}">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <Ellipse Fill="{Binding Converter={StaticResource PegColorConverter}}" />
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </HorizontalStackLayout>
-                    </Grid>
-                </Border>
+                        </HorizontalStackLayout.Resources>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Ellipse Fill="{Binding Converter={StaticResource PegColorConverter}}" />
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
             </Grid>
         </ViewCell>
     </DataTemplate>
