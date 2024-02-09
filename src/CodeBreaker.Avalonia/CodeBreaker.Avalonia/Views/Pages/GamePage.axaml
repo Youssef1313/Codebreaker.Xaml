@@ -34,17 +34,21 @@
             Grid.Row="0"
             IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToBooleanConverter}, ConverterParameter=Cancelable}"
             Margin="55,0,0,15" />
-        <ItemsControl
-            IsVisible="{Binding GameStatus, Mode=OneWay, ConverterParameter=Running}"
+        <ScrollViewer
+            x:Name="pegScrollViewer"
+            Padding="0,0,0,15"
             Grid.Row="1"
-            ItemsSource="{Binding GameMoves, Mode=OneWay}"
-            ItemTemplate="{StaticResource PegsTemplate}">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <StackPanel Orientation="Vertical" Spacing="15" />
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-        </ItemsControl>
+            IsVisible="{Binding GameStatus, Mode=OneWay, ConverterParameter=Running}">
+            <ItemsControl
+                ItemsSource="{Binding GameMoves, Mode=OneWay}"
+                ItemTemplate="{StaticResource PegsTemplate}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical" Spacing="15" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+        </ScrollViewer>
         <Button Grid.Row="2" Content="To TestPage" Click="ToTestPageButtonClicked" />
     </Grid>
 </UserControl>
