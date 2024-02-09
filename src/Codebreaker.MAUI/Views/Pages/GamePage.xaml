@@ -41,12 +41,12 @@
                 FlexLayout.Grow="1"
                 Margin="0,5,0,0"
                 ColumnDefinitions="*, auto"
-                MinimumWidthRequest="250">
+                MinimumWidthRequest="250"
+                IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Start}">
                 <Button
                     Grid.Column="0"
                     Text="Start the game"
                     MinimumWidthRequest="150"
-                    IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Start}"
                     Command="{Binding StartGameCommand, Mode=OneTime}" />
                 <ActivityIndicator
                     Grid.Column="1"
@@ -89,6 +89,7 @@
 
         <ScrollView Grid.Row="2" Padding="0,0,0,15" x:Name="pegScrollView" HorizontalOptions="CenterAndExpand">
             <ListView
+                x:Name="test"
                 HorizontalOptions="FillAndExpand"
                 SelectionMode="None"
                 IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Running}"
