@@ -5,7 +5,6 @@ using Codebreaker.GameAPIs.Client;
 using Codebreaker.ViewModels;
 using Codebreaker.ViewModels.Contracts.Services;
 using Codebreaker.ViewModels.Services;
-using CodeBreaker.Avalonia.Contracts.Services.Navigation;
 using CodeBreaker.Avalonia.Services;
 using CodeBreaker.Avalonia.Services.Navigation;
 using CodeBreaker.Avalonia.Views;
@@ -18,12 +17,9 @@ using System;
 namespace CodeBreaker.Avalonia;
 public partial class App : Application
 {
-    private readonly IHost _host;
-
     public App()
     {
         this.SetDotnetEnvironmentVariable();
-
         var builder = Host.CreateApplicationBuilder(Environment.GetCommandLineArgs());
 
         // Configuration
@@ -42,22 +38,20 @@ public partial class App : Application
         {
             client.BaseAddress = new(builder.Configuration.GetRequired("ApiBase"));
         });
-        _host = builder.Build();
-        DefaultScope = _host!.Services.CreateScope();
+        var host = builder.Build();
+        DefaultScope = host.Services.CreateScope();
     }
+
+    internal IServiceScope DefaultScope { get; private set; }
 
     internal new static App Current => (App)Application.Current!;
 
-    internal IServiceScope? DefaultScope { get; private set; }
-
     public T GetService<T>()
         where T : class =>
-        DefaultScope!.ServiceProvider.GetRequiredService<T>();
+        DefaultScope.ServiceProvider.GetRequiredService<T>();
 
-    public override void Initialize()
-    {
+    public override void Initialize() =>
         AvaloniaXamlLoader.Load(this);
-    }
 
     public override void OnFrameworkInitializationCompleted()
     {
