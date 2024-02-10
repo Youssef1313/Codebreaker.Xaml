@@ -1,4 +1,5 @@
-﻿using CodeBreaker.Avalonia;
+﻿using Avalonia.Platform;
+using CodeBreaker.Avalonia;
 using System;
 
 namespace Microsoft.Extensions.Configuration;
@@ -19,7 +20,8 @@ internal static class ConfigurationExtensions
 
     public static void AddAppSettingsJson(this ConfigurationManager configuration)
     {
-        configuration.AddJsonFile("appsettings.json", true);
-        configuration.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}.json");
+        var assemblyName = typeof(App).Assembly.GetName().Name;
+        configuration.AddJsonStream(AssetLoader.Open(new($"avares://{assemblyName}/appsettings.json")));
+        configuration.AddJsonStream(AssetLoader.Open(new($"avares://{assemblyName}/appsettings.{Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}.json")));
     }
 }
