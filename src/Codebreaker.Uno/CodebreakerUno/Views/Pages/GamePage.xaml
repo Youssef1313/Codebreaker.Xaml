@@ -20,6 +20,36 @@
         </Style>
     </Page.Resources>
     <Grid x:Name="ContentArea">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="641" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="NameInput.(Grid.Column)" Value="0" />
+                        <Setter Target="NameInput.(Grid.RowSpan)" Value="2" />
+                        <Setter Target="NameSubmitButton.(Grid.Column)" Value="1" />
+                        <Setter Target="NameSubmitButton.(Grid.RowSpan)" Value="2" />
+
+                        <Setter Target="PegSelection.Margin" Value="80,0,0,0" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="NameInput.(Grid.Row)" Value="0" />
+                        <Setter Target="NameInput.(Grid.ColumnSpan)" Value="2" />
+                        <Setter Target="NameSubmitButton.(Grid.Row)" Value="1" />
+                        <Setter Target="NameSubmitButton.(Grid.ColumnSpan)" Value="2" />
+
+                        <Setter Target="PegSelection.Margin" Value="0" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
@@ -32,13 +62,18 @@
         <Grid
             Grid.Row="0"
             ColumnSpacing="25"
+            RowSpacing="15"
             Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Start}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
-                <!-- The extra grid and the empy (enabled) TextBlock are necessary for showing the tooltip over the (disabled) TextBox. -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid x:Name="NameInput">
+                 <!--The extra grid and the empy (enabled) TextBlock are necessary for showing the tooltip over the (disabled) TextBox.-->
                 <TextBlock />
                 <TextBox
                     IsEnabled="{x:Bind ViewModel.IsNameEnterable, Mode=OneWay}"
@@ -54,7 +89,7 @@
                 </ToolTipService.ToolTip>
             </Grid>
             <Button
-                Grid.Column="1"
+                x:Name="NameSubmitButton"
                 VerticalAlignment="Bottom"
                 HorizontalAlignment="Stretch"
                 Padding="35,8"
@@ -67,15 +102,11 @@
             </Button>
         </Grid>
         <!--Gamebar section-->
-        <StackPanel
-            Orientation="Horizontal"
+        <components:PegSelectionComponent
+            x:Name="PegSelection"
             Grid.Row="1"
-            Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Cancelable}">
-            <components:PegSelectionComponent 
-            Grid.Row="3"
-            Margin="65,0,0,0"
+            Visibility="{x:Bind ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibility}, ConverterParameter=Cancelable}"
             ViewModel="{x:Bind ViewModel, Mode=OneWay}" />
-        </StackPanel>
         <!--Move section-->
         <ScrollViewer Grid.Row="2" Padding="0,0,0,15" x:Name="pegScrollViewer">
             <ListBox 
