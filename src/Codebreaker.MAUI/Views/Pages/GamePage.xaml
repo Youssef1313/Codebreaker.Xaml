@@ -27,7 +27,8 @@
             <VerticalStackLayout
                 FlexLayout.Basis="500"
                 Padding="5,0"
-                FlexLayout.Grow="2">
+                FlexLayout.Grow="2"
+                Spacing="5">
                 <Label Text="Enter your player name" />
                 <Entry
                     IsEnabled="{Binding IsNameEnterable, Mode=OneWay}"
