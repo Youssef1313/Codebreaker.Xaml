@@ -12,8 +12,8 @@
     <ContentView.Resources>
         <conv:DictionaryToValuesConverter x:Key="DictionaryToValuesConverter" />
     </ContentView.Resources>
-    <VerticalStackLayout>
-        <Label Text="Select your colors" FontSize="Header" />
+    <VerticalStackLayout Spacing="5">
+        <Label Text="Select your colors" />
         <HorizontalStackLayout
             BindableLayout.ItemsSource="{Binding Path=Fields, Mode=OneWay}"
             Spacing="4">
