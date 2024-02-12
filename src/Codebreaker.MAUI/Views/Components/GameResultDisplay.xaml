@@ -11,12 +11,12 @@
         <VerticalStackLayout IsVisible="{Binding GameStatus, Mode=OneWay, Converter={converter:GameStatusToIsVisibleConverter}, ConverterParameter=Won}">
             <Image Source="wonanimation_300_opt.gif" IsAnimationPlaying="True" MaximumHeightRequest="300" />
             <Label Text="Congratulations - you won the game 🎉🏆" FontSize="20" HorizontalOptions="Center" Margin="0,50,0,20" />
-            <Button Text="Great, play again" HorizontalOptions="Center" Margin="0,0,0,100" Command="{Binding StartGameCommand, Mode=OneTime}" />
+            <Button Text="Great, play again" HorizontalOptions="Center" Margin="0,0,0,50" Command="{Binding StartGameCommand, Mode=OneTime}" />
         </VerticalStackLayout>
         <VerticalStackLayout IsVisible="{Binding GameStatus, Mode=OneWay, Converter={converter:GameStatusToIsVisibleConverter}, ConverterParameter=Lost}">
             <Image Source="lostanimation_300_opt.gif" IsAnimationPlaying="True" MaximumHeightRequest="300" />
             <Label Text="Oh no - you lost the game 😑" FontSize="20" HorizontalOptions="Center" Margin="0,50,0,20" />
-            <Button Text="Ok, try again" HorizontalOptions="Center" Margin="0,0,0,100" Command="{Binding StartGameCommand, Mode=OneTime}" />
+            <Button Text="Ok, try again" HorizontalOptions="Center" Margin="0,0,0,50" Command="{Binding StartGameCommand, Mode=OneTime}" />
         </VerticalStackLayout>
     </Grid>
 </ContentView>

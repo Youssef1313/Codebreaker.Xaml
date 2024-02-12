@@ -26,20 +26,20 @@
             IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Start}">
             <VerticalStackLayout
                 FlexLayout.Basis="500"
-                FlexLayout.Grow="2">
-                <Label
-                    VerticalTextAlignment="Center"
-                    Text="Enter your Gamername" 
-                    FontSize="Header" />
+                Padding="5,0"
+                FlexLayout.Grow="2"
+                Spacing="5">
+                <Label Text="Enter your player name" />
                 <Entry
                     IsEnabled="{Binding IsNameEnterable, Mode=OneWay}"
                     Text="{Binding Name, Mode=TwoWay }"
-                    Placeholder="Enter your name"/>
+                    Placeholder="Enter your player name"/>
             </VerticalStackLayout>
-            <Grid 
+            <Grid
                 FlexLayout.Basis="300"
                 FlexLayout.Grow="1"
                 Margin="0,5,0,0"
+                Padding="5,0"
                 ColumnDefinitions="*, auto"
                 MinimumWidthRequest="250"
                 IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Start}">
@@ -57,36 +57,12 @@
             </Grid>
         </FlexLayout>
 
-        <FlexLayout
+        <components:PegSelectionView
             Grid.Row="1"
             MaximumWidthRequest="700"
-            IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Cancelable}"
-            Wrap="Wrap"
-            JustifyContent="Center"
-            AlignItems="Center">
-            <components:PegSelectionView />
-            <Grid
-                FlexLayout.Basis="200"
-                FlexLayout.Grow="1"
-                ColumnDefinitions="*, auto"
-                Padding="0,10"
-                MinimumWidthRequest="250">
-                <Button
-                    Grid.Column="0"
-                    Text="Move"
-                    MinimumWidthRequest="150"
-                    IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Cancelable}"
-                    Command="{Binding SetMoveCommand, Mode=OneTime}" />
-                <ActivityIndicator
-                    Grid.Column="1"
-                    Margin="15,0,0,0"
-                    IsVisible="{Binding InProgress, Mode=OneWay}"
-                    IsRunning="True"
-                    VerticalOptions="Center" />
-            </Grid>
-        </FlexLayout>
-
-        <ScrollView Grid.Row="2" Padding="0,0,0,15" x:Name="pegScrollView" HorizontalOptions="CenterAndExpand">
+            IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusVisibleConverter}, ConverterParameter=Cancelable}"/>
+        
+        <ScrollView Grid.Row="2" Padding="0,15,0,15" x:Name="pegScrollView" HorizontalOptions="CenterAndExpand">
             <ListView
                 x:Name="test"
                 HorizontalOptions="FillAndExpand"
