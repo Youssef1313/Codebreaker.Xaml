@@ -21,8 +21,8 @@
         </DataTemplate>
         <DataTemplate x:Key="SelectColorItemTemplate" x:DataType="vmComponents:SelectedFieldViewModel">
             <ComboBox
-                Margin="04" Width="112"
-                Height="92"
+                Margin="4"
+                Width="112" Height="92"
                 ItemsSource="{Binding ElementName=ThisControl, Path=DataContext.Game.FieldValues[colors], Mode=OneWay}"
                 SelectedItem="{x:Bind Value, Mode=TwoWay}"
                 ItemTemplate="{StaticResource SelectColorTemplate}"
@@ -30,22 +30,63 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid x:Name="Wrapper" ColumnSpacing="15" RowSpacing="15">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto" />
+            <ColumnDefinition MaxWidth="500" />
+            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PegComboBoxes.(Grid.Column)" Value="0" />
+                        <Setter Target="MoveSubmitButton.(Grid.Column)" Value="1" />
+                        <Setter Target="PegComboBoxes.(Grid.RowSpan)" Value="2" />
+                        <Setter Target="MoveSubmitButton.(Grid.RowSpan)" Value="2" />
+
+                        <Setter Target="PegComboBoxes.HorizontalAlignment" Value="Left" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="PegComboBoxes.(Grid.Row)" Value="0" />
+                        <Setter Target="MoveSubmitButton.(Grid.Row)" Value="1" />
+                        <Setter Target="PegComboBoxes.(Grid.ColumnSpan)" Value="2" />
+                        <Setter Target="MoveSubmitButton.(Grid.ColumnSpan)" Value="2" />
+
+                        <Setter Target="PegComboBoxes.HorizontalAlignment" Value="Center" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <ItemsControl
-            Grid.Column="0"
+            x:Name="PegComboBoxes"
             ItemsSource="{x:Bind Path=ViewModel.Fields, Mode=OneWay}"
             ItemTemplate="{StaticResource SelectColorItemTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="15,0,15,10" />
+                    <VariableSizedWrapGrid Orientation="Horizontal" ItemWidth="112" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
-        <Button Command="{x:Bind ViewModel.SetMoveCommand, Mode=OneTime}" Grid.Column="1" Margin="4" VerticalAlignment="Top" Height="92" Width="100">
+        <Button
+            x:Name="MoveSubmitButton"
+            Margin="4"
+            Height="92"
+            MinWidth="120"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Command="{x:Bind ViewModel.SetMoveCommand, Mode=OneTime}">
             <StackPanel Orientation="Vertical" Spacing="5">
                 <SymbolIcon Symbol="Send" Visibility="{x:Bind ViewModel.SetMoveCommand.IsRunning, Mode=OneWay, Converter={StaticResource BoolToVisibility}, ConverterParameter=True}" />
                 <ProgressRing Visibility="{x:Bind ViewModel.SetMoveCommand.IsRunning, Mode=OneWay}" />
