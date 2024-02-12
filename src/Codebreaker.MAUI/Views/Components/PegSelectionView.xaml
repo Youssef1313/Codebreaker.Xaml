@@ -12,22 +12,47 @@
     <ContentView.Resources>
         <conv:DictionaryToValuesConverter x:Key="DictionaryToValuesConverter" />
     </ContentView.Resources>
-    <VerticalStackLayout Spacing="5">
-        <Label Text="Select your colors" />
-        <HorizontalStackLayout
+    <FlexLayout
+        Wrap="Wrap"
+        JustifyContent="Center"
+        AlignItems="End">
+        <VerticalStackLayout Spacing="5" Padding="5,0" VerticalOptions="End">
+            <Label Text="Select your colors" />
+            <HorizontalStackLayout
             BindableLayout.ItemsSource="{Binding Path=Fields, Mode=OneWay}"
             Spacing="4">
-            <BindableLayout.ItemTemplate>
-                <DataTemplate>
-                    <Picker
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Picker
                         x:Name="PegSelectionPicker"
                         x:DataType="{x:Type vmComponents:SelectedFieldViewModel}"
                         ItemsSource="{Binding Path=BindingContext.Game.FieldValues, Converter={StaticResource DictionaryToValuesConverter}, ConverterParameter='colors', Mode=OneWay, Source={x:Reference PegSelectionViewControl}}"
                         SelectedItem="{Binding Value, Mode=TwoWay}"
                         MinimumWidthRequest="50"
                         WidthRequest="88" />
-                </DataTemplate>
-            </BindableLayout.ItemTemplate>
-        </HorizontalStackLayout>
-    </VerticalStackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+        <Grid
+            FlexLayout.Basis="200"
+            FlexLayout.Grow="1"
+            ColumnDefinitions="*, auto"
+            MinimumWidthRequest="250"
+            VerticalOptions="End"
+            Padding="5,0"
+            Margin="0,5,0,0">
+            <Button
+                Grid.Column="0"
+                Text="Move"
+                MinimumWidthRequest="150"
+                Command="{Binding SetMoveCommand, Mode=OneTime}" />
+            <ActivityIndicator
+                Grid.Column="1"
+                Margin="15,0,0,0"
+                IsVisible="{Binding InProgress, Mode=OneWay}"
+                IsRunning="True"
+                VerticalOptions="Center" />
+        </Grid>
+    </FlexLayout>
 </ContentView>
