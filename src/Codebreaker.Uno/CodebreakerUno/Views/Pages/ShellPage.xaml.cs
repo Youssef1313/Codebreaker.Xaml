@@ -28,8 +28,5 @@ public sealed partial class ShellPage : Page
             Right = AppTitleBar.Margin.Right,
             Bottom = AppTitleBar.Margin.Bottom
         };
-
-        if (sender.DisplayMode != NavigationViewDisplayMode.Expanded)
-            NavigationViewControl.Header = null;
     }
 }
