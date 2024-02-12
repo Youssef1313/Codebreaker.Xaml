@@ -16,13 +16,13 @@
                     IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToBooleanConverter}, ConverterParameter=Won}">
             <gif:GifImage SourceUri="avares://CodeBreaker.Avalonia/Assets/Animations/WonAnimation_300_opt.gif" AutoStart="True" MaxHeight="300" />
             <TextBlock Text="Congratulations - you won the game 🎉🏆" FontSize="20" HorizontalAlignment="Center" Margin="0,50,0,20" />
-            <Button Content="Great, play again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{Binding StartGameCommand, Mode=OneWay}" />
+            <Button Content="Great, play again" HorizontalAlignment="Center" Margin="0,0,0,50" Command="{Binding StartGameCommand, Mode=OneWay}" />
         </StackPanel>
         <StackPanel Orientation="Vertical"
                     IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToBooleanConverter}, ConverterParameter=Lost}">
             <gif:GifImage SourceUri="avares://CodeBreaker.Avalonia/Assets/Animations/LostAnimation_300_opt.gif" AutoStart="True" MaxHeight="300" />
             <TextBlock Text="Oh no - you lost the game 😑" FontSize="20" HorizontalAlignment="Center" Margin="0,50,0,20" />
-            <Button Content="Ok, try again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{Binding StartGameCommand, Mode=OneWay}" />
+            <Button Content="Ok, try again" HorizontalAlignment="Center" Margin="0,0,0,50" Command="{Binding StartGameCommand, Mode=OneWay}" />
         </StackPanel>
     </Grid>
 </UserControl>
