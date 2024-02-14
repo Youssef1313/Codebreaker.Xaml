@@ -17,13 +17,25 @@
     <Grid RowDefinitions="Auto,*,Auto">
         <components:GameResultDisplay Grid.Row="0" />
         <Grid Grid.Row="0"
-              RowDefinitions="Auto,*"
               ColumnDefinitions="3*,1*"
+              RowDefinitions="Auto,Auto"
               Margin="8"
               IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToBooleanConverter}, ConverterParameter=Start}">
-            <TextBlock Grid.Row="0" Grid.Column="0" Margin="0,0,0,5" Text="Enter your name:" />
-            <TextBox Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" />
-            <Button Grid.Row="1" Grid.Column="1" Margin="8,0,0,0" Padding="0,6" HorizontalAlignment="Stretch" Command="{Binding StartGameCommand, Mode=OneTime}">
+            <StackPanel
+                Grid.Column="0" Grid.Row="0"
+                Grid.RowSpan="{OnFormFactor 2, Mobile=1}" Grid.ColumnSpan="{OnFormFactor 1, Mobile=2}"
+                Orientation="Vertical"
+                Spacing="5"
+                Margin="5,0">
+                <TextBlock Text="Enter your name:" />
+                <TextBox VerticalContentAlignment="Center" />
+            </StackPanel>
+            <Button
+                Grid.Column="{OnFormFactor 1, Mobile=0}" Grid.Row="{OnFormFactor 0, Mobile=1}"
+                Grid.RowSpan="{OnFormFactor 2, Mobile=1}" Grid.ColumnSpan="{OnFormFactor 1, Mobile=2}"
+                Padding="0,6" Margin="5,5,5,0"
+                HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                Command="{Binding StartGameCommand, Mode=OneTime}">
                 <Grid RowDefinitions="*,5">
                     <TextBlock Grid.Row="0" Text="Start Game" TextAlignment="Center" />
                     <ProgressBar Grid.Row="1" IsIndeterminate="True" Margin="0,4,0,-8" IsVisible="{Binding InProgress, Mode=OneWay}" />
@@ -33,7 +45,7 @@
         <components:PegSelectionView
             Grid.Row="0"
             IsVisible="{Binding GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToBooleanConverter}, ConverterParameter=Cancelable}"
-            Margin="55,0,0,15" />
+            Margin="{OnFormFactor '55,0,0,15', Mobile='0,0,0,15'}" />
         <ScrollViewer
             x:Name="pegScrollViewer"
             Padding="0,0,0,15"

@@ -28,24 +28,32 @@
             </ComboBox>
         </DataTemplate>
     </UserControl.Resources>
-    <StackPanel Orientation="Horizontal">
+    <Grid RowDefinitions="Auto,Auto">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MaxWidth="500" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
         <ItemsControl
+            Grid.Column="0" Grid.Row="0"
+            Grid.ColumnSpan="{OnFormFactor 1, Mobile=2}" Grid.RowSpan="{OnFormFactor 2, Mobile=1}"
             ItemsSource="{Binding Fields, Mode=OneWay}"
             ItemTemplate="{StaticResource SelectColorItemTemplate}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <StackPanel Orientation="Horizontal" />
+                    <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
         </ItemsControl>
         <Button
-            Padding="0"
+            Grid.Column="{OnFormFactor 1, Mobile=0}" Grid.Row="{OnFormFactor 0, Mobile=1}"
+            Grid.ColumnSpan="{OnFormFactor 1, Mobile=2}" Grid.RowSpan="{OnFormFactor 2, Mobile=1}"
             VerticalAlignment="Stretch"
+            HorizontalAlignment="Stretch"
             Command="{Binding SetMoveCommand, Mode=OneWay}">
             <Grid RowDefinitions="*,5">
                 <TextBlock Grid.Row="0" Text="Set Move" TextAlignment="Center" VerticalAlignment="Center" MinWidth="100" />
                 <ProgressBar Grid.Row="1" IsIndeterminate="True" Margin="0,4,0,0" IsVisible="{Binding InProgress, Mode=OneWay}" HorizontalAlignment="Stretch" />
             </Grid>
         </Button>
-    </StackPanel>
+    </Grid>
 </UserControl>
