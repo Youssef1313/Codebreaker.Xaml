@@ -15,13 +15,13 @@
                     Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToVisibilityConverter}, ConverterParameter=Won}">
             <Image gif:ImageBehavior.AnimatedSource="/Assets/Animations/WonAnimation_300_opt.gif" MaxHeight="300" />
             <TextBlock Text="Congratulations - you won the game 🎉🏆" FontSize="20" HorizontalAlignment="Center" Margin="0,50,0,20" />
-            <Button Content="Great, play again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{Binding ViewModel.StartGameCommand, Mode=OneWay}" />
+            <Button Content="Great, play again" HorizontalAlignment="Center" Margin="0,0,0,50" Command="{Binding ViewModel.StartGameCommand, Mode=OneWay}" />
         </StackPanel>
         <StackPanel Orientation="Vertical"
                     Visibility="{Binding ViewModel.GameStatus, Mode=OneWay, Converter={StaticResource GameStatusToVisibilityConverter}, ConverterParameter=Lost}">
             <Image gif:ImageBehavior.AnimatedSource="/Assets/Animations/LostAnimation_300_opt.gif" MaxHeight="300" />
             <TextBlock Text="Oh no - you lost the game 😑" FontSize="20" HorizontalAlignment="Center" Margin="0,50,0,20" />
-            <Button Content="Ok, try again" HorizontalAlignment="Center" Margin="0,0,0,100" Command="{Binding ViewModel.StartGameCommand, Mode=OneWay}" />
+            <Button Content="Ok, try again" HorizontalAlignment="Center" Margin="0,0,0,50" Command="{Binding ViewModel.StartGameCommand, Mode=OneWay}" />
         </StackPanel>
     </Grid>
 </UserControl>

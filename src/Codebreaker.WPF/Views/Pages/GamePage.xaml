@@ -11,7 +11,6 @@
     <Page.Resources>
         <conv:GameStatusToVisibilityConverter x:Key="GameStatusVisibilityConverter" />
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <!--<conv:SelectionAndKeyPegToKeyVisibilityConverter x:Key="KeyPegVisibilityConverter" />-->
         <conv:ColorNameToBrushConverter x:Key="ColorConverter" />
     </Page.Resources>
 
@@ -23,37 +22,6 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!--<StackPanel Orientation="Vertical" Grid.Row="0">
-            --><!-- TODO: Create component for this, to make it (more) generic. --><!--
-                <Grid Visibility="{Binding Path=ViewModel.InfoMessage.IsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="Information: " VerticalAlignment="Center" Margin="8,0" />
-                    <TextBlock Grid.Column="1" Text="{Binding ViewModel.InfoMessage.Message, Mode=OneWay}" VerticalAlignment="Center" Margin="8,0" />
-                    <Button
-                        Grid.Column="2"
-                        Content="{Binding ViewModel.InfoMessage.ActionTitle, Mode=OneWay}" Padding="30,8"
-                        Command="{Binding ViewModel.InfoMessage.ActionCommand, Mode=OneWay}" />
-                </Grid>
-                <Grid Visibility="{Binding Path=ViewModel.ErrorMessage.IsVisible, Mode=OneWay, Converter={StaticResource BooleanToVisibilityConverter}}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <TextBlock Text="Error: " VerticalAlignment="Center" Margin="8,0" />
-                    <TextBlock Grid.Column="1" Text="{Binding ViewModel.ErrorMessage.Message, Mode=OneWay}" VerticalAlignment="Center" Margin="8,0" />
-                    <Button
-                        Grid.Column="2"
-                        Content="{Binding ViewModel.ErrorMessage.ActionTitle, Mode=OneWay}" Padding="30,8"
-                        Command="{Binding ViewModel.ErrorMessage.ActionCommand, Mode=OneWay}" />
-                </Grid>
-            </StackPanel>-->
         <components:GameResultDisplay
             Panel.ZIndex="1"
             Grid.Row="0"/>
