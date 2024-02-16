@@ -1,7 +1,9 @@
 ﻿using Codebreaker.ViewModels.Contracts.Services;
+using Codebreaker.WPF.Helpers;
 using Codebreaker.WPF.Services;
 using Codebreaker.WPF.Services.Navigation;
 using Codebreaker.WPF.Views.Pages;
+using Microsoft.Extensions.Configuration;
 
 namespace Codebreaker.WPF;
 
@@ -14,35 +16,21 @@ public sealed partial class App : Application, IDisposable
 
     public App()
     {
-#if DEBUG
-        Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", "Development");
-#else
-        Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", "Production");
-#endif
-
-        _host = Host
-            .CreateDefaultBuilder()
-            .ConfigureAppConfiguration(options =>
-            {
-                string? test = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
-            })
-            .ConfigureServices((context, services) =>
-            {
-                services.Configure<GamePageViewModelOptions>(options => { });
-                services.AddNavigation<WPFNavigationService>(pages => pages
-                    .Configure<GamePage>("GamePage")
-                    .Configure<TestPage>("TestPage")
-                    .ConfigureInitialPage<GamePage>());
-                services.AddTransient<IDialogService, WPFDialogService>();
-                services.AddSingleton<IInfoBarService, InfoBarService>();
-                services.AddScoped<GamePageViewModel>();
-                services.AddHttpClient<IGamesClient, GamesClient>(client =>
-                {
-                    string uriString = context.Configuration["ApiBase"] ?? throw new ConfigurationErrorsException("ApiBase not configured");
-                    client.BaseAddress = new Uri(uriString);
-                });
-            })
-            .Build();
+        this.SetDotnetEnvironmentVariable();
+        var builder = Host.CreateApplicationBuilder();
+        builder.Services.Configure<GamePageViewModelOptions>(options => { });
+        builder.Services.AddNavigation<WPFNavigationService>(pages => pages
+            .Configure<GamePage>("GamePage")
+            .Configure<TestPage>("TestPage")
+            .ConfigureInitialPage<GamePage>());
+        builder.Services.AddTransient<IDialogService, WPFDialogService>();
+        builder.Services.AddSingleton<IInfoBarService, InfoBarService>();
+        builder.Services.AddScoped<GamePageViewModel>();
+        builder.Services.AddHttpClient<IGamesClient, GamesClient>(client =>
+        {
+            client.BaseAddress = new Uri(builder.Configuration.GetRequired("ApiBase"));
+        });
+        _host = builder.Build();
 
         DefaultScope = _host.Services.CreateScope();
     }
