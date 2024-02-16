@@ -12,6 +12,12 @@ namespace Codebreaker.WPF;
 /// </summary>
 public sealed partial class App : Application, IDisposable
 {
+    public static new App Current => (Application.Current as App) ?? throw new InvalidOperationException("The current application is no \"App\"");
+
+    public static T GetService<T>()
+        where T : class =>
+        Current.DefaultScope.ServiceProvider.GetRequiredService<T>();
+
     private readonly IHost _host;
 
     public App()
@@ -35,15 +41,7 @@ public sealed partial class App : Application, IDisposable
         DefaultScope = _host.Services.CreateScope();
     }
 
-    public static new App Current => (Application.Current as App) ?? throw new InvalidOperationException("The current application is no \"App\"");
-
     public IServiceScope DefaultScope { get; private init; }
-
-    public IServiceProvider Services => _host.Services;
-
-    public T GetService<T>()
-        where T : class =>
-        DefaultScope.ServiceProvider.GetRequiredService<T>();
 
     public void Dispose()
     {

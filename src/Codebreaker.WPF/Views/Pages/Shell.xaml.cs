@@ -12,7 +12,7 @@ public partial class Shell : Page
     public Shell()
     {
         InitializeComponent();
-        _navigationService = App.Current.GetService<IWPFNavigationService>();
+        _navigationService = App.GetService<IWPFNavigationService>();
         _navigationService.Frame = NavigationFrame;
     }
 }

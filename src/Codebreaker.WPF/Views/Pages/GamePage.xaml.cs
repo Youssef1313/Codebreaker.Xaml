@@ -10,8 +10,8 @@ public partial class GamePage : Page, IRecipient<GameMoveMessage>
 
     public GamePage()
     {
-        ViewModel = App.Current.GetService<GamePageViewModel>();
-        _navigationService = App.Current.GetService<INavigationService>();
+        ViewModel = App.GetService<GamePageViewModel>();
+        _navigationService = App.GetService<INavigationService>();
         DataContext = this;
         InitializeComponent();
         WeakReferenceMessenger.Default.Register(this);

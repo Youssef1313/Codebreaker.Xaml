@@ -9,7 +9,7 @@ public partial class InfoBarArea : UserControl
 {
     public InfoBarArea()
     {
-        ViewModel = App.Current.GetService<IInfoBarService>();
+        ViewModel = App.GetService<IInfoBarService>();
         InitializeComponent();
         DataContext = this;
     }
