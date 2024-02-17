@@ -17,6 +17,12 @@ using System;
 namespace CodeBreaker.Avalonia;
 public partial class App : Application
 {
+    internal new static App Current => (Application.Current as App) ?? throw new InvalidOperationException("The current application is no \"App\"");
+
+    public static T GetService<T>()
+        where T : class =>
+        Current.DefaultScope.ServiceProvider.GetRequiredService<T>();
+
     public App()
     {
         this.SetDotnetEnvironmentVariable();
@@ -43,12 +49,6 @@ public partial class App : Application
     }
 
     internal IServiceScope DefaultScope { get; private set; }
-
-    internal new static App Current => (App)Application.Current!;
-
-    public T GetService<T>()
-        where T : class =>
-        DefaultScope.ServiceProvider.GetRequiredService<T>();
 
     public override void Initialize() =>
         AvaloniaXamlLoader.Load(this);

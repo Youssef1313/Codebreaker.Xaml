@@ -7,7 +7,7 @@ public partial class InfoBarArea : UserControl
 {
     public InfoBarArea()
     {
-        InfoBarService = App.Current.GetService<IInfoBarService>();
+        InfoBarService = App.GetService<IInfoBarService>();
         InitializeComponent();
         DataContext = this;
     }
