@@ -13,17 +13,15 @@ namespace CodeBreaker.Uno;
 
 public class App : Application
 {
-    protected internal Window? MainWindow { get; private set; }
-
-    protected IHost? Host { get; private set; }
-
     internal new static App Current => (App)Application.Current;
 
-    public IServiceScope? DefaultScope { get; private set; }
-
-    public T GetService<T>()
+    public static T GetService<T>()
         where T : class =>
-        DefaultScope!.ServiceProvider.GetRequiredService<T>();
+        Current.DefaultScope!.ServiceProvider.GetRequiredService<T>();
+
+    protected internal Window? MainWindow { get; private set; }
+
+    public IServiceScope? DefaultScope { get; private set; }
 
     protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
@@ -107,15 +105,15 @@ public class App : Application
         MainWindow.EnableHotReload();
 #endif
 
-        Host = builder.Build();
-        DefaultScope = Current.Host!.Services.CreateScope();
+        var host = builder.Build();
+        DefaultScope = host.Services.CreateScope();
 
         if (MainWindow.Content is not ShellPage)
         {
-            var shell = Host.Services.GetRequiredService<ShellPage>();
+            var shell = host.Services.GetRequiredService<ShellPage>();
             async void OnShellLoaded(object sender, RoutedEventArgs args)
             {
-                await Host.Services.GetRequiredService<INavigationService>().NavigateToAsync("GamePage");
+                await host.Services.GetRequiredService<INavigationService>().NavigateToAsync("GamePage");
                 shell.Loaded -= OnShellLoaded;
             }
             shell.Loaded += OnShellLoaded;
