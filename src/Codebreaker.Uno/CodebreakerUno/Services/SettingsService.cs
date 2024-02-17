@@ -6,7 +6,7 @@ namespace CodeBreaker.Uno.Services;
 
 public class SettingsService : ISettingsService
 {
-    private IPropertySet LocalSettings => ApplicationData.Current.LocalSettings.Values; // ApplicationData not support for Windows Unpackaged build
+    private static IPropertySet LocalSettings => ApplicationData.Current.LocalSettings.Values; // ApplicationData not support for Windows Unpackaged build
 
     public ElementTheme Theme
     {
