@@ -12,8 +12,8 @@ public partial class GamePage : UserControl, IRecipient<GameMoveMessage>
 
     public GamePage()
     {
-        DataContext = App.Current.GetService<GamePageViewModel>();
-        _navigationService = App.Current.GetService<INavigationService>();
+        DataContext = App.GetService<GamePageViewModel>();
+        _navigationService = App.GetService<INavigationService>();
         InitializeComponent();
         WeakReferenceMessenger.Default.Register(this);
     }

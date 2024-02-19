@@ -13,7 +13,7 @@ public sealed partial class GamePage : Page, IRecipient<GameMoveMessage>
 {
     public GamePage()
     {
-        ViewModel = App.Current.GetService<GamePageViewModel>();
+        ViewModel = App.GetService<GamePageViewModel>();
         InitializeComponent();
         WeakReferenceMessenger.Default.Register(this);
         WeakReferenceMessenger.Default.UnregisterAllOnUnloaded(this);

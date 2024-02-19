@@ -8,7 +8,7 @@ public partial class Shell : UserControl
 {
     public Shell()
     {
-        DataContext = App.Current.GetService<IAvaloniaNavigationService>();
+        DataContext = App.GetService<IAvaloniaNavigationService>();
         InitializeComponent();
     }
 

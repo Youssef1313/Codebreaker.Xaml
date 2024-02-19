@@ -12,7 +12,7 @@ public partial class TestPage : Page
     public TestPage()
     {
         InitializeComponent();
-        _navigationService = App.Current.GetService<INavigationService>();
+        _navigationService = App.GetService<INavigationService>();
     }
 
     private async void Button_Click(object sender, RoutedEventArgs e)

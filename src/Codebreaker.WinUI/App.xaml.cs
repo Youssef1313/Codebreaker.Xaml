@@ -21,6 +21,7 @@ using Codebreaker.ViewModels.Contracts.Services;
 using Codebreaker.ViewModels.Services;
 using Codebreaker.GameAPIs.Client;
 using Codebreaker.ViewModels;
+using Codebreaker.WinUI.Helpers;
 
 namespace CodeBreaker.WinUI;
 
@@ -29,53 +30,11 @@ namespace CodeBreaker.WinUI;
 /// </summary>
 public partial class App : Application
 {
-    private static readonly IHost s_host = Host
-        .CreateDefaultBuilder()
-        .ConfigureAppConfiguration(options =>
-        {
-            options.SetBasePath(Package.Current.InstalledLocation.Path);
-        })
-        .ConfigureServices((context, services) =>
-        {
-            // Default Activation Handler
-            services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
-
-            // Other Activation Handlers
-
-            // Services
-
-            services.AddTransient<INavigationViewService, NavigationViewService>();
-
-            services.AddSingleton<IActivationService, ActivationService>();
-            services.AddPageService(builder => builder
-                .Configure<GamePage>("GamePage")
-                .Configure<SettingsPage>("SettingsPage")
-                .Configure<ShellPage>("ShellPage"));
-            services.AddSingleton<IWinUINavigationService, WinUINavigationService>();
-            services.AddSingleton<INavigationService>(x => x.GetRequiredService<IWinUINavigationService>());
-            services.AddScoped<IInfoBarService, InfoBarService>();
-            services.AddScoped<IDialogService, WinUIDialogService>();
-            services.AddSingleton<ISettingsService, SettingsService>();
-
-            services.AddTransient<ShellPage>();
-            services.AddTransient<ShellViewModel>();
-
-            services.AddSingleton<ISettingsService, SettingsService>();
-            services.AddScoped<SettingsPageViewModel>();
-            services.AddTransient<SettingsPage>();
-
-            string apiBase = context.Configuration["ApiBase"] ?? throw new InvalidOperationException("ApiBase configuration not found");
-            services.AddHttpClient<IGamesClient, GamesClient>((HttpClient client) => client.BaseAddress = new(apiBase));
-            services.AddScoped<GamePageViewModel>();
-            //services.AddTransient<GamePage>();
-        })
-        .Build();
-
-    public static IServiceScope DefaultScope { get; } = s_host.Services.CreateScope();
+    public static new App Current => (Application.Current as App) ?? throw new InvalidOperationException("The current application is no \"App\"");
 
     public static T GetService<T>()
         where T : class => 
-        DefaultScope.ServiceProvider.GetRequiredService<T>();
+        Current.DefaultScope.ServiceProvider.GetRequiredService<T>();
 
     public static WindowEx MainWindow { get; } = new MainWindow();
 
@@ -85,16 +44,45 @@ public partial class App : Application
     /// </summary>
     public App()
     {
-#if DEBUG
-        // Settings the environment variable here, because environment variables in launchsettings.json get ignored
-        Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", "Development");
-#else
-        Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", "Production");
-#endif
+        this.SetDotnetEnvironmentVariable();
+        var builder = Host.CreateApplicationBuilder();
+        builder.Configuration.SetBasePath(Package.Current.InstalledLocation.Path);
+
+        // Default Activation Handler
+        builder.Services.AddTransient<ActivationHandler<LaunchActivatedEventArgs>, DefaultActivationHandler>();
+
+        // Services
+        builder.Services.AddTransient<INavigationViewService, NavigationViewService>();
+
+        builder.Services.AddSingleton<IActivationService, ActivationService>();
+        builder.Services.AddPageService(builder => builder
+            .Configure<GamePage>("GamePage")
+            .Configure<SettingsPage>("SettingsPage")
+            .Configure<ShellPage>("ShellPage"));
+        builder.Services.AddSingleton<IWinUINavigationService, WinUINavigationService>();
+        builder.Services.AddSingleton<INavigationService>(x => x.GetRequiredService<IWinUINavigationService>());
+        builder.Services.AddScoped<IInfoBarService, InfoBarService>();
+        builder.Services.AddScoped<IDialogService, WinUIDialogService>();
+        builder.Services.AddSingleton<ISettingsService, SettingsService>();
+
+        builder.Services.AddTransient<ShellPage>();
+        builder.Services.AddTransient<ShellViewModel>();
+
+        builder.Services.AddSingleton<ISettingsService, SettingsService>();
+        builder.Services.AddScoped<SettingsPageViewModel>();
+        builder.Services.AddTransient<SettingsPage>();
+
+        builder.Services.AddHttpClient<IGamesClient, GamesClient>((HttpClient client) => client.BaseAddress = new(builder.Configuration.GetRequired("ApiBase")));
+        builder.Services.AddScoped<GamePageViewModel>();
+        var host = builder.Build();
+
+        DefaultScope = host.Services.CreateScope();
 
         InitializeComponent();
         UnhandledException += App_UnhandledException;
     }
+
+    public IServiceScope DefaultScope { get; private init; }
 
     private void App_UnhandledException(object sender, Xaml.UnhandledExceptionEventArgs e)
     {
